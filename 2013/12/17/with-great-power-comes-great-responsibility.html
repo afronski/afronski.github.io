@@ -32,14 +32,14 @@
 
 <p>Let’s look at the standard abstraction of <em>iterable collections</em>, available in Java and Scala (example written in <em>Scala</em>):</p>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala">trait Iterable[T] {
-  def iterator(): Iterator[T]
-}
-
-trait Iterator[T] {
-  def hasNext: Boolean
-  def next(): T
-}</code></pre></div>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">trait</span> <span class="nc">Iterable</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+<span class="lineno">2</span>   <span class="k">def</span> <span class="n">iterator</span><span class="o">()</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+<span class="lineno">3</span> <span class="o">}</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="k">trait</span> <span class="nc">Iterator</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+<span class="lineno">6</span>   <span class="k">def</span> <span class="n">hasNext</span><span class="k">:</span> <span class="kt">Boolean</span>
+<span class="lineno">7</span>   <span class="k">def</span> <span class="n">next</span><span class="o">()</span><span class="k">:</span> <span class="kt">T</span>
+<span class="lineno">8</span> <span class="o">}</span></code></pre></div>
 
 <p><em>Iterable</em> is an abstraction for all collections which can be stepped through one-by-one.</p>
 
@@ -53,19 +53,19 @@ trait Iterator[T] {
 
 <p>But we can introduce new abstractions. Let’s look at the example (again, written in <em>Scala</em>):</p>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala">trait Observable[T] {
-  def subscribe(observer: Observer[T]): Subscription
-}
-
-trait Observer[T] {
-  def onNext(value: T): Unit
-  def onError(error: Throwable): Unit
-  def onCompleted(): Unit
-}
-
-trait Subscription {
-  def unsubscribe(): Unit
-}</code></pre></div>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno"> 1</span> <span class="k">trait</span> <span class="nc">Observable</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+<span class="lineno"> 2</span>   <span class="k">def</span> <span class="n">subscribe</span><span class="o">(</span><span class="n">observer</span><span class="k">:</span> <span class="kt">Observer</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Subscription</span>
+<span class="lineno"> 3</span> <span class="o">}</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">trait</span> <span class="nc">Observer</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+<span class="lineno"> 6</span>   <span class="k">def</span> <span class="n">onNext</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span>
+<span class="lineno"> 7</span>   <span class="k">def</span> <span class="n">onError</span><span class="o">(</span><span class="n">error</span><span class="k">:</span> <span class="kt">Throwable</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span>
+<span class="lineno"> 8</span>   <span class="k">def</span> <span class="n">onCompleted</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span>
+<span class="lineno"> 9</span> <span class="o">}</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="k">trait</span> <span class="nc">Subscription</span> <span class="o">{</span>
+<span class="lineno">12</span>   <span class="k">def</span> <span class="n">unsubscribe</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span>
+<span class="lineno">13</span> <span class="o">}</span></code></pre></div>
 
 <p>We can compare these two concepts and definitely see similarities, such as that <em>Observable</em> is similar to <em>Iterable</em>. The same for <em>Observer</em> - <em>Iterator</em> pair. Also, we can easily spot an intent and usage here.</p>
 
@@ -83,19 +83,19 @@ trait Subscription {
 
 <h2 id="tryt"><code>Try[T]</code></h2>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala">val sumTry = for {
-  int1 &lt;- Try(Integer.parseInt(&quot;1&quot;))   // int1 is Success(1).
-  int2 &lt;- Try(Integer.parseInt(&quot;a&quot;))   // int2 is Failure(...).
-} yield {
-  int1 + int2
-}</code></pre></div>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">val</span> <span class="n">sumTry</span> <span class="k">=</span> <span class="k">for</span> <span class="o">{</span>
+<span class="lineno">2</span>   <span class="n">int1</span> <span class="k">&lt;-</span> <span class="nc">Try</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="n">parseInt</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">))</span>   <span class="c1">// int1 is Success(1).</span>
+<span class="lineno">3</span>   <span class="n">int2</span> <span class="k">&lt;-</span> <span class="nc">Try</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="n">parseInt</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">))</span>   <span class="c1">// int2 is Failure(...).</span>
+<span class="lineno">4</span> <span class="o">}</span> <span class="k">yield</span> <span class="o">{</span>
+<span class="lineno">5</span>   <span class="n">int1</span> <span class="o">+</span> <span class="n">int2</span>
+<span class="lineno">6</span> <span class="o">}</span></code></pre></div>
 
 <p><em><code>Try</code></em> is an analog for the <code>try...catch</code> block. Instead of having an exception thrown and having to deal with it immediately in the same thread, it disconnects the error handling and recovery.</p>
 
 <h2 id="optiont"><code>Option[T]</code></h2>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala">val optionResult = Option(null)   // optionResult is None.
-val optionResult2 = Option(1)     // optionResult2 is Some(1).</code></pre></div>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">val</span> <span class="n">optionResult</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>   <span class="c1">// optionResult is None.</span>
+<span class="lineno">2</span> <span class="k">val</span> <span class="n">optionResult2</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>     <span class="c1">// optionResult2 is Some(1).</span></code></pre></div>
 
 <p><em><code>Option</code></em> represents optional values, returning an instance of <em><code>Some(A)</code></em> if <code>A</code> exists, or <em><code>None</code></em> if it does not.</p>
 
@@ -103,7 +103,7 @@ val optionResult2 = Option(1)     // optionResult2 is Some(1).</code></pre></div
 
 <p>The same abstraction, of <em>Observable</em> can be built on top of <em>Iterable</em> and a simple type, which is a composite of two previously explained elements:</p>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala">val collection: Iterable[Try[Option[T]]]</code></pre></div>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="n">collection</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">Try</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">T</span><span class="o">]]]</span></code></pre></div>
 
 <p>It’s a sequence which introduces the same abstraction, but definitely loses the intent. Usage is not visible at the first glance as well (how are we communicating that something changed?).</p>
 

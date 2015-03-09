@@ -38,10 +38,10 @@
 
 <p>Unfortunately, since 2013 there are no <em><code>torrent</code></em> files, which combine all videos in one place. But there is a solution - we can use <code>Selenium</code> <em>JavaScript</em> driver to scrap all links from <em><code>HTML5</code></em> <em>video</em> tags. Complete source code of scripts and helpers is available <a href="https://github.com/afronski/playground-repository/tree/master/vimeo-scraper">here</a>. Installation:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"># On Arch Linux, Selenium Chrome WebDriver is available only in AUR.
-~ $ pacaur -S chromedriver
-~ $ npm install
-~ $ node vimeo-scraper.js &gt; urls.txt</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="c"># On Arch Linux, Selenium Chrome WebDriver is available only in AUR.</span>
+<span class="lineno">2</span> ~ <span class="nv">$ </span>pacaur -S chromedriver
+<span class="lineno">3</span> ~ <span class="nv">$ </span>npm install
+<span class="lineno">4</span> ~ <span class="nv">$ </span>node vimeo-scraper.js &gt; urls.txt</code></pre></div>
 
 <p>In the output file you will receive list of URLs which point directly to <em>MP4</em> ready to download.</p>
 

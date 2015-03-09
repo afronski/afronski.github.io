@@ -30,7 +30,7 @@
 
 <p>If you want to enable a verbose mode for <em>vagrant</em>, you need to set the environment variable <code>VAGRANT_LOG</code> to <code>DEBUG</code> or <code>INFO</code> value, as in the example below:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ $ VAGRANT_LOG=DEBUG vagrant up</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ VAGRANT_LOG</span><span class="o">=</span>DEBUG vagrant up</code></pre></div>
 
 <h2 id="debugging-chef-solo">Debugging chef-solo</h2>
 
@@ -38,10 +38,10 @@
 
 <p>First, you can <em><code>SSH</code></em> into a created virtual machine and invoke the <em>magic command</em> in a certain directory:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ $ vagrant ssh
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>vagrant ssh
 
-vagrant@localhost ~ $ cd /tmp/vagrant-chef-1
-vagrant@localhost /tmp/vagrant-chef-1 $ sudo chef-solo -c solo.rb -j dna.json -l debug</code></pre></div>
+vagrant@localhost ~ <span class="nv">$ </span><span class="nb">cd</span> /tmp/vagrant-chef-1
+vagrant@localhost /tmp/vagrant-chef-1 <span class="nv">$ </span>sudo chef-solo -c solo.rb -j dna.json -l debug</code></pre></div>
 
 <p>In this <em>magic command</em> the parameter <code>-c</code> is responsible for setting a configuration file, <code>-j</code> is for passing a file with attributes, which is later called a <em>node specification</em>. Last parameter <code>-l</code> - most important for us - enables the verbose mode at a certain logging level.</p>
 
@@ -51,15 +51,15 @@ vagrant@localhost /tmp/vagrant-chef-1 $ sudo chef-solo -c solo.rb -j dna.json -l
 
 <p>But you can enable it in a different way - by passing the arguments to a provisioner inside <em>Vagrantfile</em>:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby">Vagrant.configure('2') do |config|
-  # ...
-
-  config.vm.provision :chef_solo do |chef|
-    # ...
-
-    chef.arguments = '-l debug'
-  end
-end</code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="lineno">1</span> <span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+<span class="lineno">2</span>   <span class="c1"># ...</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="ss">:chef_solo</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
+<span class="lineno">5</span>     <span class="c1"># ...</span>
+<span class="lineno">6</span> 
+<span class="lineno">7</span>     <span class="n">chef</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="s1">&#39;-l debug&#39;</span>
+<span class="lineno">8</span>   <span class="k">end</span>
+<span class="lineno">9</span> <span class="k">end</span></code></pre></div>
 
 <h2 id="mutating-the-dna">Mutating the DNA</h2>
 
@@ -69,15 +69,15 @@ end</code></pre></div>
 
 <p>In order to inject our attributes you need to read the file first, then parse the content as JSON and finally merge it with the existing value of the field:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby">Vagrant.configure('2') do |config|
-  # ...
-
-  config.vm.provision :chef_solo do |chef|
-    # ...
-
-    chef.json.merge!(JSON.parse(File.read('path/to/json/file')))
-  end
-end</code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="lineno">1</span> <span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+<span class="lineno">2</span>   <span class="c1"># ...</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="ss">:chef_solo</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
+<span class="lineno">5</span>     <span class="c1"># ...</span>
+<span class="lineno">6</span> 
+<span class="lineno">7</span>     <span class="n">chef</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span><span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;path/to/json/file&#39;</span><span class="p">)))</span>
+<span class="lineno">8</span>   <span class="k">end</span>
+<span class="lineno">9</span> <span class="k">end</span></code></pre></div>
 
 <h1 id="links">Links</h1>
 

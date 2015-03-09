@@ -36,36 +36,36 @@
 
 <p>It was presented as an asynchronous <code>try...catch</code> block without changing the language syntax and semantics. Let’s look at the initial representation:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">task.create(function concatTwoFilesAndThenSomeTask() {
-
-  fs.readFile(&quot;some/template&quot;, &quot;utf8&quot;, function (error, file1) {
-
-    if (error) {
-      throw error;
-    }
-
-    fs.readFile(&quot;something/else&quot;, &quot;utf8&quot;, function (error, file2) {
-
-      if (error) {
-        throw error;
-      }
-
-      var data = file1 + &quot;--&quot; + file2;
-
-      data = data.replace(/foo/g, &quot;bar&quot;);
-      return data;
-    });
-
-  });
-
-}).setCallback(function (error, result) {
-
-  if (error) {
-    throw error;
-  }
-
-  // Do something with the result.
-});</code></pre></div>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">task</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="kd">function</span> <span class="nx">concatTwoFilesAndThenSomeTask</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span>   <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">&quot;some/template&quot;</span><span class="p">,</span> <span class="s2">&quot;utf8&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">file1</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span>     <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 6</span>       <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+<span class="lineno"> 7</span>     <span class="p">}</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>     <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">&quot;something/else&quot;</span><span class="p">,</span> <span class="s2">&quot;utf8&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">file2</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>       <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">12</span>         <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+<span class="lineno">13</span>       <span class="p">}</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>       <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">file1</span> <span class="o">+</span> <span class="s2">&quot;--&quot;</span> <span class="o">+</span> <span class="nx">file2</span><span class="p">;</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span>       <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/foo/g</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">);</span>
+<span class="lineno">18</span>       <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+<span class="lineno">19</span>     <span class="p">});</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span>   <span class="p">});</span>
+<span class="lineno">22</span> 
+<span class="lineno">23</span> <span class="p">}).</span><span class="nx">setCallback</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span>   <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">26</span>     <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+<span class="lineno">27</span>   <span class="p">}</span>
+<span class="lineno">28</span> 
+<span class="lineno">29</span>   <span class="c1">// Do something with the result.</span>
+<span class="lineno">30</span> <span class="p">});</span></code></pre></div>
 
 <p>Of course it is a simple concept, which ignores many thing e.g. <code>EventEmitter</code>. But it also gives us many things e.g. meaningful stack traces with asynchronous operations or handling errors of composite asynchronous operations in one place.</p>
 

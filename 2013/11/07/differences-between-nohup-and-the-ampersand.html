@@ -26,8 +26,8 @@
 
 <p>There are many cases when <em>small differences</em> between environments can bite you. This is one into which I have ran recently. What is the difference between these two commands?</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ $ nohup myprocess.out &amp;
-~ $ myprocess.out &amp;</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> ~ <span class="nv">$ </span>nohup myprocess.out <span class="p">&amp;</span>
+<span class="lineno">2</span> ~ <span class="nv">$ </span>myprocess.out <span class="p">&amp;</span></code></pre></div>
 
 <p>The answer is the same as usual - <em>it depends</em>.</p>
 
@@ -43,7 +43,7 @@
 
 <p>In case you are using bash, you can use the command specified below to find out whether your shell sends <em><code>SIGHUP</code></em> to its child processes or not:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ $ shopt | grep hupon</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span><span class="nb">shopt</span> <span class="p">|</span> grep hupon</code></pre></div>
 
 <p>And moreover - there are cases where nohup does not work. For example, when the process you start reconnects the <code>NOHUP</code> signal (it is done inside, on the application code level).</p>
 
