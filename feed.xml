@@ -98,11 +98,12 @@
 
 &lt;p&gt;How we took a peek under the hood? It is simple, you can start new &lt;em&gt;Erlang&lt;/em&gt; shell and then execute:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erl&quot; data-lang=&quot;erl&quot;&gt;&lt;span class=&quot;gp&quot;&gt;1&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_core&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;ok&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;2&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% Compiler will spit out the&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;   % Core Erlang representation&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;   % to the &amp;#39;after.core&amp;#39; file.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erl&quot; data-lang=&quot;erl&quot;&gt;&lt;span class=&quot;go&quot;&gt;% Compiler will spit out the&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;% Core Erlang representation&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;% to the &amp;#39;after.core&amp;#39; file.&lt;/span&gt;
+
+&lt;span class=&quot;gp&quot;&gt;1&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_core&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;ok&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
 
