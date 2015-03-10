@@ -93,7 +93,7 @@
 
 <p>Before we will take a peek under the hood, we need to briefly explain the structure of the <em>Erlang</em> compiler. Before the <em>Erlang</em> gets interpreted on the VM it is transformed to the <em>Core Erlang</em> representation and after that to the <em>BEAM</em> code (which is a equivalent of <em>bytecode</em> from <em>JVM</em>). It turns out that our <em>named case expressions</em> (functions with multiple heads and pattern matching, a logical construct) are directly transformed to the syntactical construct - <em>case</em> expression - in the first phase of compilation.</p>
 
-<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno"> 1</span> <span class="c">% Function &#39;valueOrDefault&#39; after compilation</span>
+<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno"> 1</span> <span class="c">% Function &#39;getValueOrDefault&#39; after compilation</span>
 <span class="lineno"> 2</span> <span class="c">% to the Core Erlang representation, which will be</span>
 <span class="lineno"> 3</span> <span class="c">% afterwards compiled to the BEAM code:</span>
 <span class="lineno"> 4</span> 

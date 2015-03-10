@@ -79,7 +79,7 @@
 
 &lt;p&gt;Before we will take a peek under the hood, we need to briefly explain the structure of the &lt;em&gt;Erlang&lt;/em&gt; compiler. Before the &lt;em&gt;Erlang&lt;/em&gt; gets interpreted on the VM it is transformed to the &lt;em&gt;Core Erlang&lt;/em&gt; representation and after that to the &lt;em&gt;BEAM&lt;/em&gt; code (which is a equivalent of &lt;em&gt;bytecode&lt;/em&gt; from &lt;em&gt;JVM&lt;/em&gt;). It turns out that our &lt;em&gt;named case expressions&lt;/em&gt; (functions with multiple heads and pattern matching, a logical construct) are directly transformed to the syntactical construct - &lt;em&gt;case&lt;/em&gt; expression - in the first phase of compilation.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% Function &amp;#39;valueOrDefault&amp;#39; after compilation&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% Function &amp;#39;getValueOrDefault&amp;#39; after compilation&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% to the Core Erlang representation, which will be&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% afterwards compiled to the BEAM code:&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
