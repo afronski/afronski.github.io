@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>Interesting Language Features - Erlang I</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="interesting-language-features---erlang-i">Interesting Language Features - Erlang I</h1>
+
+<quote class="disclaimer">This blog post is a starting point of a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.</quote>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Almost every programmer struggled in the past with the unclear and non-obvious code, probably written yesterday or even earlier. That feeling is often amplified by the actual mental state (e.g. you are angry, not rested or upset - if you don’t know how it affects you, I encourage you to get familiar with <a href="http://www.afronski.pl/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html">this book and blog post</a>). If you will run onto some unclear and ugly written code sample, which yesterday was perfectly clear, your attitude may only be worse. It can escalate, if such code was written by someone else from your team.</p>
+
+<p><em>Software Craftsmanship</em> movement and Uncle Bob’s books (especially <a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">Clean Code</a> and <a href="http://www.amazon.com/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073/">Clean Coder</a>) are trying to improve that state, but most of mainstream programming languages did not encourage developers to write something clear and obvious at the first sight. Often context is hidden inside pile of code. Somewhere underneath unnecessary abstraction you can find the essence of that particular slice. Not to mention stateful programming languages, where often state is passed between following methods (or functions) inexplicitly.</p>
+
+<p>Very long, tangled, imperative flow control can bury the code conciseness and clarity very easily (yes, I am talking about <code>if-else</code> and <code>switch-case</code> statements). If I had a dime for every time I lost track somewhere in the thicket of flow control statements, I could easily retire and write for a rest of my life <em>Haskell</em> for fun. But I would like to present very clear alternative, present in almost any modern programming language, especially in the functional ones.</p>
+
+<h3 id="pattern-matching">Pattern Matching</h3>
+
+<p>Instead of codifying rules imperatively, try to think about rules in a declarative way instead. I would like to focus on <em>Erlang</em> syntax right now, but still this concept can be represented in any functional programming language.</p>
+
+<p>All examples of source code are gathered from the <em>CouchDB</em> project (very nice <em>key-value</em> storage with <em>JSON</em> documents stored as value, that <em>embraces the web</em>, written in <em>Erlang</em>). You can find link to the exact file in the <a href="#credits">Credits</a> section:</p>
+
+<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno"> 1</span> <span class="c">% Is character a whitespace?</span>
+<span class="lineno"> 2</span> <span class="c">%</span>
+<span class="lineno"> 3</span> <span class="c">% Syntax $\s means a character</span>
+<span class="lineno"> 4</span> <span class="c">% represented as with escape sequence.</span>
+<span class="lineno"> 5</span> <span class="c">%</span>
+<span class="lineno"> 6</span> <span class="c">% Equal to the &#39;\s&#39; in C-like syntax.</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="nf">is_whitespace</span><span class="p">(</span><span class="sc">$\s</span><span class="p">)</span>   <span class="o">-&gt;</span> <span class="n">true</span><span class="p">;</span>
+<span class="lineno"> 9</span> <span class="nf">is_whitespace</span><span class="p">(</span><span class="sc">$\t</span><span class="p">)</span>   <span class="o">-&gt;</span> <span class="n">true</span><span class="p">;</span>
+<span class="lineno">10</span> <span class="nf">is_whitespace</span><span class="p">(</span><span class="sc">$\n</span><span class="p">)</span>   <span class="o">-&gt;</span> <span class="n">true</span><span class="p">;</span>
+<span class="lineno">11</span> <span class="nf">is_whitespace</span><span class="p">(</span><span class="sc">$\r</span><span class="p">)</span>   <span class="o">-&gt;</span> <span class="n">true</span><span class="p">;</span>
+<span class="lineno">12</span> <span class="nf">is_whitespace</span><span class="p">(_</span><span class="nv">Else</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">false</span><span class="p">.</span></code></pre></div>
+
+<p>You can see that we declared several cases what our function should return under certain input conditions. It looks like a function with multiple heads, each with different inputs, treated as a single case. All rules are checked in the declaration order, last one is a <em>catch-all</em> clause. As you can see, this function is very simple, but it is a good starting point to get familiar with the construct.</p>
+
+<p>We can push it even further. Imagine that you can differentiate behavior and execution flow in such declarative way - lets see how we can do that.</p>
+
+<h3 id="named_case_expressions"><i>Named Case Expressions</i></h3>
+
+<p>Of course in <em>Erlang</em> and other languages there are <em>if</em> and <em>case</em> expressions (there is a significant difference between statement and expression, but that is another topic) and you can wrote your code in classical way:</p>
+
+<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno"> 1</span> <span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">before</span><span class="p">).</span>
+<span class="lineno"> 2</span> <span class="p">-</span><span class="ni">export</span><span class="p">([</span> <span class="n">dict_find</span><span class="o">/</span><span class="mi">3</span> <span class="p">]).</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="nf">dict_find</span><span class="p">(</span><span class="nv">Key</span><span class="p">,</span> <span class="nv">Dict</span><span class="p">,</span> <span class="nv">DefaultValue</span><span class="p">)</span> <span class="o">-&gt;</span>
+<span class="lineno"> 5</span>   <span class="k">case</span> <span class="nn">dict</span><span class="p">:</span><span class="nf">find</span><span class="p">(</span><span class="nv">Key</span><span class="p">,</span> <span class="nv">Dict</span><span class="p">)</span> <span class="k">of</span>
+<span class="lineno"> 6</span>     <span class="p">{</span><span class="n">ok</span><span class="p">,</span> <span class="nv">Value</span><span class="p">}</span> <span class="o">-&gt;</span>
+<span class="lineno"> 7</span>         <span class="nv">Value</span><span class="p">;</span>
+<span class="lineno"> 8</span>     <span class="p">_</span> <span class="o">-&gt;</span>
+<span class="lineno"> 9</span>         <span class="nv">DefaultValue</span>
+<span class="lineno">10</span>   <span class="k">end</span><span class="p">.</span></code></pre></div>
+
+<p>It is still a pattern matching - we are matching against a <em>tagged tuple</em> with <code>ok</code> atom at the first place, we have <em>catch-all</em> clause. But we can definitely do it better, in more <em>Erlangish</em> way. After a small refactoring code will look like this:</p>
+
+<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno">1</span> <span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="k">after</span><span class="p">).</span>
+<span class="lineno">2</span> <span class="p">-</span><span class="ni">export</span><span class="p">([</span> <span class="n">dict_find</span><span class="o">/</span><span class="mi">3</span> <span class="p">]).</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="nf">getValueOrDefault</span><span class="p">({</span><span class="n">ok</span><span class="p">,</span> <span class="nv">Value</span><span class="p">},</span> <span class="p">_)</span> <span class="o">-&gt;</span> <span class="nv">Value</span><span class="p">;</span>
+<span class="lineno">5</span> <span class="nf">getValueOrDefault</span><span class="p">(_,</span> <span class="nv">Default</span><span class="p">)</span>     <span class="o">-&gt;</span> <span class="nv">Default</span><span class="p">.</span>
+<span class="lineno">6</span> 
+<span class="lineno">7</span> <span class="nf">dict_find</span><span class="p">(</span><span class="nv">Key</span><span class="p">,</span> <span class="nv">Dict</span><span class="p">,</span> <span class="nv">DefaultValue</span><span class="p">)</span> <span class="o">-&gt;</span>
+<span class="lineno">8</span>   <span class="n">getValueOrDefault</span><span class="p">(</span><span class="nn">dict</span><span class="p">:</span><span class="nf">find</span><span class="p">(</span><span class="nv">Key</span><span class="p">,</span> <span class="nv">Dict</span><span class="p">),</span> <span class="nv">DefaultValue</span><span class="p">).</span></code></pre></div>
+
+<p>Lets look what happened here in details. We have changed the case expression into a function with clear name, that has two arguments - first is a result of <code>dict:find</code> and second is a default value. Then with pattern matching we are dispatching the execution flow - in our case we are returning a proper value (with extraction from a <em>tagged tuple</em>), but you can easily imagine that another function calls can be easily introduced here. We transformed <em>case</em> expression (a syntactical construct) to the <em>named</em> representation (a logical construct).</p>
+
+<p><em>Why it is better?</em> I hope that you can see that it is clearer at the first sight. Matching rules are stored in a declarative way, we have less syntactical noise and the most important thing - <em>it has a name</em>. That is the reason from where name of this <em>pattern</em> came from - <em>named case expressions</em>.</p>
+
+<p>But what about performance? Would not it be slower, because additional functions introduced here? We can check it easily, by digging deeper into <em>Erlang VM</em> internals.</p>
+
+<h3 id="internal-representation-core-erlang">Internal representation (<em>Core Erlang</em>)</h3>
+
+<p>Before we will take a peek under the hood, we need to briefly explain the structure of the <em>Erlang</em> compiler. Before the <em>Erlang</em> gets interpreted on the VM it is transformed to the <em>Core Erlang</em> representation and after that to the <em>BEAM</em> code (which is a equivalent of <em>bytecode</em> from <em>JVM</em>). It turns out that our <em>named case expressions</em> (functions with multiple heads and pattern matching, a logical construct) are directly transformed to the syntactical construct - <em>case</em> expression - in the first phase of compilation.</p>
+
+<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno"> 1</span> <span class="c">% Function &#39;valueOrDefault&#39; after compilation</span>
+<span class="lineno"> 2</span> <span class="c">% to the Core Erlang representation, which will be</span>
+<span class="lineno"> 3</span> <span class="c">% afterwards compiled to the BEAM code:</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="n">&#39;getValueOrDefault&#39;</span><span class="o">/</span><span class="mi">2</span> <span class="o">=</span>
+<span class="lineno"> 6</span>     <span class="c">%% Line 4</span>
+<span class="lineno"> 7</span>     <span class="k">fun</span> <span class="p">(_</span><span class="n">cor1</span><span class="p">,_</span><span class="n">cor0</span><span class="p">)</span> <span class="o">-&gt;</span>
+<span class="lineno"> 8</span> 	<span class="k">case</span> <span class="o">&lt;</span><span class="p">_</span><span class="n">cor1</span><span class="p">,_</span><span class="n">cor0</span><span class="o">&gt;</span> <span class="k">of</span>
+<span class="lineno"> 9</span> 	  <span class="o">&lt;</span><span class="p">{</span><span class="n">&#39;ok&#39;</span><span class="p">,</span><span class="nv">Value</span><span class="p">},_</span><span class="n">cor4</span><span class="o">&gt;</span> <span class="k">when</span> <span class="n">&#39;true&#39;</span> <span class="o">-&gt;</span>
+<span class="lineno">10</span> 	      <span class="nv">Value</span>
+<span class="lineno">11</span> 	  <span class="c">%% Line 5</span>
+<span class="lineno">12</span> 	  <span class="o">&lt;</span><span class="p">_</span><span class="n">cor5</span><span class="p">,</span><span class="nv">Default</span><span class="o">&gt;</span> <span class="k">when</span> <span class="n">&#39;true&#39;</span> <span class="o">-&gt;</span>
+<span class="lineno">13</span> 	      <span class="nv">Default</span>
+<span class="lineno">14</span> 	<span class="k">end</span></code></pre></div>
+
+<p>As you may see, <em>multi-head function clauses</em> are anyway compiled to the <em>case</em> expression, so argument about lost performance or additional overhead introduced by this abstraction is simply invalid - there is no such overhead, we can use it without any doubts (in most cases such objections are simply the <a href="http://en.wikipedia.org/wiki/Program_optimization">premature optimization</a> anyway).</p>
+
+<p>How we took a peek under the hood? It is simple, you can start new <em>Erlang</em> shell and then execute:</p>
+
+<div class="highlight"><pre><code class="language-erl" data-lang="erl"><span class="gp">1&gt;</span> <span class="n">c</span><span class="p">(</span><span class="k">after</span><span class="p">,</span> <span class="n">to_core</span><span class="p">).</span>
+<span class="go">ok</span>
+<span class="gp">2&gt;</span> <span class="c">% Compiler will spit out the</span>
+<span class="go">   % Core Erlang representation</span>
+<span class="go">   % to the &#39;after.core&#39; file.</span></code></pre></div>
+
+<h3 id="summary">Summary</h3>
+
+<p>Clear, concise and obvious code should be our goal from the beginning. It is easy to forget about it in the daily routine or rush caused by deadlines. It is a really small investment put upfront (even if it is bigger at the beginning, cost will definitely lower as time passes and we are gaining experience). It eases the debugging and <em>context reload</em> time. We should strive to simplicity, because <em>simple is better</em> - and it is worth knowing these tricks that can help you with pursuit to the final goal.</p>
+
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=UuHMaeO1k-E">Garrett Smith, <em>Social Code</em> (Code Mesh 2014)</a></li>
+  <li><a href="https://github.com/apache/couchdb-couch/blob/master/src/couch_util.erl">CouchDB - <em>couch_util.erl</em></a></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <footer>
+        <section>© Copyright 2014, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+  </body>
+</html>
