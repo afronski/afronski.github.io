@@ -7,6 +7,80 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Seven Languages in Seven Weeks - Ruby</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---ruby&quot;&gt;Seven Languages in Seven Weeks - Ruby&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a starting point of a series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing feature, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right ruby-logo&quot; alt=&quot;Ruby Logo&quot; src=&quot;/assets/RubyLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Aforementioned book has a very controversial concept called an &lt;em&gt;ugly child&lt;/em&gt;. One of chosen languages is presented as a &lt;em&gt;necessary evil&lt;/em&gt;, used in the old era. The choice fell on the &lt;em&gt;Ruby&lt;/em&gt;. And I partially agree with that choice.&lt;/p&gt;
+
+&lt;p&gt;Do not get me wrong - &lt;em&gt;Ruby&lt;/em&gt; is a wonderful language, it brings multiple merits and valuable tools to us. In many cases it rescued many programming careers from boredom and daily routine. It restored &lt;em&gt;happiness&lt;/em&gt; to the job of many programmers. But in this book, this language is surrounded by many other languages - better ones, relatively to the era that is coming (or rather - which is already here).&lt;/p&gt;
+
+&lt;p&gt;It is an old language - created in 1995 (the same year that &lt;em&gt;Java&lt;/em&gt; was created). This does not matter, when you have to get your job done, but it matters when it comes to the evolution, that took place since then. Author chosen that language because of joy and happiness that it brings for him. &lt;strong&gt;&lt;em&gt;Ruby is optimized for developer happiness&lt;/em&gt;&lt;/strong&gt;. Moreover, many tools that just get the job done are written in it (&lt;em&gt;Rails&lt;/em&gt;, &lt;em&gt;Sinatra&lt;/em&gt;, &lt;em&gt;Capistrano&lt;/em&gt;, &lt;em&gt;Chef&lt;/em&gt;, &lt;em&gt;Vagrant&lt;/em&gt; and many, many more). They definitely influenced many other communities (try to count how many &lt;em&gt;Sinatra&lt;/em&gt; forks are already created &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
+
+&lt;p&gt;From the community itself we can also learn multiple things. Initiatives like &lt;a href=&quot;http://railsgirls.com/&quot;&gt;Rails Girls&lt;/a&gt;, &lt;a href=&quot;http://www.rubytapas.com/&quot;&gt;Ruby Tapas&lt;/a&gt;, &lt;a href=&quot;http://exercism.io/&quot;&gt;Exercism&lt;/a&gt;, supporting diversity, embracing beginners and &lt;em&gt;greenhorns&lt;/em&gt; in the community, examples that come from the top - from core contributors, people like &lt;a href=&quot;https://twitter.com/yukihiro_matz&quot;&gt;@yukihiro_matz&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/josevalim&quot;&gt;@josevalim&lt;/a&gt; or &lt;a href=&quot;https://twitter.com/tenderlove&quot;&gt;@tenderlove&lt;/a&gt; - that really makes a &lt;em&gt;change&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Besides that, language itself have many interesting features that brings joy, but also enable nice use cases, hard to implement in other mainstream programming languages.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-this-language&quot;&gt;Why this language?&lt;/h3&gt;
+
+&lt;p&gt;I would like to present only a part of the most interesting feature - &lt;em&gt;method_missing&lt;/em&gt; and ability to easily and efficiently use &lt;em&gt;metaprogramming&lt;/em&gt; in your daily activities. It is a key thing that enables many use cases - starting from the crazy things, like that one presented below and ending on the various &lt;em&gt;Domain Specific Languages&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RomanNumerals&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;method_missing&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_s&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;IV&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;IIII&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;IX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;VIIII&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;XL&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;XXXX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;XC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;LXXXX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;I&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;V&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;X&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;L&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;C&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;How it works? Lets look on the &lt;em&gt;&lt;code&gt;REPL&lt;/code&gt;&lt;/em&gt; output:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;002&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XCII&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;92&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;003&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XII&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;004&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XIV&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For each undefined method in that class, we are calling an entry point called &lt;em&gt;&lt;code&gt;method_missing&lt;/code&gt;&lt;/em&gt;. Then you can react and do whatever you want with the actual input arguments and invoked method name. This feature, connected with very flexible and liberal syntax, enables any kind of &lt;em&gt;DSL&lt;/em&gt; creation that you can possibly imagine.&lt;/p&gt;
+
+&lt;p&gt;Why I have presented only this part? Because &lt;em&gt;Ruby&lt;/em&gt; is already very popular programming language, I would say even a mainstream one. I do not want to focus on describing its features, instead we should learn how to build an &lt;em&gt;amazing community&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;This environment was possible to build thanks to that language. Besides the described feature, additional ones like &lt;em&gt;mixins&lt;/em&gt;, &lt;em&gt;blocks&lt;/em&gt; or very complete, cohesive and well-documented &lt;em&gt;standard library&lt;/em&gt; really let you enjoy process of creating. Many people feel joy of programming when dealing with &lt;em&gt;Ruby&lt;/em&gt;. This is a key point, because that feeling attracts creative people. And these people are the creators of very vibrant and active community, these people are creators of amazing tools and libraries. And sometimes they transfer their experiences to the other communities (like &lt;a href=&quot;https://twitter.com/josevalim&quot;&gt;@josevalim&lt;/a&gt; and &lt;em&gt;Elixir&lt;/em&gt; programming language community).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;It is just simple as that&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;In the next blog post we will talk about not so popular, but still very elegant and interesting prototype-based language described in &lt;em&gt;“Seven Languages in Seven Weeks”&lt;/em&gt; book as a second one  - the &lt;a href=&quot;http://iolanguage.org&quot;&gt;Io&lt;/a&gt; programming language.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 20 Mar 2015 16:00:00 +0000</pubDate>
+        <link>http://www.afronski.pl/2015/03/20/seven-languages-in-seven-weeks-ruby.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/03/20/seven-languages-in-seven-weeks-ruby.html</guid>
+      </item>
+    
+      <item>
         <title>Interesting Language Features - Erlang I</title>
         <description>&lt;h1 id=&quot;interesting-language-features---erlang-i&quot;&gt;Interesting Language Features - Erlang I&lt;/h1&gt;
 
@@ -641,54 +715,6 @@
         <pubDate>Mon, 28 Apr 2014 22:30:00 +0000</pubDate>
         <link>http://www.afronski.pl/2014/04/28/my-toolbox.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2014/04/28/my-toolbox.html</guid>
-      </item>
-    
-      <item>
-        <title>Gibberish Game</title>
-        <description>&lt;h1 id=&quot;gibberish-game&quot;&gt;Gibberish Game&lt;/h1&gt;
-
-&lt;p&gt;Sometimes you cannot properly name the actual thing. Sometimes you exactly know how to name it, but it will introduce ambiguity and confusion. &lt;em&gt;How to avoid overloading certain terms and assign proper name to the actual definition?&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;what&quot;&gt;What?&lt;/h3&gt;
-
-&lt;p&gt;Answer how to do it is related with a technique from &lt;em&gt;domain driven design&lt;/em&gt; process called &lt;em&gt;modeling whirlpool&lt;/em&gt;. This game helps &lt;em&gt;modeler&lt;/em&gt; choose and adjust a word to the description which &lt;em&gt;domain expert&lt;/em&gt; provides.&lt;/p&gt;
-
-&lt;h3 id=&quot;when&quot;&gt;When?&lt;/h3&gt;
-
-&lt;p&gt;You definitely should use this technique when the actual term cannot be safely used in unambiguous way or it is really overloaded with meanings e.g. couple of aggregates can be associated with it. By defining different, simple, temporary and not meaningful name to the definition we are enforcing our mind to use different parts of brain in order to &lt;em&gt;discover&lt;/em&gt; the actual meaning. It is a way of jumping out just for a while from the scientific and analytic mindset to the more creative one.&lt;/p&gt;
-
-&lt;h3 id=&quot;how&quot;&gt;How?&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Do not name model elements too early.&lt;/li&gt;
-  &lt;li&gt;Name it at first as &lt;em&gt;&lt;code&gt;foo&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;bar&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;blah&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;ble&lt;/code&gt;&lt;/em&gt;/etc. and describe its rules and features.
-    &lt;ul&gt;
-      &lt;li&gt;Proper and what is even more important - descriptive and clear name will automatically appear after a while.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In the next iteration of describing things choose different word.
-    &lt;ul&gt;
-      &lt;li&gt;Why? Because your brain already learned what the previous word means.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;If &lt;em&gt;&lt;code&gt;foo&lt;/code&gt;&lt;/em&gt;-ish names sounds offensive and are not appropriate for the audience, you can use Greek letters instead.
-    &lt;ul&gt;
-      &lt;li&gt;&lt;em&gt;&lt;code&gt;Alpha&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;Kappa&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;Psi&lt;/code&gt;&lt;/em&gt;/etc. sounds more professional &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue_closed_eyes:&quot; alt=&quot;:stuck_out_tongue_closed_eyes:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61d.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://goodenoughsoftware.net/2012/02/28/the-gibberish-game/&quot;&gt;&lt;em&gt;The Gibberish Game&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://goodenoughsoftware.net/2012/02/29/the-context-game/&quot;&gt;&lt;em&gt;The Context Game&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=iaLeKHbspLg&quot;&gt;&lt;em&gt;Model jest wszystkim czego potrzebujesz&lt;/em&gt; (PL)&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 24 Apr 2014 23:00:00 +0000</pubDate>
-        <link>http://www.afronski.pl/2014/04/24/gibberish-game.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2014/04/24/gibberish-game.html</guid>
       </item>
     
   </channel>
