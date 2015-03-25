@@ -13,7 +13,7 @@
 
     <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
 
-    <title>Let's talk about memory</title>
+    <title>Interesting Language Features - Erlang II</title>
 
     <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
     <link rel="stylesheet" href="/stylesheets/main.css" />
@@ -22,19 +22,37 @@
     <article class="container post">
       <a href="/">Home</a>
 
-<h1 id="lets-talk-aboutmemory">Let’s talk <code>about:memory</code></h1>
+<h1 id="interesting-language-features---erlang-ii">Interesting Language Features - Erlang II</h1>
 
-<p>Recently on polish Facebook group <em>JSNews</em>, thanks to <a href="https://twitter.com/zbraniecki">Zbigniew Braniecki</a>, I found a very useful tool for monitoring memory in Firefox - <code>about:memory</code>.</p>
+<quote class="disclaimer">This blog post is an article of a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.</quote>
 
-<p><img src="/assets/AboutMemoryOverview.png" alt="Overview for about:memory" /></p>
+<h3 id="introduction">Introduction</h3>
 
-<p>You can open it by typing <code>about:memory</code> in your address bar. It has capabilities to measure memory usage at browser level, load and save dumps (as a gzipped <em><code>JSON</code></em> file), compare them and force garbage and cycle collection.</p>
+<ul>
+  <li>Why <em>Erlang</em>?</li>
+  <li>Reliability, Fault-tolerance.</li>
+  <li>Process oriented design.</li>
+  <li>Hardware related tricks.</li>
+</ul>
 
-<p><img src="/assets/AboutMemoryDiff.png" alt="Difference for two memory dumps" /></p>
+<h3><i>Links and Monitors</i></h3>
 
-<p>I strongly encourage you to dive into that tool, especially if you like me, thought that <em>Firefox</em> hasn’t got any tools for memory profiling. Well, not the first time I’m wrong <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />.</p>
+<ul>
+  <li>Presentation of processes, message passing.</li>
+  <li>Killing processes.</li>
+  <li>Trapping exits.</li>
+  <li>Process death is just another message.</li>
+  <li>Monitoring processes.</li>
+  <li>Linking processes.</li>
+  <li>Hardware related idea - C-Wire.</li>
+</ul>
 
-<p>P.S. On screenshots you can observe new UI for <em>Firefox</em>, called <em>Australis</em> - what do you think about it? Share your opinion in comments.</p>
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li>http://erlang.org/pipermail/erlang-questions/2014-June/079885.html</li>
+  <li>http://www.erlang-factory.com/upload/presentations/247/erlang_vm_1.pdf</li>
+</ul>
 
     </article>
 
@@ -42,8 +60,8 @@
       <a href="/" class="mobile-link">Home</a>
 
       <section class="social-buttons">
-        <div class="fb-share-button" data-href="/2013/11/28/lets-talk-about-memory.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/2013/11/28/lets-talk-about-memory.html" data-counter="right"></script>
+        <div class="fb-share-button" data-href="/2015/03/27/interesting-language-features-erlang-links-and-monitors.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2015/03/27/interesting-language-features-erlang-links-and-monitors.html" data-counter="right"></script>
         <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
       </section>
 
