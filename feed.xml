@@ -10,34 +10,47 @@
         <title>Interesting Language Features - Erlang II</title>
         <description>&lt;h1 id=&quot;interesting-language-features---erlang-ii&quot;&gt;Interesting Language Features - Erlang II&lt;/h1&gt;
 
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is an article of a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is an article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
 
 &lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Why &lt;em&gt;Erlang&lt;/em&gt;?&lt;/li&gt;
-  &lt;li&gt;Reliability, Fault-tolerance.&lt;/li&gt;
-  &lt;li&gt;Process oriented design.&lt;/li&gt;
-  &lt;li&gt;Hardware related tricks.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;In previous blog post, we talked about &lt;em&gt;pattern matching&lt;/em&gt; and its usage in &lt;em&gt;functional programming&lt;/em&gt; in general. But &lt;em&gt;Erlang&lt;/em&gt; is more known in the programming community from something different. This programming language, with support for distribution and concurrency baked in since beginning, is mostly known as a solid foundation for reliable, long running systems, maintained for many years. It was developed this way &lt;strong&gt;deliberately&lt;/strong&gt; with all mentioned features in mind, because of requirements imposed by telecommunications industry from the 80s. Moreover, these requirements are still actual for today’s IT systems. We can benefit from the whole platform, especially if we have to deal with strict requirements related with &lt;em&gt;reliability&lt;/em&gt; and &lt;em&gt;fault-tolerance&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Erlang’s&lt;/em&gt; unique features related with concurrency, reliability and distribution are based on very simple concepts - &lt;em&gt;isolation&lt;/em&gt;, &lt;em&gt;lightweight processes&lt;/em&gt; and powerful &lt;em&gt;&lt;code&gt;VM&lt;/code&gt;&lt;/em&gt; implementation. Back in a days, &lt;em&gt;Erlang&lt;/em&gt; needs for distribution was argued because of &lt;em&gt;hardware redundancy&lt;/em&gt;. If you want to have &lt;em&gt;fault-tolerant&lt;/em&gt; system, you need at least two computers. You need to provide &lt;em&gt;redundancy&lt;/em&gt; and simply put - &lt;em&gt;two machines are able to handle multiple errors, one machine handles only the first error&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;But, if you have multiple concurrent processes, you need to treat errors differently - classic way of error handling or &lt;em&gt;defensive programming&lt;/em&gt; techniques will not help us here. &lt;em&gt;Erlang’s&lt;/em&gt; famous motto for that situations is &lt;strong&gt;let it crash&lt;/strong&gt;. It does not mean, that we should crash whole &lt;em&gt;VM&lt;/em&gt; in case of error, We need to deal with them in a different way and with different tools - &lt;em&gt;supervisors&lt;/em&gt; with their hierarchies and ability to &lt;em&gt;connect&lt;/em&gt; and &lt;em&gt;observe&lt;/em&gt; other processes. I would like to focus on the second group.&lt;/p&gt;
 
 &lt;h3&gt;&lt;i&gt;Links and Monitors&lt;/i&gt;&lt;/h3&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Presentation of processes, message passing.&lt;/li&gt;
-  &lt;li&gt;Killing processes.&lt;/li&gt;
-  &lt;li&gt;Trapping exits.&lt;/li&gt;
-  &lt;li&gt;Process death is just another message.&lt;/li&gt;
-  &lt;li&gt;Monitoring processes.&lt;/li&gt;
-  &lt;li&gt;Linking processes.&lt;/li&gt;
-  &lt;li&gt;Hardware related idea - C-Wire.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Isolation&lt;/em&gt; is a very wise choice when it comes to the reliability, because we can avoid &lt;em&gt;cascading failures&lt;/em&gt;. But, how you will know that something actually failed? Besides &lt;em&gt;isolation&lt;/em&gt;, the very important thing is to have ability to &lt;em&gt;observe&lt;/em&gt; other processes. By connecting two processes together via &lt;em&gt;link&lt;/em&gt;, you are creating the bidirectional bond - if one of them fails, both processes will be killed.&lt;/p&gt;
+
+&lt;section class=&quot;picture-section&quot;&gt;
+  &lt;img class=&quot;half-sized-image&quot; alt=&quot;Links in Erlang&quot; src=&quot;http://learnyousomeerlang.com/static/img/link-exit.png&quot; /&gt;
+  &lt;small&gt;Image shamelessly taken from the amazing book &lt;em&gt;Learn You Some Erlang For Great Good!&lt;/em&gt;&lt;/small&gt;
+&lt;/section&gt;
+
+&lt;p&gt;It sounds useful - you can group processes together with common concerns and bring them down together in case of error. Disabling a link is possible on both sides. But what if we would like to have more granular control on the exiting flow. We can either &lt;em&gt;monitor&lt;/em&gt; a second process or &lt;em&gt;trap exits&lt;/em&gt;. Lets look on the second method at first:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;nb&quot;&gt;process_flag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trap_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;By doing that, process which trap exits will receive an additional message to the mailbox if the linked processes will exit abruptly with an erroneous reason. Also, if the process itself will exit with an error - exit signal will be trapped. Only one type of error, called a &lt;em&gt;&lt;code&gt;kill&lt;/code&gt;&lt;/em&gt; invoked by the process itself, cannot be trapped - you can do it by &lt;code&gt;exit(Pid, kill).&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Besides that you can &lt;em&gt;observe&lt;/em&gt; other processes by setting unidirectional connection called a &lt;em&gt;monitor&lt;/em&gt;. When the monitored process will go down, observer will receive a new message directly to the mailbox. As we said, it is a unidirectional relation, so it can be disabled only by the process that set up that connection earlier.&lt;/p&gt;
+
+&lt;h3 id=&quot;origin&quot;&gt;Origin&lt;/h3&gt;
+
+&lt;p&gt;All of described ideas looks like a very high level concepts, but it is actually the opposite:&lt;/p&gt;
+
+&lt;quote class=&quot;foreign&quot;&gt;Links were invented by Mike Williams and based on the idea of a C-wire (a form of electrical circuit breaker).&lt;/quote&gt;
+
+&lt;p&gt;Idea comes directly from the &lt;em&gt;“C-wire”&lt;/em&gt; in early telephones. In order to cancel a problematic call, you should ground the &lt;em&gt;C-wire&lt;/em&gt;. &lt;em&gt;Electronics&lt;/em&gt; is always a very good place to collect a valuable inspiration regarding the &lt;em&gt;system design&lt;/em&gt; and &lt;em&gt;fault-tolerance&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;http://erlang.org/pipermail/erlang-questions/2014-June/079885.html&lt;/li&gt;
-  &lt;li&gt;http://www.erlang-factory.com/upload/presentations/247/erlang_vm_1.pdf&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/errors-and-processes&quot;&gt;Learn You Some Erlang For Great Good! Chapter: Errors and Processes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://erlang.org/pipermail/erlang-questions/2014-June/079885.html&quot;&gt;Erlang Mailing List, Origin of Links&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang-factory.com/upload/presentations/247/erlang_vm_1.pdf&quot;&gt;The Evolution of Erlang VM&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 27 Mar 2015 16:00:00 +0000</pubDate>
