@@ -450,22 +450,28 @@
 
 &lt;p&gt;Nodeschool is a series of interactive workshops, divided into two sections - core concepts and electives.&lt;/p&gt;
 
-&lt;p&gt;In the main concepts we have:
-- &lt;a href=&quot;http://nodeschool.io/#learn-you-node&quot;&gt;basic asynchronous programming and introduction to the core Node.js concepts&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#stream-adventure&quot;&gt;introduction to the streams&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#bytewiser&quot;&gt;bytes and buffers manipulation&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#functionaljs&quot;&gt;functional programming in JavaScript&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#git-it&quot;&gt;how to work effectively with git and github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In the main concepts we have:&lt;/p&gt;
 
-&lt;p&gt;Electives are oriented around:
-- &lt;a href=&quot;http://nodeschool.io/#levelmeup&quot;&gt;use of node.js binding and modules related with LevelDB&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#makemehapi&quot;&gt;hapi.js framework&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#expressworks&quot;&gt;express.js framework&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#goingnative&quot;&gt;native modules and addons&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#count-to-6&quot;&gt;6th version of ECMAScript&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#browserify-adventure&quot;&gt;browserify&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#promiseitwonthurt&quot;&gt;promises&lt;/a&gt;
-- &lt;a href=&quot;http://nodeschool.io/#asyncyou&quot;&gt;async.js&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#learn-you-node&quot;&gt;basic asynchronous programming and introduction to the core Node.js concepts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#stream-adventure&quot;&gt;introduction to the streams&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#bytewiser&quot;&gt;bytes and buffers manipulation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#functionaljs&quot;&gt;functional programming in JavaScript&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#git-it&quot;&gt;how to work effectively with git and github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Electives are oriented around:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#levelmeup&quot;&gt;use of node.js binding and modules related with LevelDB&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#makemehapi&quot;&gt;hapi.js framework&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#expressworks&quot;&gt;express.js framework&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#goingnative&quot;&gt;native modules and addons&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#count-to-6&quot;&gt;6th version of ECMAScript&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#browserify-adventure&quot;&gt;browserify&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#promiseitwonthurt&quot;&gt;promises&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#asyncyou&quot;&gt;async.js&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&quot;how-to-start&quot;&gt;How to start?&lt;/h1&gt;
 

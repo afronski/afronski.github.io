@@ -36,10 +36,13 @@
 
 <h3 id="starting">Starting</h3>
 
-<p>At first, you need to <code>clone</code> (or <code>checkout</code> in SVN terminology) repository. You can do in three different ways:
-- First way (<em>2nd line</em>) checkouts repository with a standard SVN layout (<code>trunk</code>, <code>branches</code>, <code>tags</code>) and associates branches, tags and <em><code>trunk</code></em> with <em><code>git</code></em> <em><code>master</code></em>.
-- Second way (<em>5th line</em>) checkouts whole repository as it is.
-- Third way (<em>starts in 8th line</em>) is really an expansion for <code>git-svn clone</code>.</p>
+<p>At first, you need to <code>clone</code> (or <code>checkout</code> in SVN terminology) repository. You can do in three different ways:</p>
+
+<ul>
+  <li>First way (<em>2nd line</em>) checkouts repository with a standard SVN layout (<code>trunk</code>, <code>branches</code>, <code>tags</code>) and associates branches, tags and <em><code>trunk</code></em> with <em><code>git</code></em> <em><code>master</code></em>.</li>
+  <li>Second way (<em>5th line</em>) checkouts whole repository as it is.</li>
+  <li>Third way (<em>starts in 8th line</em>) is really an expansion for <code>git-svn clone</code>.</li>
+</ul>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="c"># Standard layout.</span>
 <span class="lineno"> 2</span> ~ <span class="nv">$ </span>git svn clone -s <span class="nv">$SVN_REPOSITORY_ROOT_URL</span>
