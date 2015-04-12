@@ -7,6 +7,58 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Books that changed my career - The Pragmatic Programmer</title>
+        <description>&lt;h1 id=&quot;books-that-changed-my-career---the-pragmatic-programmer&quot;&gt;Books that changed my career - The Pragmatic Programmer&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html#whats-next&quot;&gt;previous post&lt;/a&gt;, I have mentioned that I have this book in three copies - two editions of e-book version (Polish and English) and printed Polish translation. The last one is the most valuable for me, because I have received it as a gift from my colleague during studies, with very nice inscription (after graduating 3rd year, if I recall correctly - Hi Rafał! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
+
+&lt;p&gt;I would like to focus in this post on the actual details, because book is well known in the community. And it definitely deserves its &lt;em&gt;fame&lt;/em&gt; and &lt;em&gt;glory&lt;/em&gt;. It is even more actual, than &lt;em&gt;C Programming Language&lt;/em&gt; by Kernighan and Ritchie. &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue_winking_eye:&quot; alt=&quot;:stuck_out_tongue_winking_eye:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61c.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; Actually it is a huge foundation under the &lt;em&gt;Agile Manifesto&lt;/em&gt; (it was published two years before formalized meeting happened, where the document was signed), moreover - both authors are signatories of that manifesto.&lt;/p&gt;
+
+&lt;h3 class=&quot;center&quot;&gt;&lt;em&gt;The Pragmatic Programmer: From Journeyman to Master&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&quot;The Pragmatic Programmer&quot; src=&quot;/assets/PragmaticProgrammer.jpg&quot; class=&quot;book&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;subtitle&quot;&gt;Subtitle&lt;/h3&gt;
+
+&lt;p&gt;Almost each science specialization has its own book, which is required to read before you will start a professional career. If you are an apprentice, you will probably get most of this book, because your mind is fresh and knowledge base is relatively small, especially regarding topics like &lt;em&gt;estimation&lt;/em&gt;, &lt;em&gt;career planning&lt;/em&gt; or &lt;em&gt;teamwork&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;But in this case, even the subtitle suggests that it is a book for all generations of programmers. Of course younger programmers will benefit the most, but not surprisingly, even the more experienced folks can find this book refreshing. Why? Because it is a classic example of knowledge which is &lt;em&gt;universal&lt;/em&gt;, but sometimes &lt;em&gt;not commonly known&lt;/em&gt; or even &lt;em&gt;forgotten&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;universal-truths&quot;&gt;Universal Truths&lt;/h3&gt;
+
+&lt;p&gt;I would like to introduce the most favorite advice and guides from the book.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Tracer Bullets&lt;/em&gt; vs &lt;em&gt;Prototypes&lt;/em&gt; - If the second term is well known (maybe even more as a &lt;em&gt;proof of concept&lt;/em&gt;), we often forgot about first one. And that is a huge mistake, because it is highly useful. Moreover, we often want to use the &lt;em&gt;tracer bullets&lt;/em&gt;, but we misuse &lt;em&gt;prototype&lt;/em&gt; instead - building not a &lt;em&gt;walking skeleton&lt;/em&gt;, but a &lt;em&gt;walking dead&lt;/em&gt; project. The main difference is related with the destiny of both - &lt;em&gt;prototype&lt;/em&gt; should be built, conclusions should be gathered and whole project should be thrown out through a window. If we want to build a skeleton and fiddle with the internals, because we do not feel how it should look like right now, we should use a &lt;em&gt;tracer bullet&lt;/em&gt;. And the rules how to build both are different. I encourage you to grab your own copy, look into that chapter and read it out loud (if you do not have one yet - here is a &lt;a href=&quot;https://pragprog.com/book/tpp/the-pragmatic-programmer&quot;&gt;link&lt;/a&gt; to an official shop).&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;DRY&lt;/em&gt;, &lt;em&gt;YAGNI&lt;/em&gt; and other acronyms - During my career I ran into these abbreviations many times. And book is full of it - it does not mean that it is something wrong. Our industry is full of it - it builds our internal dictionary and sometimes it adds more meaning. Aforementioned two - &lt;em&gt;DRY&lt;/em&gt; (&lt;em&gt;Don’t Repeat Yourself&lt;/em&gt;) and &lt;em&gt;YAGNI&lt;/em&gt; (&lt;em&gt;You Ain’t Gonna Need It&lt;/em&gt;) are kind of an &lt;em&gt;axioms&lt;/em&gt; which are not negotiable. For a beginner, especially curious one, listening just one word thrown out as an explanation can be infuriating, but eventually we will all learn what it means to violate that rules. In a hard way. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Boiling the frog&lt;/em&gt; - Typical metaphor for a problem, which can be observed from the outside, but never from the inside. It affects our health in the long run, it changes our attitude and forms the future career. Sometimes it is more healthier to step out for a while and just listen, observe our/team/project behavior. Practice makes permanent and our little habits can grow to an overwhelming problems in the future.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Bus factor&lt;/em&gt; - My personal favorite, mostly because I was once such person and I will not lead to that situation again. I really like the &lt;em&gt;Agile&lt;/em&gt; attitude about cross-functional teams because it helps solve the problem. Your team should be resilient to a situation, when you are losing one person from the team. And you as a &lt;em&gt;responsible&lt;/em&gt; and &lt;em&gt;professional&lt;/em&gt; software engineer should not add anything to such problematic factor.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Rubber Duck Debugging&lt;/em&gt; - This is probably the most known advice from the book. Mostly because our &lt;a href=&quot;http://www.afronski.pl/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html#why-this-book&quot;&gt;brains works in that way&lt;/a&gt; and probably everyone experienced that feeling in the past. This is the easiest way to enable &lt;em&gt;rich mode&lt;/em&gt; in our brains, because we are switching perspective and way of thinking about the problem. It does not have to be an actual &lt;em&gt;rubber duck&lt;/em&gt;, it can be another person in the office or even a &lt;em&gt;LEGO&lt;/em&gt; minifigure. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Law of Demeter&lt;/em&gt; - This the most underestimated law from that book. Someone said that it is applicable to the &lt;em&gt;OOP&lt;/em&gt; only, but &lt;a href=&quot;http://c2.com/cgi/wiki?LawOfDemeterRevisited&quot;&gt;it is not true&lt;/a&gt;. Violations of that rule results in many different forms, the lightest and most famous one is probably a &lt;a href=&quot;http://c2.com/cgi/wiki?TrainWreck&quot;&gt;train wreck&lt;/a&gt;. I strongly recommend to read this chapter again, mindfully - try to make notes or rethink it in the back of your head. It really helps to understand and shed new light on the meaning.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And what is your favorite advice from that book? Please, share your choice and explanation in the comments below.&lt;/p&gt;
+
+&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
+
+&lt;p&gt;I would like to cover another classical position on my bookshelf, which is very underestimated by the community. Recently, it receives proper respect, even the &lt;a href=&quot;https://twitter.com/unclebobmartin&quot;&gt;Uncle Bob&lt;/a&gt; recommends to read it. Book covers functional programming in an &lt;em&gt;exotic&lt;/em&gt; language, but each &lt;em&gt;MIT&lt;/em&gt; freshman have to read it and they can do it easily. It is possible thanks to the three brilliant authors who created a very comprehensible and timeless book (which is, in my opinion, even more actual now). Stay tuned to the next post!&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/tpp/the-pragmatic-programmer&quot;&gt;The Pragmatic Programmer, The Pragmatic Bookshelf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 12 Apr 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/04/12/books-that-changed-my-career-the-pragmatic-programmer.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/04/12/books-that-changed-my-career-the-pragmatic-programmer.html</guid>
+      </item>
+    
+      <item>
         <title>The best of Lambda Days 2015</title>
         <description>&lt;h1 id=&quot;the-best-of-lambda-days-2015&quot;&gt;The best of Lambda Days 2015&lt;/h1&gt;
 
@@ -567,55 +619,6 @@
         <pubDate>Fri, 18 Jul 2014 15:00:00 +0200</pubDate>
         <link>http://www.afronski.pl/2014/07/18/nodeschool-io.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2014/07/18/nodeschool-io.html</guid>
-      </item>
-    
-      <item>
-        <title>My picks of NDC 2014 - part I</title>
-        <description>&lt;h1 id=&quot;my-picks-of-ndc-2014---part-i&quot;&gt;My picks of NDC 2014 - part I&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97329157&quot;&gt;Kevlin Henney - Seven Ineffective Coding Habits of Many Programmers&lt;/a&gt; - Very refreshing talk about style and programming habbits. Even if it has many controversial points from your perspective and it is very opinionated, many of them are at least thought-provoking and maybe they should be reconsidered and rethought again.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97315946&quot;&gt;Hadi Hariri - Developing in a Decade&lt;/a&gt; - Very inspiring and refreshing talk what software development, internet and whole IT actually is and why it should change if we want to be happier and live in the better world. Amazing anegdotes and very thought-provoking comparisons to the books (Orwell’s &lt;em&gt;“1984”&lt;/em&gt;, Huxley’s &lt;em&gt;“Brave New World”&lt;/em&gt;, Postman’s &lt;em&gt;“Amusing Ourselves to Death”&lt;/em&gt;). For me, this is the best presentation of this year NDC by now.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97530863&quot;&gt;Robert C. Martin - Clean Architecture and Design&lt;/a&gt; - Strongly recommended if you have not seen earlier talks made by &lt;em&gt;Uncle Bob&lt;/em&gt; related with this topic. The most appropriate summary of this talk: &lt;em&gt;application’s business rules are the most important things, protect them - everything is a implementation detail and it should be pluggable&lt;/em&gt;. In other words &lt;em&gt;good architecture maximizes the number of decisions not made&lt;/em&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97505656&quot;&gt;Tim Berglund - Discrete Math You Need to Know&lt;/a&gt; - Inspiring talk (even if you may think that math cannot be inspiring). Definitely recommended, at first - it is recommended to stretch your mind frequently, moreover - it is nice to know more and have these tools in your toolbox (or what is even more recommended - refresh it). Surprisingly, still many people in IT do not know how the RSA works underneath.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97318800&quot;&gt;Denise R. Jackobs - Banish Your Inner Critic&lt;/a&gt; - It can be very enlightening talk for many people, maybe even a life changer. If you have problems with pursuing to the perfection state, procrastination and you have feeling and knowledge that you are a victim of &lt;em&gt;impostor syndrome&lt;/em&gt; definitely worth watching.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97516288&quot;&gt;Robert C. Martin - Advanced Test Driven Development&lt;/a&gt; - Again, if you have seen it before, there is probably nothing new, but if not - please definitely watch it. Very interesting concept called &lt;em&gt;transformation priority premise&lt;/em&gt;. And surprising summary - &lt;em&gt;if statement is a degenerated case of while loop&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97537026&quot;&gt;Scott Bellware - TDD in Tatters&lt;/a&gt; - Eye-opening introduction about cognitive theory and learning. Very nice differentiation between crude and subtle things, which sometimes fells out and disappear in the process of learning. I disagree about that automation leads to removal a connection between the programmers and code, but still it is a viable talk (at least the beginning about &lt;em&gt;amateur cognitive theory&lt;/em&gt;, pointing out the subtleties and explaining the design role in &lt;em&gt;TDD&lt;/em&gt; acronym). The most important quote from this presentation is &lt;em&gt;every test is an additional coupling to the code&lt;/em&gt; - and by providing good design we should minimize the coupling, we should control it. It is the subtle thing that we often ignore.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;how-to-watch-these-videos-offline&quot;&gt;How to watch these videos offline?&lt;/h2&gt;
-
-&lt;p&gt;Unfortunately, since 2013 there are no &lt;em&gt;&lt;code&gt;torrent&lt;/code&gt;&lt;/em&gt; files, which combine all videos in one place. But there is a solution - we can use &lt;code&gt;Selenium&lt;/code&gt; &lt;em&gt;JavaScript&lt;/em&gt; driver to scrap all links from &lt;em&gt;&lt;code&gt;HTML5&lt;/code&gt;&lt;/em&gt; &lt;em&gt;video&lt;/em&gt; tags. Complete source code of scripts and helpers is available &lt;a href=&quot;https://github.com/afronski/playground-repository/tree/master/vimeo-scraper&quot;&gt;here&lt;/a&gt;. Installation:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# On Arch Linux, Selenium Chrome WebDriver is available only in AUR.&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pacaur -S chromedriver
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm install
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node vimeo-scraper.js &amp;gt; urls.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;In the output file you will receive list of URLs which point directly to &lt;em&gt;MP4&lt;/em&gt; ready to download.&lt;/p&gt;
-
-&lt;h2 id=&quot;appendix---a-bitter-state-of-headless-browsers&quot;&gt;Appendix - A bitter state of headless browsers&lt;/h2&gt;
-
-&lt;p&gt;I know that there are tools capable to do such things headlessly. I thought that it will be an easy task to do.&lt;/p&gt;
-
-&lt;p&gt;Unfortunately, I have tested &lt;code&gt;Phantom.js&lt;/code&gt; and &lt;code&gt;SlimmerJS&lt;/code&gt; (representatives of two major browser engines - &lt;em&gt;WebKit&lt;/em&gt; and &lt;em&gt;Gecko&lt;/em&gt;) and both does not work (even if creators of &lt;code&gt;SlimmerJS&lt;/code&gt; &lt;a href=&quot;http://slimerjs.org/features.html&quot;&gt;claims&lt;/a&gt; that it should work with &lt;em&gt;&lt;code&gt;HTML5&lt;/code&gt;&lt;/em&gt; &lt;em&gt;video&lt;/em&gt;, &lt;code&gt;Phantom.js&lt;/code&gt; is slightly better in this matter - it &lt;a href=&quot;https://github.com/ariya/phantomjs/wiki/Supported-Web-Standards#unsupported-features&quot;&gt;officially&lt;/a&gt; does not support &lt;em&gt;audio&lt;/em&gt; and &lt;em&gt;video&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;The best implementation of &lt;em&gt;&lt;code&gt;WebKit&lt;/code&gt;&lt;/em&gt; rendering engine available to Node.js called &lt;em&gt;Chimera&lt;/em&gt; is &lt;a href=&quot;https://github.com/deanmao/node-chimera/issues/44#issuecomment-30561620&quot;&gt;no longer maintained&lt;/a&gt;. It was a very nice module, I have used it in the past - very unfortunate and disappointing decision.&lt;/p&gt;
-
-&lt;p&gt;So if you really want to scrape pages headlessly by doing more than simple rendering, measure loading time and capture a single screenshot, you need to use the good, old and reliable pair: &lt;code&gt;Selenium&lt;/code&gt; and &lt;code&gt;Xvfb&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/channels/ndc2014&quot;&gt;NDC 2014 Vimeo Playlist&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://slimmerjs.org&quot;&gt;SlimmerJS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://phantomjs.org&quot;&gt;phantomjs&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/deanmao/node-chimera&quot;&gt;&lt;code&gt;node-chimera&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 16 Jun 2014 22:10:00 +0200</pubDate>
-        <link>http://www.afronski.pl/2014/06/16/my-picks-of-NDC-2014-part-1.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2014/06/16/my-picks-of-NDC-2014-part-1.html</guid>
       </item>
     
   </channel>
