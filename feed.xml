@@ -7,6 +7,155 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Seven Languages in Seven Weeks - Io</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---io&quot;&gt;Seven Languages in Seven Weeks - Io&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;&lt;img class=&quot;right io-logo&quot; alt=&quot;Io Logo&quot; src=&quot;/assets/IoLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At first you may think that blog post is about &lt;em&gt;io.js&lt;/em&gt;, a recent &lt;em&gt;node.js&lt;/em&gt; fork - but it is not, we are talking here about programming languages. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Io&lt;/em&gt; is a programming language created by &lt;em&gt;Steve Dekorte&lt;/em&gt; in 2002. It is described as second one in the aforementioned book &lt;em&gt;Seven Languages in Seven Weeks&lt;/em&gt;. The only thing that it has in common&lt;br /&gt;with &lt;em&gt;io.js&lt;/em&gt; / &lt;em&gt;node.js&lt;/em&gt; and other &lt;em&gt;JavaScript&lt;/em&gt; based platforms is its prototypical nature.&lt;/p&gt;
+
+&lt;p&gt;It means, that like in &lt;em&gt;Self&lt;/em&gt; (or &lt;em&gt;JavaScript&lt;/em&gt;) everything is a &lt;em&gt;clone&lt;/em&gt; of another object and like in &lt;em&gt;Smalltalk&lt;/em&gt; everything is an object. In other words - &lt;strong&gt;there is no distinction between class and instance&lt;/strong&gt; and you can build &lt;em&gt;classes&lt;/em&gt; and its schema during &lt;em&gt;run-time&lt;/em&gt; execution.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//   Car_0xDEADBEE:&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// type            = &amp;quot;Car&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;drive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Vroom!&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// method(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//  &amp;quot;Vroom!&amp;quot; println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// )&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;drive&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Vroom!&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can observe above - &lt;em&gt;syntax is pretty minimal&lt;/em&gt;. It is often compared to the &lt;em&gt;Lisp-like&lt;/em&gt; languages. Besides that, language has really clear semantics (which is easy to grasp), powerful features in the standard library (also related with the &lt;em&gt;concurrency&lt;/em&gt; support) and small, portable &lt;em&gt;virtual machine&lt;/em&gt; (which is often used in the &lt;em&gt;embedded systems&lt;/em&gt; domain).&lt;/p&gt;
+
+&lt;p&gt;I would like to bring some light to the most interesting language features, starting from the basic things.&lt;/p&gt;
+
+&lt;h2 id=&quot;slots-and-message-passing&quot;&gt;Slots and Message Passing&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;A simple car.&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;slotNames&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// list(&amp;quot;type&amp;quot;, &amp;quot;desc&amp;quot;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After creating new clone, you can create new slots (with an operator &lt;code&gt;:=&lt;/code&gt;) or assign value to the existing one (with simple &lt;code&gt;=&lt;/code&gt; operator). Getting value from the slot is simple. Underneath everything is a message - even the method invocation is represented as a &lt;em&gt;message passing&lt;/em&gt; to the actual object.&lt;/p&gt;
+
+&lt;h2 id=&quot;prototype-chains&quot;&gt;Prototype chains&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;A simple car.&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ferrari&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ferrari&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Ferrari&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testarossa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ferrari&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testarossa&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Ferrari&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testarossa&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;slotNames&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// list()&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testarossa&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &amp;quot;A simple car.&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In presented example you can see how the message passing related with method invocation, propagates to the top of the prototype chain. Also, in &lt;em&gt;Io&lt;/em&gt; there is a difference between instances and types regarding syntax - capitalized names means &lt;em&gt;types&lt;/em&gt; from which you can clone an &lt;em&gt;instance&lt;/em&gt; (and its name is in small caps).&lt;/p&gt;
+
+&lt;h2 id=&quot;nice-examples&quot;&gt;Nice examples&lt;/h2&gt;
+
+&lt;h3 id=&quot;singleton&quot;&gt;Singleton&lt;/h3&gt;
+
+&lt;p&gt;It is very easy to create a true &lt;em&gt;singleton&lt;/em&gt; instance in the prototypical language. We just need to provide our implementation in the &lt;em&gt;clone&lt;/em&gt; slot for that instance. Our implementation will return always the same copy. This method requires consistency in the language - it should be only one way to create an object copy.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In presented case, each clone invoked on the &lt;em&gt;Single&lt;/em&gt; object will return always the same instance.&lt;/p&gt;
+
+&lt;h3 id=&quot;concurrency-support&quot;&gt;Concurrency support&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;A&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;yield&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;A&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;yield&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;yield&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;B&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;yield&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;B&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;say&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;say&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Coroutine&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentCoroutine&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pause&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On the basic level related with concurrency, &lt;em&gt;Io&lt;/em&gt; supports &lt;em&gt;coroutines&lt;/em&gt;. As in the example, two &lt;em&gt;coroutines&lt;/em&gt; are switching back-and-forth thanks the message &lt;code&gt;yield&lt;/code&gt;. Last line will wait until all other coroutines will finish, and after it will let the execution flow. Having this piece and message passing it is very simple and intuitive to build on top the &lt;em&gt;actor model&lt;/em&gt;. Besides that we also have &lt;em&gt;futures&lt;/em&gt; implementation available in the standard library.&lt;/p&gt;
+
+&lt;h3 id=&quot;extending-interpreter-and-vm&quot;&gt;Extending interpreter and VM&lt;/h3&gt;
+
+&lt;p&gt;And finally, most advanced but still concise example - related with extensiveness of the &lt;em&gt;language&lt;/em&gt; and a &lt;em&gt;run-time&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OperatorTable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addAssignOperator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;:&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;atPutNumber&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;curlyBrackets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foreach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atPutNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atPut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalArgAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asMutable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;removePrefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;removeSuffix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalArgAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Structure of `data.json` file:&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//    &amp;quot;key&amp;quot;: 123456,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//    &amp;quot;another_key: 4567890&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;data.json&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;openForReading&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;doString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course, not a full &lt;em&gt;JSON&lt;/em&gt; specification is implemented here, but thanks to the ability to overload operator meaning, creating new operators and modifying its precedence (all of this done by manipulating &lt;em&gt;OperatorTable&lt;/em&gt;) we can extend our interpreter at &lt;em&gt;run-time&lt;/em&gt;. Thanks to that extension, it will &lt;em&gt;meaningfully&lt;/em&gt; evaluate data read, directly from the file contents.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;In the next blog post we will talk about another not popular, but powerful and &lt;em&gt;mind cracking&lt;/em&gt; programming language from the &lt;em&gt;70s&lt;/em&gt; - &lt;em&gt;&lt;a href=&quot;http://www.learnprolognow.org/&quot;&gt;Prolog&lt;/a&gt;&lt;/em&gt;. It provides declarative beauty connected together with a logic nature. Different approach to computation expressed by &lt;em&gt;facts&lt;/em&gt; and &lt;em&gt;rules&lt;/em&gt; mingled together with &lt;em&gt;relations&lt;/em&gt; can really bend your mind and guide you in the really strange, but also entertaining directions - like an annoying, but still interesting &lt;em&gt;puzzle&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/stevedekorte&quot;&gt;Steve Dekorte, Github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://iolanguage.org&quot;&gt;Io, programming language&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 30 Apr 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/04/30/seven-languages-in-seven-weeks-io.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/04/30/seven-languages-in-seven-weeks-io.html</guid>
+      </item>
+    
+      <item>
         <title>Books that changed my career - The Pragmatic Programmer</title>
         <description>&lt;h1 id=&quot;books-that-changed-my-career---the-pragmatic-programmer&quot;&gt;Books that changed my career - The Pragmatic Programmer&lt;/h1&gt;
 
@@ -528,97 +677,6 @@
         <pubDate>Thu, 28 Aug 2014 20:00:00 +0200</pubDate>
         <link>http://www.afronski.pl/2014/08/28/my-picks-of-NDC-2014-part-2.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2014/08/28/my-picks-of-NDC-2014-part-2.html</guid>
-      </item>
-    
-      <item>
-        <title>nodeschool.io</title>
-        <description>&lt;h1 id=&quot;nodeschoolio&quot;&gt;nodeschool.io&lt;/h1&gt;
-
-&lt;p&gt;I would like to present very interesting initiative for everyone interested in topics oriented around Node.js. If you are curious how to learn effectively about stuff available on the platform, how to use libraries effectively and write the most idiomatic code which is consistent with &lt;em&gt;UNIX&lt;/em&gt; philosophy, please read this article further.&lt;/p&gt;
-
-&lt;h1 id=&quot;why&quot;&gt;Why?&lt;/h1&gt;
-
-&lt;p&gt;The major problem when you are learning new stuff is related with first step, even with a basic question &lt;em&gt;“how to start”&lt;/em&gt;. This barrier is often related with new thinking or programming paradigm, new language, unknown environment or even unfamiliar &lt;code&gt;API&lt;/code&gt;. For almost every technology we can find opinionated stuff on the Internet: multiple tutorials, guidelines (often it is not so hard to find two conflicting ones &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;) and blog posts with information how to work with technology in which we are interested. Moreover, in almost each case we still have a question back in our heads: &lt;em&gt;“Is it a proper way to learn and work with it?”&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Learning process could be easier if we have one source of truth and best practices how to approach certain topics related with piece of technology which is interesting for us. For Node.js such initiative is called &lt;a href=&quot;http://nodeschool.io&quot;&gt;nodeschool.io&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/nodeschool.png&quot; alt=&quot;Nodeschool Main Page&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;what&quot;&gt;What?&lt;/h1&gt;
-
-&lt;p&gt;Nodeschool is a series of interactive workshops, divided into two sections - core concepts and electives.&lt;/p&gt;
-
-&lt;p&gt;In the main concepts we have:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#learn-you-node&quot;&gt;basic asynchronous programming and introduction to the core Node.js concepts&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#stream-adventure&quot;&gt;introduction to the streams&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#bytewiser&quot;&gt;bytes and buffers manipulation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#functionaljs&quot;&gt;functional programming in JavaScript&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#git-it&quot;&gt;how to work effectively with git and github&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Electives are oriented around:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#levelmeup&quot;&gt;use of node.js binding and modules related with LevelDB&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#makemehapi&quot;&gt;hapi.js framework&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#expressworks&quot;&gt;express.js framework&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#goingnative&quot;&gt;native modules and addons&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#count-to-6&quot;&gt;6th version of ECMAScript&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#browserify-adventure&quot;&gt;browserify&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#promiseitwonthurt&quot;&gt;promises&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/#asyncyou&quot;&gt;async.js&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;how-to-start&quot;&gt;How to start?&lt;/h1&gt;
-
-&lt;p&gt;At first you need to have &lt;em&gt;&lt;code&gt;npm&lt;/code&gt;&lt;/em&gt; and &lt;em&gt;&lt;code&gt;node&lt;/code&gt;&lt;/em&gt; executables - if you do not have them already on your machine, the most recommended place to start is &lt;a href=&quot;http://nodejs.org/download/&quot;&gt;here&lt;/a&gt;. Then you can install each workshop globally using &lt;em&gt;Node Packaged Modules&lt;/em&gt; manager:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm install -g learnyounode&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;In this example &lt;em&gt;&lt;code&gt;-g&lt;/code&gt;&lt;/em&gt; flag means &lt;em&gt;“install package globally”&lt;/em&gt;, so it will be available as a executable on your machine.&lt;/p&gt;
-
-&lt;p&gt;Every single workshop is using the same command line interface and workflow. This eases the work with each of them. Moreover, assignments are well defined, descriptive and small enough to perform them as a &lt;a href=&quot;http://en.wikipedia.org/wiki/Kata_%28programming%29&quot;&gt;daily code kata&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Workflow is oriented around invoking commands in the terminal. After starting the workshop executable without any parameters you will see the list of available assignments, like presented below:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/learnyounode.png&quot; alt=&quot;learnyounode workshop&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Then you should select first unresolved assignment from the list. After that you will see the description and guidelines how you should approach this task. Then you have two commands for testing and verifying prepared solution.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Testing your solution:&lt;/span&gt;
-~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;learnyounode run &amp;lt;FILE_NAME_WITH_SOLUTION&amp;gt;
-&lt;span class=&quot;c&quot;&gt;# Veryfing the prepared solution:&lt;/span&gt;
-~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;learnyounode verify &amp;lt;FILE_NAME_WITH_SOLUTION&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If solution is correct, the current assignment will be marked as resolved. Now you are ready to work with each workshop available on the main page.&lt;/p&gt;
-
-&lt;h1 id=&quot;i-am-the-beginner-in-nodejs-community---where-should-i-start&quot;&gt;I am the beginner in Node.js community - where should I start?&lt;/h1&gt;
-
-&lt;p&gt;I will recommend to start with &lt;a href=&quot;http://nodeschool.io/#learn-you-node&quot;&gt;learn-you-node workshop&lt;/a&gt; and then move forward through the rest of core concepts. After that you are free to choose any from the interesting topics from electives group (e.g. related with specific framework).&lt;/p&gt;
-
-&lt;h1 id=&quot;i-am-more-advanced-member---how-can-i-contribute&quot;&gt;I am more advanced member - how can I contribute?&lt;/h1&gt;
-
-&lt;p&gt;You can contribute in several ways.&lt;/p&gt;
-
-&lt;p&gt;The easiest thing is to perform any workshop and check it in practice (especially with edge cases). Then you can fork repository related with it, fix the bugs, improve documentation and clarity of the steps, maybe even add missing scenarios and lessons. After that you can contribute back your changes to the community by providing a &lt;em&gt;pull request&lt;/em&gt; to the workshop author.&lt;/p&gt;
-
-&lt;p&gt;Second option is related with local events. You can easily organize a new event in your city which will be oriented around whole &lt;em&gt;nodeschool&lt;/em&gt; initiative (or even around just one type of workshops). There is a detailed guideline prepared by organization &lt;a href=&quot;http://nodeschool.io/host.html&quot;&gt;how to do this&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;And finally, you can create a new workshop. In such vibrant and broad community you can easily find topic suitable for you. If you do not have a clue which could be suitable for you, you can look at the list of possible topics gathered &lt;a href=&quot;https://github.com/nodeschool/workshoppers/issues?labels=status%3Arequested&quot;&gt;here&lt;/a&gt;. If you already have an idea, you should fork the &lt;a href=&quot;https://github.com/rvagg/workshopper&quot;&gt;rvagg/workshopper&lt;/a&gt; project and start creating lessons. Then, you can add your project to the list of available workshops via &lt;a href=&quot;https://github.com/nodeschool/workshoppers/issues?labels=status%3Ain+progress&quot;&gt;github&lt;/a&gt; - then your workshop will be reviewed, validated and after successful acceptation it will be available as a official lesson on the main &lt;em&gt;nodeschool&lt;/em&gt; page.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io&quot;&gt;nodeschool.io&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/host.html&quot;&gt;How to run a new ‘nodeschool’ event?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/rvagg/workshopper&quot;&gt;rvagg/workshopper&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 18 Jul 2014 15:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/2014/07/18/nodeschool-io.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2014/07/18/nodeschool-io.html</guid>
       </item>
     
   </channel>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>Seven Languages in Seven Weeks - Io</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="seven-languages-in-seven-weeks---io">Seven Languages in Seven Weeks - Io</h1>
+
+<quote class="disclaimer">This blog post is a next article from series related with books "Seven Languages in Seven Weeks" and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!</quote>
+
+<h1 id="introduction">Introduction</h1>
+
+<p><img class="right io-logo" alt="Io Logo" src="/assets/IoLogo.png" /></p>
+
+<p>At first you may think that blog post is about <em>io.js</em>, a recent <em>node.js</em> fork - but it is not, we are talking here about programming languages. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+
+<p><em>Io</em> is a programming language created by <em>Steve Dekorte</em> in 2002. It is described as second one in the aforementioned book <em>Seven Languages in Seven Weeks</em>. The only thing that it has in common<br />with <em>io.js</em> / <em>node.js</em> and other <em>JavaScript</em> based platforms is its prototypical nature.</p>
+
+<p>It means, that like in <em>Self</em> (or <em>JavaScript</em>) everything is a <em>clone</em> of another object and like in <em>Smalltalk</em> everything is an object. In other words - <strong>there is no distinction between class and instance</strong> and you can build <em>classes</em> and its schema during <em>run-time</em> execution.</p>
+
+<div class="highlight"><pre><code class="language-io" data-lang="io"><span class="lineno"> 1</span> <span class="n">Car</span> <span class="o">:=</span> <span class="nb">Object</span> <span class="k">clone</span>
+<span class="lineno"> 2</span> <span class="c1">//   Car_0xDEADBEE:</span>
+<span class="lineno"> 3</span> <span class="c1">// type            = &quot;Car&quot;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="n">Car</span> <span class="n">drive</span> <span class="o">:=</span> <span class="k">method</span><span class="o">(</span><span class="s">&quot;Vroom!&quot;</span> <span class="n">println</span><span class="o">)</span>
+<span class="lineno"> 6</span> <span class="c1">// method(</span>
+<span class="lineno"> 7</span> <span class="c1">//  &quot;Vroom!&quot; println</span>
+<span class="lineno"> 8</span> <span class="c1">// )</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="n">Car</span> <span class="n">drive</span>
+<span class="lineno">11</span> <span class="c1">// Vroom!</span></code></pre></div>
+
+<p>As you can observe above - <em>syntax is pretty minimal</em>. It is often compared to the <em>Lisp-like</em> languages. Besides that, language has really clear semantics (which is easy to grasp), powerful features in the standard library (also related with the <em>concurrency</em> support) and small, portable <em>virtual machine</em> (which is often used in the <em>embedded systems</em> domain).</p>
+
+<p>I would like to bring some light to the most interesting language features, starting from the basic things.</p>
+
+<h2 id="slots-and-message-passing">Slots and Message Passing</h2>
+
+<div class="highlight"><pre><code class="language-io" data-lang="io"><span class="lineno">1</span> <span class="n">Car</span> <span class="o">:=</span> <span class="nb">Object</span> <span class="k">clone</span>
+<span class="lineno">2</span> <span class="n">Car</span> <span class="n">desc</span> <span class="o">:=</span> <span class="s">&quot;A simple car.&quot;</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="n">Car</span> <span class="n">slotNames</span>
+<span class="lineno">5</span> <span class="c1">// list(&quot;type&quot;, &quot;desc&quot;)</span></code></pre></div>
+
+<p>After creating new clone, you can create new slots (with an operator <code>:=</code>) or assign value to the existing one (with simple <code>=</code> operator). Getting value from the slot is simple. Underneath everything is a message - even the method invocation is represented as a <em>message passing</em> to the actual object.</p>
+
+<h2 id="prototype-chains">Prototype chains</h2>
+
+<div class="highlight"><pre><code class="language-io" data-lang="io"><span class="lineno"> 1</span> <span class="n">Car</span> <span class="o">:=</span> <span class="nb">Object</span> <span class="k">clone</span>
+<span class="lineno"> 2</span> <span class="n">Car</span> <span class="n">desc</span> <span class="o">:=</span> <span class="s">&quot;A simple car.&quot;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="n">Ferrari</span> <span class="o">:=</span> <span class="n">Car</span> <span class="k">clone</span>
+<span class="lineno"> 5</span> <span class="n">Ferrari</span> <span class="n">type</span>
+<span class="lineno"> 6</span> <span class="c1">// Ferrari</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="n">testarossa</span> <span class="o">:=</span> <span class="n">Ferrari</span> <span class="k">clone</span>
+<span class="lineno"> 9</span> <span class="n">testarossa</span> <span class="n">type</span>
+<span class="lineno">10</span> <span class="c1">// Ferrari</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span> <span class="n">testarossa</span> <span class="n">slotNames</span>
+<span class="lineno">13</span> <span class="c1">// list()</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span> <span class="n">testarossa</span> <span class="n">desc</span>
+<span class="lineno">16</span> <span class="c1">// &quot;A simple car.&quot;</span></code></pre></div>
+
+<p>In presented example you can see how the message passing related with method invocation, propagates to the top of the prototype chain. Also, in <em>Io</em> there is a difference between instances and types regarding syntax - capitalized names means <em>types</em> from which you can clone an <em>instance</em> (and its name is in small caps).</p>
+
+<h2 id="nice-examples">Nice examples</h2>
+
+<h3 id="singleton">Singleton</h3>
+
+<p>It is very easy to create a true <em>singleton</em> instance in the prototypical language. We just need to provide our implementation in the <em>clone</em> slot for that instance. Our implementation will return always the same copy. This method requires consistency in the language - it should be only one way to create an object copy.</p>
+
+<div class="highlight"><pre><code class="language-io" data-lang="io"><span class="lineno">1</span> <span class="n">Single</span> <span class="o">:=</span> <span class="nb">Object</span> <span class="k">clone</span>
+<span class="lineno">2</span> <span class="n">Single</span> <span class="k">clone</span> <span class="o">:=</span> <span class="n">Single</span></code></pre></div>
+
+<p>In presented case, each clone invoked on the <em>Single</em> object will return always the same instance.</p>
+
+<h3 id="concurrency-support">Concurrency support</h3>
+
+<div class="highlight"><pre><code class="language-io" data-lang="io"><span class="lineno"> 1</span> <span class="n">a</span> <span class="o">:=</span> <span class="nb">Object</span> <span class="k">clone</span>
+<span class="lineno"> 2</span> <span class="n">a</span> <span class="n">say</span> <span class="o">:=</span> <span class="k">method</span><span class="o">(</span>
+<span class="lineno"> 3</span>     <span class="s">&quot;A&quot;</span> <span class="n">println</span>
+<span class="lineno"> 4</span>     <span class="n">yield</span>
+<span class="lineno"> 5</span>     <span class="s">&quot;A&quot;</span> <span class="n">println</span>
+<span class="lineno"> 6</span>     <span class="n">yield</span><span class="o">)</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="n">b</span> <span class="o">:=</span> <span class="nb">Object</span> <span class="k">clone</span>
+<span class="lineno"> 9</span> <span class="n">b</span> <span class="n">say</span> <span class="o">:=</span> <span class="k">method</span><span class="o">(</span>
+<span class="lineno">10</span>     <span class="n">yield</span>
+<span class="lineno">11</span>     <span class="s">&quot;B&quot;</span> <span class="n">println</span>
+<span class="lineno">12</span>     <span class="n">yield</span>
+<span class="lineno">13</span>     <span class="s">&quot;B&quot;</span> <span class="n">println</span><span class="o">)</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span> <span class="n">a</span> <span class="o">@@</span><span class="n">say</span><span class="o">;</span> <span class="n">b</span> <span class="o">@@</span><span class="n">say</span>
+<span class="lineno">16</span> <span class="nb">Coroutine</span> <span class="n">currentCoroutine</span> <span class="n">pause</span></code></pre></div>
+
+<p>On the basic level related with concurrency, <em>Io</em> supports <em>coroutines</em>. As in the example, two <em>coroutines</em> are switching back-and-forth thanks the message <code>yield</code>. Last line will wait until all other coroutines will finish, and after it will let the execution flow. Having this piece and message passing it is very simple and intuitive to build on top the <em>actor model</em>. Besides that we also have <em>futures</em> implementation available in the standard library.</p>
+
+<h3 id="extending-interpreter-and-vm">Extending interpreter and VM</h3>
+
+<p>And finally, most advanced but still concise example - related with extensiveness of the <em>language</em> and a <em>run-time</em>.</p>
+
+<div class="highlight"><pre><code class="language-io" data-lang="io"><span class="lineno"> 1</span> <span class="n">OperatorTable</span> <span class="n">addAssignOperator</span><span class="o">(</span><span class="s">&quot;:&quot;</span><span class="o">,</span> <span class="s">&quot;atPutNumber&quot;</span><span class="o">)</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="n">curlyBrackets</span> <span class="o">:=</span> <span class="k">method</span><span class="o">(</span>
+<span class="lineno"> 4</span>     <span class="n">r</span> <span class="o">:=</span> <span class="nb">Map</span> <span class="k">clone</span>
+<span class="lineno"> 5</span>     <span class="n">call</span> <span class="n">message</span> <span class="n">arguments</span> <span class="n">foreach</span><span class="o">(</span><span class="n">arg</span><span class="o">,</span>
+<span class="lineno"> 6</span>         <span class="n">r</span> <span class="n">doMessage</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span>
+<span class="lineno"> 7</span>     <span class="o">)</span>
+<span class="lineno"> 8</span>     <span class="n">r</span>
+<span class="lineno"> 9</span> <span class="o">)</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="nb">Map</span> <span class="n">atPutNumber</span> <span class="o">:=</span> <span class="k">method</span><span class="o">(</span>
+<span class="lineno">12</span>     <span class="n">self</span> <span class="n">atPut</span><span class="o">(</span>
+<span class="lineno">13</span>         <span class="n">call</span> <span class="n">evalArgAt</span><span class="o">(</span><span class="mf">0</span><span class="o">)</span> <span class="n">asMutable</span> <span class="n">removePrefix</span><span class="o">(</span><span class="s">&quot;\&quot;&quot;</span><span class="o">)</span> <span class="n">removeSuffix</span><span class="o">(</span><span class="s">&quot;\&quot;&quot;</span><span class="o">),</span>
+<span class="lineno">14</span>         <span class="n">call</span> <span class="n">evalArgAt</span><span class="o">(</span><span class="mf">1</span><span class="o">)</span>
+<span class="lineno">15</span>     <span class="o">)</span>
+<span class="lineno">16</span> <span class="o">)</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span> <span class="c1">// Structure of `data.json` file:</span>
+<span class="lineno">19</span> <span class="c1">//</span>
+<span class="lineno">20</span> <span class="c1">// {</span>
+<span class="lineno">21</span> <span class="c1">//    &quot;key&quot;: 123456,</span>
+<span class="lineno">22</span> <span class="c1">//    &quot;another_key: 4567890</span>
+<span class="lineno">23</span> <span class="c1">// }</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span> <span class="n">content</span> <span class="o">:=</span> <span class="nb">File</span> <span class="n">with</span><span class="o">(</span><span class="s">&quot;data.json&quot;</span><span class="o">)</span> <span class="n">openForReading</span> <span class="n">contents</span>
+<span class="lineno">26</span> 
+<span class="lineno">27</span> <span class="n">data</span> <span class="o">:=</span> <span class="k">doString</span><span class="o">(</span><span class="n">content</span><span class="o">)</span>
+<span class="lineno">28</span> 
+<span class="lineno">29</span> <span class="n">data</span> <span class="n">keys</span> <span class="n">println</span>
+<span class="lineno">30</span> <span class="n">data</span> <span class="n">values</span> <span class="n">println</span></code></pre></div>
+
+<p>Of course, not a full <em>JSON</em> specification is implemented here, but thanks to the ability to overload operator meaning, creating new operators and modifying its precedence (all of this done by manipulating <em>OperatorTable</em>) we can extend our interpreter at <em>run-time</em>. Thanks to that extension, it will <em>meaningfully</em> evaluate data read, directly from the file contents.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>In the next blog post we will talk about another not popular, but powerful and <em>mind cracking</em> programming language from the <em>70s</em> - <em><a href="http://www.learnprolognow.org/">Prolog</a></em>. It provides declarative beauty connected together with a logic nature. Different approach to computation expressed by <em>facts</em> and <em>rules</em> mingled together with <em>relations</em> can really bend your mind and guide you in the really strange, but also entertaining directions - like an annoying, but still interesting <em>puzzle</em>.</p>
+
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li><a href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks">Seven Languages in Seven Weeks</a>, <em>Bruce A. Tate</em></li>
+  <li><a href="https://github.com/stevedekorte">Steve Dekorte, Github</a></li>
+  <li><a href="http://iolanguage.org">Io, programming language</a></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/2015/04/30/seven-languages-in-seven-weeks-io.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2015/04/30/seven-languages-in-seven-weeks-io.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <footer>
+        <section>© Copyright 2014, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>
