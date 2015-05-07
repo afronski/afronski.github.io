@@ -7,6 +7,54 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Elixir Conf EU 2015 - Afterthoughts</title>
+        <description>&lt;h1 id=&quot;elixir-conf-eu-2015---afterthoughts&quot;&gt;Elixir Conf EU 2015 - Afterthoughts&lt;/h1&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/2015/04/06/the-best-of-lambda-days.html&quot;&gt;previous post&lt;/a&gt; about interesting events, I have said that more of them will come in future. I have participated in one of these - &lt;em&gt;ElixirConf EU&lt;/em&gt; in Kraków and I must admit - it was the best conference I have ever been since &lt;a href=&quot;http://lanyrd.com/2011/falsy-values/&quot;&gt;Falsy Values in 2011&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It was the second in the world conference about &lt;em&gt;Elixir&lt;/em&gt; programming language, it brings almost 200 people interested in that topic to the former Polish capital. Most of people was either from &lt;em&gt;Ruby&lt;/em&gt; or &lt;em&gt;Erlang&lt;/em&gt; side and I think that such mixture is a &lt;em&gt;key thing&lt;/em&gt; related to the &lt;em&gt;joy&lt;/em&gt; and &lt;em&gt;success&lt;/em&gt; of that event.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ElixirConfEU2015Header.png&quot; alt=&quot;Elixir Conf EU 2015&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;talks-and-workshops&quot;&gt;Talks and Workshops&lt;/h3&gt;
+
+&lt;p&gt;At a day before actual conference organizers prepared two workshops - one about &lt;em&gt;Phoenix&lt;/em&gt; framework and one about &lt;em&gt;OTP and Elixir&lt;/em&gt;. I have participated in the second one - it was a really nice experience. Workshop was full of knowledge, I have met interesting people, with very positive attitude, whom are willing to network and share their experiences. &lt;/p&gt;
+
+&lt;p&gt;Actual conference days was started and ended with very nice keynotes - each of them was a different experience. We have very nice and thoughtful keynote from Joe Armstrong, which explains many problems related to the programming language design, from the perspective of &lt;em&gt;Elixir’s&lt;/em&gt; older brother - &lt;em&gt;Erlang&lt;/em&gt;. Jose Valim presented bright future and interesting details related with &lt;em&gt;Elixir&lt;/em&gt; evolution, and finally Chris had a very nice overview and development plans related with &lt;em&gt;Phoenix&lt;/em&gt; framework.&lt;/p&gt;
+
+&lt;p&gt;But, I was also impressed by other talks. It was very interesting to see many use cases in which people used that piece of technology. I think that both groups have many valuable opinions and observations. For me, talks made by people with &lt;em&gt;Erlang&lt;/em&gt; experience were particularly valuable, because they are coming from more mature technology. It is a different background and experiences.&lt;/p&gt;
+
+&lt;h3 id=&quot;atmosphere&quot;&gt;Atmosphere&lt;/h3&gt;
+
+&lt;p&gt;I would like to focus on one particular element, which makes this conference so enjoyable - &lt;em&gt;people&lt;/em&gt;. I have never met so many &lt;em&gt;nice&lt;/em&gt; and &lt;em&gt;friendly&lt;/em&gt; people. I have wonderful time during networking, countless talks during breaks or lunches. And to sum it up - during lightning talks &lt;em&gt;Jose Valim&lt;/em&gt; and &lt;em&gt;Jim Freeze&lt;/em&gt; received a &lt;em&gt;3D printed Elixir logo&lt;/em&gt; designed in the &lt;a href=&quot;http://hrobeers.github.io/finFoil/&quot;&gt;finFoil&lt;/a&gt; software made by &lt;a href=&quot;https://twitter.com/hrobeers&quot;&gt;@hrobeers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Amazing community!&lt;/p&gt;
+
+&lt;div class=&quot;center-tweet&quot;&gt;
+  &lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;&lt;a href=&quot;https://twitter.com/ElixirConfEU&quot;&gt;@ElixirConfEU&lt;/a&gt; Thanks for the great conference. My lightning talk including the Elixir 3D file: &lt;a href=&quot;http://t.co/m06YLIwA5h&quot;&gt;http://t.co/m06YLIwA5h&lt;/a&gt; &lt;a href=&quot;http://t.co/0VJa9SDN02&quot;&gt;pic.twitter.com/0VJa9SDN02&lt;/a&gt;&lt;/p&gt;&amp;mdash; Hans Robeers (@hrobeers) &lt;a href=&quot;https://twitter.com/hrobeers/status/591794764351197184&quot;&gt;April 25, 2015&lt;/a&gt;&lt;/blockquote&gt;&lt;script async=&quot;&quot; src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;It was a very good choice to invest my time and money in that event. Three days full of &lt;em&gt;energy&lt;/em&gt;, &lt;em&gt;knowledge&lt;/em&gt; and &lt;em&gt;experience&lt;/em&gt; sharing. As a community we have interesting perspectives. We can derive from very experienced and stable &lt;em&gt;Erlang&lt;/em&gt; ecosystem. We have a very nice and promising community, full of amazing and creative people. I will go definitely to the next &lt;em&gt;ElixirConf EU 2016&lt;/em&gt; which take place in Berlin.&lt;/p&gt;
+
+&lt;p&gt;See you there! &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://twitter.com/hrobeers/status/591794764351197184&quot;&gt;Lightning talks and their effect, done by @hrobeers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.elixirconf.eu/&quot;&gt;Elixir Conf EU 2015&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 07 May 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/05/07/elixir-conf-eu-2015-afterthoughts.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/05/07/elixir-conf-eu-2015-afterthoughts.html</guid>
+      </item>
+    
+      <item>
         <title>Seven Languages in Seven Weeks - Io</title>
         <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---io&quot;&gt;Seven Languages in Seven Weeks - Io&lt;/h1&gt;
 
@@ -653,30 +701,6 @@
         <pubDate>Sat, 24 Jan 2015 22:00:00 +0100</pubDate>
         <link>http://www.afronski.pl/2015/01/24/how-to-store-and-examine-custom-business-metrics.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2015/01/24/how-to-store-and-examine-custom-business-metrics.html</guid>
-      </item>
-    
-      <item>
-        <title>My picks of NDC 2014 - part II</title>
-        <description>&lt;h1 id=&quot;my-picks-of-ndc-2014---part-ii&quot;&gt;My picks of NDC 2014 - part II&lt;/h1&gt;
-
-&lt;p&gt;Another presentations worth looking from the past NDC conference (previous part is &lt;a href=&quot;http://www.afronski.pl/2014/06/16/my-picks-of-NDC-2014-part-1.html&quot;&gt;here&lt;/a&gt;):&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97537675&quot;&gt;Venkat Subramaniam - Towards an Evolutionary Architecture&lt;/a&gt; - Very nice talk which summarizes all necessary things which are important in the concept of &lt;em&gt;Good Architecture&lt;/em&gt;. An architect in Agile have been considered as obsolete by many people, but actually it is the opposite. Good architecture defers decisions, enables evolution and moreover handles or even removes completely the complexity. Besides that - a very nice Agile approach is to prioritize features and assignments by the business value and the architectural impact - by doing that you can really avoid many pitfalls when you are moving forward and crush the knowledge during the process of building the application.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97415346&quot;&gt;Cory House - Becoming an Outlier: Career Reboot for the Developer Mind&lt;/a&gt; - Definitely recommended video to watch. For many people it will be a mind and eye opening experience. Handful of valuable thoughts and advices how to manage your career, change your habits and adapt in the continuously changing environment.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97516289&quot;&gt;Roy Osherove - Beautiful Builds&lt;/a&gt; - Very refreshing talk. It starts by very obvious, but very often forgotten statement that &lt;em&gt;automated builds are not the continuous integration&lt;/em&gt;. It introduces important concept of &lt;em&gt;shipping skeleton&lt;/em&gt;. Mixing operational knowledge with building and deployment knowledge is also an anti-pattern. Talk contains a very useful set of patterns and best practices about CI and even Continuous Deployment - definitely recommended.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97507576&quot;&gt;Doc Norton - The Technical Debt Trap&lt;/a&gt; - Very wise and mindful explanation of Technical Debt metaphor (and moreover - the good and only true one). If you are operating this metaphor and you often use it, please watch this presentation and be sure that all points which are related with the true definition are fulfilled. Because if not, you are talking about &lt;em&gt;cruft&lt;/em&gt; not &lt;em&gt;debt&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97408239&quot;&gt;Joe Armstrong - The mess we’re in&lt;/a&gt; - In most cases talks presented by Joe Armstrong can look like a little spontaneous, sometimes even unprepared. However it is a false belief - amount of experience, insight, pragmatic and at the same time scientific approach to the computing can be really underestimated. Knowledge and very insightful anecdotes are &lt;em&gt;flowing out this talk&lt;/em&gt;. If you want to know more or you are merely interested about the history of computing and how it actually will affect the future of computer science, it is a must-watch presentation.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97505679&quot;&gt;Aral Balkan - Free is a lie&lt;/a&gt; - Definitely recommended talk, especially if you do not have an idea what is a Google / Facebook business model. For those people it can be even a controversial talk (for me it is because of presenting Mozilla as not a ‘Free’ option in the IT world - claiming that most of the income comes from the Google and only that disqualifies this company from being &lt;em&gt;free as a liberty&lt;/em&gt; is &lt;em&gt;just unfair&lt;/em&gt;). In other words - if you do not know this already, by using free services - you are not a consumer, you are a product - &lt;em&gt;a data source&lt;/em&gt; - nothing less, nothing more.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97541185&quot;&gt;Venkat Subramaniam - Core Software Design Principles&lt;/a&gt; - Worth looking if you forgot or you would like to refresh your knowledge about &lt;em&gt;&lt;code&gt;SOLID&lt;/code&gt;&lt;/em&gt; principles, or you do not know what &lt;em&gt;&lt;code&gt;YAGNI&lt;/code&gt;&lt;/em&gt;, &lt;em&gt;&lt;code&gt;DRY&lt;/code&gt;&lt;/em&gt; and &lt;em&gt;&lt;code&gt;TDA&lt;/code&gt;&lt;/em&gt; means. Otherwise, you will watch a rather repetitive (but not boring) presentation.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97337252&quot;&gt;Garrett Smith - Functional code considered Beautiful&lt;/a&gt; - Definitely worth looking, especially that it is a kind of a rather &lt;em&gt;soft&lt;/em&gt; talk with very pragmatic insights, without &lt;em&gt;preaching&lt;/em&gt; and not necessary &lt;em&gt;marketing&lt;/em&gt;. If you are not convinced enough - try to think about very readable, declarative code which is oriented around concurrency and is side-effect free - how it should look like? And one more - presented sample with &lt;em&gt;&lt;code&gt;GCD&lt;/code&gt;&lt;/em&gt; is beautiful and enlightening.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97514517&quot;&gt;Mathias Brandewinder - F# and Machine Learning: a winning combination&lt;/a&gt; - Inspiring and fresh talk, both regarding the topic and presented programming language. Definitely worth looking if you are interested in the polyglot programming movement, and if you are looking for interesting language to learn in this or next year. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/97419178&quot;&gt;Bruce Tate - Pipe Dreams&lt;/a&gt; - Another talk from the polyglot programming family. In this case it presents only two key pieces of Elixir, a new language which is a mix of Ruby syntax, Erlang VM and OTP library, but does it well and deeply - actually it is open-minded in terms of specific approach to the data processing paradigm and sequentiality.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 28 Aug 2014 20:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/2014/08/28/my-picks-of-NDC-2014-part-2.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2014/08/28/my-picks-of-NDC-2014-part-2.html</guid>
       </item>
     
   </channel>
