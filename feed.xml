@@ -7,6 +7,99 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Interesting Language Features - Erlang III</title>
+        <description>&lt;h1 id=&quot;interesting-language-features---erlang-iii&quot;&gt;Interesting Language Features - Erlang III&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;As you may know, In &lt;em&gt;Erlang&lt;/em&gt; you are building &lt;em&gt;systems&lt;/em&gt; which consists of &lt;em&gt;multiple applications&lt;/em&gt;. Do not try to match these terms on the mainstream technologies (e.g. components) - you should rather compare it to the terms related with an &lt;em&gt;operating system&lt;/em&gt;, because &lt;em&gt;Erlang VM&lt;/em&gt; behaves in a similar way.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Erlang&lt;/em&gt; was designed long before the language of design patterns was formalized, but still engineers responsible for building the platform wanted to have a solid abstractions. It is all about splitting generic code away from specific code - and that is how the &lt;em&gt;behaviors&lt;/em&gt; were created. They denote the idea that your specific code gives up its own execution flow and inserts itself as a bunch of custom functions (called &lt;em&gt;callbacks&lt;/em&gt;) to be used by the generic code. In simpler words, behaviours handle the boring parts while you are focused on the &lt;em&gt;business logic&lt;/em&gt;. In the case of &lt;em&gt;applications&lt;/em&gt;, this generic part is quite complex and not nearly as simple as other behaviours. But on the first sight it does not look like this.&lt;/p&gt;
+
+&lt;p&gt;One of the parts in aforementioned complexity is an entity called &lt;strong&gt;application_controller&lt;/strong&gt;. Whenever the &lt;em&gt;VM&lt;/em&gt; starts up, this process is started and it starts &lt;em&gt;applications&lt;/em&gt;. It supervises most of them (but not in the literal way). If you have couple of them, it will look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ApplicationController.png&quot; alt=&quot;Application Controller and multiple applications with application masters&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Everything that I have told you before you can find in the books (and again - I especially recommend the amazing book from &lt;a href=&quot;https://twitter.com/mononcqc&quot;&gt;@mononcqc&lt;/a&gt; - &lt;a href=&quot;http://learnyousomeerlang.com&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt;), but there is a small understatement regarding &lt;em&gt;applications&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/SupervisionTree.png&quot; alt=&quot;What are the processes at the beginning?&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This topic arisen during work on my hobby project called &lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;afronski/wolves-and-rabbits-world-simulation&lt;/a&gt;. Above you can see the &lt;em&gt;supervision tree&lt;/em&gt; of this application (pretty standard one), but at the beginning of it there are two additional processes - not just one, which I have expected (the application master). So I tried to found an explanation and literally - &lt;em&gt;I found nothing&lt;/em&gt;. There is only a small mention about that in the aforementioned book:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;The application master is in fact two processes taking charge of each individual application: they set it up and act like a middleman in between your application's top supervisor and the application controller.&lt;/quote&gt;
+
+&lt;p&gt;But that’s all. No particular explanation why the second process is necessary. This topic is missing in the &lt;em&gt;Erlang&lt;/em&gt; books that I know - if you know a book with a good explanation of this, please let me know in the comments - it can be beneficial for me (and as an additional reference).&lt;/p&gt;
+
+&lt;p&gt;So, I thought that it is an interesting topic to analyze and I started to dig into it.&lt;/p&gt;
+
+&lt;h3 id=&quot;internals&quot;&gt;Internals&lt;/h3&gt;
+
+&lt;p&gt;So, we know what the &lt;em&gt;application controller&lt;/em&gt; is, what the &lt;em&gt;application master&lt;/em&gt; is explained above in the quote. In other words &lt;em&gt;application master&lt;/em&gt; behaves like an application &lt;em&gt;nanny&lt;/em&gt;: &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;Just know that the application master acts a bit like the app's nanny (well, a pretty insane nanny). It looks over its children and grandchildren, and when things go awry, it goes berserk and terminates its whole family tree. Brutally killing children is a common topic among Erlangers.&lt;/quote&gt;
+
+&lt;p&gt;&lt;em&gt;Nanny or not&lt;/em&gt; - still we don’t know why there are actually two of them. If there is no explanation in the books, we need to look at the actual source code. And finally we found something &lt;a href=&quot;https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84&quot;&gt;useful&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;c&quot;&gt;%%% The logical and physical process structure is as follows:&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         logical                physical&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         |AM(GL)|               |AM(GL)|&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%            |                       |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         |Appl P|               |   X  |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%                                    |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%                                --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%                                |Appl P|&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%                                --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% Where AM(GL) == Application Master (Group Leader)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%       Appl P == The application specific root process (child to AM)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%       X      == A special &amp;#39;invisible&amp;#39; process&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% The reason for not using the logical structrure is that&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% the application start function is synchronous, and&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% that the AM is GL.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% This means that if AM executed the start&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% function, and this function uses io, deadlock would occur.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% Therefore, this function is executed by the process X.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% Also, AM needs three loops;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%   - init_loop (waiting for the start function to return)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%   - main_loop&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%   - terminate_loop (waiting for the process to die)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% In each of these loops, io and other requests are handled.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;But what is a &lt;strong&gt;group leader&lt;/strong&gt;? Let’s dig into official documentation:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;Every process is a member of some process group and all groups have a group leader. All IO from the group is channeled to the group leader. When a new process is spawned, it gets the same group leader as the spawning process. Initially, at system start-up, init is both its own group leader and the group leader of all processes.&lt;/quote&gt;
+
+&lt;p&gt;Aha! Now the actual structure is pretty clear. During the &lt;code&gt;application:start/2&lt;/code&gt; anything can happen, including &lt;em&gt;I/O calls&lt;/em&gt; - but &lt;em&gt;application master&lt;/em&gt; is a group leader, owner of &lt;em&gt;I/O resources&lt;/em&gt; in its supervision tree. If the &lt;em&gt;I/O calls&lt;/em&gt; are channeled through leader, definitely a deadlock can occur if the same process is responsible for invoking that &lt;em&gt;a call&lt;/em&gt;. In order to avoid that &lt;em&gt;OTP developers&lt;/em&gt; introduced an artificial process called &lt;code&gt;X&lt;/code&gt; in the comment above, which executes the start function. Thanks to that, any &lt;em&gt;I/O calls&lt;/em&gt; from the start-up process can be forwarded through the &lt;em&gt;application master&lt;/em&gt; safely. &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;What is even more interesting, an application life cycle consists of three phases - &lt;code&gt;init_loop&lt;/code&gt; which is responsible for waiting until the start-up process will finish, &lt;code&gt;main_loop&lt;/code&gt; which is a normal work of an application and &lt;code&gt;terminate_loop&lt;/code&gt; which is responsible for shutdown all process owned by an application.&lt;/p&gt;
+
+&lt;p&gt;We finally found an useful explanation for the additional processes in the &lt;em&gt;supervision tree&lt;/em&gt;. Besides that, we introduced &lt;em&gt;behaviors&lt;/em&gt;, which are the primary mechanism where it comes to reusing common abstractions prepared by the &lt;em&gt;OTP team&lt;/em&gt;. But we, as the developers, can also create our own behaviors - and we will cover this topic in the next post.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/building-otp-applications&quot;&gt;Learn You Some Erlang For Great Good! Chapter: Building OTP Applications&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84&quot;&gt;Application Master - Internal Structure&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang.org/doc/man/erlang.html#group_leader-0&quot;&gt;erlang:group_leader/0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 14 May 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html</guid>
+      </item>
+    
+      <item>
         <title>Elixir Conf EU 2015 - Afterthoughts</title>
         <description>&lt;h1 id=&quot;elixir-conf-eu-2015---afterthoughts&quot;&gt;Elixir Conf EU 2015 - Afterthoughts&lt;/h1&gt;
 
@@ -660,47 +753,6 @@
         <pubDate>Sun, 22 Feb 2015 22:30:00 +0100</pubDate>
         <link>http://www.afronski.pl/2015/02/22/books-that-changed-my-career-introduction.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2015/02/22/books-that-changed-my-career-introduction.html</guid>
-      </item>
-    
-      <item>
-        <title>How to store and examine custom business metrics?</title>
-        <description>&lt;h1 id=&quot;how-to-store-and-examine-custom-business-metrics&quot;&gt;How to store and examine custom business metrics?&lt;/h1&gt;
-
-&lt;p&gt;Recently, I spent some time looking for an ideal provider, which will deliver storage and graphing capabilities for our custom business metrics. Each growing business need to track your &lt;code&gt;KPIs&lt;/code&gt; but also other values, on the internal and much more granular level. It was not an easy job to do, because we have got very specific requirements.&lt;/p&gt;
-
-&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;We need &lt;em&gt;schemaless&lt;/em&gt; storage with support for JSON.&lt;/li&gt;
-  &lt;li&gt;We need a possibility to query, group, filter by plain fields and nested object structure.&lt;/li&gt;
-  &lt;li&gt;We need to deliver multiple and custom data series, represented as business metrics.&lt;/li&gt;
-  &lt;li&gt;We need to deliver them over &lt;code&gt;HTTPS&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;We need a possibility to create graphs, tables and dashboards.&lt;/li&gt;
-  &lt;li&gt;We need at most one hour delay when displaying graphs from actual data.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Obviously, it looks like too many requirements for one tool, especially that we were focused on the &lt;em&gt;SaaS&lt;/em&gt; solutions - for obvious reasons we don’t want to host anything by ourselves. Moreover, it will be nice to have a dedicated &lt;em&gt;Node.js&lt;/em&gt; client available for such service.&lt;/p&gt;
-
-&lt;h2 id=&quot;services&quot;&gt;Services&lt;/h2&gt;
-
-&lt;p&gt;We have evaluated numerous solutions (&lt;em&gt;around 25 providers&lt;/em&gt;) and we have found these mentioned below as these which match our requirements:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://keen.io/&quot;&gt;Keen IO&lt;/a&gt; - That is the most complete solution for us. It has everything (even a nice &lt;em&gt;Node.js&lt;/em&gt; client), however it does not host dashboards and charts in their place. It is a very nice storage and API only. Fortunately, there is a &lt;a href=&quot;http://keen.github.io/dashboards/&quot;&gt;project&lt;/a&gt; which provides nice, &lt;em&gt;Bootstrap&lt;/em&gt; powered, templates for &lt;a href=&quot;https://keen.io&quot;&gt;Keen IO&lt;/a&gt;. Unfortunately you have to host them on your own.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://datahero.com/&quot;&gt;DataHero&lt;/a&gt; - It is the most impressive solution, with amazing charting abilities, but without any kind of storage and API for pushing metrics. They are specializing in visualization and data analysis. It is possible to integrate &lt;a href=&quot;https://keen.io&quot;&gt;Keen IO&lt;/a&gt; with it, however you can schedule update of your data only once a day. Second possibility is to use the &lt;em&gt;Google Drive Spreadsheet&lt;/em&gt; in order to achieve real-time integration for your dashboards, but it feels like a &lt;em&gt;hack&lt;/em&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://statsmix.com/&quot;&gt;StatsMix&lt;/a&gt; - Very nice complete solution, which has dashboards, metrics storage. Unfortunately bugs related with &lt;code&gt;CSV&lt;/code&gt; export, lack of JSON metadata filtering and grouping and plenty of UI glitches destroy the overall experience.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://newrelic.com/insights&quot;&gt;New Relic Insights&lt;/a&gt; - Again, nice and complete solution but without support for JSON metadata (lack of filtering, storage and grouping). If you would like to store plain, flat structure it is a very nice solution to do that.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://segment.com/&quot;&gt;Segment&lt;/a&gt; - It is a nice tool, but it is only a &lt;em&gt;black-box&lt;/em&gt; which eases integration across multiple services. You can basically insert data into &lt;a href=&quot;https://segment.com&quot;&gt;Segment&lt;/a&gt; (with a nice &lt;em&gt;Node.js&lt;/em&gt; client) and forward them automatically to the other integrated services (like &lt;em&gt;Google Analytics&lt;/em&gt;, &lt;a href=&quot;https://keen.io&quot;&gt;Keen IO&lt;/a&gt; and so on). They do not have dashboards and export API.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.librato.com/&quot;&gt;Librato&lt;/a&gt; - Again, very nice and complete solution without support for nested JSON objects. If you need to store and display graphs from only flat and plain metrics it is a nice tool to check.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;Our choice focused on &lt;a href=&quot;https://keen.io&quot;&gt;Keen IO&lt;/a&gt; integrated via &lt;a href=&quot;https://segment.com&quot;&gt;Segment&lt;/a&gt;. It has an API and JavaScript library for drawing charts (which uses &lt;em&gt;Google Charts&lt;/em&gt; underneath), however it does not host your charts and dashboards in one place, so it is not a complete solution. So why we chosen that one? Simply because of that the rest of solutions have far more problems than &lt;a href=&quot;https://keen.io&quot;&gt;Keen IO&lt;/a&gt; with our requirements.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 24 Jan 2015 22:00:00 +0100</pubDate>
-        <link>http://www.afronski.pl/2015/01/24/how-to-store-and-examine-custom-business-metrics.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2015/01/24/how-to-store-and-examine-custom-business-metrics.html</guid>
       </item>
     
   </channel>
