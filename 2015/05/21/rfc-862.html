@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>RFC 862</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="rfc-862---echo-protocol">RFC 862 - <em>Echo Protocol</em></h1>
+
+<p>Often, when you are getting familiar with new programming language or small networking library it is hard to came up with something meaningful as an example. I would like to share with you a little piece of advice regarding that.</p>
+
+<p>You can implement an <em>echo server</em>. Even more - there is an official RFC for an <strong>echo protocol</strong> - it has number <code>862</code>.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Network Working Group                                          J. Postel
+Request for Comments: 862                                            ISI
+                                                                May 1983
+
+
+
+                             Echo Protocol
+
+
+
+
+This RFC specifies a standard for the ARPA Internet community.  Hosts on
+the ARPA Internet that choose to implement an Echo Protocol are expected
+to adopt and implement this standard.
+
+A very useful debugging and measurement tool is an echo service.  An
+echo service simply sends back to the originating source any data it
+receives.
+
+TCP Based Echo Service
+
+   One echo service is defined as a connection based application on TCP.
+   A server listens for TCP connections on TCP port 7.  Once a
+   connection is established any data received is sent back.  This
+   continues until the calling user terminates the connection.
+
+UDP Based Echo Service
+
+   Another echo service is defined as a datagram based application on
+   UDP.  A server listens for UDP datagrams on UDP port 7.  When a
+   datagram is received, the data from it is sent back in an answering
+   datagram.</code></pre></div>
+
+<p>It is a tiny document, that formalizes also tiny specification for an <em>echo server</em> - for two most known transport layer protocols - <em>TCP</em> and <em>UDP</em>. Rules and requirements are clear and well defined, port numbers are well known.</p>
+
+<p><em>BTW</em>: it is a really nice <em>kata</em> assignment as well. And, just for the record - please, look at the author and date - RFC was created in <code>1983</code> by Jon Postel (yes, this one responsible for <a href="http://en.wikipedia.org/wiki/Robustness_principle">Postel’s Law</a>).</p>
+
+<p>Besides an <em>echo protocol</em> there is also well known RFC which describes an <em>IP</em> protocol implemented on top of <em>breeding pigeons</em> (look at the security considerations at page 3 <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />). But this is much harder to implement as a <em>small assignment</em> or <em>kata</em>.</p>
+
+<p>Please, share with me your example implementation of an <em>echo server</em> in the comments - choose any protocol or programming language that you like. <img class="emoji" title=":smile:" alt=":smile:" src="https://assets.github.com/images/icons/emoji/unicode/1f604.png" height="20" width="20" align="absmiddle" /></p>
+
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc862">RFC 862 - Echo Protocol</a></li>
+  <li><a href="http://tools.ietf.org/html/rfc2549">RFC 2549 - IP over Avian Carriers with Quality of Service</a></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/2015/05/21/rfc-862.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2015/05/21/rfc-862.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <footer>
+        <section>© Copyright 2014, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>
