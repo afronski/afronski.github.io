@@ -7,6 +7,60 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>And you? What are you doing for the community?</title>
+        <description>&lt;h1 id=&quot;and-you-what-are-you-doing-for-the-community&quot;&gt;And you? What are you doing for the community?&lt;/h1&gt;
+
+&lt;p&gt;During one of the endless &lt;em&gt;flame wars&lt;/em&gt;, somewhere over Twitter, one idea hit my mind - it is surprising how much time we spent on so many trivial and fiddling stuff. And moreover, what could happen if instead of &lt;em&gt;flame war&lt;/em&gt;, we spent this time actually doing something for our community. Whether the world would not be a better place?&lt;/p&gt;
+
+&lt;p&gt;If we will try to count how many hours we spent unproductively by reading this &lt;em&gt;bullshit&lt;/em&gt; or even worse - &lt;em&gt;participating in it&lt;/em&gt; (I’m not talking about rest, holidays and spare time - that is a different thing, you should rest, &lt;em&gt;your Github streak is not more important than your friends or your life&lt;/em&gt;). We should be at least saddened (and actually I was pissed off on myself because of that). At the same time, we are whining that this or that library or framework has not got enough tests, has poor examples or almost no documentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/foss.png&quot; alt=&quot;Free Open Source Software&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I have got an idea, and if you have the same problem - let’s try to do it with me - &lt;em&gt;instead of talking, start doing&lt;/em&gt;. Instead starting a &lt;em&gt;flame war&lt;/em&gt; or answering in the hot topic on Twitter, open an &lt;em&gt;IDE&lt;/em&gt;. Instead of trying to convince someone about superiority one technology over another, search for a small thing to do in your favorite open source project. Take the initiative, be proactive - being a contributor is not that hard. Of course do it mindfully, you should not patch a Linux kernel source code if you have not got any idea how to start there - but I am sure that there are plenty of smaller libraries which are begging for help.&lt;/p&gt;
+
+&lt;p&gt;You can even extrapolate this policy, to other things like:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Giving back your precious time as a mentor or lecturer&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Cooperate with your local meetups or &lt;em&gt;CoderDojos&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Try to not waste time on useless rants, it will be also beneficial for your daily attitude.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;JavaScript&lt;/em&gt; is better than &lt;em&gt;Java&lt;/em&gt;? Or maybe the other way? &lt;strong&gt;Who cares!&lt;/strong&gt; Instead, build something valuable with any technology that you’d like.&lt;/li&gt;
+  &lt;li&gt;Do not waste others time! Especially when you are asking for a help, and you don’t want to listen - you can easily become an &lt;em&gt;askhole&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Respect even the free activities - if you’ve subscribed or &lt;em&gt;RVSPed&lt;/em&gt; on a free event, and you can’t go - please, click that you won’t go.&lt;/li&gt;
+  &lt;li&gt;Give, not only take! Spent just 30 minutes with backlog or documentation of your favorite library. It is not that hard to contribute.&lt;/li&gt;
+  &lt;li&gt;If you are learning, take an example from your trainers! After a while you’ll become a one, so pay it forward.&lt;/li&gt;
+  &lt;li&gt;No community or interesting meet-up group? &lt;strong&gt;Build one&lt;/strong&gt; - start small and use social media to grow.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-can-i-help&quot;&gt;How can I help?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Just do something for others&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Spent some time with open source projects, help with documentation, prioritize and clarify bugs and theirs description (&lt;em&gt;triage&lt;/em&gt;), implement a missing feature or missing integration in your favorite library or framework. Share your knowledge and experience on the local events, across local meetups, publish articles on your blog and share it on social media. Be a true participant of your community!&lt;/p&gt;
+
+&lt;p&gt;I have also prepared links to many aforementioned initiatives (I focused more on Silesian events, but you’ll get the idea):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nodebug.me&quot;&gt;Triage Node.js bugs in your spare time&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io&quot;&gt;Participate in NodeSchool&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/nodeschool/silesia/issues&quot;&gt;Help with nodeschool/silesia&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://qualityexcites.pl/en/&quot;&gt;Got to the Quality Excites&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;hs-silesia.pl&quot;&gt;Build with us a community around HackerSpace Silesia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://2015.dwo.mikstura.it/&quot;&gt;Participate in DWO&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://slaskit.pl/&quot;&gt;Look at other silesian events&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And many, many others - you probably know better which projects need help. &lt;em&gt;It is matter of time, there is nothing more precious than your time that you can give to others&lt;/em&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 28 May 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/05/28/and-you-what-are-you-doing-for-the-community.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/05/28/and-you-what-are-you-doing-for-the-community.html</guid>
+      </item>
+    
+      <item>
         <title>Seven Languages in Seven Weeks - Prolog</title>
         <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---prolog&quot;&gt;Seven Languages in Seven Weeks - Prolog&lt;/h1&gt;
 
@@ -697,120 +751,6 @@ UDP Based Echo Service
         <pubDate>Fri, 20 Mar 2015 16:00:00 +0100</pubDate>
         <link>http://www.afronski.pl/2015/03/20/seven-languages-in-seven-weeks-ruby.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2015/03/20/seven-languages-in-seven-weeks-ruby.html</guid>
-      </item>
-    
-      <item>
-        <title>Interesting Language Features - Erlang I</title>
-        <description>&lt;h1 id=&quot;interesting-language-features---erlang-i&quot;&gt;Interesting Language Features - Erlang I&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a starting point of a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;Almost every programmer struggled in the past with the unclear and non-obvious code, probably written yesterday or even earlier. That feeling is often amplified by the actual mental state (e.g. you are angry, not rested or upset - if you don’t know how it affects you, I encourage you to get familiar with &lt;a href=&quot;http://www.afronski.pl/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html&quot;&gt;this book and blog post&lt;/a&gt;). If you will run onto some unclear and ugly written code sample, which yesterday was perfectly clear, your attitude may only be worse. It can escalate, if such code was written by someone else from your team.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Software Craftsmanship&lt;/em&gt; movement and Uncle Bob’s books (especially &lt;a href=&quot;http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/&quot;&gt;Clean Code&lt;/a&gt; and &lt;a href=&quot;http://www.amazon.com/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073/&quot;&gt;Clean Coder&lt;/a&gt;) are trying to improve that state, but most of mainstream programming languages did not encourage developers to write something clear and obvious at the first sight. Often context is hidden inside pile of code. Somewhere underneath unnecessary abstraction you can find the essence of that particular slice. Not to mention stateful programming languages, where often state is passed between following methods (or functions) inexplicitly.&lt;/p&gt;
-
-&lt;p&gt;Very long, tangled, imperative flow control can bury the code conciseness and clarity very easily (yes, I am talking about &lt;code&gt;if-else&lt;/code&gt; and &lt;code&gt;switch-case&lt;/code&gt; statements). If I had a dime for every time I lost track somewhere in the thicket of flow control statements, I could easily retire and write for a rest of my life &lt;em&gt;Haskell&lt;/em&gt; for fun. But I would like to present very clear alternative, present in almost any modern programming language, especially in the functional ones.&lt;/p&gt;
-
-&lt;h3 id=&quot;pattern-matching&quot;&gt;Pattern Matching&lt;/h3&gt;
-
-&lt;p&gt;Instead of codifying rules imperatively, try to think about rules in a declarative way instead. I would like to focus on &lt;em&gt;Erlang&lt;/em&gt; syntax right now, but still this concept can be represented in any functional programming language.&lt;/p&gt;
-
-&lt;p&gt;All examples of source code are gathered from the &lt;em&gt;CouchDB&lt;/em&gt; project (very nice &lt;em&gt;key-value&lt;/em&gt; storage with &lt;em&gt;JSON&lt;/em&gt; documents stored as value, that &lt;em&gt;embraces the web&lt;/em&gt;, written in &lt;em&gt;Erlang&lt;/em&gt;). You can find link to the exact file in the &lt;a href=&quot;#credits&quot;&gt;Credits&lt;/a&gt; section:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% Is character a whitespace?&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% Syntax $\s means a character&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% represented as with escape sequence.&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;%&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% Equal to the &amp;#39;\s&amp;#39; in C-like syntax.&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_whitespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;$\s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_whitespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;$\t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_whitespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;$\n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_whitespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;$\r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_whitespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(_&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You can see that we declared several cases what our function should return under certain input conditions. It looks like a function with multiple heads, each with different inputs, treated as a single case. All rules are checked in the declaration order, last one is a &lt;em&gt;catch-all&lt;/em&gt; clause. As you can see, this function is very simple, but it is a good starting point to get familiar with the construct.&lt;/p&gt;
-
-&lt;p&gt;We can push it even further. Imagine that you can differentiate behavior and execution flow in such declarative way - lets see how we can do that.&lt;/p&gt;
-
-&lt;h3 id=&quot;named_case_expressions&quot;&gt;&lt;i&gt;Named Case Expressions&lt;/i&gt;&lt;/h3&gt;
-
-&lt;p&gt;Of course in &lt;em&gt;Erlang&lt;/em&gt; and other languages there are &lt;em&gt;if&lt;/em&gt; and &lt;em&gt;case&lt;/em&gt; expressions (there is a significant difference between statement and expression, but that is another topic) and you can wrote your code in classical way:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;export&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dict_find&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dict_find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;DefaultValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;         &lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;         &lt;span class=&quot;nv&quot;&gt;DefaultValue&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;It is still a pattern matching - we are matching against a &lt;em&gt;tagged tuple&lt;/em&gt; with &lt;code&gt;ok&lt;/code&gt; atom at the first place, we have &lt;em&gt;catch-all&lt;/em&gt; clause. But we can definitely do it better, in more &lt;em&gt;Erlangish&lt;/em&gt; way. After a small refactoring code will look like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;export&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dict_find&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getValueOrDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;_)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getValueOrDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(_,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dict_find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;DefaultValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;getValueOrDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;DefaultValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Lets look what happened here in details. We have changed the case expression into a function with clear name, that has two arguments - first is a result of &lt;code&gt;dict:find&lt;/code&gt; and second is a default value. Then with pattern matching we are dispatching the execution flow - in our case we are returning a proper value (with extraction from a &lt;em&gt;tagged tuple&lt;/em&gt;), but you can easily imagine that another function calls can be easily introduced here. We transformed &lt;em&gt;case&lt;/em&gt; expression (a syntactical construct) to the &lt;em&gt;named&lt;/em&gt; representation (a logical construct).&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Why it is better?&lt;/em&gt; I hope that you can see that it is clearer at the first sight. Matching rules are stored in a declarative way, we have less syntactical noise and the most important thing - &lt;em&gt;it has a name&lt;/em&gt;. That is the reason from where name of this &lt;em&gt;pattern&lt;/em&gt; came from - &lt;em&gt;named case expressions&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;But what about performance? Would not it be slower, because additional functions introduced here? We can check it easily, by digging deeper into &lt;em&gt;Erlang VM&lt;/em&gt; internals.&lt;/p&gt;
-
-&lt;h3 id=&quot;internal-representation-core-erlang&quot;&gt;Internal representation (&lt;em&gt;Core Erlang&lt;/em&gt;)&lt;/h3&gt;
-
-&lt;p&gt;Before we will take a peek under the hood, we need to briefly explain the structure of the &lt;em&gt;Erlang&lt;/em&gt; compiler. Before the &lt;em&gt;Erlang&lt;/em&gt; gets interpreted on the VM it is transformed to the &lt;em&gt;Core Erlang&lt;/em&gt; representation and after that to the &lt;em&gt;BEAM&lt;/em&gt; code (which is a equivalent of &lt;em&gt;bytecode&lt;/em&gt; from &lt;em&gt;JVM&lt;/em&gt;). It turns out that our &lt;em&gt;named case expressions&lt;/em&gt; (functions with multiple heads and pattern matching, a logical construct) are directly transformed to the syntactical construct - &lt;em&gt;case&lt;/em&gt; expression - in the first phase of compilation.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% Function &amp;#39;getValueOrDefault&amp;#39; after compilation&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% to the Core Erlang representation, which will be&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;% afterwards compiled to the BEAM code:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;&amp;#39;getValueOrDefault&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;%% Line 4&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(_&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cor1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,_&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cor0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; 	&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cor1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,_&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cor0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; 	  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;&amp;#39;ok&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},_&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cor4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;&amp;#39;true&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 	      &lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; 	  &lt;span class=&quot;c&quot;&gt;%% Line 5&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 	  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cor5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;&amp;#39;true&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; 	      &lt;span class=&quot;nv&quot;&gt;Default&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 	&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;As you may see, &lt;em&gt;multi-head function clauses&lt;/em&gt; are anyway compiled to the &lt;em&gt;case&lt;/em&gt; expression, so argument about lost performance or additional overhead introduced by this abstraction is simply invalid - there is no such overhead, we can use it without any doubts (in most cases such objections are simply the &lt;a href=&quot;http://en.wikipedia.org/wiki/Program_optimization&quot;&gt;premature optimization&lt;/a&gt; anyway).&lt;/p&gt;
-
-&lt;p&gt;How we took a peek under the hood? It is simple, you can start new &lt;em&gt;Erlang&lt;/em&gt; shell and then execute:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;c&quot;&gt;% Compiler will spit out the&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;% Core Erlang representation&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;% to the &amp;#39;after.core&amp;#39; file.&lt;/span&gt;
-
-&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_core&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
-
-&lt;p&gt;Clear, concise and obvious code should be our goal from the beginning. It is easy to forget about it in the daily routine or rush caused by deadlines. It is a really small investment put upfront (even if it is bigger at the beginning, cost will definitely lower as time passes and we are gaining experience). It eases the debugging and &lt;em&gt;context reload&lt;/em&gt; time. We should strive to simplicity, because &lt;em&gt;simple is better&lt;/em&gt; - and it is worth knowing these tricks that can help you with pursuit to the final goal.&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UuHMaeO1k-E&quot;&gt;Garrett Smith, &lt;em&gt;Social Code&lt;/em&gt; (Code Mesh 2014)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/couchdb-couch/blob/master/src/couch_util.erl&quot;&gt;CouchDB - &lt;em&gt;couch_util.erl&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 10 Mar 2015 16:00:00 +0100</pubDate>
-        <link>http://www.afronski.pl/2015/03/10/interesting-language-features-erlang-named-case-expressions.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2015/03/10/interesting-language-features-erlang-named-case-expressions.html</guid>
       </item>
     
   </channel>
