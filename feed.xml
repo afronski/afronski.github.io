@@ -7,6 +7,57 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Books that changed my career - Structure and Interpretation of Computer Programs</title>
+        <description>&lt;h1 id=&quot;books-that-changed-my-career---structure-and-interpretation-of-computer-programs&quot;&gt;Books that changed my career - Structure and Interpretation of Computer Programs&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is another one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right sicp-logo&quot; alt=&quot;Structure and Interpretation of Computer Programs - Cover&quot; src=&quot;/assets/SICPCover.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Only a few books have such significant impact on the &lt;em&gt;computer science&lt;/em&gt; and IT environment as the book mentioned in the title. Obviously, this is very personal choice - but some of them are universally equal for all of us. One of such books we have described previously - I am talking about &lt;em&gt;Pragmatic Programmer&lt;/em&gt;, which is the most known and valuable book for aspiring programmer and a &lt;em&gt;craftsman&lt;/em&gt;. But let’s talk about the book which is a foundation for the whole course on &lt;em&gt;MIT&lt;/em&gt;. And I hope that I do not have to remind you &lt;em&gt;what&lt;/em&gt; and &lt;em&gt;how important&lt;/em&gt; for &lt;em&gt;computer science&lt;/em&gt; MIT is.&lt;/p&gt;
+
+&lt;p&gt;Let’s start with this long quote from one of the unquestionable (or questionable - in this case, doesn’t matter, because citation is really accurate) authorities in IT world - &lt;a href=&quot;https://twitter.com/unclebobmartin&quot;&gt;@unclebobmartin&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;quote class=&quot;citation&quot;&gt;SICP is a literary masterpiece. It's not often that you can say that a technical book is a page-turner, but that's just what I found SICP to be.  The book moves from topic to topic with rare ease and clarity, but more importantly it moves with purpose and mission.  As you read it, you can feel the authors slowly building a tension towards a climax. The chapters fly by as you read about data structures, algorithms, message passing, first-class procedures, and so much else. Each concept leads inevitably to the next. Each chapter adds to the ever building tension. By time you are half-way through the book, the sense that something important is about to change becomes palpable.&lt;/quote&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;quote class=&quot;citation&quot;&gt;And then something important changes! Something you had not anticipated. Something you should have guessed, but did not. On page 216 they introduce a concept so familiar that most programming books start with it. On page 216 they prove to you that you've had some wrong ideas about programming all along. On page two hundred and sixteen, after talking about algorithms, data structures, recursion, iteration, trees, high-order procedures, scoping, local variables, data abstraction, closures, message-passing, and a plethora of other topics - after all that, they introduce assignment!&lt;/quote&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;quote class=&quot;citation&quot;&gt;And with that elegant coup-de-grace (which is not the last in this book!), they vanquish the concept that programming is about manipulating state. With that one stroke, they force you to look back on all you had done in the previous pages in a new and enlightened way - a functional way.&lt;/quote&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you have not been exposed to &lt;em&gt;functional programming&lt;/em&gt; earlier those statements will sound to you at least ground breaking, if not ridiculous. Moreover, if you are starting your career as a programmer, immediately grab this book and start reading it - it will be beneficial for you, you will open your mind to a different paradigm. Moreover, you will not have so much &lt;em&gt;mental baggage&lt;/em&gt; to unlearn, as the most programmers exposed to &lt;em&gt;object-oriented programming languages&lt;/em&gt; (which are in most cases &lt;a href=&quot;http://c2.com/cgi/wiki?AlanKaysDefinitionOfObjectOriented&quot;&gt;implemented in a wrong way&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;ok-i-am-in-how-to-read-it&quot;&gt;Ok, I am in. How to read it?&lt;/h3&gt;
+
+&lt;p&gt;I am reading this book second time in my life, and I am trying to do it mindfully, with full focus (it is really hard, but I am trying &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;). I also play with plethora of assignments gathered at the end of each chapter - each time I am fiddling with them in different programming language. I would like to preserve knowledge from the reading process, and I would like to introduce you to the next blog post series which will start at 4th of June.&lt;/p&gt;
+
+&lt;p&gt;How it will look like? Often people are getting this book as a topic of the local reading club (second book which is often used as a topic is a &lt;a href=&quot;http://mitpress.mit.edu/books/little-schemer&quot;&gt;Little Schemer&lt;/a&gt;). I have not found one around, so I will do it by myself. I will sum up each chapter with a post, adding also small examples and topics that I found interesting related to that chapter. Thanks to that, I and maybe someone else can return to this place and recall interesting bits easier.&lt;/p&gt;
+
+&lt;p&gt;I hope that you will enjoy new series. Give me your feelings about that and feedback in the comments - and let’s stay in touch till Thursday! &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
+
+&lt;p&gt;Obviously, this post cannot end the whole series about important books for my career. Next time, I will present a book which has a special place on my bookshelf, because it changed drastically my thinking about concurrency. Moreover, it is already extensively quoted on this blog. Also, it has very nice drawings and &lt;em&gt;IMHO&lt;/em&gt; is a great continuation of the original idea. Author of this book is a well known programmer in the &lt;em&gt;Erlang&lt;/em&gt; world. And probably, by that statement, you should be pretty sure which book I described here. So, see you soon! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://thecleancoder.blogspot.com/2010/08/why-clojure.html&quot;&gt;Why Clojure?&lt;/a&gt; by &lt;a href=&quot;https://twitter.com/unclebobmartin&quot;&gt;@unclebobmartin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mitpress.mit.edu/books/structure-and-interpretation-computer-programs&quot;&gt;Structure and Interpretation of Computer Programs&lt;/a&gt;, &lt;em&gt;Harold Abelson&lt;/em&gt;, &lt;em&gt;Gerald Jay Sussman&lt;/em&gt; and &lt;em&gt;Julie Sussman&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Full book available online&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 01 Jun 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html</guid>
+      </item>
+    
+      <item>
         <title>And you? What are you doing for the community?</title>
         <description>&lt;h1 id=&quot;and-you-what-are-you-doing-for-the-community&quot;&gt;And you? What are you doing for the community?&lt;/h1&gt;
 
@@ -678,80 +729,6 @@ UDP Based Echo Service
         <pubDate>Fri, 27 Mar 2015 16:00:00 +0100</pubDate>
         <link>http://www.afronski.pl/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</guid>
-      </item>
-    
-      <item>
-        <title>Seven Languages in Seven Weeks - Ruby</title>
-        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---ruby&quot;&gt;Seven Languages in Seven Weeks - Ruby&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a starting point of a series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing feature, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;&lt;img class=&quot;right ruby-logo&quot; alt=&quot;Ruby Logo&quot; src=&quot;/assets/RubyLogo.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Aforementioned book has a very controversial concept called an &lt;em&gt;ugly child&lt;/em&gt;. One of chosen languages is presented as a &lt;em&gt;necessary evil&lt;/em&gt;, used in the old era. The choice fell on the &lt;em&gt;Ruby&lt;/em&gt;. And I partially agree with that choice.&lt;/p&gt;
-
-&lt;p&gt;Do not get me wrong - &lt;em&gt;Ruby&lt;/em&gt; is a wonderful language, it brings multiple merits and valuable tools to us. In many cases it rescued many programming careers from boredom and daily routine. It restored &lt;em&gt;happiness&lt;/em&gt; to the job of many programmers. But in this book, this language is surrounded by many other languages - better ones, relatively to the era that is coming (or rather - which is already here).&lt;/p&gt;
-
-&lt;p&gt;It is an old language - created in 1995 (the same year that &lt;em&gt;Java&lt;/em&gt; was created). This does not matter, when you have to get your job done, but it matters when it comes to the evolution, that took place since then. Author chosen that language because of joy and happiness that it brings for him. &lt;strong&gt;&lt;em&gt;Ruby is optimized for developer happiness&lt;/em&gt;&lt;/strong&gt;. Moreover, many tools that just get the job done are written in it (&lt;em&gt;Rails&lt;/em&gt;, &lt;em&gt;Sinatra&lt;/em&gt;, &lt;em&gt;Capistrano&lt;/em&gt;, &lt;em&gt;Chef&lt;/em&gt;, &lt;em&gt;Vagrant&lt;/em&gt; and many, many more). They definitely influenced many other communities (try to count how many &lt;em&gt;Sinatra&lt;/em&gt; forks are already created &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
-
-&lt;p&gt;From the community itself we can also learn multiple things. Initiatives like &lt;a href=&quot;http://railsgirls.com/&quot;&gt;Rails Girls&lt;/a&gt;, &lt;a href=&quot;http://www.rubytapas.com/&quot;&gt;Ruby Tapas&lt;/a&gt;, &lt;a href=&quot;http://exercism.io/&quot;&gt;Exercism&lt;/a&gt;, supporting diversity, embracing beginners and &lt;em&gt;greenhorns&lt;/em&gt; in the community, examples that come from the top - from core contributors, people like &lt;a href=&quot;https://twitter.com/yukihiro_matz&quot;&gt;@yukihiro_matz&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/josevalim&quot;&gt;@josevalim&lt;/a&gt; or &lt;a href=&quot;https://twitter.com/tenderlove&quot;&gt;@tenderlove&lt;/a&gt; - that really makes a &lt;em&gt;change&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Besides that, language itself have many interesting features that brings joy, but also enable nice use cases, hard to implement in other mainstream programming languages.&lt;/p&gt;
-
-&lt;h3 id=&quot;why-this-language&quot;&gt;Why this language?&lt;/h3&gt;
-
-&lt;p&gt;I would like to present only a part of the most interesting feature - &lt;em&gt;method_missing&lt;/em&gt; and ability to easily and efficiently use &lt;em&gt;metaprogramming&lt;/em&gt; in your daily activities. It is a key thing that enables many use cases - starting from the crazy things, like that one presented below and ending on the various &lt;em&gt;Domain Specific Languages&lt;/em&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RomanNumerals&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;method_missing&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_s&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;IV&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;IIII&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;IX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;VIIII&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;XL&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;XXXX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;XC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;LXXXX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;I&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;V&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;X&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;L&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;C&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;How it works? Lets look on the &lt;em&gt;&lt;code&gt;REPL&lt;/code&gt;&lt;/em&gt; output:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;002&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XCII&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;92&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;003&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XII&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;004&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XIV&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;For each undefined method in that class, we are calling an entry point called &lt;em&gt;&lt;code&gt;method_missing&lt;/code&gt;&lt;/em&gt;. Then you can react and do whatever you want with the actual input arguments and invoked method name. This feature, connected with very flexible and liberal syntax, enables any kind of &lt;em&gt;DSL&lt;/em&gt; creation that you can possibly imagine.&lt;/p&gt;
-
-&lt;p&gt;Why I have presented only this part? Because &lt;em&gt;Ruby&lt;/em&gt; is already very popular programming language, I would say even a mainstream one. I do not want to focus on describing its features, instead we should learn how to build an &lt;em&gt;amazing community&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;This environment was possible to build thanks to that language. Besides the described feature, additional ones like &lt;em&gt;mixins&lt;/em&gt;, &lt;em&gt;blocks&lt;/em&gt; or very complete, cohesive and well-documented &lt;em&gt;standard library&lt;/em&gt; really let you enjoy process of creating. Many people feel joy of programming when dealing with &lt;em&gt;Ruby&lt;/em&gt;. This is a key point, because that feeling attracts creative people. And these people are the creators of very vibrant and active community, these people are creators of amazing tools and libraries. And sometimes they transfer their experiences to the other communities (like &lt;a href=&quot;https://twitter.com/josevalim&quot;&gt;@josevalim&lt;/a&gt; and &lt;em&gt;Elixir&lt;/em&gt; programming language community).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;It is just simple as that&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
-
-&lt;p&gt;In the next blog post we will talk about not so popular, but still very elegant and interesting prototype-based language described in &lt;em&gt;“Seven Languages in Seven Weeks”&lt;/em&gt; book as a second one  - the &lt;a href=&quot;http://iolanguage.org&quot;&gt;Io&lt;/a&gt; programming language.&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 20 Mar 2015 16:00:00 +0100</pubDate>
-        <link>http://www.afronski.pl/2015/03/20/seven-languages-in-seven-weeks-ruby.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2015/03/20/seven-languages-in-seven-weeks-ruby.html</guid>
       </item>
     
   </channel>
