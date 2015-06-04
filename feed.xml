@@ -7,6 +7,142 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>SICP in Clojure - Chapter 1</title>
+        <description>&lt;h1 id=&quot;sicp-in-clojure---chapter-1&quot;&gt;SICP in Clojure - Chapter 1&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;In one of the &lt;a href=&quot;http://www.afronski.pl/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html&quot;&gt;previous blog posts&lt;/a&gt; I have announced that I would like to start a new series of posts. It is a persistent journal from my journey through aforementioned book. I hope that you will enjoy it and find it useful - the main goal is to make this series a place where we can return in future, recall ideas and thoughts that accompanied reading process.&lt;/quote&gt;
+
+&lt;h3 id=&quot;what-is-a-sicp-and-why-should-you-care&quot;&gt;What is a &lt;em&gt;SICP&lt;/em&gt; and why should you care?&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;SICP&lt;/em&gt; is an acronym which represents a classic computer science book and stands for &lt;em&gt;“Structure and Interpretation of Computer Programs”&lt;/em&gt;. It is written by Harold Abelson, Gerald Jay Sussman and Julie Sussman. It is a base book for &lt;a href=&quot;http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005&quot;&gt;an introductory course in programming on MIT&lt;/a&gt;. Original examples are written in &lt;em&gt;Scheme&lt;/em&gt;, which is still a very popular &lt;em&gt;Lisp&lt;/em&gt; dialect. Well, it is not so popular as &lt;em&gt;Clojure&lt;/em&gt; these days, so I would like to convert prepared examples to that language instead.&lt;/p&gt;
+
+&lt;p&gt;At the beginning, I would like to focus on one thing - I will tell you, why this book is different, and why you should care about it. There are plenty books out there, which are doing a fairly well introduction to the programming, why do we even care about another one? Especially, if you are more than a beginner. &lt;em&gt;You should care because of two things&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;As every book related with teaching programming from the scratch, it introduces you to the topic from the ground up. It starts from the most basic concepts related with programming. Actually, if you are an experienced programmer, you will be disappointed by a first few dozens of pages. It will not introduce anything new, however it is written in a very interesting way - during the process you may think &lt;em&gt;“Well, at least it feels interesting when I am reading it”&lt;/em&gt;. After first 50 pages, you will start seeing the first benefits of that book - it introduces you to the topic from the side of functional programming. In this book, assignment operator is introduced around 250 page. Every single concept introduced before that (e.g. various data structures, interesting tasks and algorithms) is literally pure (&lt;em&gt;free from shared state and side effects&lt;/em&gt;) and immutable. Why this is an important thing? &lt;em&gt;Well, now I would like to introduce a second reason&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.gotw.ca/publications/concurrency-ddj.htm&quot;&gt;Free lunch is over&lt;/a&gt;. Last few decades we surf on top of huge wave directed by &lt;em&gt;Moore’s Law&lt;/em&gt;. Computer chips are getting smaller, faster and more effective in terms of power usage. But everything has its limits. Laws of physics are inexorable. We cannot bend the basic laws of nature, so instead making chips faster and smaller, we have to make &lt;em&gt;more&lt;/em&gt; of them. And when I say &lt;em&gt;more&lt;/em&gt;, I mean dozens, not only couple of them. In that case, not every responsibility can be dropped on the operating system and many of our programs should have notion of a &lt;em&gt;parallel execution&lt;/em&gt; inside. But too many things related with &lt;em&gt;software engineering&lt;/em&gt; today - programming languages, paradigms, solutions - are oriented around mutable and shared state.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://upload.wikimedia.org/wikipedia/commons/e/ea/AmdahlsLaw.svg&quot; alt=&quot;Amdahl's Law - Graph&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Metaphorically, we may say that instead of getting profits from &lt;em&gt;Moore’s Law&lt;/em&gt;, we have to deal with &lt;em&gt;Amdahl’s Law&lt;/em&gt; now. And that one of the basics truths inside computer science is also inexorable. It says that the maximum speedup in parallel environment is strictly related with its sequential part. Obviously, some parts have to be sequential, because of the inherent complexity related with the problem domain, however putting more and more constraints (related with mutability and shared state) increases this factor significantly. And in that case our parallel environment will be used inefficiently, or even worse - we are blocking resources which can be utilized in other parts of the system.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Functional programming&lt;/em&gt; exceeds your toolbox and enhances your programming skills, by bending them and enforcing to use them in a different way. By adding value to your toolbox, it introduces many powerful elements such as &lt;em&gt;referential transparency&lt;/em&gt;, &lt;em&gt;mathematical conciseness&lt;/em&gt;, &lt;em&gt;immutability&lt;/em&gt;, &lt;em&gt;composability&lt;/em&gt;, designing and thinking about parts of the system which are &lt;em&gt;pure&lt;/em&gt; (side-effect free) and &lt;em&gt;impure&lt;/em&gt; (abstracting side-effects away into different constructs like &lt;em&gt;Monads&lt;/em&gt;). Those benefits are key factors when we have to deal with a concurrency and parallel environment - it is just easier to manage complexity in that way. Certain classes of problems, also related with concurrency, will disappear after choosing proper tool. Inferring the execution flow in such languages is also easier, because it is transparent (&lt;em&gt;no side effects&lt;/em&gt;). &lt;/p&gt;
+
+&lt;p&gt;I would like to introduce some amazing concepts from this book by emphasizing them in a series of articles posted on the blog. Starting from this one, I will speak about each chapter separately, mentioning important concepts, documented with a code samples written in &lt;em&gt;Clojure&lt;/em&gt;. I will not focus on documenting things from the beginners point of view, but rather looking for analogies which an experienced programmer should understand. Let’s start!&lt;/p&gt;
+
+&lt;h3 id=&quot;example&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;I would like to introduce to you a set of examples which will be a base for our discussion:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;c1&quot;&gt;;; Recurrency is a powerful concept, which helps us traverse&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; collections. We can also abstract the actual transformation,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; (which is represented as `term` here) and the evaluation&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; of the next step (represented as `next`).&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;term&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;next &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;term&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;term&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;next &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;next &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;;; Constructing new functions from other functions.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; Remember, that operators are actually functions.&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cube&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;incr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;;; Reusing the existing function inside the transformation.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; Please, look that we describe what should be calculated,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; not how it should iterate through range.&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sum-cubes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cube&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;incr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;println &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum-cubes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;;; Private functions can be created inside the scope.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; Thanks to that we can hide unnecessary details from&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; the others.&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pi-sum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pi-term&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;/ &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pi-next&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pi-term&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pi-next&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;println &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pi-sum&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;;; Please look at the `add-dx` function - in that case&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; we are using function arguments inside from the higher&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; scope.&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;integral&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-dx&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;/ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;add-dx&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;println &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;integral&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cube&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;function-as-a-first-class-citizen&quot;&gt;Function as a &lt;em&gt;first-class citizen&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;It is not a new concept. Literally every single mainstream programming language these days introduced the concept of &lt;em&gt;lambdas&lt;/em&gt; (even Java &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;). And prerequisite for that concept is having a notion of functions which are the &lt;em&gt;first-class citizens&lt;/em&gt; in the language. It means that they can be passed around via variables and arguments, they can be returned and thanks to that - &lt;em&gt;they can be built&lt;/em&gt; almost in a dynamic manner.&lt;/p&gt;
+
+&lt;p&gt;I you have experience and background in the &lt;em&gt;OOP&lt;/em&gt;, you often worked with interfaces, which define only the protocol how rest of the code is using that specific part. If you worked with &lt;em&gt;C&lt;/em&gt;, you used &lt;em&gt;function pointers&lt;/em&gt; - it is also a definition of the protocol. Those concepts are the poor replacement of aforementioned mechanism.&lt;/p&gt;
+
+&lt;h4 id=&quot;just-enough-abstraction&quot;&gt;&lt;em&gt;Just-enough&lt;/em&gt; abstraction&lt;/h4&gt;
+
+&lt;p&gt;Function is a &lt;em&gt;smallest possible abstraction&lt;/em&gt;. Everything is transparent - it should have meaningful name, it has input arguments and it returns a result. Function will not mutate any global state, it will not mutate its arguments either. This means that it will not propagate any change outside of function. In the pure functional programming languages it cannot have even a single side-effect (e.g. using &lt;em&gt;I/O&lt;/em&gt;). If we add that to the previous point - we have almost infinite possibilities to build and modify our &lt;em&gt;just-enough abstraction&lt;/em&gt;, which will be safe and clean. Constructs like currying, recurrency, partial application will be our daily tool (we will talk about them in later posts).&lt;/p&gt;
+
+&lt;p&gt;I would like to point out one more thing. Many abstractions described as &lt;em&gt;a design patterns&lt;/em&gt; can be represented as a such &lt;em&gt;just-enough abstractions&lt;/em&gt; - e.g. decorator, facade, adapter. All of them can be represented as a single function.&lt;/p&gt;
+
+&lt;h4 id=&quot;gentle-start-into-composability&quot;&gt;Gentle start into &lt;em&gt;composability&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;Composition is a very powerful mechanism. It is as a primary way to create new behaviours from the others. We can defer the execution by constructing the pipeline - it is a definition of &lt;em&gt;lazy computation&lt;/em&gt;. Also composition is often useful, when we have to deal with transformations. In that case we are focusing on building the algorithm in a declarative way, modelling the purpose of it (&lt;em&gt;what should be done or calculated&lt;/em&gt;) instead of describing every single bit and piece (&lt;em&gt;how it should be done&lt;/em&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;interesting-examples&quot;&gt;&lt;em&gt;Interesting Examples&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;At the end I would like to present the power of conciseness:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;first-denomization&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; 
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;or &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&amp;lt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;ss&quot;&gt;:else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt;
+                     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                 &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt;
+                        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first-denomization&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                     &lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;count-change&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;println &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;count-change&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That algorithm calculates how many combinations of coin exchanges we can have from a given amount. Thanks to the recurrency and splitting responsibilities into small functions, code is very readable and self explanatory.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://upload.wikimedia.org/wikipedia/commons/e/ea/AmdahlsLaw.svg&quot;&gt;Amdahl’s Law&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mitpress.mit.edu/books/structure-and-interpretation-computer-programs&quot;&gt;Structure and Interpretation of Computer Programs&lt;/a&gt;, &lt;em&gt;Harold Abelson&lt;/em&gt;, &lt;em&gt;Gerald Jay Sussman&lt;/em&gt; and &lt;em&gt;Julie Sussman&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Full book available online&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 04 Jun 2015 11:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/06/04/sicp-in-clojure-chapter-1.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/06/04/sicp-in-clojure-chapter-1.html</guid>
+      </item>
+    
+      <item>
         <title>Books that changed my career - Structure and Interpretation of Computer Programs</title>
         <description>&lt;h1 id=&quot;books-that-changed-my-career---structure-and-interpretation-of-computer-programs&quot;&gt;Books that changed my career - Structure and Interpretation of Computer Programs&lt;/h1&gt;
 
@@ -677,58 +813,6 @@ UDP Based Echo Service
         <pubDate>Mon, 06 Apr 2015 19:15:00 +0200</pubDate>
         <link>http://www.afronski.pl/2015/04/06/the-best-of-lambda-days.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2015/04/06/the-best-of-lambda-days.html</guid>
-      </item>
-    
-      <item>
-        <title>Interesting Language Features - Erlang II</title>
-        <description>&lt;h1 id=&quot;interesting-language-features---erlang-ii&quot;&gt;Interesting Language Features - Erlang II&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is an article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;In previous blog post, we talked about &lt;em&gt;pattern matching&lt;/em&gt; and its usage in &lt;em&gt;functional programming&lt;/em&gt; in general. But &lt;em&gt;Erlang&lt;/em&gt; is more known in the programming community from something different. This programming language, with support for distribution and concurrency baked in since beginning, is mostly known as a solid foundation for reliable, long running systems, maintained for many years. It was developed this way &lt;strong&gt;deliberately&lt;/strong&gt; with all mentioned features in mind, because of requirements imposed by telecommunications industry from the 80s. Moreover, these requirements are still actual for today’s IT systems. We can benefit from the whole platform, especially if we have to deal with strict requirements related with &lt;em&gt;reliability&lt;/em&gt; and &lt;em&gt;fault-tolerance&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Erlang’s&lt;/em&gt; unique features related with concurrency, reliability and distribution are based on very simple concepts - &lt;em&gt;isolation&lt;/em&gt;, &lt;em&gt;lightweight processes&lt;/em&gt; and powerful &lt;em&gt;&lt;code&gt;VM&lt;/code&gt;&lt;/em&gt; implementation. Back in a days, &lt;em&gt;Erlang&lt;/em&gt; needs for distribution was argued because of &lt;em&gt;hardware redundancy&lt;/em&gt;. If you want to have &lt;em&gt;fault-tolerant&lt;/em&gt; system, you need at least two computers. You need to provide &lt;em&gt;redundancy&lt;/em&gt; and simply put - &lt;em&gt;two machines are able to handle multiple errors, one machine handles only the first error&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;But, if you have multiple concurrent processes, you need to treat errors differently - classic way of error handling or &lt;em&gt;defensive programming&lt;/em&gt; techniques will not help us here. &lt;em&gt;Erlang’s&lt;/em&gt; famous motto for that situations is &lt;strong&gt;let it crash&lt;/strong&gt;. It does not mean, that we should crash whole &lt;em&gt;VM&lt;/em&gt; in case of error, We need to deal with them in a different way and with different tools - &lt;em&gt;supervisors&lt;/em&gt; with their hierarchies and ability to &lt;em&gt;connect&lt;/em&gt; and &lt;em&gt;observe&lt;/em&gt; other processes. I would like to focus on the second group.&lt;/p&gt;
-
-&lt;h3&gt;&lt;i&gt;Links and Monitors&lt;/i&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Isolation&lt;/em&gt; is a very wise choice when it comes to the reliability, because we can avoid &lt;em&gt;cascading failures&lt;/em&gt;. But, how you will know that something actually failed? Besides &lt;em&gt;isolation&lt;/em&gt;, the very important thing is to have ability to &lt;em&gt;observe&lt;/em&gt; other processes. By connecting two processes together via &lt;em&gt;link&lt;/em&gt;, you are creating the bidirectional bond - if one of them fails, both processes will be killed.&lt;/p&gt;
-
-&lt;section class=&quot;picture-section&quot;&gt;
-  &lt;img class=&quot;half-sized-image&quot; alt=&quot;Links in Erlang&quot; src=&quot;http://learnyousomeerlang.com/static/img/link-exit.png&quot; /&gt;
-  &lt;small&gt;Image shamelessly taken from the amazing book &lt;em&gt;Learn You Some Erlang For Great Good!&lt;/em&gt;&lt;/small&gt;
-&lt;/section&gt;
-
-&lt;p&gt;It sounds useful - you can group processes together with common concerns and bring them down together in case of error. Disabling a link is possible on both sides. But what if we would like to have more granular control on the exiting flow. We can either &lt;em&gt;monitor&lt;/em&gt; a second process or &lt;em&gt;trap exits&lt;/em&gt;. Lets look on the second method at first:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;nb&quot;&gt;process_flag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trap_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;By doing that, process which trap exits will receive an additional message to the mailbox if the linked processes will exit abruptly with an erroneous reason. Also, if the process itself will exit with an error - exit signal will be trapped. Only one type of error, called a &lt;em&gt;&lt;code&gt;kill&lt;/code&gt;&lt;/em&gt; invoked by the process itself, cannot be trapped - you can do it by &lt;code&gt;exit(Pid, kill).&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Besides that you can &lt;em&gt;observe&lt;/em&gt; other processes by setting unidirectional connection called a &lt;em&gt;monitor&lt;/em&gt;. When the monitored process will go down, observer will receive a new message directly to the mailbox. As we said, it is a unidirectional relation, so it can be disabled only by the process that set up that connection earlier.&lt;/p&gt;
-
-&lt;h3 id=&quot;origin&quot;&gt;Origin&lt;/h3&gt;
-
-&lt;p&gt;All of described ideas looks like a very high level concepts, but it is actually the opposite:&lt;/p&gt;
-
-&lt;quote class=&quot;foreign&quot;&gt;Links were invented by Mike Williams and based on the idea of a C-wire (a form of electrical circuit breaker).&lt;/quote&gt;
-
-&lt;p&gt;Idea comes directly from the &lt;em&gt;“C-wire”&lt;/em&gt; in early telephones. In order to cancel a problematic call, you should ground the &lt;em&gt;C-wire&lt;/em&gt;. &lt;em&gt;Electronics&lt;/em&gt; is always a very good place to collect a valuable inspiration regarding the &lt;em&gt;system design&lt;/em&gt; and &lt;em&gt;fault-tolerance&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/errors-and-processes&quot;&gt;Learn You Some Erlang For Great Good! Chapter: Errors and Processes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://erlang.org/pipermail/erlang-questions/2014-June/079885.html&quot;&gt;Erlang Mailing List, Origin of Links&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.erlang-factory.com/upload/presentations/247/erlang_vm_1.pdf&quot;&gt;The Evolution of Erlang VM&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 27 Mar 2015 16:00:00 +0100</pubDate>
-        <link>http://www.afronski.pl/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</guid>
       </item>
     
   </channel>
