@@ -7,6 +7,67 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Seven Languages in Seven Weeks - Scala</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---scala&quot;&gt;Seven Languages in Seven Weeks - Scala&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right scala-logo&quot; alt=&quot;Scala Logo&quot; src=&quot;/assets/ScalaLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I have got a small sentiment for that language. After couple of years working primarily with &lt;em&gt;OOP&lt;/em&gt; languages, I have tried something new. I enrolled into &lt;em&gt;Functional Programming Principles in Scala&lt;/em&gt;. It was a &lt;em&gt;great choice&lt;/em&gt; - the course itself was an amazing experience, I have learned a lot. Basically, it was my first functional language adventure - and I liked it (it may sound strange, but I have not, literally, even a single hour related to that topic during my studies in the college).&lt;/p&gt;
+
+&lt;p&gt;After that experience, I dived deeper into that topic. I have worked with other programming languages, I built more and more projects in that methodology - starting from smaller things to a bigger ones. I have read more and more books related with that topic. And my perspective also changed. In that blog post I would like to focus not on the language features, but some things which I consider, at the same time, the &lt;em&gt;advantages&lt;/em&gt; and &lt;em&gt;curses&lt;/em&gt; of Scala.&lt;/p&gt;
+
+&lt;h3 id=&quot;object-oriented-meets-functional&quot;&gt;“Object-Oriented Meets Functional”&lt;/h3&gt;
+
+&lt;p&gt;As you probably know, &lt;em&gt;Scala&lt;/em&gt; has both paradigms inscribed in its nature. It is easy and approachable for newcomers - it is often described as a &lt;em&gt;hybrid&lt;/em&gt; or a &lt;em&gt;bridge&lt;/em&gt; programming language. Another important advantage is that one related with a platform - it has seamless integration with Java and it brings whole power of JVM to the table.&lt;/p&gt;
+
+&lt;p&gt;The whole problem which I have with that approach is the following - it is really easy to start and employ certain functional constructs in the &lt;em&gt;OOP&lt;/em&gt; world, but in order to start thinking in a purely functional manner you need to drop almost everything related with the conventional and mainstream &lt;em&gt;OOP&lt;/em&gt; (which is - surprise, surprise - &lt;a href=&quot;http://c2.com/cgi/wiki?AlanKaysDefinitionOfObjectOriented&quot;&gt;a broken model&lt;/a&gt;). Is it hard to believe? Try to seek a &lt;em&gt;“truly”&lt;/em&gt; object oriented stuff in &lt;a href=&quot;http://www.manning.com/bjarnason/&quot;&gt;that book&lt;/a&gt; - Good luck with that. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is also impossible to enforce &lt;em&gt;pureness&lt;/em&gt; and e.g. &lt;em&gt;immutability&lt;/em&gt;. It is impossible on the compiler side to do it on the compiler side. It is possible to build another layer on top of that, but it is really hard to develop such safety net with a type system - and most people will consider this rather impractical. So it means, that the all good practices and good features attached to the language can be destroyed by a single decision (often caused by a laziness, pragmatism or convenience). &lt;em&gt;I do not think that it is a good idea&lt;/em&gt; - I would rather go in a &lt;em&gt;“painful”&lt;/em&gt; path with e.g. being immutable from the beginning.&lt;/p&gt;
+
+&lt;h3 id=&quot;feature-bloat&quot;&gt;Feature Bloat&lt;/h3&gt;
+
+&lt;p&gt;Another problem that I have with &lt;em&gt;Scala&lt;/em&gt; it is its size - in terms of &lt;em&gt;features&lt;/em&gt; and ways to &lt;em&gt;do something&lt;/em&gt;. It is really hard to grasp all possible syntactical choices related with various constructs. Core of the language has really strange capabilities - my &lt;em&gt;“favorite”&lt;/em&gt; one is built-in support for &lt;em&gt;XML&lt;/em&gt; (I do not get why it is not defined in a user space, especially that &lt;em&gt;Scala&lt;/em&gt; is well known from its relaxed syntax, which is really nice when it comes to the &lt;em&gt;DSL&lt;/em&gt; creation). Why it does not have a JSON then? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The same thing applies to the &lt;em&gt;operator overloading&lt;/em&gt; (please look at the &lt;em&gt;Scalaz&lt;/em&gt; library - for a person not familiar with that library, code written in that manner is illegible) or different (and &lt;em&gt;strange&lt;/em&gt;) syntactical rules e.g. related with &lt;a href=&quot;https://www.agilelearner.com/presentation/81&quot;&gt;somersault of operands&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;From the other hand &lt;em&gt;Scala&lt;/em&gt; core language features does not have anything related with concurrency besides &lt;code&gt;Future[T]&lt;/code&gt; and &lt;code&gt;promise[T]&lt;/code&gt;. This is really a strange choice, especially looking at the &lt;em&gt;XML&lt;/em&gt; support in the core. And I am not only whining here, because &lt;em&gt;Scala&lt;/em&gt; has also many awesome features - the best ones are &lt;em&gt;Partial Functions&lt;/em&gt; and &lt;em&gt;Traits&lt;/em&gt;. It has also very decent &lt;em&gt;pattern matching&lt;/em&gt; and impressive &lt;em&gt;type inference&lt;/em&gt;. But the core language with libraries size it is definitely too big.&lt;/p&gt;
+
+&lt;h3 id=&quot;jvm-oh-sweet-jvm&quot;&gt;JVM, oh sweet JVM…&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html&quot;&gt;There is no doubt&lt;/a&gt;, Java is still the most popular programming language - it automatically means that the &lt;em&gt;JVM&lt;/em&gt; is very popular, and all languages based on that platform can easily employ that power. &lt;em&gt;Scala&lt;/em&gt; also does that.&lt;/p&gt;
+
+&lt;p&gt;Mentioned popularity is even more visible when it comes to the books. &lt;a href=&quot;https://youtu.be/HLCFJ9hnR1M?t=808&quot;&gt;In 20015, 5 out of 6 books in the functional programming space are about &lt;em&gt;Scala&lt;/em&gt;&lt;/a&gt;. During last 4 years &lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming in Scala&lt;/a&gt; was the most popular book in the functional programming space.&lt;/p&gt;
+
+&lt;p&gt;Basing design of a new language on top of the existing platform can be sometimes &lt;a href=&quot;http://docs.scala-lang.org/overviews/core/value-classes.html&quot;&gt;a constraining path&lt;/a&gt;. The canonical example is &lt;a href=&quot;http://www.scala-lang.org/api/current/#scala.util.control.TailCalls$&quot;&gt;&lt;code&gt;scala.util.control.TailCalls&lt;/code&gt;&lt;/a&gt;. I hope that amount of work related with providing workarounds for &lt;code&gt;JVM&lt;/code&gt; limitations is still smaller than the amount of actual work. And last but not least - tooling. I have nothing against &lt;em&gt;&lt;code&gt;scalac&lt;/code&gt;&lt;/em&gt; or &lt;em&gt;&lt;code&gt;REPL&lt;/code&gt;&lt;/em&gt;, but &lt;code&gt;sbt&lt;/code&gt; - really? Are we still in XXI century, or did I miss something? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; In the ranking of the most obscure programming tools &lt;code&gt;sbt&lt;/code&gt; will be on the podium.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;It does not mean that &lt;em&gt;Scala&lt;/em&gt; is a bad programming language - it has huge minds behind, it has certain merits (even for me - it somehow introduced me to the topic of the &lt;em&gt;functional programming&lt;/em&gt;), but it should provide something more - and by &lt;em&gt;more&lt;/em&gt;, I do not mean more features. Without that it will be just another language on top of &lt;em&gt;JVM&lt;/em&gt;, which brings some of functional concepts to the crowd - and it will stay in that way.&lt;/p&gt;
+
+&lt;p&gt;I think that one of such things that are different and brings real value to the community is the &lt;a href=&quot;http://www.manning.com/bjarnason/&quot;&gt;Functional Programming in Scala&lt;/a&gt; book. It is a masterpiece, I have not read it fully yet, but from the very first chapters I see that it brings thinking about &lt;em&gt;FP&lt;/em&gt; on the different level. &lt;em&gt;This book is definitely recommended for everyone who is interested in functional paradigm&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
+
+&lt;p&gt;In the next blog post we will talk about my favorite programming language, &lt;em&gt;&lt;a href=&quot;http://www.erlang.org&quot;&gt;Erlang&lt;/a&gt;&lt;/em&gt;. It has unique approach to the concurrency, it is a mature and battle-tested platform, which has still active and vibrant community (recently expanded by a fast growing &lt;em&gt;Elixir&lt;/em&gt; community). See you in the next blog post! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.scala-lang.org/&quot;&gt;Scala&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming in Scala, 2nd Edition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 29 Jun 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/06/29/seven-languages-in-seven-weeks-scala.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/06/29/seven-languages-in-seven-weeks-scala.html</guid>
+      </item>
+    
+      <item>
         <title>Interesting Language Features - Erlang IV</title>
         <description>&lt;h1 id=&quot;interesting-language-features---erlang-iv&quot;&gt;Interesting Language Features - Erlang IV&lt;/h1&gt;
 
@@ -791,58 +852,6 @@ UDP Based Echo Service
         <pubDate>Thu, 30 Apr 2015 16:00:00 +0200</pubDate>
         <link>http://www.afronski.pl/2015/04/30/seven-languages-in-seven-weeks-io.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2015/04/30/seven-languages-in-seven-weeks-io.html</guid>
-      </item>
-    
-      <item>
-        <title>Books that changed my career - The Pragmatic Programmer</title>
-        <description>&lt;h1 id=&quot;books-that-changed-my-career---the-pragmatic-programmer&quot;&gt;Books that changed my career - The Pragmatic Programmer&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html#whats-next&quot;&gt;previous post&lt;/a&gt;, I have mentioned that I have this book in three copies - two editions of e-book version (Polish and English) and printed Polish translation. The last one is the most valuable for me, because I have received it as a gift from my colleague during studies, with very nice inscription (after graduating 3rd year, if I recall correctly - Hi Rafał! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
-
-&lt;p&gt;I would like to focus in this post on the actual details, because book is well known in the community. And it definitely deserves its &lt;em&gt;fame&lt;/em&gt; and &lt;em&gt;glory&lt;/em&gt;. It is even more actual, than &lt;em&gt;C Programming Language&lt;/em&gt; by Kernighan and Ritchie. &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue_winking_eye:&quot; alt=&quot;:stuck_out_tongue_winking_eye:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61c.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; Actually it is a huge foundation under the &lt;em&gt;Agile Manifesto&lt;/em&gt; (it was published two years before formalized meeting happened, where the document was signed), moreover - both authors are signatories of that manifesto.&lt;/p&gt;
-
-&lt;h3 class=&quot;center&quot;&gt;&lt;em&gt;The Pragmatic Programmer: From Journeyman to Master&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt=&quot;The Pragmatic Programmer&quot; src=&quot;/assets/PragmaticProgrammer.jpg&quot; class=&quot;book&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;subtitle&quot;&gt;Subtitle&lt;/h3&gt;
-
-&lt;p&gt;Almost each science specialization has its own book, which is required to read before you will start a professional career. If you are an apprentice, you will probably get most of this book, because your mind is fresh and knowledge base is relatively small, especially regarding topics like &lt;em&gt;estimation&lt;/em&gt;, &lt;em&gt;career planning&lt;/em&gt; or &lt;em&gt;teamwork&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;But in this case, even the subtitle suggests that it is a book for all generations of programmers. Of course younger programmers will benefit the most, but not surprisingly, even the more experienced folks can find this book refreshing. Why? Because it is a classic example of knowledge which is &lt;em&gt;universal&lt;/em&gt;, but sometimes &lt;em&gt;not commonly known&lt;/em&gt; or even &lt;em&gt;forgotten&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;universal-truths&quot;&gt;Universal Truths&lt;/h3&gt;
-
-&lt;p&gt;I would like to introduce the most favorite advice and guides from the book.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.artima.com/intv/tracer.html&quot;&gt;Tracer Bullets and Prototypes&lt;/a&gt; - If the second term is well known (maybe even more as a &lt;em&gt;proof of concept&lt;/em&gt;), we often forgot about first one. And that is a huge mistake, because it is highly useful. Moreover, we often want to use the &lt;em&gt;tracer bullets&lt;/em&gt;, but we misuse &lt;em&gt;prototype&lt;/em&gt; instead - building not a &lt;em&gt;walking skeleton&lt;/em&gt;, but a &lt;em&gt;walking dead&lt;/em&gt; project. The main difference is related with the destiny of both - &lt;em&gt;prototype&lt;/em&gt; should be built, conclusions should be gathered and whole project should be thrown out through a window. If we want to build a skeleton and fiddle with the internals, because we do not feel how it should look like right now, we should use a &lt;em&gt;tracer bullet&lt;/em&gt;. And the rules how to build both are different. I encourage you to grab your own copy, look into that chapter and read it out loud (if you do not have one yet - here is a &lt;a href=&quot;https://pragprog.com/book/tpp/the-pragmatic-programmer&quot;&gt;link&lt;/a&gt; to an official shop).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Don%27t_repeat_yourself&quot;&gt;DRY&lt;/a&gt;, &lt;a href=&quot;http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it&quot;&gt;YAGNI&lt;/a&gt; and other acronyms - During my career I ran into these abbreviations many times. And book is full of it - it does not mean that it is something wrong. Our industry is full of it - it builds our internal dictionary and sometimes it adds more meaning. Aforementioned two - &lt;em&gt;DRY&lt;/em&gt; (&lt;em&gt;Don’t Repeat Yourself&lt;/em&gt;) and &lt;em&gt;YAGNI&lt;/em&gt; (&lt;em&gt;You Ain’t Gonna Need It&lt;/em&gt;) are kind of an &lt;em&gt;axioms&lt;/em&gt; which are not negotiable. For a beginner, especially curious one, listening just one word thrown out as an explanation can be infuriating, but eventually we will all learn what it means to violate that rules. In a hard way. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Boiling_frog&quot;&gt;Boiling frog&lt;/a&gt; - Typical metaphor for a problem, which can be observed from the outside, but never from the inside. It affects our health in the long run, it changes our attitude and forms the future career. Sometimes it is more healthier to step out for a while and just listen, observe our/team/project behavior. Practice makes permanent and our little habits can grow to an overwhelming problems in the future.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Bus_factor&quot;&gt;Bus factor&lt;/a&gt; - My personal favorite, mostly because I was once such person and I will not lead to that situation again. I really like the &lt;em&gt;Agile&lt;/em&gt; attitude about cross-functional teams because it helps solve the problem. Your team should be resilient to a situation, when you are losing one person from the team. And you as a &lt;em&gt;responsible&lt;/em&gt; and &lt;em&gt;professional&lt;/em&gt; software engineer should not add anything to such problematic factor.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Rubber_duck_debugging&quot;&gt;Rubber Duck Debugging&lt;/a&gt; - This is probably the most known advice from the book. Mostly because our &lt;a href=&quot;http://www.afronski.pl/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html#why-this-book&quot;&gt;brains works in that way&lt;/a&gt; and probably everyone experienced that feeling in the past. This is the easiest way to enable &lt;em&gt;rich mode&lt;/em&gt; in our brains, because we are switching perspective and way of thinking about the problem. It does not have to be an actual &lt;em&gt;rubber duck&lt;/em&gt;, it can be another person in the office or even a &lt;em&gt;LEGO&lt;/em&gt; minifigure. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Law_of_Demeter&quot;&gt;Law of Demeter&lt;/a&gt; - This the most underestimated law from that book. Someone said that it is applicable to the &lt;em&gt;OOP&lt;/em&gt; only, but &lt;a href=&quot;http://c2.com/cgi/wiki?LawOfDemeterRevisited&quot;&gt;it is not true&lt;/a&gt;. Violations of that rule results in many different forms, the lightest and most famous one is probably a &lt;a href=&quot;http://c2.com/cgi/wiki?TrainWreck&quot;&gt;train wreck&lt;/a&gt;. I strongly recommend to read this chapter again, mindfully - try to make notes or rethink it in the back of your head. It really helps to understand and shed new light on the meaning.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And what is your favorite advice from that book? Please, share your choice and explanation in the comments below.&lt;/p&gt;
-
-&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
-
-&lt;p&gt;I would like to cover another classical position on my bookshelf, which is very underestimated by the community. Recently, it receives proper respect, even the &lt;a href=&quot;https://twitter.com/unclebobmartin&quot;&gt;Uncle Bob&lt;/a&gt; recommends to read it. Book covers functional programming in an &lt;em&gt;exotic&lt;/em&gt; language, but each &lt;em&gt;MIT&lt;/em&gt; freshman have to read it and they can do it easily. It is possible thanks to the three brilliant authors who created a very comprehensible and timeless book (which is, in my opinion, even more actual now). Stay tuned to the next post!&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/tpp/the-pragmatic-programmer&quot;&gt;The Pragmatic Programmer, The Pragmatic Bookshelf&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 12 Apr 2015 16:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/2015/04/12/books-that-changed-my-career-the-pragmatic-programmer.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2015/04/12/books-that-changed-my-career-the-pragmatic-programmer.html</guid>
       </item>
     
   </channel>

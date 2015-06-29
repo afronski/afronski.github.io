@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>Seven Languages in Seven Weeks - Scala</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="seven-languages-in-seven-weeks---scala">Seven Languages in Seven Weeks - Scala</h1>
+
+<quote class="disclaimer">This blog post is a next article from series related with books "Seven Languages in Seven Weeks" and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!</quote>
+
+<h3 id="introduction">Introduction</h3>
+
+<p><img class="right scala-logo" alt="Scala Logo" src="/assets/ScalaLogo.png" /></p>
+
+<p>I have got a small sentiment for that language. After couple of years working primarily with <em>OOP</em> languages, I have tried something new. I enrolled into <em>Functional Programming Principles in Scala</em>. It was a <em>great choice</em> - the course itself was an amazing experience, I have learned a lot. Basically, it was my first functional language adventure - and I liked it (it may sound strange, but I have not, literally, even a single hour related to that topic during my studies in the college).</p>
+
+<p>After that experience, I dived deeper into that topic. I have worked with other programming languages, I built more and more projects in that methodology - starting from smaller things to a bigger ones. I have read more and more books related with that topic. And my perspective also changed. In that blog post I would like to focus not on the language features, but some things which I consider, at the same time, the <em>advantages</em> and <em>curses</em> of Scala.</p>
+
+<h3 id="object-oriented-meets-functional">“Object-Oriented Meets Functional”</h3>
+
+<p>As you probably know, <em>Scala</em> has both paradigms inscribed in its nature. It is easy and approachable for newcomers - it is often described as a <em>hybrid</em> or a <em>bridge</em> programming language. Another important advantage is that one related with a platform - it has seamless integration with Java and it brings whole power of JVM to the table.</p>
+
+<p>The whole problem which I have with that approach is the following - it is really easy to start and employ certain functional constructs in the <em>OOP</em> world, but in order to start thinking in a purely functional manner you need to drop almost everything related with the conventional and mainstream <em>OOP</em> (which is - surprise, surprise - <a href="http://c2.com/cgi/wiki?AlanKaysDefinitionOfObjectOriented">a broken model</a>). Is it hard to believe? Try to seek a <em>“truly”</em> object oriented stuff in <a href="http://www.manning.com/bjarnason/">that book</a> - Good luck with that. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+
+<p>It is also impossible to enforce <em>pureness</em> and e.g. <em>immutability</em>. It is impossible on the compiler side to do it on the compiler side. It is possible to build another layer on top of that, but it is really hard to develop such safety net with a type system - and most people will consider this rather impractical. So it means, that the all good practices and good features attached to the language can be destroyed by a single decision (often caused by a laziness, pragmatism or convenience). <em>I do not think that it is a good idea</em> - I would rather go in a <em>“painful”</em> path with e.g. being immutable from the beginning.</p>
+
+<h3 id="feature-bloat">Feature Bloat</h3>
+
+<p>Another problem that I have with <em>Scala</em> it is its size - in terms of <em>features</em> and ways to <em>do something</em>. It is really hard to grasp all possible syntactical choices related with various constructs. Core of the language has really strange capabilities - my <em>“favorite”</em> one is built-in support for <em>XML</em> (I do not get why it is not defined in a user space, especially that <em>Scala</em> is well known from its relaxed syntax, which is really nice when it comes to the <em>DSL</em> creation). Why it does not have a JSON then? <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+
+<p>The same thing applies to the <em>operator overloading</em> (please look at the <em>Scalaz</em> library - for a person not familiar with that library, code written in that manner is illegible) or different (and <em>strange</em>) syntactical rules e.g. related with <a href="https://www.agilelearner.com/presentation/81">somersault of operands</a>.</p>
+
+<p>From the other hand <em>Scala</em> core language features does not have anything related with concurrency besides <code>Future[T]</code> and <code>promise[T]</code>. This is really a strange choice, especially looking at the <em>XML</em> support in the core. And I am not only whining here, because <em>Scala</em> has also many awesome features - the best ones are <em>Partial Functions</em> and <em>Traits</em>. It has also very decent <em>pattern matching</em> and impressive <em>type inference</em>. But the core language with libraries size it is definitely too big.</p>
+
+<h3 id="jvm-oh-sweet-jvm">JVM, oh sweet JVM…</h3>
+
+<p><a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html">There is no doubt</a>, Java is still the most popular programming language - it automatically means that the <em>JVM</em> is very popular, and all languages based on that platform can easily employ that power. <em>Scala</em> also does that.</p>
+
+<p>Mentioned popularity is even more visible when it comes to the books. <a href="https://youtu.be/HLCFJ9hnR1M?t=808">In 20015, 5 out of 6 books in the functional programming space are about <em>Scala</em></a>. During last 4 years <a href="http://www.artima.com/shop/programming_in_scala_2ed">Programming in Scala</a> was the most popular book in the functional programming space.</p>
+
+<p>Basing design of a new language on top of the existing platform can be sometimes <a href="http://docs.scala-lang.org/overviews/core/value-classes.html">a constraining path</a>. The canonical example is <a href="http://www.scala-lang.org/api/current/#scala.util.control.TailCalls$"><code>scala.util.control.TailCalls</code></a>. I hope that amount of work related with providing workarounds for <code>JVM</code> limitations is still smaller than the amount of actual work. And last but not least - tooling. I have nothing against <em><code>scalac</code></em> or <em><code>REPL</code></em>, but <code>sbt</code> - really? Are we still in XXI century, or did I miss something? <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /> In the ranking of the most obscure programming tools <code>sbt</code> will be on the podium.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>It does not mean that <em>Scala</em> is a bad programming language - it has huge minds behind, it has certain merits (even for me - it somehow introduced me to the topic of the <em>functional programming</em>), but it should provide something more - and by <em>more</em>, I do not mean more features. Without that it will be just another language on top of <em>JVM</em>, which brings some of functional concepts to the crowd - and it will stay in that way.</p>
+
+<p>I think that one of such things that are different and brings real value to the community is the <a href="http://www.manning.com/bjarnason/">Functional Programming in Scala</a> book. It is a masterpiece, I have not read it fully yet, but from the very first chapters I see that it brings thinking about <em>FP</em> on the different level. <em>This book is definitely recommended for everyone who is interested in functional paradigm</em>.</p>
+
+<h3 id="what-is-next">What is next?</h3>
+
+<p>In the next blog post we will talk about my favorite programming language, <em><a href="http://www.erlang.org">Erlang</a></em>. It has unique approach to the concurrency, it is a mature and battle-tested platform, which has still active and vibrant community (recently expanded by a fast growing <em>Elixir</em> community). See you in the next blog post! <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li><a href="http://www.scala-lang.org/">Scala</a></li>
+  <li><a href="http://www.artima.com/shop/programming_in_scala_2ed">Programming in Scala, 2nd Edition</a></li>
+  <li><a href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks">Seven Languages in Seven Weeks</a>, <em>Bruce A. Tate</em></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/2015/06/29/seven-languages-in-seven-weeks-scala.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2015/06/29/seven-languages-in-seven-weeks-scala.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <footer>
+        <section>© Copyright 2014, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>
