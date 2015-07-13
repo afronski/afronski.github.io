@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>Seven Languages in Seven Weeks - Erlang</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="seven-languages-in-seven-weeks---erlang">Seven Languages in Seven Weeks - Erlang</h1>
+
+<quote class="disclaimer">This blog post is a next article from series related with book "Seven Languages in Seven Weeks" and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!</quote>
+
+<h3 id="introduction">Introduction</h3>
+
+<p><img class="right erlang-logo" alt="Erlang Logo" src="/assets/ErlangLogo.png" /></p>
+
+<p>If you did not sleep under a rock in the past 30 years or this post is not a first one which you have read on this blog, you are probably familiar what <em>Erlang</em> is and which features are making it uniquely suited in certain class of applications. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+
+<p>I do not want to cover any interesting language features, because I have already written <a href="http://www.afronski.pl/2015/03/10/interesting-language-features-erlang-named-case-expressions.html">several</a> <a href="http://www.afronski.pl/2015/03/27/interesting-language-features-erlang-links-and-monitors.html">posts</a> <a href="http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html">about</a> <a href="http://www.afronski.pl/2015/06/11/interesting-language-features-erlang-custom-behaviors.html">that</a>. Instead, I would like to introduce to you a small story about origin of the <em>actor model</em> in that particular case.</p>
+
+<h3 id="a-small-story-about-the-actor-model-in-erlang">A small story about the <em>actor model</em> in <em>Erlang</em></h3>
+
+<p>The easiest way to start, will be to introduce definition directly from <em>Wikipedia</em>:</p>
+
+<quote class="citation">The actor model in computer science is a mathematical model of concurrent computation that treats "actors" as the universal primitives of concurrent computation: in response to a message that it receives, an actor can make local decisions, create more actors, send more messages, and determine how to respond to the next message received. The actor model originated in 1973. It has been used both as a framework for a theoretical understanding of computation and as the theoretical basis for several practical implementations of concurrent systems. The relationship of the model to other work is discussed in Indeterminacy in concurrent computation and Actor model and process calculi.</quote>
+
+<p>More or less at the same time, Erlang was created - with similar concepts inside. At first sight it looks like an industrial implementation of academic theory. However, creators did not call that an <em>actor model</em>, but all features are reflecting that idea pretty much entirely - core of this idea is a lightweight processes implementation, which use message passing for communication between them and complete isolation from each other.</p>
+
+<p>It may sound as an impossible and strange coincidence, but that implementation <strong>was not inspired by work of Hewitt, Bishop and Steiger at all</strong>. As <a href="https://twitter.com/rvirding">Robert Virding</a> said <a href="http://rvirding.blogspot.com/2008/01/virdings-first-rule-of-programming.html?showComment=1400761539472#c5295780053912797163">here</a>:</p>
+
+<quote class="citation">No, we didn't as such "invent" them, but at the same time we didn't take them from anywhere either. We arrived at these properties on our own as the best ways of solving our problems. We never heard about actors till years later.</quote>
+
+<p>It means that <em>actor model</em> has a solid industrial motivation and inspiration in the Telecommunication domain. Looking at this from a different perspective - it is how the phone calls are working at the highest conceptual level (also you can easily find analogies to that process in nature and biology). They have arrived to the same properties on their own, distilling and solving the domain problems over and over again - in complete isolation from the academic theory, as a best fit for set of their problems. I am convinced that this model is a valuable thing by that, because it means that at least two sets of people came up with same idea which is a perfect fit for handling certain class of problems related with concurrent operations.</p>
+
+<h3 id="what-is-next">What is next?</h3>
+
+<p>We are heading inevitably to the end of first book - following blog posts in that series will cover two last programming languages - <em>Clojure</em> and <em>Haskell</em>. After that, we will have a short break, for one or two blog posts about other languages which are not covered in neither both aforementioned books. Then, we will start again with first language described in the sequel <a href="https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks"><em>Seven More Languages in Seven Weeks</em></a>. See you next time then! <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Actor_model">Actor Model - Wikipedia</a></li>
+  <li><a href="http://worrydream.com/refs/Hewitt-ActorModel.pdf">A Universal Modular Actor Formalism for Artificial Intelligence - Hewitt, Bishop, Steiger</a></li>
+  <li><a href="http://www.erlang.org/">Erlang - Official Website</a></li>
+  <li><a href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks">Seven Languages in Seven Weeks</a>, <em>Bruce A. Tate</em></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/2015/07/13/seven-languages-in-seven-weeks-erlang.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2015/07/13/seven-languages-in-seven-weeks-erlang.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <footer>
+        <section>© Copyright 2014, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>

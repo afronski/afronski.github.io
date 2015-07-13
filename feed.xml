@@ -7,6 +7,52 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Seven Languages in Seven Weeks - Erlang</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---erlang&quot;&gt;Seven Languages in Seven Weeks - Erlang&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with book &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right erlang-logo&quot; alt=&quot;Erlang Logo&quot; src=&quot;/assets/ErlangLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you did not sleep under a rock in the past 30 years or this post is not a first one which you have read on this blog, you are probably familiar what &lt;em&gt;Erlang&lt;/em&gt; is and which features are making it uniquely suited in certain class of applications. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I do not want to cover any interesting language features, because I have already written &lt;a href=&quot;http://www.afronski.pl/2015/03/10/interesting-language-features-erlang-named-case-expressions.html&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/2015/03/27/interesting-language-features-erlang-links-and-monitors.html&quot;&gt;posts&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/2015/06/11/interesting-language-features-erlang-custom-behaviors.html&quot;&gt;that&lt;/a&gt;. Instead, I would like to introduce to you a small story about origin of the &lt;em&gt;actor model&lt;/em&gt; in that particular case.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-small-story-about-the-actor-model-in-erlang&quot;&gt;A small story about the &lt;em&gt;actor model&lt;/em&gt; in &lt;em&gt;Erlang&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;The easiest way to start, will be to introduce definition directly from &lt;em&gt;Wikipedia&lt;/em&gt;:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;The actor model in computer science is a mathematical model of concurrent computation that treats &quot;actors&quot; as the universal primitives of concurrent computation: in response to a message that it receives, an actor can make local decisions, create more actors, send more messages, and determine how to respond to the next message received. The actor model originated in 1973. It has been used both as a framework for a theoretical understanding of computation and as the theoretical basis for several practical implementations of concurrent systems. The relationship of the model to other work is discussed in Indeterminacy in concurrent computation and Actor model and process calculi.&lt;/quote&gt;
+
+&lt;p&gt;More or less at the same time, Erlang was created - with similar concepts inside. At first sight it looks like an industrial implementation of academic theory. However, creators did not call that an &lt;em&gt;actor model&lt;/em&gt;, but all features are reflecting that idea pretty much entirely - core of this idea is a lightweight processes implementation, which use message passing for communication between them and complete isolation from each other.&lt;/p&gt;
+
+&lt;p&gt;It may sound as an impossible and strange coincidence, but that implementation &lt;strong&gt;was not inspired by work of Hewitt, Bishop and Steiger at all&lt;/strong&gt;. As &lt;a href=&quot;https://twitter.com/rvirding&quot;&gt;Robert Virding&lt;/a&gt; said &lt;a href=&quot;http://rvirding.blogspot.com/2008/01/virdings-first-rule-of-programming.html?showComment=1400761539472#c5295780053912797163&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;No, we didn't as such &quot;invent&quot; them, but at the same time we didn't take them from anywhere either. We arrived at these properties on our own as the best ways of solving our problems. We never heard about actors till years later.&lt;/quote&gt;
+
+&lt;p&gt;It means that &lt;em&gt;actor model&lt;/em&gt; has a solid industrial motivation and inspiration in the Telecommunication domain. Looking at this from a different perspective - it is how the phone calls are working at the highest conceptual level (also you can easily find analogies to that process in nature and biology). They have arrived to the same properties on their own, distilling and solving the domain problems over and over again - in complete isolation from the academic theory, as a best fit for set of their problems. I am convinced that this model is a valuable thing by that, because it means that at least two sets of people came up with same idea which is a perfect fit for handling certain class of problems related with concurrent operations.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
+
+&lt;p&gt;We are heading inevitably to the end of first book - following blog posts in that series will cover two last programming languages - &lt;em&gt;Clojure&lt;/em&gt; and &lt;em&gt;Haskell&lt;/em&gt;. After that, we will have a short break, for one or two blog posts about other languages which are not covered in neither both aforementioned books. Then, we will start again with first language described in the sequel &lt;a href=&quot;https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks&quot;&gt;&lt;em&gt;Seven More Languages in Seven Weeks&lt;/em&gt;&lt;/a&gt;. See you next time then! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Actor_model&quot;&gt;Actor Model - Wikipedia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://worrydream.com/refs/Hewitt-ActorModel.pdf&quot;&gt;A Universal Modular Actor Formalism for Artificial Intelligence - Hewitt, Bishop, Steiger&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang.org/&quot;&gt;Erlang - Official Website&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 13 Jul 2015 18:15:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/07/13/seven-languages-in-seven-weeks-erlang.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/07/13/seven-languages-in-seven-weeks-erlang.html</guid>
+      </item>
+    
+      <item>
         <title>Books that changed my career - Learn You Some Erlang For Great Good!</title>
         <description>&lt;h1 id=&quot;books-that-changed-my-career---learn-you-some-erlang-for-great-good&quot;&gt;Books that changed my career - Learn You Some Erlang For Great Good!&lt;/h1&gt;
 
@@ -700,54 +746,6 @@ UDP Based Echo Service
         <pubDate>Thu, 14 May 2015 16:00:00 +0200</pubDate>
         <link>http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html</guid>
-      </item>
-    
-      <item>
-        <title>Elixir Conf EU 2015 - Afterthoughts</title>
-        <description>&lt;h1 id=&quot;elixir-conf-eu-2015---afterthoughts&quot;&gt;Elixir Conf EU 2015 - Afterthoughts&lt;/h1&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/2015/04/06/the-best-of-lambda-days.html&quot;&gt;previous post&lt;/a&gt; about interesting events, I have said that more of them will come in future. I have participated in one of these - &lt;em&gt;ElixirConf EU&lt;/em&gt; in Kraków and I must admit - it was the best conference I have ever been since &lt;a href=&quot;http://lanyrd.com/2011/falsy-values/&quot;&gt;Falsy Values in 2011&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;It was the second in the world conference about &lt;em&gt;Elixir&lt;/em&gt; programming language, it brings almost 200 people interested in that topic to the former Polish capital. Most of people was either from &lt;em&gt;Ruby&lt;/em&gt; or &lt;em&gt;Erlang&lt;/em&gt; side and I think that such mixture is a &lt;em&gt;key thing&lt;/em&gt; related to the &lt;em&gt;joy&lt;/em&gt; and &lt;em&gt;success&lt;/em&gt; of that event.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ElixirConfEU2015Header.png&quot; alt=&quot;Elixir Conf EU 2015&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;talks-and-workshops&quot;&gt;Talks and Workshops&lt;/h3&gt;
-
-&lt;p&gt;At a day before actual conference organizers prepared two workshops - one about &lt;em&gt;Phoenix&lt;/em&gt; framework and one about &lt;em&gt;OTP and Elixir&lt;/em&gt;. I have participated in the second one - it was a really nice experience. Workshop was full of knowledge, I have met interesting people, with very positive attitude, whom are willing to network and share their experiences. &lt;/p&gt;
-
-&lt;p&gt;Actual conference days was started and ended with very nice keynotes - each of them was a different experience. We have very nice and thoughtful keynote from Joe Armstrong, which explains many problems related to the programming language design, from the perspective of &lt;em&gt;Elixir’s&lt;/em&gt; older brother - &lt;em&gt;Erlang&lt;/em&gt;. Jose Valim presented bright future and interesting details related with &lt;em&gt;Elixir&lt;/em&gt; evolution, and finally Chris had a very nice overview and development plans related with &lt;em&gt;Phoenix&lt;/em&gt; framework.&lt;/p&gt;
-
-&lt;p&gt;But, I was also impressed by other talks. It was very interesting to see many use cases in which people used that piece of technology. I think that both groups have many valuable opinions and observations. For me, talks made by people with &lt;em&gt;Erlang&lt;/em&gt; experience were particularly valuable, because they are coming from more mature technology. It is a different background and experiences.&lt;/p&gt;
-
-&lt;h3 id=&quot;atmosphere&quot;&gt;Atmosphere&lt;/h3&gt;
-
-&lt;p&gt;I would like to focus on one particular element, which makes this conference so enjoyable - &lt;em&gt;people&lt;/em&gt;. I have never met so many &lt;em&gt;nice&lt;/em&gt; and &lt;em&gt;friendly&lt;/em&gt; people. I have wonderful time during networking, countless talks during breaks or lunches. And to sum it up - during lightning talks &lt;em&gt;Jose Valim&lt;/em&gt; and &lt;em&gt;Jim Freeze&lt;/em&gt; received a &lt;em&gt;3D printed Elixir logo&lt;/em&gt; designed in the &lt;a href=&quot;http://hrobeers.github.io/finFoil/&quot;&gt;finFoil&lt;/a&gt; software made by &lt;a href=&quot;https://twitter.com/hrobeers&quot;&gt;@hrobeers&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Amazing community!&lt;/p&gt;
-
-&lt;div class=&quot;center-tweet&quot;&gt;
-  &lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;&lt;a href=&quot;https://twitter.com/ElixirConfEU&quot;&gt;@ElixirConfEU&lt;/a&gt; Thanks for the great conference. My lightning talk including the Elixir 3D file: &lt;a href=&quot;http://t.co/m06YLIwA5h&quot;&gt;http://t.co/m06YLIwA5h&lt;/a&gt; &lt;a href=&quot;http://t.co/0VJa9SDN02&quot;&gt;pic.twitter.com/0VJa9SDN02&lt;/a&gt;&lt;/p&gt;&amp;mdash; Hans Robeers (@hrobeers) &lt;a href=&quot;https://twitter.com/hrobeers/status/591794764351197184&quot;&gt;April 25, 2015&lt;/a&gt;&lt;/blockquote&gt;&lt;script async=&quot;&quot; src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
-
-&lt;p&gt;It was a very good choice to invest my time and money in that event. Three days full of &lt;em&gt;energy&lt;/em&gt;, &lt;em&gt;knowledge&lt;/em&gt; and &lt;em&gt;experience&lt;/em&gt; sharing. As a community we have interesting perspectives. We can derive from very experienced and stable &lt;em&gt;Erlang&lt;/em&gt; ecosystem. We have a very nice and promising community, full of amazing and creative people. I will go definitely to the next &lt;em&gt;ElixirConf EU 2016&lt;/em&gt; which take place in Berlin.&lt;/p&gt;
-
-&lt;p&gt;See you there! &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://twitter.com/hrobeers/status/591794764351197184&quot;&gt;Lightning talks and their effect, done by @hrobeers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.elixirconf.eu/&quot;&gt;Elixir Conf EU 2015&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 07 May 2015 16:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/2015/05/07/elixir-conf-eu-2015-afterthoughts.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2015/05/07/elixir-conf-eu-2015-afterthoughts.html</guid>
       </item>
     
   </channel>
