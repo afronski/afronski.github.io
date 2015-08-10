@@ -4,7 +4,7 @@
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.afronski.pl/2015/08/07/sicp-in-clojure-chapter-2.html</loc>
+    <loc>http://www.afronski.pl/sicp-in-clojure/2015/08/07/sicp-in-clojure-chapter-2.html</loc>
     
     <lastmod>2015-08-07T16:00:00+02:00</lastmod>
     
@@ -13,7 +13,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/07/13/seven-languages-in-seven-weeks-erlang.html</loc>
+    <loc>http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</loc>
     
     <lastmod>2015-07-13T18:15:00+02:00</lastmod>
     
@@ -22,7 +22,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</loc>
+    <loc>http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</loc>
     
     <lastmod>2015-07-06T16:00:00+02:00</lastmod>
     
@@ -31,7 +31,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/06/29/seven-languages-in-seven-weeks-scala.html</loc>
+    <loc>http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html</loc>
     
     <lastmod>2015-06-29T16:00:00+02:00</lastmod>
     
@@ -40,7 +40,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</loc>
+    <loc>http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</loc>
     
     <lastmod>2015-06-11T16:00:00+02:00</lastmod>
     
@@ -49,7 +49,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/06/04/sicp-in-clojure-chapter-1.html</loc>
+    <loc>http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html</loc>
     
     <lastmod>2015-06-04T11:00:00+02:00</lastmod>
     
@@ -58,7 +58,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html</loc>
+    <loc>http://www.afronski.pl/books-that-changed-my-career/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html</loc>
     
     <lastmod>2015-06-01T16:00:00+02:00</lastmod>
     
@@ -76,7 +76,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/05/24/seven-languages-in-seven-weeks-prolog.html</loc>
+    <loc>http://www.afronski.pl/7-languages-in-7-weeks/2015/05/24/seven-languages-in-seven-weeks-prolog.html</loc>
     
     <lastmod>2015-05-24T22:00:00+02:00</lastmod>
     
@@ -94,7 +94,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html</loc>
+    <loc>http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html</loc>
     
     <lastmod>2015-05-14T16:00:00+02:00</lastmod>
     
@@ -112,7 +112,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/04/30/seven-languages-in-seven-weeks-io.html</loc>
+    <loc>http://www.afronski.pl/7-languages-in-7-weeks/2015/04/30/seven-languages-in-seven-weeks-io.html</loc>
     
     <lastmod>2015-04-30T16:00:00+02:00</lastmod>
     
@@ -121,7 +121,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/04/12/books-that-changed-my-career-the-pragmatic-programmer.html</loc>
+    <loc>http://www.afronski.pl/books-that-changed-my-career/2015/04/12/books-that-changed-my-career-the-pragmatic-programmer.html</loc>
     
     <lastmod>2015-04-12T16:00:00+02:00</lastmod>
     
@@ -139,7 +139,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</loc>
+    <loc>http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</loc>
     
     <lastmod>2015-03-27T16:00:00+01:00</lastmod>
     
@@ -148,7 +148,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/03/20/seven-languages-in-seven-weeks-ruby.html</loc>
+    <loc>http://www.afronski.pl/7-languages-in-7-weeks/2015/03/20/seven-languages-in-seven-weeks-ruby.html</loc>
     
     <lastmod>2015-03-20T16:00:00+01:00</lastmod>
     
@@ -157,7 +157,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/03/10/interesting-language-features-erlang-named-case-expressions.html</loc>
+    <loc>http://www.afronski.pl/interesting-language-features/2015/03/10/interesting-language-features-erlang-named-case-expressions.html</loc>
     
     <lastmod>2015-03-10T16:00:00+01:00</lastmod>
     
@@ -166,7 +166,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html</loc>
+    <loc>http://www.afronski.pl/books-that-changed-my-career/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html</loc>
     
     <lastmod>2015-03-07T16:00:00+01:00</lastmod>
     
@@ -175,7 +175,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2015/02/22/books-that-changed-my-career-introduction.html</loc>
+    <loc>http://www.afronski.pl/books-that-changed-my-career/2015/02/22/books-that-changed-my-career-introduction.html</loc>
     
     <lastmod>2015-02-22T22:30:00+01:00</lastmod>
     
@@ -247,7 +247,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2014/04/13/useful-tools-mailcatcher.html</loc>
+    <loc>http://www.afronski.pl/useful-tools/2014/04/13/useful-tools-mailcatcher.html</loc>
     
     <lastmod>2014-04-13T14:00:00+02:00</lastmod>
     
@@ -265,7 +265,7 @@
   </url>
   
   <url>
-    <loc>http://www.afronski.pl/2014/02/04/ssh2-nodejs-module-of-the-week.html</loc>
+    <loc>http://www.afronski.pl/nodejs-module-of-the-week/2014/02/04/ssh2-nodejs-module-of-the-week.html</loc>
     
     <lastmod>2014-02-04T22:00:00+01:00</lastmod>
     
@@ -376,9 +376,18 @@
     
   <url>
     <loc>http://www.afronski.pl/about.html</loc>
-    <lastmod>2015-07-06T16:00:00+02:00</lastmod>
+    <lastmod>2015-08-10T22:00:00+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+    
+  
+    
+  <url>
+    <loc>http://www.afronski.pl/categories.html</loc>
+    <lastmod>2015-08-10T22:00:00+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
     
   
@@ -387,10 +396,153 @@
     
   <url>
     <loc>http://www.afronski.pl/index.html</loc>
-    <lastmod>2015-08-07T16:00:00+02:00</lastmod>
+    <lastmod>2015-08-10T22:00:00+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+    
+  
+    
+  
+    
+  <url>
+    <loc>http://www.afronski.pl/tags.html</loc>
+    <lastmod>2015-08-10T22:00:00+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
     
   
     

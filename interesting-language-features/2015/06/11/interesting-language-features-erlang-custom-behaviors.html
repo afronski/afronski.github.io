@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>Interesting Language Features - Erlang IV</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="interesting-language-features---erlang-iv">Interesting Language Features - Erlang IV</h1>
+
+<quote class="disclaimer">This blog post is a next article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.</quote>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>In the <a href="http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html">previous blog post</a> we talked about <em>behaviors</em>, in particular about <em>application</em> behavior. It is a primary way of reusing common abstractions.</p>
+
+<p>It may look limiting at the first sight that we have only couple of them available by default. But fortunately, we are not limited only to the abstractions prepared by the <em>OTP</em> team. <em>We can easily create new ones</em> - and many <em>Erlang</em> teams willingly takes that opportunity. In this blog post I would like to show you various abstractions hidden inside RabbitMQ.</p>
+
+<h3 id="what-is-rabbitmq">What is <em>RabbitMQ</em>?</h3>
+
+<p><img class="right rabbitmq-logo" alt="RabbitMQ Logo" src="/assets/RabbitMQ.png" /></p>
+
+<p>It is a robust, easy to use message broker ready to use with your applications - it can be a <em>communication backbone</em> for your system. It supports multiple protocols by default - <em>AMQP</em>, <em>MQTT</em> and <em>STOMP</em>. Also, it has various client libraries for many programming languages - you can integrate with it from almost any kind of environment. The main idea behind it is pretty simple - it accepts and forwards messages. You can think about it as an any abstraction related with letters and messaging e.g. post office - when you send mail to the post box you are pretty sure that postman will eventually deliver it to your recipient. Using this metaphor <em>RabbitMQ</em> is a post box, a <em>post office</em> and a <em>postman</em> in one thing. If you want to get familiar with this tool, you should start with <a href="https://www.rabbitmq.com/getstarted.html">this article</a>.</p>
+
+<p><em>RabbitMQ</em> is written in <em>Erlang</em> and it is a base for its reliability and concurrency features. Also, thanks to built-in distribution it is much easier to implement custom mechanisms, even if they are using different thing than standard <em>Erlang</em> distribution to handle that problem. As you probably know, in <em>Erlang</em>, <em>behaviors</em> are the main mechanism for providing reusable abstractions - we can easily use that ones prepared by an <em>OTP</em> team like <code>supervisor</code>, <code>application</code> or <code>gen_server</code>.</p>
+
+<p>But, as we said in the introduction, we are not limited only to the prepared ones. <em>We can create our own behaviors</em>.</p>
+
+<h3 id="how-we-can-create-a-custom-behavior">How we can create a <em>custom behavior</em>?</h3>
+
+<p>To create your own behavior, you must make a module that exports a function <code>behaviour_info/1</code>. Note, that while Erlang is <em>American-English-friendly</em> in regards to declaring behaviors, it is not as friendly when you are defining them. For example, you can use either <code>-behavior(gen_server).</code> or <code>-behaviour(gen_server).</code> when you declare you module implements the <code>gen_server</code> behavior, but if you name the <code>behaviour_info/1</code> function without the <em>‘u’</em> it will not work.</p>
+
+<p><code>behaviour_info/1</code> just needs to return the list of required exports of an implementation. Here’s an example:</p>
+
+<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno">1</span> <span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">gen_foo</span><span class="p">).</span>
+<span class="lineno">2</span> <span class="p">-</span><span class="ni">export</span><span class="p">([</span> <span class="n">behaviour_info</span><span class="o">/</span><span class="mi">1</span> <span class="p">]).</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="nf">behaviour_info</span><span class="p">(</span><span class="n">callbacks</span><span class="p">)</span> <span class="o">-&gt;</span>
+<span class="lineno">5</span>   <span class="p">[</span> <span class="p">{</span><span class="n">foo</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="n">bar</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="n">baz</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="p">];</span>
+<span class="lineno">6</span> 
+<span class="lineno">7</span> <span class="nf">behavior_info</span><span class="p">(_)</span> <span class="o">-&gt;</span>
+<span class="lineno">8</span>     <span class="n">undefined</span><span class="p">.</span></code></pre></div>
+
+<p>This declares three callbacks for the <code>gen_foo</code> behavior: <code>foo/0</code>, <code>bar/1</code>, and <code>baz/2</code>. Function simply returns an array of <em>two elements tuples</em> with the function name andan arity.</p>
+
+<p>When a module declares that it implements <code>gen_foo</code> now, the Erlang compiler will check to make sure it exports and implements the required callbacks, and it will print warnings if this is not the case:</p>
+
+<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno">1</span> <span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">fooer</span><span class="p">).</span>
+<span class="lineno">2</span> <span class="p">-</span><span class="ni">behavior</span><span class="p">(</span><span class="n">gen_foo</span><span class="p">).</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="p">-</span><span class="ni">export</span><span class="p">([</span> <span class="n">foo</span><span class="o">/</span><span class="mi">0</span><span class="p">,</span> <span class="n">bar</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span> <span class="n">baz</span><span class="o">/</span><span class="mi">2</span> <span class="p">]).</span>
+<span class="lineno">5</span> 
+<span class="lineno">6</span> <span class="nf">foo</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">foo</span><span class="p">.</span>
+<span class="lineno">7</span> <span class="nf">bar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="n">bar</span><span class="p">,</span> <span class="n">a</span><span class="p">}.</span>
+<span class="lineno">8</span> <span class="nf">baz</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="n">baz</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">}.</span></code></pre></div>
+
+<p>You can also use tools like <em>Dialyzer</em> and <em>Typer</em> - with prepared type specifications, you can easily verify that the new behavior is used properly (according to the specification) and that there are no type errors which can be caught due to <em>static code analysis</em>.</p>
+
+<h3 id="custom-behaviors-available-inside-rabbitmq">Custom behaviors available inside <em>RabbitMQ</em></h3>
+
+<p>In RabbitMQ we have implemented several routing algorithms in the form of <em>exchanges</em> (let’s call them the <em>gateways</em> by which messages are coming to the system). We can say that each exchange has a specific type. By default <em>RabbitMQ</em> has four exchanges: <em>direct</em>, <em>fanout</em>, <em>topic</em> and <em>headers</em>. But also, it allows the user to add new exchange types via plugins.</p>
+
+<p>User, which will provide new exchange type needs to implement the <code>rabbit_exchange_type</code> behaviour. Similar pattern can be applied to the <code>rabbitmq_backing_queue</code> which is responsible for various techniques related with backing stores and e.g. persistent queues. Aforementioned abstractions have pretty simple implementation - most of the module code is related with type specifications used for the verification. More complicated behaviors are mirroring and enhancing the standard ones - inside <em>RabbitMQ</em> maintainers implemented <code>supervisor2</code> and <code>gen_server2</code> - code is really long and complex, because those behaviors need to mirror the original implementations, and also should have additional features.</p>
+
+<p>If you have already some experience with <em>Erlang</em> I recommend you to dive into the implementation of two mentioned behaviors (and look at the originals as well - comments are really helpful). And by that, I would like to finish that blog post - in the next one, we will switch the language - now it is time to look into a different place to search for an interesting feature. Stay tuned! <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /> </p>
+
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li><a href="http://www.slideshare.net/old_sound/dissecting-the-rabbit">Dissecting the rabbit: RabbitMQ Internal Architecture</a></li>
+  <li><a href="http://videlalvaro.github.io">Alvaro Videla’s blog</a> - amazing source of knowledge about RabbitMQ internals.</li>
+  <li><a href="https://github.com/rabbitmq/rabbitmq-server/blob/master/src/rabbit_backing_queue.erl">rabbitmq_backing_queue</a></li>
+  <li><a href="https://github.com/rabbitmq/rabbitmq-server/blob/master/src/rabbit_exchange_type.erl">rabbitmq_exchange_type</a></li>
+  <li><a href="https://github.com/rabbitmq/rabbitmq-server/blob/master/src/gen_server2.erl">gen_server2</a></li>
+  <li><a href="https://github.com/rabbitmq/rabbitmq-server/blob/master/src/supervisor2.erl">supervisor2</a></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <nav class="additional-navigation">
+        Go to:
+        <ul>
+          <li><a href="/categories.html">Categories</a></li>
+          <li><a href="/tag/series/">Series</a></li>
+          <li><a href="/tags.html">Tags</a></li>
+        </ul>
+      </nav>
+
+      <footer>
+        <section>© Copyright 2014, 2015, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>

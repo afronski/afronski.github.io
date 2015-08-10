@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>Seven Languages in Seven Weeks - Ruby</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="seven-languages-in-seven-weeks---ruby">Seven Languages in Seven Weeks - Ruby</h1>
+
+<quote class="disclaimer">This blog post is a starting point of a series related with books "Seven Languages in Seven Weeks" and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing feature, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!</quote>
+
+<h3 id="introduction">Introduction</h3>
+
+<p><img class="right ruby-logo" alt="Ruby Logo" src="/assets/RubyLogo.png" /></p>
+
+<p>Aforementioned book has a very controversial concept called an <em>ugly child</em>. One of chosen languages is presented as a <em>necessary evil</em>, used in the old era. The choice fell on the <em>Ruby</em>. And I partially agree with that choice.</p>
+
+<p>Do not get me wrong - <em>Ruby</em> is a wonderful language, it brings multiple merits and valuable tools to us. In many cases it rescued many programming careers from boredom and daily routine. It restored <em>happiness</em> to the job of many programmers. But in this book, this language is surrounded by many other languages - better ones, relatively to the era that is coming (or rather - which is already here).</p>
+
+<p>It is an old language - created in 1995 (the same year that <em>Java</em> was created). This does not matter, when you have to get your job done, but it matters when it comes to the evolution, that took place since then. Author chosen that language because of joy and happiness that it brings for him. <strong><em>Ruby is optimized for developer happiness</em></strong>. Moreover, many tools that just get the job done are written in it (<em>Rails</em>, <em>Sinatra</em>, <em>Capistrano</em>, <em>Chef</em>, <em>Vagrant</em> and many, many more). They definitely influenced many other communities (try to count how many <em>Sinatra</em> forks are already created <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />).</p>
+
+<p>From the community itself we can also learn multiple things. Initiatives like <a href="http://railsgirls.com/">Rails Girls</a>, <a href="http://www.rubytapas.com/">Ruby Tapas</a>, <a href="http://exercism.io/">Exercism</a>, supporting diversity, embracing beginners and <em>greenhorns</em> in the community, examples that come from the top - from core contributors, people like <a href="https://twitter.com/yukihiro_matz">@yukihiro_matz</a>, <a href="https://twitter.com/josevalim">@josevalim</a> or <a href="https://twitter.com/tenderlove">@tenderlove</a> - that really makes a <em>change</em>.</p>
+
+<p>Besides that, language itself have many interesting features that brings joy, but also enable nice use cases, hard to implement in other mainstream programming languages.</p>
+
+<h3 id="why-this-language">Why this language?</h3>
+
+<p>I would like to present only a part of the most interesting feature - <em>method_missing</em> and ability to easily and efficiently use <em>metaprogramming</em> in your daily activities. It is a key thing that enables many use cases - starting from the crazy things, like that one presented below and ending on the various <em>Domain Specific Languages</em>.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">RomanNumerals</span>
+<span class="lineno"> 2</span>   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">method_missing</span> <span class="nb">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span>
+<span class="lineno"> 3</span>     <span class="n">roman</span> <span class="o">=</span> <span class="nb">name</span><span class="o">.</span><span class="n">to_s</span>
+<span class="lineno"> 4</span>     <span class="n">roman</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="s2">&quot;IV&quot;</span><span class="p">,</span> <span class="s2">&quot;IIII&quot;</span><span class="p">)</span>
+<span class="lineno"> 5</span>     <span class="n">roman</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="s2">&quot;IX&quot;</span><span class="p">,</span> <span class="s2">&quot;VIIII&quot;</span><span class="p">)</span>
+<span class="lineno"> 6</span>     <span class="n">roman</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="s2">&quot;XL&quot;</span><span class="p">,</span> <span class="s2">&quot;XXXX&quot;</span><span class="p">)</span>
+<span class="lineno"> 7</span>     <span class="n">roman</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="s2">&quot;XC&quot;</span><span class="p">,</span> <span class="s2">&quot;LXXXX&quot;</span><span class="p">)</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>     <span class="p">(</span><span class="n">roman</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">)</span> <span class="o">+</span>
+<span class="lineno">10</span>      <span class="n">roman</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;V&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span>
+<span class="lineno">11</span>      <span class="n">roman</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span>
+<span class="lineno">12</span>      <span class="n">roman</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span>
+<span class="lineno">13</span>      <span class="n">roman</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+<span class="lineno">14</span>   <span class="k">end</span>
+<span class="lineno">15</span> <span class="k">end</span></code></pre></div>
+
+<p>How it works? Lets look on the <em><code>REPL</code></em> output:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">001</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">RomanNumerals</span><span class="o">.</span><span class="n">X</span>
+<span class="o">=&gt;</span> <span class="mi">10</span>
+<span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">002</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">RomanNumerals</span><span class="o">.</span><span class="n">XCII</span>
+<span class="o">=&gt;</span> <span class="mi">92</span>
+<span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">003</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">RomanNumerals</span><span class="o">.</span><span class="n">XII</span>
+<span class="o">=&gt;</span> <span class="mi">12</span>
+<span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">004</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="no">RomanNumerals</span><span class="o">.</span><span class="n">XIV</span>
+<span class="o">=&gt;</span> <span class="mi">14</span></code></pre></div>
+
+<p>For each undefined method in that class, we are calling an entry point called <em><code>method_missing</code></em>. Then you can react and do whatever you want with the actual input arguments and invoked method name. This feature, connected with very flexible and liberal syntax, enables any kind of <em>DSL</em> creation that you can possibly imagine.</p>
+
+<p>Why I have presented only this part? Because <em>Ruby</em> is already very popular programming language, I would say even a mainstream one. I do not want to focus on describing its features, instead we should learn how to build an <em>amazing community</em>.</p>
+
+<p>This environment was possible to build thanks to that language. Besides the described feature, additional ones like <em>mixins</em>, <em>blocks</em> or very complete, cohesive and well-documented <em>standard library</em> really let you enjoy process of creating. Many people feel joy of programming when dealing with <em>Ruby</em>. This is a key point, because that feeling attracts creative people. And these people are the creators of very vibrant and active community, these people are creators of amazing tools and libraries. And sometimes they transfer their experiences to the other communities (like <a href="https://twitter.com/josevalim">@josevalim</a> and <em>Elixir</em> programming language community).</p>
+
+<p><strong>It is just simple as that</strong>.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>In the next blog post we will talk about not so popular, but still very elegant and interesting prototype-based language described in <em>“Seven Languages in Seven Weeks”</em> book as a second one  - the <a href="http://iolanguage.org">Io</a> programming language.</p>
+
+<h3 id="credits">Credits</h3>
+
+<ul>
+  <li><a href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks">Seven Languages in Seven Weeks</a>, <em>Bruce A. Tate</em></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/7-languages-in-7-weeks/2015/03/20/seven-languages-in-seven-weeks-ruby.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/7-languages-in-7-weeks/2015/03/20/seven-languages-in-seven-weeks-ruby.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <nav class="additional-navigation">
+        Go to:
+        <ul>
+          <li><a href="/categories.html">Categories</a></li>
+          <li><a href="/tag/series/">Series</a></li>
+          <li><a href="/tags.html">Tags</a></li>
+        </ul>
+      </nav>
+
+      <footer>
+        <section>© Copyright 2014, 2015, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>
