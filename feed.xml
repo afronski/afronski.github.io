@@ -10,11 +10,11 @@
         <title>SICP in Clojure - Chapter 2</title>
         <description>&lt;h1 id=&quot;sicp-in-clojure---chapter-2&quot;&gt;SICP in Clojure - Chapter 2&lt;/h1&gt;
 
-&lt;quote class=&quot;disclaimer&quot;&gt;In one of the &lt;a href=&quot;http://www.afronski.pl/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html&quot;&gt;previous blog posts&lt;/a&gt; I have announced that I would like to start a new series of posts. It is a persistent journal of my journey through the aforementioned book. I hope that you will enjoy it and find it useful - the main goal is to make this series a place we can return to in the future, recall ideas and thoughts that accompanied the reading process.&lt;/quote&gt;
+&lt;quote class=&quot;disclaimer&quot;&gt;In one of the &lt;a href=&quot;http://www.afronski.pl/books-that-changed-my-career/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html&quot;&gt;previous blog posts&lt;/a&gt; I have announced that I would like to start a new series of posts. It is a persistent journal of my journey through the aforementioned book. I hope that you will enjoy it and find it useful - the main goal is to make this series a place we can return to in the future, recall ideas and thoughts that accompanied the reading process.&lt;/quote&gt;
 
 &lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
-&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/2015/06/04/sicp-in-clojure-chapter-1.html&quot;&gt;previous blog post&lt;/a&gt; we have started with an interesting example. In this case we will start with a small summary of the whole chapter and then we will move to a couple very interesting examples.&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html&quot;&gt;previous blog post&lt;/a&gt; we have started with an interesting example. In this case we will start with a small summary of the whole chapter and then we will move to a couple very interesting examples.&lt;/p&gt;
 
 &lt;p&gt;Basically it is all about having clear and reasonable abstractions. Authors introduced a term called &lt;em&gt;barriers&lt;/em&gt;, which help you build a contract and clear abstractions from the beginning. A separate place in the chapter is dedicated to the minimal syntax - which enables elasticity and freedom when constructing &lt;em&gt;new data types&lt;/em&gt;, &lt;em&gt;type systems&lt;/em&gt; and &lt;em&gt;domain specific languages&lt;/em&gt;.&lt;/p&gt;
 
@@ -237,7 +237,7 @@
 
 &lt;p&gt;If you did not sleep under a rock in the past 30 years or this post is not a first one which you have read on this blog, you are probably familiar what &lt;em&gt;Erlang&lt;/em&gt; is and which features are making it uniquely suited in certain class of applications. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;I do not want to cover any interesting language features, because I have already written &lt;a href=&quot;http://www.afronski.pl/2015/03/10/interesting-language-features-erlang-named-case-expressions.html&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/2015/03/27/interesting-language-features-erlang-links-and-monitors.html&quot;&gt;posts&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/2015/06/11/interesting-language-features-erlang-custom-behaviors.html&quot;&gt;that&lt;/a&gt;. Instead, I would like to introduce to you a small story about origin of the &lt;em&gt;actor model&lt;/em&gt; in that particular case.&lt;/p&gt;
+&lt;p&gt;I do not want to cover any interesting language features, because I have already written &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/10/interesting-language-features-erlang-named-case-expressions.html&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html&quot;&gt;posts&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html&quot;&gt;that&lt;/a&gt;. Instead, I would like to introduce to you a small story about origin of the &lt;em&gt;actor model&lt;/em&gt; in that particular case.&lt;/p&gt;
 
 &lt;h3 id=&quot;a-small-story-about-the-actor-model-in-erlang&quot;&gt;A small story about the &lt;em&gt;actor model&lt;/em&gt; in &lt;em&gt;Erlang&lt;/em&gt;&lt;/h3&gt;
 
@@ -299,7 +299,7 @@
 
 &lt;p&gt;&lt;strong&gt;The shortest and simplest answer is no&lt;/strong&gt;. The longer one, needs much more investigation of problem’s root.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;May I ask you why you don’t like Erlang?&lt;/em&gt; If you are already interested in any other language that is &lt;em&gt;functional&lt;/em&gt; and &lt;em&gt;built with concurrency in mind&lt;/em&gt;, then it is fine. But if not, you should learn a new one (pick any - &lt;code&gt;Clojure&lt;/code&gt;, &lt;code&gt;F#&lt;/code&gt; or &lt;code&gt;Erlang&lt;/code&gt;). Just use a different language than your daily tool. You can read about that &lt;a href=&quot;http://www.afronski.pl/2015/06/04/sicp-in-clojure-chapter-1.html&quot;&gt;here&lt;/a&gt;. And I will leave you with that till the next time! &lt;img class=&quot;emoji&quot; title=&quot;:smiley:&quot; alt=&quot;:smiley:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f603.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;May I ask you why you don’t like Erlang?&lt;/em&gt; If you are already interested in any other language that is &lt;em&gt;functional&lt;/em&gt; and &lt;em&gt;built with concurrency in mind&lt;/em&gt;, then it is fine. But if not, you should learn a new one (pick any - &lt;code&gt;Clojure&lt;/code&gt;, &lt;code&gt;F#&lt;/code&gt; or &lt;code&gt;Erlang&lt;/code&gt;). Just use a different language than your daily tool. You can read about that &lt;a href=&quot;http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html&quot;&gt;here&lt;/a&gt;. And I will leave you with that till the next time! &lt;img class=&quot;emoji&quot; title=&quot;:smiley:&quot; alt=&quot;:smiley:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f603.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
 
@@ -385,7 +385,7 @@
 
 &lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
-&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;previous blog post&lt;/a&gt; we talked about &lt;em&gt;behaviors&lt;/em&gt;, in particular about &lt;em&gt;application&lt;/em&gt; behavior. It is a primary way of reusing common abstractions.&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;previous blog post&lt;/a&gt; we talked about &lt;em&gt;behaviors&lt;/em&gt;, in particular about &lt;em&gt;application&lt;/em&gt; behavior. It is a primary way of reusing common abstractions.&lt;/p&gt;
 
 &lt;p&gt;It may look limiting at the first sight that we have only couple of them available by default. But fortunately, we are not limited only to the abstractions prepared by the &lt;em&gt;OTP&lt;/em&gt; team. &lt;em&gt;We can easily create new ones&lt;/em&gt; - and many &lt;em&gt;Erlang&lt;/em&gt; teams willingly takes that opportunity. In this blog post I would like to show you various abstractions hidden inside RabbitMQ.&lt;/p&gt;
 
@@ -457,7 +457,7 @@
         <title>SICP in Clojure - Chapter 1</title>
         <description>&lt;h1 id=&quot;sicp-in-clojure---chapter-1&quot;&gt;SICP in Clojure - Chapter 1&lt;/h1&gt;
 
-&lt;quote class=&quot;disclaimer&quot;&gt;In one of the &lt;a href=&quot;http://www.afronski.pl/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html&quot;&gt;previous blog posts&lt;/a&gt; I have announced that I would like to start a new series of posts. It is a persistent journal from my journey through aforementioned book. I hope that you will enjoy it and find it useful - the main goal is to make this series a place where we can return in future, recall ideas and thoughts that accompanied reading process.&lt;/quote&gt;
+&lt;quote class=&quot;disclaimer&quot;&gt;In one of the &lt;a href=&quot;http://www.afronski.pl/books-that-changed-my-career/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html&quot;&gt;previous blog posts&lt;/a&gt; I have announced that I would like to start a new series of posts. It is a persistent journal from my journey through aforementioned book. I hope that you will enjoy it and find it useful - the main goal is to make this series a place where we can return in future, recall ideas and thoughts that accompanied reading process.&lt;/quote&gt;
 
 &lt;h3 id=&quot;what-is-a-sicp-and-why-should-you-care&quot;&gt;What is a &lt;em&gt;SICP&lt;/em&gt; and why should you care?&lt;/h3&gt;
 
