@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: shell</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/shell/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Differences between nohup and ampersand</title>
+        <description>&lt;h1 id=&quot;differences-between-nohup-and-the-ampersand&quot;&gt;Differences between &lt;code&gt;nohup&lt;/code&gt; and the ampersand&lt;/h1&gt;
+
+&lt;p&gt;There are many cases when &lt;em&gt;small differences&lt;/em&gt; between environments can bite you. This is one into which I have ran recently. What is the difference between these two commands?&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nohup myprocess.out &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;myprocess.out &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The answer is the same as usual - &lt;em&gt;it depends&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;nohup&lt;/code&gt; catches the hangup signal while the ampersand does not.&lt;/p&gt;
+
+&lt;p&gt;What is the hangup signal?&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;code&gt;SIGHUP&lt;/code&gt; - hangup detected on controlling terminal or death of controlling process (value: 1).&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Normally, when running a command using &lt;code&gt;&amp;amp;&lt;/code&gt; and exiting the shell afterwards, the shell will terminate the sub-command with the hangup signal (like &lt;code&gt;kill -SIGHUP $PID&lt;/code&gt;). This can be prevented using nohup, as it catches the signal and ignores it so that it never reaches the actual application.&lt;/p&gt;
+
+&lt;p&gt;Fine, but like in this case there are always &lt;em&gt;‘buts’&lt;/em&gt;. There is no difference between these launching methods when the shell is configured in a way where it does not send &lt;code&gt;SIGHUP&lt;/code&gt; at all.&lt;/p&gt;
+
+&lt;p&gt;In case you are using bash, you can use the command specified below to find out whether your shell sends &lt;em&gt;&lt;code&gt;SIGHUP&lt;/code&gt;&lt;/em&gt; to its child processes or not:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;shopt&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep hupon&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And moreover - there are cases where nohup does not work. For example, when the process you start reconnects the &lt;code&gt;NOHUP&lt;/code&gt; signal (it is done inside, on the application code level).&lt;/p&gt;
+
+&lt;p&gt;In the described case, lack of differences bit me when inside a custom service launching script there was a call to a second script which sets up and launches the proper application &lt;em&gt;without a &lt;code&gt;nohup&lt;/code&gt; command&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;On one Linux environment everything worked smoothly, on a second one the application quit as soon as the second script exited (detecting that case, of course took me much more time then you might think &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue:&quot; alt=&quot;:stuck_out_tongue:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
+
+&lt;p&gt;After adding &lt;code&gt;nohup&lt;/code&gt; as a launching method to second script, application keeps running even if the scripts will exit and this behavior became consistent on both environments.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://unixhelp.ed.ac.uk/CGI/man-cgi?signal+7&quot;&gt;&lt;code&gt;man 7 signal&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 07 Nov 2013 18:45:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2013/11/07/differences-between-nohup-and-the-ampersand.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2013/11/07/differences-between-nohup-and-the-ampersand.html</guid>
+      </item>
+    
+      <item>
+        <title>Mysterious problem with missing name of the active virtualenv</title>
+        <description>&lt;h1 id=&quot;mysterious-problem-with-missing-name-of-the-active-virtualenv&quot;&gt;Mysterious problem with missing name of the active &lt;code&gt;virtualenv&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;Recently I have ran into an issue related to &lt;code&gt;virtualenv&lt;/code&gt; and my shell. It did not display name of the active &lt;code&gt;virtualenv&lt;/code&gt; after invoking the standard command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;bin/activate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, everything works perfectly without that (even a &lt;code&gt;deactivate&lt;/code&gt; command). This little thing makes me nervous so I have started looking for a solution to that problem.&lt;/p&gt;
+
+&lt;p&gt;After a while I found the reason why it does not work:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; calculate_prompt&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# Beautifying the prompt ;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;calculate_prompt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Yeah&lt;/em&gt;, I totally forgot about the fact that I am using &lt;code&gt;PROMPT_COMMAND&lt;/code&gt;. Right now, when I know the reason, the solution is a piece of cake - just add the code for displaying &lt;em&gt;&lt;code&gt;virtualenv&lt;/code&gt;&lt;/em&gt; name to the function which calculates the prompt:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; calculate_prompt&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# Beautifying the prompt ;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -z &lt;span class=&quot;s2&quot;&gt;&amp;quot;$VIRTUAL_ENV_DISABLE_PROMPT&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;nv&quot;&gt;_OLD_VIRTUAL_PS1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$PS1&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;x&amp;quot;&lt;/span&gt; !&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; x &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;         &lt;span class=&quot;nv&quot;&gt;PS1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$PS1&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; ! -z &lt;span class=&quot;s2&quot;&gt;&amp;quot;$VIRTUAL_ENV&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;`basename \&amp;quot;$VIRTUAL_ENV\&amp;quot;`&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;__&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;           &lt;span class=&quot;nv&quot;&gt;PS1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;`basename \`dirname \&amp;quot;$VIRTUAL_ENV\&amp;quot;\``: $PS1&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;           &lt;span class=&quot;nv&quot;&gt;PS1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;`basename $VIRTUAL_ENV`: $PS1&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;calculate_prompt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And it is fixed! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 13 Nov 2013 18:20:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2013/11/13/mysterious-problem-with-missing-name-of-the-active-virtualenv.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2013/11/13/mysterious-problem-with-missing-name-of-the-active-virtualenv.html</guid>
+      </item>
+    
+      <item>
+        <title>Using JIRA from the command line</title>
+        <description>&lt;h1 id=&quot;using-jira-from-the-command-line&quot;&gt;Using &lt;code&gt;JIRA&lt;/code&gt; from the command line&lt;/h1&gt;
+
+&lt;p&gt;If someone would like to automate some popular workflows related with &lt;code&gt;JIRA&lt;/code&gt; (like logging time related with code review or meetings) or just use it from command line, please look at &lt;a href=&quot;http://tebriel.github.io/jira-cli&quot;&gt;this tool&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Installation:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm install -g jira-cli&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then create a file inside your home directory called &lt;em&gt;&lt;code&gt;.jiraclirc.json&lt;/code&gt;&lt;/em&gt; with content:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;USERNAME&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;PASSWORD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;host&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;address.to.jira.com&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;protocol&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;https:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;port&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;443&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;strictSSL&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;project&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PROJECTID&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After that you can log time with command specified below. In this case, it will prompt you to type a work log comment and amount of time spent with this activity e.g. &lt;em&gt;&lt;code&gt;1h&lt;/code&gt;&lt;/em&gt; (format like in corresponding dialog):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jira -w BLAHBLAH-111&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;links&quot;&gt;Links&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tebriel.github.io/jira-cli/&quot;&gt;&lt;code&gt;jira-cli&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 02 Apr 2014 15:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2014/04/02/using-jira-from-the-command-line.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2014/04/02/using-jira-from-the-command-line.html</guid>
+      </item>
+    
+  </channel>
+</rss>

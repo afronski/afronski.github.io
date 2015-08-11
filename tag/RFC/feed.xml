@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: RFC</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/RFC/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>RFC 862</title>
+        <description>&lt;h1 id=&quot;rfc-862---echo-protocol&quot;&gt;RFC 862 - &lt;em&gt;Echo Protocol&lt;/em&gt;&lt;/h1&gt;
+
+&lt;p&gt;Often, when you are getting familiar with new programming language or small networking library it is hard to came up with something meaningful as an example. I would like to share with you a little piece of advice regarding that.&lt;/p&gt;
+
+&lt;p&gt;You can implement an &lt;em&gt;echo server&lt;/em&gt;. Even more - there is an official RFC for an &lt;strong&gt;echo protocol&lt;/strong&gt; - it has number &lt;code&gt;862&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Network Working Group                                          J. Postel
+Request for Comments: 862                                            ISI
+                                                                May 1983
+
+
+
+                             Echo Protocol
+
+
+
+
+This RFC specifies a standard for the ARPA Internet community.  Hosts on
+the ARPA Internet that choose to implement an Echo Protocol are expected
+to adopt and implement this standard.
+
+A very useful debugging and measurement tool is an echo service.  An
+echo service simply sends back to the originating source any data it
+receives.
+
+TCP Based Echo Service
+
+   One echo service is defined as a connection based application on TCP.
+   A server listens for TCP connections on TCP port 7.  Once a
+   connection is established any data received is sent back.  This
+   continues until the calling user terminates the connection.
+
+UDP Based Echo Service
+
+   Another echo service is defined as a datagram based application on
+   UDP.  A server listens for UDP datagrams on UDP port 7.  When a
+   datagram is received, the data from it is sent back in an answering
+   datagram.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It is a tiny document, that formalizes also tiny specification for an &lt;em&gt;echo server&lt;/em&gt; - for two most known transport layer protocols - &lt;em&gt;TCP&lt;/em&gt; and &lt;em&gt;UDP&lt;/em&gt;. Rules and requirements are clear and well defined, port numbers are well known.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;BTW&lt;/em&gt;: it is a really nice &lt;em&gt;kata&lt;/em&gt; assignment as well. And, just for the record - please, look at the author and date - RFC was created in &lt;code&gt;1983&lt;/code&gt; by Jon Postel (yes, this one responsible for &lt;a href=&quot;http://en.wikipedia.org/wiki/Robustness_principle&quot;&gt;Postel’s Law&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Besides an &lt;em&gt;echo protocol&lt;/em&gt; there is also well known RFC which describes an &lt;em&gt;IP&lt;/em&gt; protocol implemented on top of &lt;em&gt;breeding pigeons&lt;/em&gt; (look at the security considerations at page 3 &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;). But this is much harder to implement as a &lt;em&gt;small assignment&lt;/em&gt; or &lt;em&gt;kata&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Please, share with me your example implementation of an &lt;em&gt;echo server&lt;/em&gt; in the comments - choose any protocol or programming language that you like. &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tools.ietf.org/html/rfc862&quot;&gt;RFC 862 - Echo Protocol&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tools.ietf.org/html/rfc2549&quot;&gt;RFC 2549 - IP over Avian Carriers with Quality of Service&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 21 May 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/05/21/rfc-862.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/05/21/rfc-862.html</guid>
+      </item>
+    
+  </channel>
+</rss>

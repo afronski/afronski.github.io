@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: erlang-behaviours</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/erlang-behaviours/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Interesting Language Features - Erlang IV</title>
+        <description>&lt;h1 id=&quot;interesting-language-features---erlang-iv&quot;&gt;Interesting Language Features - Erlang IV&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;previous blog post&lt;/a&gt; we talked about &lt;em&gt;behaviors&lt;/em&gt;, in particular about &lt;em&gt;application&lt;/em&gt; behavior. It is a primary way of reusing common abstractions.&lt;/p&gt;
+
+&lt;p&gt;It may look limiting at the first sight that we have only couple of them available by default. But fortunately, we are not limited only to the abstractions prepared by the &lt;em&gt;OTP&lt;/em&gt; team. &lt;em&gt;We can easily create new ones&lt;/em&gt; - and many &lt;em&gt;Erlang&lt;/em&gt; teams willingly takes that opportunity. In this blog post I would like to show you various abstractions hidden inside RabbitMQ.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-rabbitmq&quot;&gt;What is &lt;em&gt;RabbitMQ&lt;/em&gt;?&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right rabbitmq-logo&quot; alt=&quot;RabbitMQ Logo&quot; src=&quot;/assets/RabbitMQ.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is a robust, easy to use message broker ready to use with your applications - it can be a &lt;em&gt;communication backbone&lt;/em&gt; for your system. It supports multiple protocols by default - &lt;em&gt;AMQP&lt;/em&gt;, &lt;em&gt;MQTT&lt;/em&gt; and &lt;em&gt;STOMP&lt;/em&gt;. Also, it has various client libraries for many programming languages - you can integrate with it from almost any kind of environment. The main idea behind it is pretty simple - it accepts and forwards messages. You can think about it as an any abstraction related with letters and messaging e.g. post office - when you send mail to the post box you are pretty sure that postman will eventually deliver it to your recipient. Using this metaphor &lt;em&gt;RabbitMQ&lt;/em&gt; is a post box, a &lt;em&gt;post office&lt;/em&gt; and a &lt;em&gt;postman&lt;/em&gt; in one thing. If you want to get familiar with this tool, you should start with &lt;a href=&quot;https://www.rabbitmq.com/getstarted.html&quot;&gt;this article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;RabbitMQ&lt;/em&gt; is written in &lt;em&gt;Erlang&lt;/em&gt; and it is a base for its reliability and concurrency features. Also, thanks to built-in distribution it is much easier to implement custom mechanisms, even if they are using different thing than standard &lt;em&gt;Erlang&lt;/em&gt; distribution to handle that problem. As you probably know, in &lt;em&gt;Erlang&lt;/em&gt;, &lt;em&gt;behaviors&lt;/em&gt; are the main mechanism for providing reusable abstractions - we can easily use that ones prepared by an &lt;em&gt;OTP&lt;/em&gt; team like &lt;code&gt;supervisor&lt;/code&gt;, &lt;code&gt;application&lt;/code&gt; or &lt;code&gt;gen_server&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But, as we said in the introduction, we are not limited only to the prepared ones. &lt;em&gt;We can create our own behaviors&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-we-can-create-a-custom-behavior&quot;&gt;How we can create a &lt;em&gt;custom behavior&lt;/em&gt;?&lt;/h3&gt;
+
+&lt;p&gt;To create your own behavior, you must make a module that exports a function &lt;code&gt;behaviour_info/1&lt;/code&gt;. Note, that while Erlang is &lt;em&gt;American-English-friendly&lt;/em&gt; in regards to declaring behaviors, it is not as friendly when you are defining them. For example, you can use either &lt;code&gt;-behavior(gen_server).&lt;/code&gt; or &lt;code&gt;-behaviour(gen_server).&lt;/code&gt; when you declare you module implements the &lt;code&gt;gen_server&lt;/code&gt; behavior, but if you name the &lt;code&gt;behaviour_info/1&lt;/code&gt; function without the &lt;em&gt;‘u’&lt;/em&gt; it will not work.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;behaviour_info/1&lt;/code&gt; just needs to return the list of required exports of an implementation. Here’s an example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;export&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;behaviour_info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviour_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behavior_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(_)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This declares three callbacks for the &lt;code&gt;gen_foo&lt;/code&gt; behavior: &lt;code&gt;foo/0&lt;/code&gt;, &lt;code&gt;bar/1&lt;/code&gt;, and &lt;code&gt;baz/2&lt;/code&gt;. Function simply returns an array of &lt;em&gt;two elements tuples&lt;/em&gt; with the function name andan arity.&lt;/p&gt;
+
+&lt;p&gt;When a module declares that it implements &lt;code&gt;gen_foo&lt;/code&gt; now, the Erlang compiler will check to make sure it exports and implements the required callbacks, and it will print warnings if this is not the case:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fooer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;behavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;export&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also use tools like &lt;em&gt;Dialyzer&lt;/em&gt; and &lt;em&gt;Typer&lt;/em&gt; - with prepared type specifications, you can easily verify that the new behavior is used properly (according to the specification) and that there are no type errors which can be caught due to &lt;em&gt;static code analysis&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;custom-behaviors-available-inside-rabbitmq&quot;&gt;Custom behaviors available inside &lt;em&gt;RabbitMQ&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;In RabbitMQ we have implemented several routing algorithms in the form of &lt;em&gt;exchanges&lt;/em&gt; (let’s call them the &lt;em&gt;gateways&lt;/em&gt; by which messages are coming to the system). We can say that each exchange has a specific type. By default &lt;em&gt;RabbitMQ&lt;/em&gt; has four exchanges: &lt;em&gt;direct&lt;/em&gt;, &lt;em&gt;fanout&lt;/em&gt;, &lt;em&gt;topic&lt;/em&gt; and &lt;em&gt;headers&lt;/em&gt;. But also, it allows the user to add new exchange types via plugins.&lt;/p&gt;
+
+&lt;p&gt;User, which will provide new exchange type needs to implement the &lt;code&gt;rabbit_exchange_type&lt;/code&gt; behaviour. Similar pattern can be applied to the &lt;code&gt;rabbitmq_backing_queue&lt;/code&gt; which is responsible for various techniques related with backing stores and e.g. persistent queues. Aforementioned abstractions have pretty simple implementation - most of the module code is related with type specifications used for the verification. More complicated behaviors are mirroring and enhancing the standard ones - inside &lt;em&gt;RabbitMQ&lt;/em&gt; maintainers implemented &lt;code&gt;supervisor2&lt;/code&gt; and &lt;code&gt;gen_server2&lt;/code&gt; - code is really long and complex, because those behaviors need to mirror the original implementations, and also should have additional features.&lt;/p&gt;
+
+&lt;p&gt;If you have already some experience with &lt;em&gt;Erlang&lt;/em&gt; I recommend you to dive into the implementation of two mentioned behaviors (and look at the originals as well - comments are really helpful). And by that, I would like to finish that blog post - in the next one, we will switch the language - now it is time to look into a different place to search for an interesting feature. Stay tuned! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.slideshare.net/old_sound/dissecting-the-rabbit&quot;&gt;Dissecting the rabbit: RabbitMQ Internal Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://videlalvaro.github.io&quot;&gt;Alvaro Videla’s blog&lt;/a&gt; - amazing source of knowledge about RabbitMQ internals.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/rabbit_backing_queue.erl&quot;&gt;rabbitmq_backing_queue&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/rabbit_exchange_type.erl&quot;&gt;rabbitmq_exchange_type&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/gen_server2.erl&quot;&gt;gen_server2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/supervisor2.erl&quot;&gt;supervisor2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 11 Jun 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</guid>
+      </item>
+    
+  </channel>
+</rss>

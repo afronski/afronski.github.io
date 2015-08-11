@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: debugging</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/debugging/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Low-level Node.js debugging on production</title>
+        <description>&lt;h1 id=&quot;low-level-nodejs-debugging-on-production&quot;&gt;Low-level Node.js debugging on production&lt;/h1&gt;
+
+&lt;p&gt;Sometimes when you want to run your Node.js application on production environment, you will receive:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;node-stuff &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node index.js
+Segmentation fault&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Yeah… and &lt;em&gt;now&lt;/em&gt; what?&lt;/p&gt;
+
+&lt;p&gt;Welcome to the dungeon, &lt;em&gt;DevOps&lt;/em&gt; marine &lt;img class=&quot;emoji&quot; title=&quot;:grin:&quot; alt=&quot;:grin:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f601.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;First of all, if you deployed an application on an &lt;em&gt;OS&lt;/em&gt; different than &lt;em&gt;SmartOS&lt;/em&gt;, you lost the ability to use many impressive tools which could definitely help you in that case (the most impressive ones are &lt;code&gt;mdb&lt;/code&gt; and &lt;code&gt;dtrace&lt;/code&gt;, you can find details in the references section of this post).&lt;/p&gt;
+
+&lt;p&gt;So there is no &lt;em&gt;&lt;code&gt;mdb&lt;/code&gt;&lt;/em&gt;, no &lt;em&gt;&lt;code&gt;dtrace&lt;/code&gt;&lt;/em&gt;, no &lt;em&gt;SmartOS&lt;/em&gt;. You can’t also use your favorite debugger like &lt;a href=&quot;https://trace.gl/&quot;&gt;trace.gl&lt;/a&gt;, &lt;a href=&quot;https://github.com/jwarkentin/node-monkey&quot;&gt;node-monkey&lt;/a&gt; or &lt;a href=&quot;https://github.com/node-inspector/node-inspector&quot;&gt;node-inspector&lt;/a&gt;. You have got only &lt;code&gt;gdb&lt;/code&gt; and your brain filled with low-level computer knowledge &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before you dive deeper into the internals of your application, let’s begin the voodoo that is the process of setting the proper options in your &lt;em&gt;OS&lt;/em&gt;. First you will remove the limit related with the &lt;em&gt;core dump&lt;/em&gt; size:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo &lt;span class=&quot;nb&quot;&gt;ulimit&lt;/span&gt; -c unlimited&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, you set different path for these files (remember to put them on a partition with a huge amount of the free disk space):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/tmp/core_%e.%p&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sudo tee /proc/sys/kernel/core_pattern&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, if you are using native Node.js extensions you have to recompile them with the debugging flag &lt;em&gt;&lt;code&gt;-g&lt;/code&gt;&lt;/em&gt; (configuration file taken from the &lt;em&gt;&lt;code&gt;node_xslt&lt;/code&gt;&lt;/em&gt; module):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;targets&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;target_name&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;node_xslt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;sources&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;node_xslt.cc&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;cflags&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;cflags_cc&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;xcode_settings&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;OTHER_CFLAGS&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;libraries&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;-lxml2&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;-lxslt&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;-lexslt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;library_dirs&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/usr/lib&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, look at the dependencies (in our case &lt;code&gt;libxslt&lt;/code&gt;, &lt;code&gt;libxml2&lt;/code&gt;) and reinstall them in the development version (sometimes marked with a &lt;code&gt;-devel&lt;/code&gt; postfix).&lt;/p&gt;
+
+&lt;p&gt;After modifications and installing dependencies in the &lt;em&gt;debugging mode&lt;/em&gt;, you have to run installation process inside the directory of the modified module (but only there, not on the upper level, because it will remove our changes in the modified module):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;node_xslt &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm install --verbose&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Somewhere inside the long output you will find information about flags used in compilation process (and you should see a &lt;em&gt;&lt;code&gt;-g&lt;/code&gt;&lt;/em&gt; flag, responsible for attaching debugging informations).&lt;/p&gt;
+
+&lt;p&gt;Next, you have to simulate again situation with &lt;em&gt;&lt;code&gt;Segmentation fault&lt;/code&gt;&lt;/em&gt; behavior. When application receive unwanted signal, it will dump file with the &lt;em&gt;post-mortem&lt;/em&gt; internal structure, ready for using inside &lt;code&gt;gdb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gdb /usr/bin/node /tmp/core_XXX.YYY&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And now you are inside the belly of the monster, so you can move around:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;...
+Program received signal SIGSEGV, Segmentation fault.
+
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; bt
+&lt;span class=&quot;c&quot;&gt;# It shows the stack trace (but from the native code).&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; print V8_Fatal&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;a&amp;quot;&lt;/span&gt;, 11, &lt;span class=&quot;s2&quot;&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# It shows the stack trace inside V8.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Values &amp;quot;a&amp;quot;, 11 and &amp;quot;c&amp;quot; are irrelevant.&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; quit
+&lt;span class=&quot;c&quot;&gt;# It exits gdb.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to attach to the running process, you have to invoke the command specified below:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gdb attach &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;pidof node&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, if your application is running in a cluster mode (or you are running more than one Node.js application on your machine), this will fail and instead of &lt;em&gt;&lt;code&gt;pidof&lt;/code&gt;&lt;/em&gt; you have to pass a single &lt;em&gt;PID&lt;/em&gt; value (from one application, master or one of the slaves, depends on what is interesting for you).&lt;/p&gt;
+
+&lt;p&gt;You can also run &lt;em&gt;&lt;code&gt;strace&lt;/code&gt;&lt;/em&gt; in order to determine which system calls does your program invoke before &lt;em&gt;death&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -ttT&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After gathering a certain amount of knowledge, armed with the stack traces, system call invocations and the memory footprint you have to &lt;em&gt;dig deeper&lt;/em&gt; into the actual application code and maybe try to reproduce that behavior in a more &lt;em&gt;debuggable&lt;/em&gt; environment &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dtrace.org/blogs/dap/2012/01/13/playing-with-nodev8-postmortem-debugging&quot;&gt;Using &lt;code&gt;mdb&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dtrace.org/blogs/dap/2012/01/05/where-does-your-node-program-spend-its-time&quot;&gt;Using &lt;code&gt;dtrace&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linux.die.net/man/3/ulimit&quot;&gt;&lt;code&gt;ulimit&lt;/code&gt; man pages&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bsuh/node_xslt&quot;&gt;node_xslt&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linux.die.net/man/1/strace&quot;&gt;&lt;code&gt;strace&lt;/code&gt; man pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 02 Nov 2013 10:45:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2013/11/02/low-level-nodejs-debugging-on-production.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2013/11/02/low-level-nodejs-debugging-on-production.html</guid>
+      </item>
+    
+      <item>
+        <title>Let's talk about memory</title>
+        <description>&lt;h1 id=&quot;lets-talk-aboutmemory&quot;&gt;Let’s talk &lt;code&gt;about:memory&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;Recently on polish Facebook group &lt;em&gt;JSNews&lt;/em&gt;, thanks to &lt;a href=&quot;https://twitter.com/zbraniecki&quot;&gt;Zbigniew Braniecki&lt;/a&gt;, I found a very useful tool for monitoring memory in Firefox - &lt;code&gt;about:memory&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/AboutMemoryOverview.png&quot; alt=&quot;Overview for about:memory&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can open it by typing &lt;code&gt;about:memory&lt;/code&gt; in your address bar. It has capabilities to measure memory usage at browser level, load and save dumps (as a gzipped &lt;em&gt;&lt;code&gt;JSON&lt;/code&gt;&lt;/em&gt; file), compare them and force garbage and cycle collection.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/AboutMemoryDiff.png&quot; alt=&quot;Difference for two memory dumps&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I strongly encourage you to dive into that tool, especially if you like me, thought that &lt;em&gt;Firefox&lt;/em&gt; hasn’t got any tools for memory profiling. Well, not the first time I’m wrong &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;P.S. On screenshots you can observe new UI for &lt;em&gt;Firefox&lt;/em&gt;, called &lt;em&gt;Australis&lt;/em&gt; - what do you think about it? Share your opinion in comments.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 27 Nov 2013 23:35:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2013/11/27/lets-talk-about-memory.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2013/11/27/lets-talk-about-memory.html</guid>
+      </item>
+    
+  </channel>
+</rss>

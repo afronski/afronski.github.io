@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: books</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/books/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Books that changed my career - Introduction</title>
+        <description>&lt;h1 id=&quot;books-that-changed-my-career---introduction&quot;&gt;Books that changed my career - Introduction&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a starting point of a series which contains the most influential books that I have read in my programming career. This is my private ranking, each post will contain a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;If you are a programmer and you like your profession, it is very likely that you are reading a lot of technical books. There are plenty of them on the market - related to craftsmanship, oriented fully around technology, patterns or methodologies and more. Besides practicing in your spare time - reading is probably the most important way of learning new stuff.&lt;/p&gt;
+
+&lt;p&gt;I read a lot of books, what is even more important - my reading queue is growing faster than my reading abilities - and what I found after a while is that merely only a couple of them can be marked as a highly influential on my career. It is not only related to the frequency with which I am returning to it - there are some books which I find really valuable, but I have read it only once. So, what makes a book &lt;em&gt;good&lt;/em&gt;?&lt;/p&gt;
+
+&lt;p&gt;Before we define that set of features, I would like to divert a bit - &lt;strong&gt;learning is hard&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/LearningIsHard.jpg&quot; alt=&quot;Learning is hard&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is true especially if you are doing it in isolation (this is directly related with reading a book - you can do it within a book club, but still - it can uncomfortable or not enjoyable for someone). There is a very important concept related to learning new skill, when you are selecting a task which is only just slightly more difficult than your regular task, but still doable - it is the &lt;em&gt;sweet spot&lt;/em&gt; where you can learn in the most effective way by yourself (learning in group is fundamentally different).&lt;/p&gt;
+
+&lt;p&gt;What I have observed relates to that &lt;em&gt;sweet spot&lt;/em&gt; - books which I grouped in my private &lt;em&gt;the best of&lt;/em&gt; list are related to that &lt;em&gt;concept&lt;/em&gt; &lt;strong&gt;and&lt;/strong&gt; with a particular &lt;em&gt;time&lt;/em&gt; when I read it. That is why this list is perfectly viable for me, and can be irritating for you - especially if we are on the different level of skill acquisition for the particular set of features, covered in the described publication.&lt;/p&gt;
+
+&lt;p&gt;Today I would like to start with a very interesting book, but at the first sight it looks just like a classic example of &lt;i&gt;XYZ for dummies&lt;/i&gt; guidebook. Such omission can result that you can miss a very good publication.&lt;/p&gt;
+
+&lt;h3 class=&quot;center&quot;&gt;&lt;em&gt;Seven Languages in Seven Weeks&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Seven Languages in Seven Weeks&quot; src=&quot;/assets/SevenLanguagesInSevenWeeks.jpg&quot; class=&quot;book&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;why-this-book&quot;&gt;Why this book?&lt;/h4&gt;
+
+&lt;p&gt;We live in interesting times - &lt;a href=&quot;http://www.wsj.com/articles/SB10001424053111903480904576512250915629460&quot;&gt;software is eating world&lt;/a&gt;, now even more than in the 2011. Being a &lt;em&gt;software engineer&lt;/em&gt; means that you have to &lt;em&gt;solve various business problems&lt;/em&gt;. The more advanced topics you grab, the more complex problems appear. Up to some point, using a well-known &lt;em&gt;hammer&lt;/em&gt; is a very pragmatic and good choice.&lt;/p&gt;
+
+&lt;p&gt;But someday you will hit a wall. You will see that it is not enough to know just one technology or one programming language well in order to solve these problems. This is especially true when you are building a distributed system, which should handle significant traffic and at the same time solve a complicated business case. In such environment you need to adapt - improve your skills by continuous learning.&lt;/p&gt;
+
+&lt;p&gt;There is another term, highly connected with the aforementioned concept, called &lt;em&gt;polyglot programming&lt;/em&gt; (coined by Neal Ford). It does not mean that you should put every single language into your project, but rather that you should try to enhance your perspective, skills, try to think in a different way, build and interact with completely new ideas. That experience will influence your existing capabilities, it will create new pathways inside your brain and it may open your senses to the new patterns. Obviously, it requires &lt;em&gt;curiosity&lt;/em&gt;, &lt;em&gt;small dose of courage&lt;/em&gt; and &lt;em&gt;humility&lt;/em&gt; (because nobody likes to feel stupid and this is inevitable at the beginning).&lt;/p&gt;
+
+&lt;p&gt;I found this book (polish edition) in the middle of 2012. At that time I was mostly a web and front-end developer (only &lt;em&gt;JavaScript&lt;/em&gt;) with significant &lt;em&gt;.NET&lt;/em&gt; experience and some smaller &lt;em&gt;Python&lt;/em&gt; and &lt;em&gt;Node.js&lt;/em&gt; episodes. I have tried both flavors, &lt;em&gt;back-end&lt;/em&gt; and &lt;em&gt;front-end&lt;/em&gt;, and only this kind of partition in the IT world had a significant meaning for me before. But the transition had already started - I heard about &lt;em&gt;functional programming&lt;/em&gt;, I started looking for different experiences - I have just discovered &lt;em&gt;Erlang&lt;/em&gt; and started getting familiar with it, I worked for a while with &lt;em&gt;Scala&lt;/em&gt; because of Coursera’s course guided by &lt;em&gt;Martin Odersky&lt;/em&gt;. At the studies I worked twice with &lt;em&gt;Prolog&lt;/em&gt; and that’s it - I have seen every non-obvious technology as impractical and not worth looking at. Being a &lt;em&gt;clean coder&lt;/em&gt; in the enterprise was the &lt;em&gt;thing&lt;/em&gt; back then. At least I have seen it as a fully professional requirement. But it changed when I have started reading this book - it just literally sucked me in.&lt;/p&gt;
+
+&lt;p&gt;At first, it was not a pleasant ride. As a huge fan of &lt;em&gt;JavaScript&lt;/em&gt;, I felt insecure and wronged because of choosing different prototype-based language as a representative of this group. But suddenly, when I finished the first 3 chapters, a really strange thing happened - I just realized how narrow my mindset was, how ineffective is to use single tool to the every problem that you try to solve. There are plenty of problems from very interesting domains that can be relatively easily solved (in comparison to &lt;em&gt;my favorite well-known&lt;/em&gt; language) just by choosing a &lt;em&gt;screwdriver&lt;/em&gt; instead a &lt;em&gt;hammer&lt;/em&gt; again. I have soaked myself completely in &lt;em&gt;polyglot programming&lt;/em&gt; movement and after a while I have seen the first effects.&lt;/p&gt;
+
+&lt;p&gt;Thanks to the different perspective, I started to think in categories that were previously fixed, sometimes even not considered as a point for change or improvement. I have understood the theory underneath many patterns and behaviors that I previously subconsciously used or implemented (e.g. I have used early versions of &lt;em&gt;RxJS&lt;/em&gt; just because it was convenient - already built, packaged and well-tested). This book definitely changed my approach to the programming languages and I can honestly say, without exaggeration, that thanks to this book I started treating programming language as a &lt;em&gt;tool&lt;/em&gt;, instead of treating it as a &lt;em&gt;dogma&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you are aware of that simple fact, that your life is oriented around 1-2 programming languages, within only one programming paradigm (e.g. &lt;em&gt;OOP&lt;/em&gt;), I strongly recommend to buy this book and read it. You most likely will not write your next back-end system in &lt;em&gt;Haskell&lt;/em&gt;, you will not use &lt;em&gt;Prolog&lt;/em&gt; inside your application, but your mindset will change.&lt;/p&gt;
+
+&lt;p&gt;I would say that the only drawback of this book is the incomprehensible explanation of &lt;em&gt;monads&lt;/em&gt; (yes, there are the &lt;em&gt;m-words&lt;/em&gt; there). Besides that, this book is really well-written, it contains nice set of homework assignments and for me was an &lt;em&gt;eye-opening&lt;/em&gt; book, which significantly enhanced my toolbox.&lt;/p&gt;
+
+&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
+
+&lt;p&gt;Obviously the aforementioned book cannot be described in just one blog post, so I would like to announce a follow-up post series, which will start immediately after this one. There I will discuss each language presented in that publication separately.&lt;/p&gt;
+
+&lt;p&gt;Regarding this series, next books are ready, waiting in the pipeline and I would like to share them with you. The next one is a &lt;em&gt;must-read&lt;/em&gt; for every programmer, but in a different way that you might initially think. If you have an idea which one I am talking about, please post the title in the comment below. Regardless of whether you know - stay tuned! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks, The Pragmatic Bookshelf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://martinfowler.com/bliki/OneLanguage.html&quot;&gt;One Language, Martin Fowler&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.flickr.com/photos/cote/94256599/in/photolist-9k6cM-nMfaY2-nMxn12-4Wyyg-pPzTdM-f4fhb-ojhTc-9PY9Uk-9PYaxc-qQb56p-qhZZ5T-9vpW4P-qaQqEc-nerTPS-ngcZsg-3WzyA-7Hxgmw-5EyP2b-mZXyzn-h5bQ9g-eCod2H-dAgeQa-q6Vgj-q6Ver-4vQgFr-cHPbL-9Q1ZxL-ngcXRS-dAmHEY-dAmHJj-tGzJq-9Q22fh-cToBD3-G4y8C-4TyQRZ-dAgeAT-dAmHpU-dAmHum-dAgeqD-dAgewk-dAmGXL-dAgeia-9aagv6-9PY9v2-4qcY6P-efwp43-efqE1K-efqEdg-efqDPH-efwoWq&quot;&gt;Pile of books (CC BY 2.0)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 22 Feb 2015 22:30:00 +0100</pubDate>
+        <link>http://www.afronski.pl/books-that-changed-my-career/2015/02/22/books-that-changed-my-career-introduction.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/02/22/books-that-changed-my-career-introduction.html</guid>
+      </item>
+    
+      <item>
+        <title>Books that changed my career - Pragmatic Thinking and Learning</title>
+        <description>&lt;h1 id=&quot;books-that-changed-my-career---pragmatic-thinking-and-learning&quot;&gt;Books that changed my career - Pragmatic Thinking and Learning&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is the second in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;Programming and designing is very thankful activity, when everything snaps and clicks together (programmers call this state &lt;em&gt;flow&lt;/em&gt;). Nevertheless, it can be extremely frustrating as well, especially when you try to solve something really difficult, or you are overloaded with work, maybe personal issues. Sometimes the same hard problem will be solved in a day, sometimes it will take couple of weeks instead (and I am assuming doing it in both cases from scratch and for the first time).&lt;/p&gt;
+
+&lt;p&gt;But some people seem to be more effective than others at first sight. Like they do not have &lt;em&gt;bad days&lt;/em&gt; at all. This can be observed especially in larger teams, for longer periods of time - when you can work with multiple colleagues several times, where each activity is separated by a few weeks. I am not a huge fan of &lt;a href=&quot;http://en.wikipedia.org/wiki/Biorhythm&quot;&gt;biorythm&lt;/a&gt; pseudoscience, so there must be a different explanation.&lt;/p&gt;
+
+&lt;p&gt;In most cases they have got &lt;em&gt;very good habits&lt;/em&gt; or &lt;em&gt;huge self-awareness&lt;/em&gt;. This sounds almost like an obvious statement, but actually it is not so simple to bring it to your daily working environment. We are learning all the time (and someone who stops learning as an active programmer, while acting like an expert, has treated himself with &lt;quote&gt;&lt;i&gt;the professional kiss of death&lt;/i&gt;&lt;/quote&gt;) and it could be useful to know all science and these little tricks which will ease and improve the whole process.&lt;/p&gt;
+
+&lt;p&gt;Fortunately, someone has collected many of good techniques and advice in a book, with an addition of the science (&lt;em&gt;neuroscience&lt;/em&gt;, &lt;em&gt;psychology&lt;/em&gt; and &lt;em&gt;cognitive science&lt;/em&gt;) necessary to explain everything in greater detail.&lt;/p&gt;
+
+&lt;h3 class=&quot;center&quot;&gt;&lt;em&gt;Pragmatic Thinking and Learning: Refactor Your Wetware&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Programming Thinking and Learning&quot; src=&quot;/assets/PragmaticThinkingAndLearning.jpg&quot; class=&quot;book&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;why-this-book&quot;&gt;Why this book?&lt;/h4&gt;
+
+&lt;p&gt;It is not a surprise that this person is &lt;em&gt;Andy Hunt&lt;/em&gt;, one of &lt;em&gt;pragmatic programmers&lt;/em&gt;. The first thing that (I hope &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;) caught your attention is a &lt;em&gt;subtitle&lt;/em&gt;. It has a subtle pun - the word &lt;a href=&quot;http://en.wikipedia.org/wiki/Wetware_(brain)&quot;&gt;&lt;em&gt;wetware&lt;/em&gt;&lt;/a&gt;. I encourage you to dig deeper into the meaning of this word, because it is crucial to rewire your thinking to a proper attitude, necessary to work with this book effectively.&lt;/p&gt;
+
+&lt;p&gt;The book is structured in a very deliberate way, we are starting with definitions and theoretical introduction to the learning process (&lt;em&gt;Dreyfus Skill Acquisition&lt;/em&gt; model). Then we are digging deeper into mechanisms that are working inside our brains, with a small dose of inevitable theory. After knowing how your brain works &lt;em&gt;inside out&lt;/em&gt;, we are ready to rewire and refactor our &lt;em&gt;wetware&lt;/em&gt; - we will try to overcome our primal instincts (&lt;quote&gt;&lt;i&gt;I am the evolved one&lt;/i&gt;&lt;/quote&gt;), we will try to learn deliberately, work in a focused manner. At the end author introduces the key concepts how be an expert, but still be a passionate and eager to learn even more. If you met &lt;em&gt;Dreyfus Model&lt;/em&gt; before, the whole structure will look similar for you.&lt;/p&gt;
+
+&lt;p&gt;Besides science, the book also introduces many well-known and verified methods like &lt;em&gt;GTD&lt;/em&gt; (&lt;a href=&quot;http://en.wikipedia.org/wiki/Getting_Things_Done&quot;&gt;Getting Things Done&lt;/a&gt;), positive psychology or techniques known from &lt;em&gt;Agile&lt;/em&gt; or &lt;em&gt;eXtreme Programming&lt;/em&gt;. Even referrals to the classical &lt;em&gt;Pragmatic Programmer&lt;/em&gt; book are used in a proper context (e.g. &lt;em&gt;rubber duck debugging&lt;/em&gt; or &lt;em&gt;boiling frog&lt;/em&gt; explanation).&lt;/p&gt;
+
+&lt;p&gt;As engineers, we are rather skeptical in terms of emotions, instincts and psychology. This cannot be described, evaluated and verified with any mathematical or physical model that we know. It looks to us as &lt;em&gt;voodoo&lt;/em&gt;, a kind of black magic which involves too many irrational things at once. But this book is different, the major advantage is that is written in a &lt;em&gt;geek&lt;/em&gt; language for geeks, by a &lt;em&gt;computer geek&lt;/em&gt;. And moreover you will experience only fully scientific explanations to the certain behaviors (supported by real studies, everything referenced in book contents or annotations). Even the chapter describing &lt;em&gt;meditation&lt;/em&gt; techniques, which at the first sight definitely is not supported by any science, has some reasonable explanations based on research related to &lt;em&gt;breathing techniques&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Obviously, many of these techniques are not a silver bullet for everyone, but I strongly suggest at least trying them. Do not rush through the book, even the author encourages slower reading and thinking about the chapter currently being read (and he does it by introducing small exercises which require e.g. walking or drawing &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;). If you feel that a certain technique is not for you, it is fine - &lt;em&gt;learn&lt;/em&gt;, &lt;em&gt;think&lt;/em&gt; and &lt;em&gt;adapt&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;For me the most important and &lt;em&gt;eye opening&lt;/em&gt; techniques are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;i&gt;Learning and experiencing with all senses&lt;/i&gt; - I was a huge believer in the theory that people learn with some senses better, which turns out not to be true. You should learn and experience using as many senses and techniques as you can (it enables more areas in your brain). Try to scribble and listen during meetings, try acting, role play during planning - it brings new solutions and creative ways to the table.&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;Deliberate scribbling&lt;/i&gt; - I have done this in the past, but I have stopped (because I thought that noting everything digitally will much better). That was a wrong move - you can see above why, but that’s the immediate thing that brings value after doing it one or two times. I just feel more focused and I can see visually the actual problem and solution in my head. I will never stop doing that again.&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;Morning Text Dump&lt;/i&gt; - Another &lt;em&gt;eye opening&lt;/em&gt; technique. It may sounds funny at the beginning, but the first thing you should do after waking up is not a coffee, but a morning text dump. You should literally write 2-3 pages of text, just after out of the bed - the things that you actually remember. After couple of days you will be able to &lt;em&gt;dump&lt;/em&gt; almost anything that is in the back of your head (processed by the &lt;em&gt;rich mode&lt;/em&gt; of your brain).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator&quot;&gt;&lt;i&gt;Myers-Briggs Type Indicator&lt;/i&gt;&lt;/a&gt; - I strongly recommend to read about this and take a test. Results can be ground breaking for you, but even if they will acknowledge what you already know, the original test has some advice and explanations why with type of your personality some things can be hard.&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;Lizard Brain&lt;/i&gt; - Very important knowledge, especially if you are a very &lt;em&gt;impulsive&lt;/em&gt; and &lt;em&gt;judging&lt;/em&gt; type. It is the root cause of almost all problems related to subconscious, compulsive behaviors that you may express, especially if you are dealing with huge stress or deadlines.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Oblique_Strategies&quot;&gt;&lt;i&gt;Oblique Statements&lt;/i&gt;&lt;/a&gt; - For me that was the strangest one, but I gave it a try and the results also amazed me. I suggest you to try it by yourself, it is astonishing to see what your brain can deduce, in your actual context from, at the very first sight, words cluster (because they sound and look like this sometimes &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue:&quot; alt=&quot;:stuck_out_tongue:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
+
+&lt;p&gt;I am aware that I have started this series with less obvious positions in the programmer’s library. For the next review, I would like to shift a little bit - to the more standard and established books. This is a classical one, again from the &lt;em&gt;Pragmatic Programmers&lt;/em&gt; sign. I have three copies of this book: in English (as an &lt;em&gt;ebook&lt;/em&gt;), in Polish (again, as an ebook), but the most valuable for me is the printed Polish version, which I have received from my friend, with an inscription. Stay tuned! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/ahptl/pragmatic-thinking-and-learning&quot;&gt;Pragmatic Thinking and Learning, The Pragmatic Bookshelf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 07 Mar 2015 16:00:00 +0100</pubDate>
+        <link>http://www.afronski.pl/books-that-changed-my-career/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html</guid>
+      </item>
+    
+      <item>
+        <title>Seven Languages in Seven Weeks - Ruby</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---ruby&quot;&gt;Seven Languages in Seven Weeks - Ruby&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a starting point of a series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing feature, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right ruby-logo&quot; alt=&quot;Ruby Logo&quot; src=&quot;/assets/RubyLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Aforementioned book has a very controversial concept called an &lt;em&gt;ugly child&lt;/em&gt;. One of chosen languages is presented as a &lt;em&gt;necessary evil&lt;/em&gt;, used in the old era. The choice fell on the &lt;em&gt;Ruby&lt;/em&gt;. And I partially agree with that choice.&lt;/p&gt;
+
+&lt;p&gt;Do not get me wrong - &lt;em&gt;Ruby&lt;/em&gt; is a wonderful language, it brings multiple merits and valuable tools to us. In many cases it rescued many programming careers from boredom and daily routine. It restored &lt;em&gt;happiness&lt;/em&gt; to the job of many programmers. But in this book, this language is surrounded by many other languages - better ones, relatively to the era that is coming (or rather - which is already here).&lt;/p&gt;
+
+&lt;p&gt;It is an old language - created in 1995 (the same year that &lt;em&gt;Java&lt;/em&gt; was created). This does not matter, when you have to get your job done, but it matters when it comes to the evolution, that took place since then. Author chosen that language because of joy and happiness that it brings for him. &lt;strong&gt;&lt;em&gt;Ruby is optimized for developer happiness&lt;/em&gt;&lt;/strong&gt;. Moreover, many tools that just get the job done are written in it (&lt;em&gt;Rails&lt;/em&gt;, &lt;em&gt;Sinatra&lt;/em&gt;, &lt;em&gt;Capistrano&lt;/em&gt;, &lt;em&gt;Chef&lt;/em&gt;, &lt;em&gt;Vagrant&lt;/em&gt; and many, many more). They definitely influenced many other communities (try to count how many &lt;em&gt;Sinatra&lt;/em&gt; forks are already created &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
+
+&lt;p&gt;From the community itself we can also learn multiple things. Initiatives like &lt;a href=&quot;http://railsgirls.com/&quot;&gt;Rails Girls&lt;/a&gt;, &lt;a href=&quot;http://www.rubytapas.com/&quot;&gt;Ruby Tapas&lt;/a&gt;, &lt;a href=&quot;http://exercism.io/&quot;&gt;Exercism&lt;/a&gt;, supporting diversity, embracing beginners and &lt;em&gt;greenhorns&lt;/em&gt; in the community, examples that come from the top - from core contributors, people like &lt;a href=&quot;https://twitter.com/yukihiro_matz&quot;&gt;@yukihiro_matz&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/josevalim&quot;&gt;@josevalim&lt;/a&gt; or &lt;a href=&quot;https://twitter.com/tenderlove&quot;&gt;@tenderlove&lt;/a&gt; - that really makes a &lt;em&gt;change&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Besides that, language itself have many interesting features that brings joy, but also enable nice use cases, hard to implement in other mainstream programming languages.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-this-language&quot;&gt;Why this language?&lt;/h3&gt;
+
+&lt;p&gt;I would like to present only a part of the most interesting feature - &lt;em&gt;method_missing&lt;/em&gt; and ability to easily and efficiently use &lt;em&gt;metaprogramming&lt;/em&gt; in your daily activities. It is a key thing that enables many use cases - starting from the crazy things, like that one presented below and ending on the various &lt;em&gt;Domain Specific Languages&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RomanNumerals&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;method_missing&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_s&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;IV&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;IIII&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;IX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;VIIII&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;XL&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;XXXX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;XC&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;LXXXX&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;I&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;V&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;X&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;L&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;roman&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;C&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;How it works? Lets look on the &lt;em&gt;&lt;code&gt;REPL&lt;/code&gt;&lt;/em&gt; output:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;002&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XCII&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;92&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;003&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XII&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;004&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RomanNumerals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XIV&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For each undefined method in that class, we are calling an entry point called &lt;em&gt;&lt;code&gt;method_missing&lt;/code&gt;&lt;/em&gt;. Then you can react and do whatever you want with the actual input arguments and invoked method name. This feature, connected with very flexible and liberal syntax, enables any kind of &lt;em&gt;DSL&lt;/em&gt; creation that you can possibly imagine.&lt;/p&gt;
+
+&lt;p&gt;Why I have presented only this part? Because &lt;em&gt;Ruby&lt;/em&gt; is already very popular programming language, I would say even a mainstream one. I do not want to focus on describing its features, instead we should learn how to build an &lt;em&gt;amazing community&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;This environment was possible to build thanks to that language. Besides the described feature, additional ones like &lt;em&gt;mixins&lt;/em&gt;, &lt;em&gt;blocks&lt;/em&gt; or very complete, cohesive and well-documented &lt;em&gt;standard library&lt;/em&gt; really let you enjoy process of creating. Many people feel joy of programming when dealing with &lt;em&gt;Ruby&lt;/em&gt;. This is a key point, because that feeling attracts creative people. And these people are the creators of very vibrant and active community, these people are creators of amazing tools and libraries. And sometimes they transfer their experiences to the other communities (like &lt;a href=&quot;https://twitter.com/josevalim&quot;&gt;@josevalim&lt;/a&gt; and &lt;em&gt;Elixir&lt;/em&gt; programming language community).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;It is just simple as that&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;In the next blog post we will talk about not so popular, but still very elegant and interesting prototype-based language described in &lt;em&gt;“Seven Languages in Seven Weeks”&lt;/em&gt; book as a second one  - the &lt;a href=&quot;http://iolanguage.org&quot;&gt;Io&lt;/a&gt; programming language.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 20 Mar 2015 16:00:00 +0100</pubDate>
+        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/03/20/seven-languages-in-seven-weeks-ruby.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/03/20/seven-languages-in-seven-weeks-ruby.html</guid>
+      </item>
+    
+      <item>
+        <title>Books that changed my career - The Pragmatic Programmer</title>
+        <description>&lt;h1 id=&quot;books-that-changed-my-career---the-pragmatic-programmer&quot;&gt;Books that changed my career - The Pragmatic Programmer&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/books-that-changed-my-career/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html#whats-next&quot;&gt;previous post&lt;/a&gt;, I have mentioned that I have this book in three copies - two editions of e-book version (Polish and English) and printed Polish translation. The last one is the most valuable for me, because I have received it as a gift from my colleague during studies, with very nice inscription (after graduating 3rd year, if I recall correctly - Hi Rafał! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
+
+&lt;p&gt;I would like to focus in this post on the actual details, because book is well known in the community. And it definitely deserves its &lt;em&gt;fame&lt;/em&gt; and &lt;em&gt;glory&lt;/em&gt;. It is even more actual, than &lt;em&gt;C Programming Language&lt;/em&gt; by Kernighan and Ritchie. &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue_winking_eye:&quot; alt=&quot;:stuck_out_tongue_winking_eye:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61c.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; Actually it is a huge foundation under the &lt;em&gt;Agile Manifesto&lt;/em&gt; (it was published two years before formalized meeting happened, where the document was signed), moreover - both authors are signatories of that manifesto.&lt;/p&gt;
+
+&lt;h3 class=&quot;center&quot;&gt;&lt;em&gt;The Pragmatic Programmer: From Journeyman to Master&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&quot;The Pragmatic Programmer&quot; src=&quot;/assets/PragmaticProgrammer.jpg&quot; class=&quot;book&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;subtitle&quot;&gt;Subtitle&lt;/h3&gt;
+
+&lt;p&gt;Almost each science specialization has its own book, which is required to read before you will start a professional career. If you are an apprentice, you will probably get most of this book, because your mind is fresh and knowledge base is relatively small, especially regarding topics like &lt;em&gt;estimation&lt;/em&gt;, &lt;em&gt;career planning&lt;/em&gt; or &lt;em&gt;teamwork&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;But in this case, even the subtitle suggests that it is a book for all generations of programmers. Of course younger programmers will benefit the most, but not surprisingly, even the more experienced folks can find this book refreshing. Why? Because it is a classic example of knowledge which is &lt;em&gt;universal&lt;/em&gt;, but sometimes &lt;em&gt;not commonly known&lt;/em&gt; or even &lt;em&gt;forgotten&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;universal-truths&quot;&gt;Universal Truths&lt;/h3&gt;
+
+&lt;p&gt;I would like to introduce the most favorite advice and guides from the book.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.artima.com/intv/tracer.html&quot;&gt;Tracer Bullets and Prototypes&lt;/a&gt; - If the second term is well known (maybe even more as a &lt;em&gt;proof of concept&lt;/em&gt;), we often forgot about first one. And that is a huge mistake, because it is highly useful. Moreover, we often want to use the &lt;em&gt;tracer bullets&lt;/em&gt;, but we misuse &lt;em&gt;prototype&lt;/em&gt; instead - building not a &lt;em&gt;walking skeleton&lt;/em&gt;, but a &lt;em&gt;walking dead&lt;/em&gt; project. The main difference is related with the destiny of both - &lt;em&gt;prototype&lt;/em&gt; should be built, conclusions should be gathered and whole project should be thrown out through a window. If we want to build a skeleton and fiddle with the internals, because we do not feel how it should look like right now, we should use a &lt;em&gt;tracer bullet&lt;/em&gt;. And the rules how to build both are different. I encourage you to grab your own copy, look into that chapter and read it out loud (if you do not have one yet - here is a &lt;a href=&quot;https://pragprog.com/book/tpp/the-pragmatic-programmer&quot;&gt;link&lt;/a&gt; to an official shop).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Don%27t_repeat_yourself&quot;&gt;DRY&lt;/a&gt;, &lt;a href=&quot;http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it&quot;&gt;YAGNI&lt;/a&gt; and other acronyms - During my career I ran into these abbreviations many times. And book is full of it - it does not mean that it is something wrong. Our industry is full of it - it builds our internal dictionary and sometimes it adds more meaning. Aforementioned two - &lt;em&gt;DRY&lt;/em&gt; (&lt;em&gt;Don’t Repeat Yourself&lt;/em&gt;) and &lt;em&gt;YAGNI&lt;/em&gt; (&lt;em&gt;You Ain’t Gonna Need It&lt;/em&gt;) are kind of an &lt;em&gt;axioms&lt;/em&gt; which are not negotiable. For a beginner, especially curious one, listening just one word thrown out as an explanation can be infuriating, but eventually we will all learn what it means to violate that rules. In a hard way. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Boiling_frog&quot;&gt;Boiling frog&lt;/a&gt; - Typical metaphor for a problem, which can be observed from the outside, but never from the inside. It affects our health in the long run, it changes our attitude and forms the future career. Sometimes it is more healthier to step out for a while and just listen, observe our/team/project behavior. Practice makes permanent and our little habits can grow to an overwhelming problems in the future.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Bus_factor&quot;&gt;Bus factor&lt;/a&gt; - My personal favorite, mostly because I was once such person and I will not lead to that situation again. I really like the &lt;em&gt;Agile&lt;/em&gt; attitude about cross-functional teams because it helps solve the problem. Your team should be resilient to a situation, when you are losing one person from the team. And you as a &lt;em&gt;responsible&lt;/em&gt; and &lt;em&gt;professional&lt;/em&gt; software engineer should not add anything to such problematic factor.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Rubber_duck_debugging&quot;&gt;Rubber Duck Debugging&lt;/a&gt; - This is probably the most known advice from the book. Mostly because our &lt;a href=&quot;http://www.afronski.pl/books-that-changed-my-career/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html#why-this-book&quot;&gt;brains works in that way&lt;/a&gt; and probably everyone experienced that feeling in the past. This is the easiest way to enable &lt;em&gt;rich mode&lt;/em&gt; in our brains, because we are switching perspective and way of thinking about the problem. It does not have to be an actual &lt;em&gt;rubber duck&lt;/em&gt;, it can be another person in the office or even a &lt;em&gt;LEGO&lt;/em&gt; minifigure. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Law_of_Demeter&quot;&gt;Law of Demeter&lt;/a&gt; - This the most underestimated law from that book. Someone said that it is applicable to the &lt;em&gt;OOP&lt;/em&gt; only, but &lt;a href=&quot;http://c2.com/cgi/wiki?LawOfDemeterRevisited&quot;&gt;it is not true&lt;/a&gt;. Violations of that rule results in many different forms, the lightest and most famous one is probably a &lt;a href=&quot;http://c2.com/cgi/wiki?TrainWreck&quot;&gt;train wreck&lt;/a&gt;. I strongly recommend to read this chapter again, mindfully - try to make notes or rethink it in the back of your head. It really helps to understand and shed new light on the meaning.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And what is your favorite advice from that book? Please, share your choice and explanation in the comments below.&lt;/p&gt;
+
+&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
+
+&lt;p&gt;I would like to cover another classical position on my bookshelf, which is very underestimated by the community. Recently, it receives proper respect, even the &lt;a href=&quot;https://twitter.com/unclebobmartin&quot;&gt;Uncle Bob&lt;/a&gt; recommends to read it. Book covers functional programming in an &lt;em&gt;exotic&lt;/em&gt; language, but each &lt;em&gt;MIT&lt;/em&gt; freshman have to read it and they can do it easily. It is possible thanks to the three brilliant authors who created a very comprehensible and timeless book (which is, in my opinion, even more actual now). Stay tuned to the next post!&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/tpp/the-pragmatic-programmer&quot;&gt;The Pragmatic Programmer, The Pragmatic Bookshelf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 12 Apr 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/books-that-changed-my-career/2015/04/12/books-that-changed-my-career-the-pragmatic-programmer.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/04/12/books-that-changed-my-career-the-pragmatic-programmer.html</guid>
+      </item>
+    
+      <item>
+        <title>Seven Languages in Seven Weeks - Io</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---io&quot;&gt;Seven Languages in Seven Weeks - Io&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;&lt;img class=&quot;right io-logo&quot; alt=&quot;Io Logo&quot; src=&quot;/assets/IoLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At first you may think that blog post is about &lt;em&gt;io.js&lt;/em&gt;, a recent &lt;em&gt;node.js&lt;/em&gt; fork - but it is not, we are talking here about programming languages. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Io&lt;/em&gt; is a programming language created by &lt;em&gt;Steve Dekorte&lt;/em&gt; in 2002. It is described as second one in the aforementioned book &lt;em&gt;Seven Languages in Seven Weeks&lt;/em&gt;. The only thing that it has in common&lt;br /&gt;with &lt;em&gt;io.js&lt;/em&gt; / &lt;em&gt;node.js&lt;/em&gt; and other &lt;em&gt;JavaScript&lt;/em&gt; based platforms is its prototypical nature.&lt;/p&gt;
+
+&lt;p&gt;It means, that like in &lt;em&gt;Self&lt;/em&gt; (or &lt;em&gt;JavaScript&lt;/em&gt;) everything is a &lt;em&gt;clone&lt;/em&gt; of another object and like in &lt;em&gt;Smalltalk&lt;/em&gt; everything is an object. In other words - &lt;strong&gt;there is no distinction between class and instance&lt;/strong&gt; and you can build &lt;em&gt;classes&lt;/em&gt; and its schema during &lt;em&gt;run-time&lt;/em&gt; execution.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//   Car_0xDEADBEE:&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// type            = &amp;quot;Car&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;drive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Vroom!&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// method(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//  &amp;quot;Vroom!&amp;quot; println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// )&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;drive&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Vroom!&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can observe above - &lt;em&gt;syntax is pretty minimal&lt;/em&gt;. It is often compared to the &lt;em&gt;Lisp-like&lt;/em&gt; languages. Besides that, language has really clear semantics (which is easy to grasp), powerful features in the standard library (also related with the &lt;em&gt;concurrency&lt;/em&gt; support) and small, portable &lt;em&gt;virtual machine&lt;/em&gt; (which is often used in the &lt;em&gt;embedded systems&lt;/em&gt; domain).&lt;/p&gt;
+
+&lt;p&gt;I would like to bring some light to the most interesting language features, starting from the basic things.&lt;/p&gt;
+
+&lt;h2 id=&quot;slots-and-message-passing&quot;&gt;Slots and Message Passing&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;A simple car.&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;slotNames&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// list(&amp;quot;type&amp;quot;, &amp;quot;desc&amp;quot;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After creating new clone, you can create new slots (with an operator &lt;code&gt;:=&lt;/code&gt;) or assign value to the existing one (with simple &lt;code&gt;=&lt;/code&gt; operator). Getting value from the slot is simple. Underneath everything is a message - even the method invocation is represented as a &lt;em&gt;message passing&lt;/em&gt; to the actual object.&lt;/p&gt;
+
+&lt;h2 id=&quot;prototype-chains&quot;&gt;Prototype chains&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;A simple car.&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ferrari&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ferrari&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Ferrari&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testarossa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ferrari&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testarossa&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Ferrari&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testarossa&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;slotNames&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// list()&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testarossa&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &amp;quot;A simple car.&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In presented example you can see how the message passing related with method invocation, propagates to the top of the prototype chain. Also, in &lt;em&gt;Io&lt;/em&gt; there is a difference between instances and types regarding syntax - capitalized names means &lt;em&gt;types&lt;/em&gt; from which you can clone an &lt;em&gt;instance&lt;/em&gt; (and its name is in small caps).&lt;/p&gt;
+
+&lt;h2 id=&quot;nice-examples&quot;&gt;Nice examples&lt;/h2&gt;
+
+&lt;h3 id=&quot;singleton&quot;&gt;Singleton&lt;/h3&gt;
+
+&lt;p&gt;It is very easy to create a true &lt;em&gt;singleton&lt;/em&gt; instance in the prototypical language. We just need to provide our implementation in the &lt;em&gt;clone&lt;/em&gt; slot for that instance. Our implementation will return always the same copy. This method requires consistency in the language - it should be only one way to create an object copy.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In presented case, each clone invoked on the &lt;em&gt;Single&lt;/em&gt; object will return always the same instance.&lt;/p&gt;
+
+&lt;h3 id=&quot;concurrency-support&quot;&gt;Concurrency support&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;A&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;yield&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;A&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;yield&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;say&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;yield&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;B&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;yield&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;B&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;say&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;say&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Coroutine&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentCoroutine&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pause&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On the basic level related with concurrency, &lt;em&gt;Io&lt;/em&gt; supports &lt;em&gt;coroutines&lt;/em&gt;. As in the example, two &lt;em&gt;coroutines&lt;/em&gt; are switching back-and-forth thanks the message &lt;code&gt;yield&lt;/code&gt;. Last line will wait until all other coroutines will finish, and after it will let the execution flow. Having this piece and message passing it is very simple and intuitive to build on top the &lt;em&gt;actor model&lt;/em&gt;. Besides that we also have &lt;em&gt;futures&lt;/em&gt; implementation available in the standard library.&lt;/p&gt;
+
+&lt;h3 id=&quot;extending-interpreter-and-vm&quot;&gt;Extending interpreter and VM&lt;/h3&gt;
+
+&lt;p&gt;And finally, most advanced but still concise example - related with extensiveness of the &lt;em&gt;language&lt;/em&gt; and a &lt;em&gt;run-time&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-io&quot; data-lang=&quot;io&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OperatorTable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addAssignOperator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;:&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;atPutNumber&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;curlyBrackets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;clone&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foreach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atPutNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atPut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalArgAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asMutable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;removePrefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;removeSuffix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalArgAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Structure of `data.json` file:&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//    &amp;quot;key&amp;quot;: 123456,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//    &amp;quot;another_key: 4567890&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;data.json&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;openForReading&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;doString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course, not a full &lt;em&gt;JSON&lt;/em&gt; specification is implemented here, but thanks to the ability to overload operator meaning, creating new operators and modifying its precedence (all of this done by manipulating &lt;em&gt;OperatorTable&lt;/em&gt;) we can extend our interpreter at &lt;em&gt;run-time&lt;/em&gt;. Thanks to that extension, it will &lt;em&gt;meaningfully&lt;/em&gt; evaluate data read, directly from the file contents.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;In the next blog post we will talk about another not popular, but powerful and &lt;em&gt;mind cracking&lt;/em&gt; programming language from the &lt;em&gt;70s&lt;/em&gt; - &lt;em&gt;&lt;a href=&quot;http://www.learnprolognow.org/&quot;&gt;Prolog&lt;/a&gt;&lt;/em&gt;. It provides declarative beauty connected together with a logic nature. Different approach to computation expressed by &lt;em&gt;facts&lt;/em&gt; and &lt;em&gt;rules&lt;/em&gt; mingled together with &lt;em&gt;relations&lt;/em&gt; can really bend your mind and guide you in the really strange, but also entertaining directions - like an annoying, but still interesting &lt;em&gt;puzzle&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/stevedekorte&quot;&gt;Steve Dekorte, Github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://iolanguage.org&quot;&gt;Io, programming language&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 30 Apr 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/04/30/seven-languages-in-seven-weeks-io.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/04/30/seven-languages-in-seven-weeks-io.html</guid>
+      </item>
+    
+      <item>
+        <title>Seven Languages in Seven Weeks - Prolog</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---prolog&quot;&gt;Seven Languages in Seven Weeks - Prolog&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right prolog-logo&quot; alt=&quot;SWI Prolog Logo&quot; src=&quot;/assets/SWIPrologLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this blog post I would like to spent some time with one of the most interesting programming languages ever - with &lt;em&gt;Prolog&lt;/em&gt;. In &lt;em&gt;Bruce Tate’s&lt;/em&gt; book this language is compared to the &lt;em&gt;Raymond&lt;/em&gt; from the &lt;em&gt;Rain Man&lt;/em&gt; movie. For most people &lt;em&gt;Prolog&lt;/em&gt; is mostly known as a language that answers &lt;code&gt;no&lt;/code&gt; to everything. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; It has very nice characteristics and often it is used in various domains and applications when other languages miserably failed.&lt;/p&gt;
+
+&lt;p&gt;Logo on the right is representing the most popular &lt;em&gt;Prolog&lt;/em&gt; distribution called &lt;em&gt;SWI Prolog&lt;/em&gt;, but in this blog post we will take a slightly different approach - we will use &lt;em&gt;Erlog&lt;/em&gt;, which is a &lt;em&gt;Prolog&lt;/em&gt; implementation on top of &lt;em&gt;Erlang VM&lt;/em&gt;. We will use &lt;em&gt;Elixir&lt;/em&gt; as a &lt;em&gt;glue&lt;/em&gt; for everything.&lt;/p&gt;
+
+&lt;h3 id=&quot;facts-relations-rules-and-queries&quot;&gt;Facts, Relations, Rules and Queries&lt;/h3&gt;
+
+&lt;p&gt;The main advantage of &lt;em&gt;Prolog&lt;/em&gt; is its declarative approach. You are building &lt;em&gt;knowledge base&lt;/em&gt; by declaring &lt;em&gt;facts&lt;/em&gt; and &lt;em&gt;relations&lt;/em&gt; that connect all of them together. Then, you can define &lt;em&gt;rules&lt;/em&gt; with which you can query this &lt;em&gt;knowledge base&lt;/em&gt; and retrieve information, like in the example below:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-prolog&quot; data-lang=&quot;prolog&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s-Atom&quot;&gt;vincent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;mia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s-Atom&quot;&gt;marsellus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;mia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s-Atom&quot;&gt;pumpkin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;honey_bunny&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s-Atom&quot;&gt;honey_bunny&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;pumpkin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;jealous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):-&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In this example &lt;code&gt;loves&lt;/code&gt; defines a &lt;em&gt;fact&lt;/em&gt; between two entities (in our case represented by &lt;em&gt;atoms&lt;/em&gt;, a unique symbols) - so we defined &lt;em&gt;relations&lt;/em&gt; there. At the &lt;em&gt;6th&lt;/em&gt; line we defined rule, which uses previous relations between two facts, represented as variables &lt;code&gt;X&lt;/code&gt; and &lt;code&gt;Z&lt;/code&gt; (as in the &lt;em&gt;Erlang&lt;/em&gt; variables should be started with a &lt;em&gt;capital letter&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Then if we &lt;em&gt;query&lt;/em&gt; such database basing on rule &lt;code&gt;jealous&lt;/code&gt; we will receive:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-prolog&quot; data-lang=&quot;prolog&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;?-&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;jealous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s-Atom&quot;&gt;marsellus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;vincent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Which obviously true - fans of &lt;i&gt;&lt;em&gt;Pulp Fiction&lt;/em&gt;&lt;/i&gt; will already know why. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;unification&quot;&gt;Unification&lt;/h3&gt;
+
+&lt;p&gt;If we use &lt;em&gt;unification&lt;/em&gt; together with the aforementioned elements, we will receive a place where &lt;em&gt;Prolog&lt;/em&gt; shines the most. Building on top of a pile of provided facts, relations and rules, it can effectively deduce missing parts. How? We already used it in previous example, but let’s look at the example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-prolog&quot; data-lang=&quot;prolog&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;L&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;First query is a pretty much obvious &lt;em&gt;array concatenation&lt;/em&gt; (in &lt;em&gt;Prolog&lt;/em&gt; you have to return value by the parameter). But, in the second case something &lt;em&gt;strange&lt;/em&gt; happened - interpreter responded how it should look first argument of a function call, if we want to receive &lt;code&gt;[1,2]&lt;/code&gt; as a result. Third example is a similar case - it is not possible to substitute any value under &lt;code&gt;W&lt;/code&gt; in order to satisfy these conditions.&lt;/p&gt;
+
+&lt;h3 id=&quot;sudoku-solver&quot;&gt;Sudoku Solver&lt;/h3&gt;
+
+&lt;p&gt;So, let’s try to use our knowledge in practice. Inside my small pet project - &lt;a href=&quot;https://github.com/afronski/erlog_sudoku_solver&quot;&gt;afronski/erlog_sudoku_solver&lt;/a&gt; - I have used &lt;em&gt;Erlog&lt;/em&gt; interpreter on top of &lt;em&gt;Erlang VM&lt;/em&gt;. Unfortunately there is no module similar to the &lt;code&gt;clpfd&lt;/code&gt; which is available in the &lt;em&gt;SWI Prolog&lt;/em&gt; distribution, so the Sudoku solver example will be a little more complicated and it will solve smaller boards - only &lt;code&gt;4x4&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-prolog&quot; data-lang=&quot;prolog&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sudoku&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Cells&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:-&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;nv&quot;&gt;Cells&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;A1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;A2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;A3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;A4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;B1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;B2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;B3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;B4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;C1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;C2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;C3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;C4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;D1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;D2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;D3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;D4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;   &lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;A1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowA_234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col1_BCD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowA_234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;A2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowA__34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col2_BCD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowA__34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;A3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowA___4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col3_BCD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowA___4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;A4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowA___&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col4_BCD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col1_BCD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;B1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowB_234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col1__CD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;A2&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;\=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;B1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowB_234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col2_BCD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;B2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowB__34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col2__CD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;A1&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;\=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;B2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowB__34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col3_BCD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;B3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowB___4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col3__CD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;A4&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;\=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;B3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowB___4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col4_BCD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;B4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowB___&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col4__CD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;A3&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;\=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;B4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col1__CD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;C1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowC_234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col1___D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowC_234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col2__CD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;C2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowC__34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col2___D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowC__34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col3__CD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;C3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowC___4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col3___D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowC___4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col4__CD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;C4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowC___&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col4___D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Possible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col1___D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;D1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowD_234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;C2&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;\=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;D1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowD_234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col2___D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;D2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowD__34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;C1&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;\=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;D2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowD__34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col3___D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;D3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowD___4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;C4&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;\=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;D3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowD___4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Col4___D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;D4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowD___&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;C3&lt;/span&gt; &lt;span class=&quot;s-Atom&quot;&gt;\=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;D4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt;   &lt;span class=&quot;s-Atom&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pick_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowVals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ColVals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowValRest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ColValRest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:-&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;pickValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RowVals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RowValRest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;pickValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ColVals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ColValRest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pickValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;39&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pickValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Picked&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:-&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pickValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Picked&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;40&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;41&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:-&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;42&lt;/span&gt;     &lt;span class=&quot;nv&quot;&gt;L&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;43&lt;/span&gt;     &lt;span class=&quot;nf&quot;&gt;sudoku&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;And that is it&lt;/strong&gt;. As you may noticed - we defined only rules for the game, rest is done thanks to the &lt;em&gt;backtracking algorithms&lt;/em&gt; implemented in the interpreter, which are searching and pruning all paths build on top of &lt;em&gt;knowledge base&lt;/em&gt; made from &lt;em&gt;facts&lt;/em&gt;, &lt;em&gt;relations&lt;/em&gt; and &lt;em&gt;rules&lt;/em&gt;. This example can be even more concise and clear, if you have module like &lt;a href=&quot;http://www.swi-prolog.org/man/clpfd.html&quot;&gt;&lt;code&gt;clpfd&lt;/code&gt;&lt;/a&gt;, as I mentioned before - you can find an example which uses aforementioned module &lt;a href=&quot;https://github.com/afronski/playground-other/blob/master/prolog/sudoku-resolver/sudoku-resolver.pro&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;In the next blog post we will talk about relatively new (compared to the other languages described in the book), but very popular &lt;em&gt;hybrid&lt;/em&gt; programming language called &lt;em&gt;&lt;a href=&quot;http://www.scala-lang.org&quot;&gt;Scala&lt;/a&gt;&lt;/em&gt;. It was my starting point with world of functional programming languages, and it is also often recommended as a starting point - especially if you have background as an &lt;em&gt;object oriented programmer&lt;/em&gt;. See you soon! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.swi-prolog.org/&quot;&gt;SWI Prolog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/erlog_sudoku_solver&quot;&gt;afronski/erlog_sudoku_solver&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rvirding/erlog&quot;&gt;rvirding/erlog&lt;/a&gt; and &lt;a href=&quot;https://github.com/zkessin/erlog-server&quot;&gt;zkessin/erlog-server&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.learnprolognow.org&quot;&gt;Learn Prolog Now!&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 24 May 2015 22:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/05/24/seven-languages-in-seven-weeks-prolog.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/05/24/seven-languages-in-seven-weeks-prolog.html</guid>
+      </item>
+    
+      <item>
+        <title>Books that changed my career - Structure and Interpretation of Computer Programs</title>
+        <description>&lt;h1 id=&quot;books-that-changed-my-career---structure-and-interpretation-of-computer-programs&quot;&gt;Books that changed my career - Structure and Interpretation of Computer Programs&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is another one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right sicp-logo&quot; alt=&quot;Structure and Interpretation of Computer Programs - Cover&quot; src=&quot;/assets/SICPCover.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Only a few books have such significant impact on the &lt;em&gt;computer science&lt;/em&gt; and IT environment as the book mentioned in the title. Obviously, this is very personal choice - but some of them are universally equal for all of us. One of such books we have described previously - I am talking about &lt;em&gt;Pragmatic Programmer&lt;/em&gt;, which is the most known and valuable book for aspiring programmer and a &lt;em&gt;craftsman&lt;/em&gt;. But let’s talk about the book which is a foundation for the whole course on &lt;em&gt;MIT&lt;/em&gt;. And I hope that I do not have to remind you &lt;em&gt;what&lt;/em&gt; and &lt;em&gt;how important&lt;/em&gt; for &lt;em&gt;computer science&lt;/em&gt; MIT is.&lt;/p&gt;
+
+&lt;p&gt;Let’s start with this long quote from one of the unquestionable (or questionable - in this case, doesn’t matter, because citation is really accurate) authorities in IT world - &lt;a href=&quot;https://twitter.com/unclebobmartin&quot;&gt;@unclebobmartin&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;quote class=&quot;citation&quot;&gt;SICP is a literary masterpiece. It's not often that you can say that a technical book is a page-turner, but that's just what I found SICP to be.  The book moves from topic to topic with rare ease and clarity, but more importantly it moves with purpose and mission.  As you read it, you can feel the authors slowly building a tension towards a climax. The chapters fly by as you read about data structures, algorithms, message passing, first-class procedures, and so much else. Each concept leads inevitably to the next. Each chapter adds to the ever building tension. By time you are half-way through the book, the sense that something important is about to change becomes palpable.&lt;/quote&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;quote class=&quot;citation&quot;&gt;And then something important changes! Something you had not anticipated. Something you should have guessed, but did not. On page 216 they introduce a concept so familiar that most programming books start with it. On page 216 they prove to you that you've had some wrong ideas about programming all along. On page two hundred and sixteen, after talking about algorithms, data structures, recursion, iteration, trees, high-order procedures, scoping, local variables, data abstraction, closures, message-passing, and a plethora of other topics - after all that, they introduce assignment!&lt;/quote&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;quote class=&quot;citation&quot;&gt;And with that elegant coup-de-grace (which is not the last in this book!), they vanquish the concept that programming is about manipulating state. With that one stroke, they force you to look back on all you had done in the previous pages in a new and enlightened way - a functional way.&lt;/quote&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you have not been exposed to &lt;em&gt;functional programming&lt;/em&gt; earlier those statements will sound to you at least ground breaking, if not ridiculous. Moreover, if you are starting your career as a programmer, immediately grab this book and start reading it - it will be beneficial for you, you will open your mind to a different paradigm. Moreover, you will not have so much &lt;em&gt;mental baggage&lt;/em&gt; to unlearn, as the most programmers exposed to &lt;em&gt;object-oriented programming languages&lt;/em&gt; (which are in most cases &lt;a href=&quot;http://c2.com/cgi/wiki?AlanKaysDefinitionOfObjectOriented&quot;&gt;implemented in a wrong way&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;ok-i-am-in-how-to-read-it&quot;&gt;Ok, I am in. How to read it?&lt;/h3&gt;
+
+&lt;p&gt;I am reading this book second time in my life, and I am trying to do it mindfully, with full focus (it is really hard, but I am trying &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;). I also play with plethora of assignments gathered at the end of each chapter - each time I am fiddling with them in different programming language. I would like to preserve knowledge from the reading process, and I would like to introduce you to the next blog post series which will start at 4th of June.&lt;/p&gt;
+
+&lt;p&gt;How it will look like? Often people are getting this book as a topic of the local reading club (second book which is often used as a topic is a &lt;a href=&quot;http://mitpress.mit.edu/books/little-schemer&quot;&gt;Little Schemer&lt;/a&gt;). I have not found one around, so I will do it by myself. I will sum up each chapter with a post, adding also small examples and topics that I found interesting related to that chapter. Thanks to that, I and maybe someone else can return to this place and recall interesting bits easier.&lt;/p&gt;
+
+&lt;p&gt;I hope that you will enjoy new series. Give me your feelings about that and feedback in the comments - and let’s stay in touch till Thursday! &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
+
+&lt;p&gt;Obviously, this post cannot end the whole series about important books for my career. Next time, I will present a book which has a special place on my bookshelf, because it changed drastically my thinking about concurrency. Moreover, it is already extensively quoted on this blog. Also, it has very nice drawings and &lt;em&gt;IMHO&lt;/em&gt; is a great continuation of the original idea. Author of this book is a well known programmer in the &lt;em&gt;Erlang&lt;/em&gt; world. And probably, by that statement, you should be pretty sure which book I described here. So, see you soon! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://thecleancoder.blogspot.com/2010/08/why-clojure.html&quot;&gt;Why Clojure?&lt;/a&gt; by &lt;a href=&quot;https://twitter.com/unclebobmartin&quot;&gt;@unclebobmartin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mitpress.mit.edu/books/structure-and-interpretation-computer-programs&quot;&gt;Structure and Interpretation of Computer Programs&lt;/a&gt;, &lt;em&gt;Harold Abelson&lt;/em&gt;, &lt;em&gt;Gerald Jay Sussman&lt;/em&gt; and &lt;em&gt;Julie Sussman&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Full book available online&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 01 Jun 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/books-that-changed-my-career/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html</guid>
+      </item>
+    
+      <item>
+        <title>Seven Languages in Seven Weeks - Scala</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---scala&quot;&gt;Seven Languages in Seven Weeks - Scala&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right scala-logo&quot; alt=&quot;Scala Logo&quot; src=&quot;/assets/ScalaLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I have got a small sentiment for that language. After couple of years working primarily with &lt;em&gt;OOP&lt;/em&gt; languages, I have tried something new. I enrolled into &lt;em&gt;Functional Programming Principles in Scala&lt;/em&gt;. It was a &lt;em&gt;great choice&lt;/em&gt; - the course itself was an amazing experience, I have learned a lot. Basically, it was my first functional language adventure - and I liked it (it may sound strange, but I have not, literally, even a single hour related to that topic during my studies in the college).&lt;/p&gt;
+
+&lt;p&gt;After that experience, I dived deeper into that topic. I have worked with other programming languages, I built more and more projects in that methodology - starting from smaller things to a bigger ones. I have read more and more books related with that topic. And my perspective also changed. In that blog post I would like to focus not on the language features, but some things which I consider, at the same time, the &lt;em&gt;advantages&lt;/em&gt; and &lt;em&gt;curses&lt;/em&gt; of Scala.&lt;/p&gt;
+
+&lt;h3 id=&quot;object-oriented-meets-functional&quot;&gt;“Object-Oriented Meets Functional”&lt;/h3&gt;
+
+&lt;p&gt;As you probably know, &lt;em&gt;Scala&lt;/em&gt; has both paradigms inscribed in its nature. It is easy and approachable for newcomers - it is often described as a &lt;em&gt;hybrid&lt;/em&gt; or a &lt;em&gt;bridge&lt;/em&gt; programming language. Another important advantage is that one related with a platform - it has seamless integration with Java and it brings whole power of JVM to the table.&lt;/p&gt;
+
+&lt;p&gt;The whole problem which I have with that approach is the following - it is really easy to start and employ certain functional constructs in the &lt;em&gt;OOP&lt;/em&gt; world, but in order to start thinking in a purely functional manner you need to drop almost everything related with the conventional and mainstream &lt;em&gt;OOP&lt;/em&gt; (which is - surprise, surprise - &lt;a href=&quot;http://c2.com/cgi/wiki?AlanKaysDefinitionOfObjectOriented&quot;&gt;a broken model&lt;/a&gt;). Is it hard to believe? Try to seek a &lt;em&gt;“truly”&lt;/em&gt; object oriented stuff in &lt;a href=&quot;http://www.manning.com/bjarnason/&quot;&gt;that book&lt;/a&gt; - Good luck with that. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is also impossible to enforce &lt;em&gt;pureness&lt;/em&gt; and e.g. &lt;em&gt;immutability&lt;/em&gt;. It is impossible on the compiler side to do it on the compiler side. It is possible to build another layer on top of that, but it is really hard to develop such safety net with a type system - and most people will consider this rather impractical. So it means, that the all good practices and good features attached to the language can be destroyed by a single decision (often caused by a laziness, pragmatism or convenience). &lt;em&gt;I do not think that it is a good idea&lt;/em&gt; - I would rather go in a &lt;em&gt;“painful”&lt;/em&gt; path with e.g. being immutable from the beginning.&lt;/p&gt;
+
+&lt;h3 id=&quot;feature-bloat&quot;&gt;Feature Bloat&lt;/h3&gt;
+
+&lt;p&gt;Another problem that I have with &lt;em&gt;Scala&lt;/em&gt; it is its size - in terms of &lt;em&gt;features&lt;/em&gt; and ways to &lt;em&gt;do something&lt;/em&gt;. It is really hard to grasp all possible syntactical choices related with various constructs. Core of the language has really strange capabilities - my &lt;em&gt;“favorite”&lt;/em&gt; one is built-in support for &lt;em&gt;XML&lt;/em&gt; (I do not get why it is not defined in a user space, especially that &lt;em&gt;Scala&lt;/em&gt; is well known from its relaxed syntax, which is really nice when it comes to the &lt;em&gt;DSL&lt;/em&gt; creation). Why it does not have a JSON then? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The same thing applies to the &lt;em&gt;operator overloading&lt;/em&gt; (please look at the &lt;em&gt;Scalaz&lt;/em&gt; library - for a person not familiar with that library, code written in that manner is illegible) or different (and &lt;em&gt;strange&lt;/em&gt;) syntactical rules e.g. related with &lt;a href=&quot;https://www.agilelearner.com/presentation/81&quot;&gt;somersault of operands&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;From the other hand &lt;em&gt;Scala&lt;/em&gt; core language features does not have anything related with concurrency besides &lt;code&gt;Future[T]&lt;/code&gt; and &lt;code&gt;promise[T]&lt;/code&gt;. This is really a strange choice, especially looking at the &lt;em&gt;XML&lt;/em&gt; support in the core. And I am not only whining here, because &lt;em&gt;Scala&lt;/em&gt; has also many awesome features - the best ones are &lt;em&gt;Partial Functions&lt;/em&gt; and &lt;em&gt;Traits&lt;/em&gt;. It has also very decent &lt;em&gt;pattern matching&lt;/em&gt; and impressive &lt;em&gt;type inference&lt;/em&gt;. But the core language with libraries size it is definitely too big.&lt;/p&gt;
+
+&lt;h3 id=&quot;jvm-oh-sweet-jvm&quot;&gt;JVM, oh sweet JVM…&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html&quot;&gt;There is no doubt&lt;/a&gt;, Java is still the most popular programming language - it automatically means that the &lt;em&gt;JVM&lt;/em&gt; is very popular, and all languages based on that platform can easily employ that power. &lt;em&gt;Scala&lt;/em&gt; also does that.&lt;/p&gt;
+
+&lt;p&gt;Mentioned popularity is even more visible when it comes to the books. &lt;a href=&quot;https://youtu.be/HLCFJ9hnR1M?t=808&quot;&gt;In 20015, 5 out of 6 books in the functional programming space are about &lt;em&gt;Scala&lt;/em&gt;&lt;/a&gt;. During last 4 years &lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming in Scala&lt;/a&gt; was the most popular book in the functional programming space.&lt;/p&gt;
+
+&lt;p&gt;Basing design of a new language on top of the existing platform can be sometimes &lt;a href=&quot;http://docs.scala-lang.org/overviews/core/value-classes.html&quot;&gt;a constraining path&lt;/a&gt;. The canonical example is &lt;a href=&quot;http://www.scala-lang.org/api/current/#scala.util.control.TailCalls$&quot;&gt;&lt;code&gt;scala.util.control.TailCalls&lt;/code&gt;&lt;/a&gt;. I hope that amount of work related with providing workarounds for &lt;code&gt;JVM&lt;/code&gt; limitations is still smaller than the amount of actual work. And last but not least - tooling. I have nothing against &lt;em&gt;&lt;code&gt;scalac&lt;/code&gt;&lt;/em&gt; or &lt;em&gt;&lt;code&gt;REPL&lt;/code&gt;&lt;/em&gt;, but &lt;code&gt;sbt&lt;/code&gt; - really? Are we still in XXI century, or did I miss something? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; In the ranking of the most obscure programming tools &lt;code&gt;sbt&lt;/code&gt; will be on the podium.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;It does not mean that &lt;em&gt;Scala&lt;/em&gt; is a bad programming language - it has huge minds behind, it has certain merits (even for me - it somehow introduced me to the topic of the &lt;em&gt;functional programming&lt;/em&gt;), but it should provide something more - and by &lt;em&gt;more&lt;/em&gt;, I do not mean more features. Without that it will be just another language on top of &lt;em&gt;JVM&lt;/em&gt;, which brings some of functional concepts to the crowd - and it will stay in that way.&lt;/p&gt;
+
+&lt;p&gt;I think that one of such things that are different and brings real value to the community is the &lt;a href=&quot;http://www.manning.com/bjarnason/&quot;&gt;Functional Programming in Scala&lt;/a&gt; book. It is a masterpiece, I have not read it fully yet, but from the very first chapters I see that it brings thinking about &lt;em&gt;FP&lt;/em&gt; on the different level. &lt;em&gt;This book is definitely recommended for everyone who is interested in functional paradigm&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
+
+&lt;p&gt;In the next blog post we will talk about my favorite programming language, &lt;em&gt;&lt;a href=&quot;http://www.erlang.org&quot;&gt;Erlang&lt;/a&gt;&lt;/em&gt;. It has unique approach to the concurrency, it is a mature and battle-tested platform, which has still active and vibrant community (recently expanded by a fast growing &lt;em&gt;Elixir&lt;/em&gt; community). See you in the next blog post! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.scala-lang.org/&quot;&gt;Scala&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming in Scala, 2nd Edition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 29 Jun 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html</guid>
+      </item>
+    
+      <item>
+        <title>Books that changed my career - Learn You Some Erlang For Great Good!</title>
+        <description>&lt;h1 id=&quot;books-that-changed-my-career---learn-you-some-erlang-for-great-good&quot;&gt;Books that changed my career - Learn You Some Erlang For Great Good!&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is another one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
+
+&lt;h3 id=&quot;why-should-i-care&quot;&gt;Why should I care?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;The shortest and simplest answer is - you should care if you are interested in &lt;em&gt;Erlang VM&lt;/em&gt; related topics&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;It is a book for a specialized audience. Probably you will not be interested if you are not interested in learning &lt;em&gt;Erlang&lt;/em&gt; or diving into ecosystem built around it. But if you would like to learn a new programming language - it is a very good book for a newcomer. Besides that, you should also read the Joe Armstrong’s book &lt;em&gt;“Programming Erlang, 2nd Edition”&lt;/em&gt; - which is a classic position, written by one of language creators.&lt;/p&gt;
+
+&lt;p&gt;Also, if you are dealing with &lt;em&gt;Erlang&lt;/em&gt; operations (e.g. you are a &lt;em&gt;DevOps&lt;/em&gt; person in the project which uses &lt;em&gt;Erlang&lt;/em&gt;), the same author wrote a book &lt;em&gt;Erlang in Anger&lt;/em&gt;, which is an awesome source of knowledge - it is full of hints, small tools and scripts and many useful guides, based on author’s extensive experience (&lt;em&gt;Heroku&lt;/em&gt; is the place when you probably can deal with &lt;a href=&quot;https://blog.heroku.com/archives/2013/11/7/logplex-down-the-rabbit-hole&quot;&gt;huge amount of unusual problems&lt;/a&gt; &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-book&quot;&gt;About the book&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right lysefgg-logo&quot; alt=&quot;Learn You Some Erlang For Great Good! - Cover&quot; src=&quot;/assets/LYSEFGGCover.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That book was mine entry point into the &lt;em&gt;Erlang&lt;/em&gt; world. It is a really good source of knowledge for newcomers, it is also complete - it covers all important topics from language basic syntax to more advanced topics related e.g. with &lt;em&gt;OTP&lt;/em&gt; or building distributed systems. It is very pragmatic and &lt;em&gt;Fred&lt;/em&gt; is continuously updating it (last changes are related with &lt;em&gt;maps&lt;/em&gt; and changes in handling &lt;em&gt;time&lt;/em&gt; which was introduced in the recently released 18th version of &lt;em&gt;Erlang VM&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;You will learn from this book a true &lt;em&gt;Erlang&lt;/em&gt; approach. Book contains also idioms, but it is starting from the ground up. It has a well thought structure and also - it is really well written and it has very interesting style (you will not miss &lt;em&gt;illustrations&lt;/em&gt; prepared for each chapter - they are sometimes funny).&lt;/p&gt;
+
+&lt;p&gt;The last, but not least - as I said in the previous paragraph - author &lt;a href=&quot;https://twitter.com/mononcqc&quot;&gt;Fred Trottier-Hebert&lt;/a&gt; is an experienced &lt;em&gt;Erlang&lt;/em&gt; developer, he is well-known in the community (he was an &lt;em&gt;Erlang&lt;/em&gt; user of the year), he wrote 2 books about &lt;em&gt;Erlang&lt;/em&gt; and numerous blog posts on &lt;a href=&quot;http://ferd.ca/&quot;&gt;his blog&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;i-do-not-care-about-erlang-or-elixir-should-i-still-care&quot;&gt;I do not care about &lt;code&gt;Erlang&lt;/code&gt; or &lt;code&gt;Elixir&lt;/code&gt;. Should I still care?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;The shortest and simplest answer is no&lt;/strong&gt;. The longer one, needs much more investigation of problem’s root.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;May I ask you why you don’t like Erlang?&lt;/em&gt; If you are already interested in any other language that is &lt;em&gt;functional&lt;/em&gt; and &lt;em&gt;built with concurrency in mind&lt;/em&gt;, then it is fine. But if not, you should learn a new one (pick any - &lt;code&gt;Clojure&lt;/code&gt;, &lt;code&gt;F#&lt;/code&gt; or &lt;code&gt;Erlang&lt;/code&gt;). Just use a different language than your daily tool. You can read about that &lt;a href=&quot;http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html&quot;&gt;here&lt;/a&gt;. And I will leave you with that till the next time! &lt;img class=&quot;emoji&quot; title=&quot;:smiley:&quot; alt=&quot;:smiley:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f603.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/content&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang-in-anger.com/&quot;&gt;Erlang in Anger&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/time&quot;&gt;Erlang 18 and Time&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.heroku.com/archives/2013/11/7/logplex-down-the-rabbit-hole&quot;&gt;Troubleshooting Down the Logplex Rabbit Hole&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/jaerlang2/programming-erlang&quot;&gt;Programming Erlang, 2nd Edition&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 06 Jul 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</guid>
+      </item>
+    
+      <item>
+        <title>Seven Languages in Seven Weeks - Erlang</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---erlang&quot;&gt;Seven Languages in Seven Weeks - Erlang&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with book &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right erlang-logo&quot; alt=&quot;Erlang Logo&quot; src=&quot;/assets/ErlangLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you did not sleep under a rock in the past 30 years or this post is not a first one which you have read on this blog, you are probably familiar what &lt;em&gt;Erlang&lt;/em&gt; is and which features are making it uniquely suited in certain class of applications. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I do not want to cover any interesting language features, because I have already written &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/10/interesting-language-features-erlang-named-case-expressions.html&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html&quot;&gt;posts&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html&quot;&gt;that&lt;/a&gt;. Instead, I would like to introduce to you a small story about origin of the &lt;em&gt;actor model&lt;/em&gt; in that particular case.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-small-story-about-the-actor-model-in-erlang&quot;&gt;A small story about the &lt;em&gt;actor model&lt;/em&gt; in &lt;em&gt;Erlang&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;The easiest way to start, will be to introduce definition directly from &lt;em&gt;Wikipedia&lt;/em&gt;:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;The actor model in computer science is a mathematical model of concurrent computation that treats &quot;actors&quot; as the universal primitives of concurrent computation: in response to a message that it receives, an actor can make local decisions, create more actors, send more messages, and determine how to respond to the next message received. The actor model originated in 1973. It has been used both as a framework for a theoretical understanding of computation and as the theoretical basis for several practical implementations of concurrent systems. The relationship of the model to other work is discussed in Indeterminacy in concurrent computation and Actor model and process calculi.&lt;/quote&gt;
+
+&lt;p&gt;More or less at the same time, Erlang was created - with similar concepts inside. At first sight it looks like an industrial implementation of academic theory. However, creators did not call that an &lt;em&gt;actor model&lt;/em&gt;, but all features are reflecting that idea pretty much entirely - core of this idea is a lightweight processes implementation, which use message passing for communication between them and complete isolation from each other.&lt;/p&gt;
+
+&lt;p&gt;It may sound as an impossible and strange coincidence, but that implementation &lt;strong&gt;was not inspired by work of Hewitt, Bishop and Steiger at all&lt;/strong&gt;. As &lt;a href=&quot;https://twitter.com/rvirding&quot;&gt;Robert Virding&lt;/a&gt; said &lt;a href=&quot;http://rvirding.blogspot.com/2008/01/virdings-first-rule-of-programming.html?showComment=1400761539472#c5295780053912797163&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;No, we didn't as such &quot;invent&quot; them, but at the same time we didn't take them from anywhere either. We arrived at these properties on our own as the best ways of solving our problems. We never heard about actors till years later.&lt;/quote&gt;
+
+&lt;p&gt;It means that &lt;em&gt;actor model&lt;/em&gt; has a solid industrial motivation and inspiration in the Telecommunication domain. Looking at this from a different perspective - it is how the phone calls are working at the highest conceptual level (also you can easily find analogies to that process in nature and biology). They have arrived to the same properties on their own, distilling and solving the domain problems over and over again - in complete isolation from the academic theory, as a best fit for set of their problems. I am convinced that this model is a valuable thing by that, because it means that at least two sets of people came up with same idea which is a perfect fit for handling certain class of problems related with concurrent operations.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
+
+&lt;p&gt;We are heading inevitably to the end of first book - following blog posts in that series will cover two last programming languages - &lt;em&gt;Clojure&lt;/em&gt; and &lt;em&gt;Haskell&lt;/em&gt;. After that, we will have a short break, for one or two blog posts about other languages which are not covered in neither both aforementioned books. Then, we will start again with first language described in the sequel &lt;a href=&quot;https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks&quot;&gt;&lt;em&gt;Seven More Languages in Seven Weeks&lt;/em&gt;&lt;/a&gt;. See you next time then! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Actor_model&quot;&gt;Actor Model - Wikipedia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://worrydream.com/refs/Hewitt-ActorModel.pdf&quot;&gt;A Universal Modular Actor Formalism for Artificial Intelligence - Hewitt, Bishop, Steiger&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang.org/&quot;&gt;Erlang - Official Website&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 13 Jul 2015 18:15:00 +0200</pubDate>
+        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</guid>
+      </item>
+    
+  </channel>
+</rss>

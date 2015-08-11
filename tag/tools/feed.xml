@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: tools</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/tools/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Useful tools - mailcatcher</title>
+        <description>&lt;h1 id=&quot;useful-tools---mailcatcher&quot;&gt;Useful tools - &lt;code&gt;mailcatcher&lt;/code&gt;&lt;/h1&gt;
+
+&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;MailCatcher&lt;/em&gt; runs a super simple &lt;code&gt;SMTP&lt;/code&gt; server which catches any message sent to it to display in a web interface. It is a very useful tool which does not need a huge knowledge about e.g. &lt;code&gt;sendmail&lt;/code&gt; and it is really easy to set up.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation-and-usage&quot;&gt;Installation and Usage&lt;/h2&gt;
+
+&lt;p&gt;Service is written in &lt;em&gt;Ruby&lt;/em&gt; and it is accessible in the gems repository. If you have &lt;em&gt;Ruby&lt;/em&gt; installed you will only need to perform two installation steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Install it from gems by &lt;code&gt;gem install mailcatcher&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Start the service by invoking command &lt;code&gt;mailcatcher&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Go to the dashboard at &lt;code&gt;http://localhost:1080/&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Send email through &lt;code&gt;smtp://localhost:1025&lt;/code&gt; - after that email should appear in the dashboard.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Using it inside a web framework e.g. &lt;em&gt;&lt;code&gt;Symfony2&lt;/code&gt;&lt;/em&gt; is a piece of cake. The only thing you need is a small modification in the &lt;em&gt;&lt;code&gt;parameters.yml&lt;/code&gt;&lt;/em&gt; configuration file:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;l-Scalar-Plain&quot;&gt;mailer_transport&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;l-Scalar-Plain&quot;&gt;smtp&lt;/span&gt;
+  &lt;span class=&quot;l-Scalar-Plain&quot;&gt;mailer_host&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;       &lt;span class=&quot;l-Scalar-Plain&quot;&gt;localhost&lt;/span&gt;
+  &lt;span class=&quot;l-Scalar-Plain&quot;&gt;mailer_port&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;       &lt;span class=&quot;l-Scalar-Plain&quot;&gt;1025&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You need to be sure that in the &lt;em&gt;&lt;code&gt;config.yml&lt;/code&gt;&lt;/em&gt; you have these keys:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;swiftmailer&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;l-Scalar-Plain&quot;&gt;transport&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;      &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;mailer_transport%&lt;/span&gt;
+  &lt;span class=&quot;l-Scalar-Plain&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;           &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;mailer_host%&lt;/span&gt;
+  &lt;span class=&quot;l-Scalar-Plain&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;           &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;mailer_port%&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After applying mentioned changes and rebuilding the cache application will send emails via &lt;code&gt;SMTP&lt;/code&gt; server from &lt;em&gt;mailcatcher&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you need to run it as a service with web interface accessible outside you need to run it in this way:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nohup mailcatcher --http-ip 0.0.0.0 &amp;gt; /var/log/mailcatcher.log 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;links&quot;&gt;Links&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mailcatcher.me/&quot;&gt;&lt;code&gt;mailcatcher&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 13 Apr 2014 14:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/useful-tools/2014/04/13/useful-tools-mailcatcher.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/useful-tools/2014/04/13/useful-tools-mailcatcher.html</guid>
+      </item>
+    
+      <item>
+        <title>My Toolbox</title>
+        <description>&lt;h1 id=&quot;my-toolbox&quot;&gt;My Toolbox&lt;/h1&gt;
+
+&lt;p&gt;This post is mostly a summary, notes with conclusions and information about what tools I am actually using, which ones I have dropped and even more important why these are sufficient or just good enough.&lt;/p&gt;
+
+&lt;h2 id=&quot;current-setup&quot;&gt;Current Setup&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Notes - &lt;em&gt;Microsoft OneNote&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Impressive web and mobile clients.&lt;/li&gt;
+      &lt;li&gt;Easy access to my notes.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tasks - &lt;em&gt;Asana&lt;/em&gt; &amp;amp; &lt;em&gt;Google Calendar&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Unfortunately all tasks management tools are after a while not enough and too &lt;em&gt;rigid&lt;/em&gt; for me.&lt;/li&gt;
+      &lt;li&gt;Right now I am scheduling all tasks in Google Calendar and rest of uncategorized tasks are available in &lt;em&gt;Asana&lt;/em&gt;.&lt;/li&gt;
+      &lt;li&gt;I am in the middle of researching an ideal workflow and transferring tasks from both to just one.&lt;/li&gt;
+      &lt;li&gt;Recently I back to &lt;em&gt;Trello&lt;/em&gt; for some side project and I cannot recall why I stopped to use this tool.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mind Maps - &lt;em&gt;MindMup&lt;/em&gt; (&lt;a href=&quot;http://www.mindmup.com&quot;&gt;mindmup.com&lt;/a&gt;)
+    &lt;ul&gt;
+      &lt;li&gt;I have started using mind mapping technique recently as a way of making notes and I must admit that in some cases it works perfectly.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;MindMup&lt;/em&gt; is a very good web client for doing notes in such form.&lt;/li&gt;
+      &lt;li&gt;Unfortunately, I cannot use this approach in each case, because editing mode for longer notes and short descriptions in nodes is terrible.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Repositories - &lt;em&gt;Github&lt;/em&gt; (&lt;a href=&quot;https://github.com&quot;&gt;github.com&lt;/a&gt;)
+    &lt;ul&gt;
+      &lt;li&gt;For me it is an obvious choice - I am a happy customer since 2012.&lt;/li&gt;
+      &lt;li&gt;I have tried &lt;em&gt;bitbucket&lt;/em&gt; earlier, I moved to &lt;em&gt;github&lt;/em&gt; and recently I have used &lt;em&gt;bitbucket&lt;/em&gt; again after a while - it works and looks much better right now.&lt;/li&gt;
+      &lt;li&gt;At this point of time these two systems are very similar in capabilities and supported features.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Storage - &lt;em&gt;Google Drive&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Natural choice because of Google Apps account and seamless integration with Google Docs.&lt;/li&gt;
+      &lt;li&gt;From &lt;em&gt;Android&lt;/em&gt;-like device it is a pleasure to work with Drive for me.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Documents - &lt;em&gt;Google Docs&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Impressive and what is most important working web and mobile client.&lt;/li&gt;
+      &lt;li&gt;Right now I am using Google Docs in all tasks which requires creating documents, spreadsheets.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Read/Watch Later - &lt;em&gt;Instapaper&lt;/em&gt;, &lt;em&gt;Feedly&lt;/em&gt;, &lt;em&gt;Vimeo&lt;/em&gt;, &lt;em&gt;Youtube&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Simple and clean UI, whole project is seamlessly integrated with Kindle.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Feedly&lt;/em&gt; (after closing &lt;em&gt;Google Reader&lt;/em&gt;) is for me the best application for RSS feeds management (with decent mobile client).
+        &lt;ul&gt;
+          &lt;li&gt;Still, it has serious issues - lack of tag management etc.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;For videos and podcasts I am using Youtube’s and Vimeo’s &lt;em&gt;“Watch Later”&lt;/em&gt; lists.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Presentations - &lt;em&gt;Customized frameworks&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;I hate &lt;em&gt;PowerPoint&lt;/em&gt;-like presentations.&lt;/li&gt;
+      &lt;li&gt;I am using adjusted and crafted version of &lt;a href=&quot;http://lab.hakim.se/reveal-js&quot;&gt;reveal.js&lt;/a&gt; available &lt;a href=&quot;https://github.com/afronski/presentation-template&quot;&gt;here&lt;/a&gt;.&lt;/li&gt;
+      &lt;li&gt;In future, with probability I will use &lt;a href=&quot;http://slides.com&quot;&gt;slides.com&lt;/a&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tools-that-i-tried&quot;&gt;Tools that I tried&lt;/h2&gt;
+
+&lt;h3 id=&quot;emacs-org-mode&quot;&gt;Emacs org-mode&lt;/h3&gt;
+
+&lt;p&gt;It is at the same time powerful and annoying. With &lt;em&gt;&lt;code&gt;git&lt;/code&gt;&lt;/em&gt; and remote repository creates very powerful combination. Unfortunately, there are no synchronization mechanisms for web / mobile application - for me it is not acceptable, because most of notes and ideas are coming to my mind when I do not have access to laptop / PC.&lt;/p&gt;
+
+&lt;h3 id=&quot;dropbox&quot;&gt;Dropbox&lt;/h3&gt;
+
+&lt;p&gt;My Dropbox account was the victim of migration to Google Apps - I would like to have seamless integration with my online documents, so the naturally I have migrated to Google Drive. Unfortunately this option has a serious drawback - Linux client for Google Drive does not exist, there is a very simple alternative called &lt;em&gt;&lt;code&gt;grive&lt;/code&gt;&lt;/em&gt;. Dropbox had very good client for that operating system.&lt;/p&gt;
+
+&lt;h3 id=&quot;offline-note-taking&quot;&gt;Offline note-taking&lt;/h3&gt;
+
+&lt;p&gt;This does not work for me. I have made myself to work with it and I just can’t. When I have pen and paper, notebook or something similar, I can note interesting observation and idea. There is only one &lt;em&gt;if&lt;/em&gt; - I often forgot to gather with me my notebook. Another disadvantage is related with offline management for such notes - it is much harder then the digital ones (lack of copy-pasting, lack of elasticity - moving paragraphs etc.).&lt;/p&gt;
+
+&lt;h3 id=&quot;trello&quot;&gt;Trello&lt;/h3&gt;
+
+&lt;p&gt;Very simple and neat board management tool. I have used it extensively in the past and one day I just stopped. Personally, I don’t remember why I did that - it can be that I had pile of tasks which are not properly reduced after a while and &lt;em&gt;icebox&lt;/em&gt; was bigger and bigger.&lt;/p&gt;
+
+&lt;h3 id=&quot;evernote&quot;&gt;Evernote&lt;/h3&gt;
+
+&lt;p&gt;It is a really good tool, I have used it previously as a something in the middle of note taking and long term tasks management tool. However lack of decent Linux / Web client enforced me to look for better alternative.&lt;/p&gt;
+
+&lt;h3 id=&quot;prezi&quot;&gt;Prezi&lt;/h3&gt;
+
+&lt;p&gt;It does not look good enough for me to pay for it, and free version limitation (e.g. I do not like watermarks) is unacceptable for me. Moreover communication via such tool can be very &lt;em&gt;cluttered&lt;/em&gt; and &lt;em&gt;inconsistent&lt;/em&gt;. Do you need more arguments? It is powered by Flash.&lt;/p&gt;
+
+&lt;h3 id=&quot;impressjs&quot;&gt;impress.js&lt;/h3&gt;
+
+&lt;p&gt;It is very neat tool, but complicated transforms and moving parts are &lt;em&gt;cluttering&lt;/em&gt; the meaning (as above). A huge advantage is use of a web platform and browser as a main technologies for this library.&lt;/p&gt;
+
+&lt;h3 id=&quot;pocket&quot;&gt;Pocket&lt;/h3&gt;
+
+&lt;p&gt;This project does not work for me because of several reasons. First, I have used it around a year ago and I hated this UI. Second, there were no integration with Kindle at that time.&lt;/p&gt;
+
+&lt;h3 id=&quot;digg&quot;&gt;Digg&lt;/h3&gt;
+
+&lt;p&gt;I have tried to use this web application and after a couple of days I gave up. Many glitches on the UI side and problem with categorization of sources were sufficient for me to drop that tool.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-old-reader&quot;&gt;The Old Reader&lt;/h3&gt;
+
+&lt;p&gt;I really liked this application, it has simple and clean UI, decent tags and feeds categorization management. However after fuss with closing and reopening it discouraged me enough to keep me away from it.&lt;/p&gt;
+
+&lt;h1 id=&quot;missing-pieces&quot;&gt;Missing Pieces&lt;/h1&gt;
+
+&lt;p&gt;Actually, there is only one piece missing here - integration between tasks, calendar and feeds of information (like &lt;em&gt;Instapaper&lt;/em&gt;/&lt;em&gt;Youtube&lt;/em&gt;/&lt;em&gt;Vimeo&lt;/em&gt; queues). If you know such tool, please let me know.&lt;/p&gt;
+
+&lt;p&gt;If you disagree with my opinion and my choices, please let me know about it in the comments.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Apr 2014 20:30:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2014/04/28/my-toolbox.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2014/04/28/my-toolbox.html</guid>
+      </item>
+    
+  </channel>
+</rss>

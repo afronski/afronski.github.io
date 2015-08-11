@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: scala</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/scala/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>With great power, comes great responsibility</title>
+        <description>&lt;h1 id=&quot;with-great-power-comes-great-responsibility&quot;&gt;With great power, comes great responsibility&lt;/h1&gt;
+
+&lt;p&gt;If you had to choose what is better - &lt;em&gt;short and concise code&lt;/em&gt; or &lt;em&gt;abstractions visible at the first glance&lt;/em&gt; - what would you choose?&lt;/p&gt;
+
+&lt;p&gt;Got your answer? Fine, let’s look at the examples.&lt;/p&gt;
+
+&lt;h1 id=&quot;iterables&quot;&gt;Iterables&lt;/h1&gt;
+
+&lt;p&gt;Let’s look at the standard abstraction of &lt;em&gt;iterable collections&lt;/em&gt;, available in Java and Scala (example written in &lt;em&gt;Scala&lt;/em&gt;):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Boolean&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Iterable&lt;/em&gt; is an abstraction for all collections which can be stepped through one-by-one.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Iterator&lt;/em&gt; is a data structure (again, an abstraction) that allows to iterate over a sequence of elements. It has two methods - first for checking if there is a next element available, and second which returns the next element.&lt;/p&gt;
+
+&lt;p&gt;So far, so good - we can explicitly see an intent and usage for such abstractions. It is readable at the first sight.&lt;/p&gt;
+
+&lt;h1 id=&quot;observables&quot;&gt;Observables&lt;/h1&gt;
+
+&lt;p&gt;Things can get complicated if we are dealing with asynchronous operations, which return a collection as well. &lt;em&gt;Iterables&lt;/em&gt; define only a collection of existing elements, not possible results.&lt;/p&gt;
+
+&lt;p&gt;But we can introduce new abstractions. Let’s look at the example (again, written in &lt;em&gt;Scala&lt;/em&gt;):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Subscription&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Observer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Throwable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;trait&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Subscription&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unsubscribe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We can compare these two concepts and definitely see similarities, such as that &lt;em&gt;Observable&lt;/em&gt; is similar to &lt;em&gt;Iterable&lt;/em&gt;. The same for &lt;em&gt;Observer&lt;/em&gt; - &lt;em&gt;Iterator&lt;/em&gt; pair. Also, we can easily spot an intent and usage here.&lt;/p&gt;
+
+&lt;p&gt;But when we add a new &lt;em&gt;trait&lt;/em&gt; called &lt;em&gt;Subscription&lt;/em&gt;, there is a slight and subtle change in approach for &lt;em&gt;Observable&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;It receives an &lt;em&gt;Observer&lt;/em&gt; instance as an argument, instead of returning it as presented in the &lt;em&gt;Iterable&lt;/em&gt; / &lt;em&gt;Iterator&lt;/em&gt; approach.&lt;/p&gt;
+
+&lt;p&gt;This subtle change has huge consequences in modelling and understanding these two abstractions. We trade the possibility of pulling things out from an &lt;em&gt;Iterable&lt;/em&gt; collection to pushing a model for the &lt;em&gt;Observable&lt;/em&gt; which will notify an &lt;em&gt;Observer&lt;/em&gt; that something appears, but not for free - we receive an ability to model an asynchronous operation which returns a collection of elements (in other words: we transformed from &lt;em&gt;pulling mode&lt;/em&gt; to the &lt;em&gt;pushing mode&lt;/em&gt;).&lt;/p&gt;
+
+&lt;h1 id=&quot;power-of-expressiveness&quot;&gt;Power of expressiveness&lt;/h1&gt;
+
+&lt;p&gt;What if this &lt;em&gt;Observable&lt;/em&gt; / &lt;em&gt;Iterable&lt;/em&gt; approach was to be presented in one line as a composite type?&lt;/p&gt;
+
+&lt;p&gt;Ready? Superb, but first we will bring up two definitions.&lt;/p&gt;
+
+&lt;h2 id=&quot;tryt&quot;&gt;&lt;code&gt;Try[T]&lt;/code&gt;&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sumTry&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;int1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Try&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// int1 is Success(1).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;int2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Try&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// int2 is Failure(...).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;int1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int2&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;code&gt;Try&lt;/code&gt;&lt;/em&gt; is an analog for the &lt;code&gt;try...catch&lt;/code&gt; block. Instead of having an exception thrown and having to deal with it immediately in the same thread, it disconnects the error handling and recovery.&lt;/p&gt;
+
+&lt;h2 id=&quot;optiont&quot;&gt;&lt;code&gt;Option[T]&lt;/code&gt;&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;optionResult&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Option&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// optionResult is None.&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;optionResult2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Option&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// optionResult2 is Some(1).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;code&gt;Option&lt;/code&gt;&lt;/em&gt; represents optional values, returning an instance of &lt;em&gt;&lt;code&gt;Some(A)&lt;/code&gt;&lt;/em&gt; if &lt;code&gt;A&lt;/code&gt; exists, or &lt;em&gt;&lt;code&gt;None&lt;/code&gt;&lt;/em&gt; if it does not.&lt;/p&gt;
+
+&lt;h2 id=&quot;composition&quot;&gt;Composition&lt;/h2&gt;
+
+&lt;p&gt;The same abstraction, of &lt;em&gt;Observable&lt;/em&gt; can be built on top of &lt;em&gt;Iterable&lt;/em&gt; and a simple type, which is a composite of two previously explained elements:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;collection&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Iterable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Try&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Option&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]]]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s a sequence which introduces the same abstraction, but definitely loses the intent. Usage is not visible at the first glance as well (how are we communicating that something changed?).&lt;/p&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;The whole point of this article is to illustrate that intent and usage can be provided by certain abstractions. Of course, these abstractions can be verbose and seem unnecessary at first sight, but if we chase expressiveness, and introduce it out of hand we will loose details and initial intent.&lt;/p&gt;
+
+&lt;p&gt;The post is strongly inspired by &lt;em&gt;Coursera&lt;/em&gt; course &lt;em&gt;“Principles of Reactive Programming”&lt;/em&gt; provided by courtesy of &lt;em&gt;Erik Meijer&lt;/em&gt;, &lt;em&gt;Martin Odersky&lt;/em&gt; and &lt;em&gt;Roland Kuhn&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.coursera.org/course/reactive&quot;&gt;Coursera - Principles of Reactive Programming&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Tue, 17 Dec 2013 21:45:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2013/12/17/with-great-power-comes-great-responsibility.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2013/12/17/with-great-power-comes-great-responsibility.html</guid>
+      </item>
+    
+      <item>
+        <title>Seven Languages in Seven Weeks - Scala</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---scala&quot;&gt;Seven Languages in Seven Weeks - Scala&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right scala-logo&quot; alt=&quot;Scala Logo&quot; src=&quot;/assets/ScalaLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I have got a small sentiment for that language. After couple of years working primarily with &lt;em&gt;OOP&lt;/em&gt; languages, I have tried something new. I enrolled into &lt;em&gt;Functional Programming Principles in Scala&lt;/em&gt;. It was a &lt;em&gt;great choice&lt;/em&gt; - the course itself was an amazing experience, I have learned a lot. Basically, it was my first functional language adventure - and I liked it (it may sound strange, but I have not, literally, even a single hour related to that topic during my studies in the college).&lt;/p&gt;
+
+&lt;p&gt;After that experience, I dived deeper into that topic. I have worked with other programming languages, I built more and more projects in that methodology - starting from smaller things to a bigger ones. I have read more and more books related with that topic. And my perspective also changed. In that blog post I would like to focus not on the language features, but some things which I consider, at the same time, the &lt;em&gt;advantages&lt;/em&gt; and &lt;em&gt;curses&lt;/em&gt; of Scala.&lt;/p&gt;
+
+&lt;h3 id=&quot;object-oriented-meets-functional&quot;&gt;“Object-Oriented Meets Functional”&lt;/h3&gt;
+
+&lt;p&gt;As you probably know, &lt;em&gt;Scala&lt;/em&gt; has both paradigms inscribed in its nature. It is easy and approachable for newcomers - it is often described as a &lt;em&gt;hybrid&lt;/em&gt; or a &lt;em&gt;bridge&lt;/em&gt; programming language. Another important advantage is that one related with a platform - it has seamless integration with Java and it brings whole power of JVM to the table.&lt;/p&gt;
+
+&lt;p&gt;The whole problem which I have with that approach is the following - it is really easy to start and employ certain functional constructs in the &lt;em&gt;OOP&lt;/em&gt; world, but in order to start thinking in a purely functional manner you need to drop almost everything related with the conventional and mainstream &lt;em&gt;OOP&lt;/em&gt; (which is - surprise, surprise - &lt;a href=&quot;http://c2.com/cgi/wiki?AlanKaysDefinitionOfObjectOriented&quot;&gt;a broken model&lt;/a&gt;). Is it hard to believe? Try to seek a &lt;em&gt;“truly”&lt;/em&gt; object oriented stuff in &lt;a href=&quot;http://www.manning.com/bjarnason/&quot;&gt;that book&lt;/a&gt; - Good luck with that. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is also impossible to enforce &lt;em&gt;pureness&lt;/em&gt; and e.g. &lt;em&gt;immutability&lt;/em&gt;. It is impossible on the compiler side to do it on the compiler side. It is possible to build another layer on top of that, but it is really hard to develop such safety net with a type system - and most people will consider this rather impractical. So it means, that the all good practices and good features attached to the language can be destroyed by a single decision (often caused by a laziness, pragmatism or convenience). &lt;em&gt;I do not think that it is a good idea&lt;/em&gt; - I would rather go in a &lt;em&gt;“painful”&lt;/em&gt; path with e.g. being immutable from the beginning.&lt;/p&gt;
+
+&lt;h3 id=&quot;feature-bloat&quot;&gt;Feature Bloat&lt;/h3&gt;
+
+&lt;p&gt;Another problem that I have with &lt;em&gt;Scala&lt;/em&gt; it is its size - in terms of &lt;em&gt;features&lt;/em&gt; and ways to &lt;em&gt;do something&lt;/em&gt;. It is really hard to grasp all possible syntactical choices related with various constructs. Core of the language has really strange capabilities - my &lt;em&gt;“favorite”&lt;/em&gt; one is built-in support for &lt;em&gt;XML&lt;/em&gt; (I do not get why it is not defined in a user space, especially that &lt;em&gt;Scala&lt;/em&gt; is well known from its relaxed syntax, which is really nice when it comes to the &lt;em&gt;DSL&lt;/em&gt; creation). Why it does not have a JSON then? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The same thing applies to the &lt;em&gt;operator overloading&lt;/em&gt; (please look at the &lt;em&gt;Scalaz&lt;/em&gt; library - for a person not familiar with that library, code written in that manner is illegible) or different (and &lt;em&gt;strange&lt;/em&gt;) syntactical rules e.g. related with &lt;a href=&quot;https://www.agilelearner.com/presentation/81&quot;&gt;somersault of operands&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;From the other hand &lt;em&gt;Scala&lt;/em&gt; core language features does not have anything related with concurrency besides &lt;code&gt;Future[T]&lt;/code&gt; and &lt;code&gt;promise[T]&lt;/code&gt;. This is really a strange choice, especially looking at the &lt;em&gt;XML&lt;/em&gt; support in the core. And I am not only whining here, because &lt;em&gt;Scala&lt;/em&gt; has also many awesome features - the best ones are &lt;em&gt;Partial Functions&lt;/em&gt; and &lt;em&gt;Traits&lt;/em&gt;. It has also very decent &lt;em&gt;pattern matching&lt;/em&gt; and impressive &lt;em&gt;type inference&lt;/em&gt;. But the core language with libraries size it is definitely too big.&lt;/p&gt;
+
+&lt;h3 id=&quot;jvm-oh-sweet-jvm&quot;&gt;JVM, oh sweet JVM…&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html&quot;&gt;There is no doubt&lt;/a&gt;, Java is still the most popular programming language - it automatically means that the &lt;em&gt;JVM&lt;/em&gt; is very popular, and all languages based on that platform can easily employ that power. &lt;em&gt;Scala&lt;/em&gt; also does that.&lt;/p&gt;
+
+&lt;p&gt;Mentioned popularity is even more visible when it comes to the books. &lt;a href=&quot;https://youtu.be/HLCFJ9hnR1M?t=808&quot;&gt;In 20015, 5 out of 6 books in the functional programming space are about &lt;em&gt;Scala&lt;/em&gt;&lt;/a&gt;. During last 4 years &lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming in Scala&lt;/a&gt; was the most popular book in the functional programming space.&lt;/p&gt;
+
+&lt;p&gt;Basing design of a new language on top of the existing platform can be sometimes &lt;a href=&quot;http://docs.scala-lang.org/overviews/core/value-classes.html&quot;&gt;a constraining path&lt;/a&gt;. The canonical example is &lt;a href=&quot;http://www.scala-lang.org/api/current/#scala.util.control.TailCalls$&quot;&gt;&lt;code&gt;scala.util.control.TailCalls&lt;/code&gt;&lt;/a&gt;. I hope that amount of work related with providing workarounds for &lt;code&gt;JVM&lt;/code&gt; limitations is still smaller than the amount of actual work. And last but not least - tooling. I have nothing against &lt;em&gt;&lt;code&gt;scalac&lt;/code&gt;&lt;/em&gt; or &lt;em&gt;&lt;code&gt;REPL&lt;/code&gt;&lt;/em&gt;, but &lt;code&gt;sbt&lt;/code&gt; - really? Are we still in XXI century, or did I miss something? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; In the ranking of the most obscure programming tools &lt;code&gt;sbt&lt;/code&gt; will be on the podium.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;It does not mean that &lt;em&gt;Scala&lt;/em&gt; is a bad programming language - it has huge minds behind, it has certain merits (even for me - it somehow introduced me to the topic of the &lt;em&gt;functional programming&lt;/em&gt;), but it should provide something more - and by &lt;em&gt;more&lt;/em&gt;, I do not mean more features. Without that it will be just another language on top of &lt;em&gt;JVM&lt;/em&gt;, which brings some of functional concepts to the crowd - and it will stay in that way.&lt;/p&gt;
+
+&lt;p&gt;I think that one of such things that are different and brings real value to the community is the &lt;a href=&quot;http://www.manning.com/bjarnason/&quot;&gt;Functional Programming in Scala&lt;/a&gt; book. It is a masterpiece, I have not read it fully yet, but from the very first chapters I see that it brings thinking about &lt;em&gt;FP&lt;/em&gt; on the different level. &lt;em&gt;This book is definitely recommended for everyone who is interested in functional paradigm&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
+
+&lt;p&gt;In the next blog post we will talk about my favorite programming language, &lt;em&gt;&lt;a href=&quot;http://www.erlang.org&quot;&gt;Erlang&lt;/a&gt;&lt;/em&gt;. It has unique approach to the concurrency, it is a mature and battle-tested platform, which has still active and vibrant community (recently expanded by a fast growing &lt;em&gt;Elixir&lt;/em&gt; community). See you in the next blog post! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.scala-lang.org/&quot;&gt;Scala&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming in Scala, 2nd Edition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 29 Jun 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html</guid>
+      </item>
+    
+  </channel>
+</rss>

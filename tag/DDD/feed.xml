@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: DDD</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/DDD/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Gibberish Game</title>
+        <description>&lt;h1 id=&quot;gibberish-game&quot;&gt;Gibberish Game&lt;/h1&gt;
+
+&lt;p&gt;Sometimes you cannot properly name the actual thing. Sometimes you exactly know how to name it, but it will introduce ambiguity and confusion. &lt;em&gt;How to avoid overloading certain terms and assign proper name to the actual definition?&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;what&quot;&gt;What?&lt;/h3&gt;
+
+&lt;p&gt;Answer how to do it is related with a technique from &lt;em&gt;domain driven design&lt;/em&gt; process called &lt;em&gt;modeling whirlpool&lt;/em&gt;. This game helps &lt;em&gt;modeler&lt;/em&gt; choose and adjust a word to the description which &lt;em&gt;domain expert&lt;/em&gt; provides.&lt;/p&gt;
+
+&lt;h3 id=&quot;when&quot;&gt;When?&lt;/h3&gt;
+
+&lt;p&gt;You definitely should use this technique when the actual term cannot be safely used in unambiguous way or it is really overloaded with meanings e.g. couple of aggregates can be associated with it. By defining different, simple, temporary and not meaningful name to the definition we are enforcing our mind to use different parts of brain in order to &lt;em&gt;discover&lt;/em&gt; the actual meaning. It is a way of jumping out just for a while from the scientific and analytic mindset to the more creative one.&lt;/p&gt;
+
+&lt;h3 id=&quot;how&quot;&gt;How?&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Do not name model elements too early.&lt;/li&gt;
+  &lt;li&gt;Name it at first as &lt;em&gt;&lt;code&gt;foo&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;bar&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;blah&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;ble&lt;/code&gt;&lt;/em&gt;/etc. and describe its rules and features.
+    &lt;ul&gt;
+      &lt;li&gt;Proper and what is even more important - descriptive and clear name will automatically appear after a while.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In the next iteration of describing things choose different word.
+    &lt;ul&gt;
+      &lt;li&gt;Why? Because your brain already learned what the previous word means.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If &lt;em&gt;&lt;code&gt;foo&lt;/code&gt;&lt;/em&gt;-ish names sounds offensive and are not appropriate for the audience, you can use Greek letters instead.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;&lt;code&gt;Alpha&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;Kappa&lt;/code&gt;&lt;/em&gt;/&lt;em&gt;&lt;code&gt;Psi&lt;/code&gt;&lt;/em&gt;/etc. sounds more professional &lt;img class=&quot;emoji&quot; title=&quot;:stuck_out_tongue_closed_eyes:&quot; alt=&quot;:stuck_out_tongue_closed_eyes:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f61d.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://goodenoughsoftware.net/2012/02/28/the-gibberish-game/&quot;&gt;&lt;em&gt;The Gibberish Game&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://goodenoughsoftware.net/2012/02/29/the-context-game/&quot;&gt;&lt;em&gt;The Context Game&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=iaLeKHbspLg&quot;&gt;&lt;em&gt;Model jest wszystkim czego potrzebujesz&lt;/em&gt; (PL)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 24 Apr 2014 21:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2014/04/24/gibberish-game.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2014/04/24/gibberish-game.html</guid>
+      </item>
+    
+  </channel>
+</rss>

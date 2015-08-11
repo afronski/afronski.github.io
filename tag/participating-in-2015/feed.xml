@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: participating-in-2015</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/participating-in-2015/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>The best of Lambda Days 2015</title>
+        <description>&lt;h1 id=&quot;the-best-of-lambda-days-2015&quot;&gt;The best of Lambda Days 2015&lt;/h1&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;You can look with admiration and envy to the US or European based conferences like &lt;a href=&quot;https://thestrangeloop.com/&quot;&gt;Strangeloop&lt;/a&gt;, &lt;a href=&quot;http://www.ndc-london.com/&quot;&gt;NDC Oslo&lt;/a&gt;, &lt;a href=&quot;http://www.ndc-london.com/&quot;&gt;NDC London&lt;/a&gt; or &lt;a href=&quot;http://www.erlang-factory.com/sfbay2015/home&quot;&gt;Erlang Factory San Francisco&lt;/a&gt;. Thankfully, conferences list in Poland looks better year after year (e.g. amazing &lt;a href=&quot;http://devday.pl/&quot;&gt;DevDay&lt;/a&gt;, &lt;a href=&quot;http://lanyrd.com/2014/euclojure/&quot;&gt;EuroClojure 2014&lt;/a&gt; or incoming &lt;a href=&quot;http://www.elixirconf.eu/&quot;&gt;Elixir Conf EU 2015&lt;/a&gt;). Still, I was not aware of fact, that there is a conference dedicated purely to the &lt;em&gt;functional programming&lt;/em&gt;. Thanks to the &lt;a href=&quot;https://twitter.com/lechglowiak&quot;&gt;@lechglowiak&lt;/a&gt; I discovered such amazing conference in Kraków (so it is relatively close to the place where I live).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/LambdaDaysHeader.png&quot; alt=&quot;Lambda Days 2015&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yes, I am talking about &lt;a href=&quot;http://lambdadays.org/&quot;&gt;Lambda Days 2015&lt;/a&gt;. Organization, venue and prepared tracks raised the bar high. Great kudos to the organizers for creating such amazing event! I am glad that I could take part in such awesome and inspiring experience.&lt;/p&gt;
+
+&lt;p&gt;In this blog post I would like to focus on the best presentations which I have seen live. Please note, that list is far from complete. Parallel tracks caused hard choices sometimes. I am still catching up with the rest of the talks, thanks to the uploaded &lt;a href=&quot;https://vimeo.com/tag:Lambda+Days&quot;&gt;videos&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;my-top-5&quot;&gt;My Top 5&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/121374004&quot;&gt;How computers change our brains. Can screen-time cause mental or neurological disorders?&lt;/a&gt; by &lt;em&gt;Kinga Panasiewicz&lt;/em&gt; - Very inspiring and scientific talk about the most precious part of our body - &lt;em&gt;brain&lt;/em&gt;. As people which constantly learns and, what is even more important, we use &lt;em&gt;brain&lt;/em&gt; in our daily work without rest, we should know almost everything about the possible damage and &lt;em&gt;“hygiene”&lt;/em&gt;. I am a little biased, because I love learning about that topics, but I recommend watching it. &lt;strong&gt;Good mental health is a key for effective and stress-less work&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Understanding Cancer Behavior with F# by &lt;em&gt;Evelina Gobasova&lt;/em&gt; - Being a part of such research team can be intimidating, but also rewarding. Your impact as a computer scientist cannot be more meaningful than that. Highly inspiring talk, with many technical details related with &lt;em&gt;F#&lt;/em&gt;. If you are interested in type providers or using functional programming as a data scientist, it is highly recommended to watch it (&lt;em&gt;but it is not uploaded yet&lt;/em&gt;).&lt;/li&gt;
+  &lt;li&gt;Building systems in Clojure by &lt;em&gt;Matthias Nehlsen&lt;/em&gt; - I am following Matthias blog and work (on his &lt;a href=&quot;https://leanpub.com/building-a-system-in-clojure&quot;&gt;book&lt;/a&gt; and side projects) and I was not disappointed. Presentation described practical approach to the building systems, not only in Clojure, but in general with use of the functional programming language. If you are interested in such details, I recommend to watch this talk (&lt;em&gt;video is not available yet&lt;/em&gt;).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/123606435&quot;&gt;State, Communication and Side-Effects in Idris&lt;/a&gt; by &lt;em&gt;Edwin Brady&lt;/em&gt; - I was blown away by features and capabilities of &lt;a href=&quot;http://www.idris-lang.org/example/&quot;&gt;Idris&lt;/a&gt;. Literally, this talk just blown my mind - &lt;em&gt;dependent types&lt;/em&gt; looks really promising. Even if someone claims that it is a purely academical thing (but in presented context, it does not look as a purely theoretical work) it is still valuable at least to briefly look at it. Mostly for expanding your horizon and drill your brain.&lt;/li&gt;
+  &lt;li&gt;Lessons from Erlang VM by &lt;em&gt;Michał Ślaski&lt;/em&gt; - I am a huge fan of &lt;em&gt;Erlang&lt;/em&gt; ecosystem, mainly because of pragmatism and focus on building &lt;em&gt;reliable&lt;/em&gt; and &lt;em&gt;resilient&lt;/em&gt;  systems. Moreover, a lot of time we speak how to build such systems and we treat the maintenance part as a &lt;em&gt;side-effect&lt;/em&gt; and something not worth our attention. It should be exactly opposite! Most of the time related with software lifetime is spent in the maintenance phase. We need to build mission critical systems on a solid foundation, with maintenance in mind from the &lt;em&gt;day zero&lt;/em&gt;. Talk recommended for people interested in getting familiar with &lt;em&gt;Erlang VM&lt;/em&gt; features overview, which ease building systems with such requirements (&lt;em&gt;talk video it is not uploaded yet&lt;/em&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;stickers-on-participant-badges-and-lambda-academy&quot;&gt;Stickers on participant badges and Lambda Academy&lt;/h3&gt;
+
+&lt;p&gt;During the conference there was an interesting exhibition. I noticed, as probably most of the people, strange sticker on my participant’s badge. It turns out, that one of the stands has &lt;em&gt;Raspberry Pi&lt;/em&gt; installation with NFC tag reader (yes, it is a NFC-powered sticker). This sent an XMPP message to the &lt;a href=&quot;https://www.erlang-solutions.com/products/mongooseim-massively-scalable-ejabberd-platform&quot;&gt;MongooseIM&lt;/a&gt; each time when someone scanned a badge. Everything built in Erlang (even the sticker scanner). &lt;strong&gt;Awesome idea!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This exhibition was dedicated to the &lt;a href=&quot;http://www.lambdaacademy.org/blog/&quot;&gt;Lambda Academy&lt;/a&gt; initiative. Software used at the conference - chat, voting system (back-end and mobile application) were created in a first iteration of lectures. Whole academy is focused on use &lt;em&gt;functional programming languages&lt;/em&gt; and popularizing them in the community. Feel free to subscribe, in order to receive updates about new initiatives and future projects.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;If you are a curious person, this conference is a must-be place for you. If you are an open person, eager to learn new stuff, especially - related with functional programming - go for it! I am looking forward to the Lambda Days 2016. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lambdadays.org&quot;&gt;Lambda Days&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.lambdaacademy.org&quot;&gt;Lambda Academy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 06 Apr 2015 19:15:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/04/06/the-best-of-lambda-days.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/04/06/the-best-of-lambda-days.html</guid>
+      </item>
+    
+      <item>
+        <title>Elixir Conf EU 2015 - Afterthoughts</title>
+        <description>&lt;h1 id=&quot;elixir-conf-eu-2015---afterthoughts&quot;&gt;Elixir Conf EU 2015 - Afterthoughts&lt;/h1&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/2015/04/06/the-best-of-lambda-days.html&quot;&gt;previous post&lt;/a&gt; about interesting events, I have said that more of them will come in future. I have participated in one of these - &lt;em&gt;ElixirConf EU&lt;/em&gt; in Kraków and I must admit - it was the best conference I have ever been since &lt;a href=&quot;http://lanyrd.com/2011/falsy-values/&quot;&gt;Falsy Values in 2011&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It was the second in the world conference about &lt;em&gt;Elixir&lt;/em&gt; programming language, it brings almost 200 people interested in that topic to the former Polish capital. Most of people was either from &lt;em&gt;Ruby&lt;/em&gt; or &lt;em&gt;Erlang&lt;/em&gt; side and I think that such mixture is a &lt;em&gt;key thing&lt;/em&gt; related to the &lt;em&gt;joy&lt;/em&gt; and &lt;em&gt;success&lt;/em&gt; of that event.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ElixirConfEU2015Header.png&quot; alt=&quot;Elixir Conf EU 2015&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;talks-and-workshops&quot;&gt;Talks and Workshops&lt;/h3&gt;
+
+&lt;p&gt;At a day before actual conference organizers prepared two workshops - one about &lt;em&gt;Phoenix&lt;/em&gt; framework and one about &lt;em&gt;OTP and Elixir&lt;/em&gt;. I have participated in the second one - it was a really nice experience. Workshop was full of knowledge, I have met interesting people, with very positive attitude, whom are willing to network and share their experiences. &lt;/p&gt;
+
+&lt;p&gt;Actual conference days was started and ended with very nice keynotes - each of them was a different experience. We have very nice and thoughtful keynote from Joe Armstrong, which explains many problems related to the programming language design, from the perspective of &lt;em&gt;Elixir’s&lt;/em&gt; older brother - &lt;em&gt;Erlang&lt;/em&gt;. Jose Valim presented bright future and interesting details related with &lt;em&gt;Elixir&lt;/em&gt; evolution, and finally Chris had a very nice overview and development plans related with &lt;em&gt;Phoenix&lt;/em&gt; framework.&lt;/p&gt;
+
+&lt;p&gt;But, I was also impressed by other talks. It was very interesting to see many use cases in which people used that piece of technology. I think that both groups have many valuable opinions and observations. For me, talks made by people with &lt;em&gt;Erlang&lt;/em&gt; experience were particularly valuable, because they are coming from more mature technology. It is a different background and experiences.&lt;/p&gt;
+
+&lt;h3 id=&quot;atmosphere&quot;&gt;Atmosphere&lt;/h3&gt;
+
+&lt;p&gt;I would like to focus on one particular element, which makes this conference so enjoyable - &lt;em&gt;people&lt;/em&gt;. I have never met so many &lt;em&gt;nice&lt;/em&gt; and &lt;em&gt;friendly&lt;/em&gt; people. I have wonderful time during networking, countless talks during breaks or lunches. And to sum it up - during lightning talks &lt;em&gt;Jose Valim&lt;/em&gt; and &lt;em&gt;Jim Freeze&lt;/em&gt; received a &lt;em&gt;3D printed Elixir logo&lt;/em&gt; designed in the &lt;a href=&quot;http://hrobeers.github.io/finFoil/&quot;&gt;finFoil&lt;/a&gt; software made by &lt;a href=&quot;https://twitter.com/hrobeers&quot;&gt;@hrobeers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Amazing community!&lt;/p&gt;
+
+&lt;div class=&quot;center-tweet&quot;&gt;
+  &lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;&lt;a href=&quot;https://twitter.com/ElixirConfEU&quot;&gt;@ElixirConfEU&lt;/a&gt; Thanks for the great conference. My lightning talk including the Elixir 3D file: &lt;a href=&quot;http://t.co/m06YLIwA5h&quot;&gt;http://t.co/m06YLIwA5h&lt;/a&gt; &lt;a href=&quot;http://t.co/0VJa9SDN02&quot;&gt;pic.twitter.com/0VJa9SDN02&lt;/a&gt;&lt;/p&gt;&amp;mdash; Hans Robeers (@hrobeers) &lt;a href=&quot;https://twitter.com/hrobeers/status/591794764351197184&quot;&gt;April 25, 2015&lt;/a&gt;&lt;/blockquote&gt;&lt;script async=&quot;&quot; src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;It was a very good choice to invest my time and money in that event. Three days full of &lt;em&gt;energy&lt;/em&gt;, &lt;em&gt;knowledge&lt;/em&gt; and &lt;em&gt;experience&lt;/em&gt; sharing. As a community we have interesting perspectives. We can derive from very experienced and stable &lt;em&gt;Erlang&lt;/em&gt; ecosystem. We have a very nice and promising community, full of amazing and creative people. I will go definitely to the next &lt;em&gt;ElixirConf EU 2016&lt;/em&gt; which take place in Berlin.&lt;/p&gt;
+
+&lt;p&gt;See you there! &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://twitter.com/hrobeers/status/591794764351197184&quot;&gt;Lightning talks and their effect, done by @hrobeers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.elixirconf.eu/&quot;&gt;Elixir Conf EU 2015&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 07 May 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2015/05/07/elixir-conf-eu-2015-afterthoughts.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/05/07/elixir-conf-eu-2015-afterthoughts.html</guid>
+      </item>
+    
+  </channel>
+</rss>
