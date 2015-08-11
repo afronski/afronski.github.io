@@ -121,11 +121,12 @@
 <p>At the end I would like to present the power of conciseness:</p>
 
 <div class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="kd">defn </span><span class="nv">first-denomization</span> <span class="p">[</span> <span class="nv">kinds-of-coins</span> <span class="p">]</span>
-  <span class="p">(</span><span class="nb">cond </span><span class="p">(</span><span class="nb">= </span><span class="nv">kinds-of-coins</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">1</span>
-        <span class="p">(</span><span class="nb">= </span><span class="nv">kinds-of-coins</span> <span class="mi">2</span><span class="p">)</span> <span class="mi">5</span>
-        <span class="p">(</span><span class="nb">= </span><span class="nv">kinds-of-coins</span> <span class="mi">3</span><span class="p">)</span> <span class="mi">10</span>
-        <span class="p">(</span><span class="nb">= </span><span class="nv">kinds-of-coins</span> <span class="mi">4</span><span class="p">)</span> <span class="mi">25</span>
-        <span class="p">(</span><span class="nb">= </span><span class="nv">kinds-of-coins</span> <span class="mi">5</span><span class="p">)</span> <span class="mi">50</span><span class="p">))</span>
+  <span class="p">(</span><span class="nf">condp</span> <span class="nb">= </span><span class="nv">kinds-of-coins</span>
+    <span class="mi">1</span> <span class="mi">1</span>
+    <span class="mi">2</span> <span class="mi">5</span>
+    <span class="mi">3</span> <span class="mi">10</span>
+    <span class="mi">4</span> <span class="mi">25</span>
+    <span class="mi">5</span> <span class="mi">50</span><span class="p">))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">cc</span> <span class="p">[</span> <span class="nv">amount</span> <span class="nv">kinds-of-coins</span> <span class="p">]</span>
   <span class="p">(</span><span class="nb">cond </span><span class="p">(</span><span class="nb">= </span><span class="nv">amount</span> <span class="mi">0</span><span class="p">)</span> <span class="mi">1</span> 
