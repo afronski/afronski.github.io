@@ -186,7 +186,10 @@
 
 &lt;p&gt;One of the parts in aforementioned complexity is an entity called &lt;strong&gt;application_controller&lt;/strong&gt;. Whenever the &lt;em&gt;VM&lt;/em&gt; starts up, this process is started and it starts &lt;em&gt;applications&lt;/em&gt;. It supervises most of them (but not in the literal way). If you have couple of them, it will look like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/ApplicationController.png&quot; alt=&quot;Application Controller and multiple applications with application masters&quot; /&gt;&lt;/p&gt;
+&lt;section class=&quot;picture-section&quot;&gt;
+  &lt;img alt=&quot;Application Controller and multiple applications with application masters.&quot; src=&quot;/assets/ApplicationController.png&quot; /&gt;
+  &lt;small&gt;Image shamelessly taken from the amazing book &lt;em&gt;Learn You Some Erlang For Great Good!&lt;/em&gt;&lt;/small&gt;
+&lt;/section&gt;
 
 &lt;p&gt;Everything that I have told you before you can find in the books (and again - I especially recommend the amazing book from &lt;a href=&quot;https://twitter.com/mononcqc&quot;&gt;@mononcqc&lt;/a&gt; - &lt;a href=&quot;http://learnyousomeerlang.com&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt;), but there is a small understatement regarding &lt;em&gt;applications&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
 
