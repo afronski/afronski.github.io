@@ -7,6 +7,321 @@
     <atom:link href="http://www.afronski.pl/tag/erlang/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Seven Languages in Seven Weeks - Erlang</title>
+        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---erlang&quot;&gt;Seven Languages in Seven Weeks - Erlang&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with book &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right erlang-logo&quot; alt=&quot;Erlang Logo&quot; src=&quot;/assets/ErlangLogo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you did not sleep under a rock in the past 30 years or this post is not a first one which you have read on this blog, you are probably familiar what &lt;em&gt;Erlang&lt;/em&gt; is and which features are making it uniquely suited in certain class of applications. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I do not want to cover any interesting language features, because I have already written &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/10/interesting-language-features-erlang-named-case-expressions.html&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html&quot;&gt;posts&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html&quot;&gt;that&lt;/a&gt;. Instead, I would like to introduce to you a small story about origin of the &lt;em&gt;actor model&lt;/em&gt; in that particular case.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-small-story-about-the-actor-model-in-erlang&quot;&gt;A small story about the &lt;em&gt;actor model&lt;/em&gt; in &lt;em&gt;Erlang&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;The easiest way to start, will be to introduce definition directly from &lt;em&gt;Wikipedia&lt;/em&gt;:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;The actor model in computer science is a mathematical model of concurrent computation that treats &quot;actors&quot; as the universal primitives of concurrent computation: in response to a message that it receives, an actor can make local decisions, create more actors, send more messages, and determine how to respond to the next message received. The actor model originated in 1973. It has been used both as a framework for a theoretical understanding of computation and as the theoretical basis for several practical implementations of concurrent systems. The relationship of the model to other work is discussed in Indeterminacy in concurrent computation and Actor model and process calculi.&lt;/quote&gt;
+
+&lt;p&gt;More or less at the same time, Erlang was created - with similar concepts inside. At first sight it looks like an industrial implementation of academic theory. However, creators did not call that an &lt;em&gt;actor model&lt;/em&gt;, but all features are reflecting that idea pretty much entirely - core of this idea is a lightweight processes implementation, which use message passing for communication between them and complete isolation from each other.&lt;/p&gt;
+
+&lt;p&gt;It may sound as an impossible and strange coincidence, but that implementation &lt;strong&gt;was not inspired by work of Hewitt, Bishop and Steiger at all&lt;/strong&gt;. As &lt;a href=&quot;https://twitter.com/rvirding&quot;&gt;Robert Virding&lt;/a&gt; said &lt;a href=&quot;http://rvirding.blogspot.com/2008/01/virdings-first-rule-of-programming.html?showComment=1400761539472#c5295780053912797163&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;No, we didn't as such &quot;invent&quot; them, but at the same time we didn't take them from anywhere either. We arrived at these properties on our own as the best ways of solving our problems. We never heard about actors till years later.&lt;/quote&gt;
+
+&lt;p&gt;It means that &lt;em&gt;actor model&lt;/em&gt; has a solid industrial motivation and inspiration in the Telecommunication domain. Looking at this from a different perspective - it is how the phone calls are working at the highest conceptual level (also you can easily find analogies to that process in nature and biology). They have arrived to the same properties on their own, distilling and solving the domain problems over and over again - in complete isolation from the academic theory, as a best fit for set of their problems. I am convinced that this model is a valuable thing by that, because it means that at least two sets of people came up with same idea which is a perfect fit for handling certain class of problems related with concurrent operations.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
+
+&lt;p&gt;We are heading inevitably to the end of first book - following blog posts in that series will cover two last programming languages - &lt;em&gt;Clojure&lt;/em&gt; and &lt;em&gt;Haskell&lt;/em&gt;. After that, we will have a short break, for one or two blog posts about other languages which are not covered in neither both aforementioned books. Then, we will start again with first language described in the sequel &lt;a href=&quot;https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks&quot;&gt;&lt;em&gt;Seven More Languages in Seven Weeks&lt;/em&gt;&lt;/a&gt;. See you next time then! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Actor_model&quot;&gt;Actor Model - Wikipedia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://worrydream.com/refs/Hewitt-ActorModel.pdf&quot;&gt;A Universal Modular Actor Formalism for Artificial Intelligence - Hewitt, Bishop, Steiger&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang.org/&quot;&gt;Erlang - Official Website&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 13 Jul 2015 18:15:00 +0200</pubDate>
+        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</guid>
+      </item>
+    
+      <item>
+        <title>Books that changed my career - Learn You Some Erlang For Great Good!</title>
+        <description>&lt;h1 id=&quot;books-that-changed-my-career---learn-you-some-erlang-for-great-good&quot;&gt;Books that changed my career - Learn You Some Erlang For Great Good!&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is another one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
+
+&lt;h3 id=&quot;why-should-i-care&quot;&gt;Why should I care?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;The shortest and simplest answer is - you should care if you are interested in &lt;em&gt;Erlang VM&lt;/em&gt; related topics&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;It is a book for a specialized audience. Probably you will not be interested if you are not interested in learning &lt;em&gt;Erlang&lt;/em&gt; or diving into ecosystem built around it. But if you would like to learn a new programming language - it is a very good book for a newcomer. Besides that, you should also read the Joe Armstrong’s book &lt;em&gt;“Programming Erlang, 2nd Edition”&lt;/em&gt; - which is a classic position, written by one of language creators.&lt;/p&gt;
+
+&lt;p&gt;Also, if you are dealing with &lt;em&gt;Erlang&lt;/em&gt; operations (e.g. you are a &lt;em&gt;DevOps&lt;/em&gt; person in the project which uses &lt;em&gt;Erlang&lt;/em&gt;), the same author wrote a book &lt;em&gt;Erlang in Anger&lt;/em&gt;, which is an awesome source of knowledge - it is full of hints, small tools and scripts and many useful guides, based on author’s extensive experience (&lt;em&gt;Heroku&lt;/em&gt; is the place when you probably can deal with &lt;a href=&quot;https://blog.heroku.com/archives/2013/11/7/logplex-down-the-rabbit-hole&quot;&gt;huge amount of unusual problems&lt;/a&gt; &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-book&quot;&gt;About the book&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right lysefgg-logo&quot; alt=&quot;Learn You Some Erlang For Great Good! - Cover&quot; src=&quot;/assets/LYSEFGGCover.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That book was mine entry point into the &lt;em&gt;Erlang&lt;/em&gt; world. It is a really good source of knowledge for newcomers, it is also complete - it covers all important topics from language basic syntax to more advanced topics related e.g. with &lt;em&gt;OTP&lt;/em&gt; or building distributed systems. It is very pragmatic and &lt;em&gt;Fred&lt;/em&gt; is continuously updating it (last changes are related with &lt;em&gt;maps&lt;/em&gt; and changes in handling &lt;em&gt;time&lt;/em&gt; which was introduced in the recently released 18th version of &lt;em&gt;Erlang VM&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;You will learn from this book a true &lt;em&gt;Erlang&lt;/em&gt; approach. Book contains also idioms, but it is starting from the ground up. It has a well thought structure and also - it is really well written and it has very interesting style (you will not miss &lt;em&gt;illustrations&lt;/em&gt; prepared for each chapter - they are sometimes funny).&lt;/p&gt;
+
+&lt;p&gt;The last, but not least - as I said in the previous paragraph - author &lt;a href=&quot;https://twitter.com/mononcqc&quot;&gt;Fred Trottier-Hebert&lt;/a&gt; is an experienced &lt;em&gt;Erlang&lt;/em&gt; developer, he is well-known in the community (he was an &lt;em&gt;Erlang&lt;/em&gt; user of the year), he wrote 2 books about &lt;em&gt;Erlang&lt;/em&gt; and numerous blog posts on &lt;a href=&quot;http://ferd.ca/&quot;&gt;his blog&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;i-do-not-care-about-erlang-or-elixir-should-i-still-care&quot;&gt;I do not care about &lt;code&gt;Erlang&lt;/code&gt; or &lt;code&gt;Elixir&lt;/code&gt;. Should I still care?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;The shortest and simplest answer is no&lt;/strong&gt;. The longer one, needs much more investigation of problem’s root.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;May I ask you why you don’t like Erlang?&lt;/em&gt; If you are already interested in any other language that is &lt;em&gt;functional&lt;/em&gt; and &lt;em&gt;built with concurrency in mind&lt;/em&gt;, then it is fine. But if not, you should learn a new one (pick any - &lt;code&gt;Clojure&lt;/code&gt;, &lt;code&gt;F#&lt;/code&gt; or &lt;code&gt;Erlang&lt;/code&gt;). Just use a different language than your daily tool. You can read about that &lt;a href=&quot;http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html&quot;&gt;here&lt;/a&gt;. And I will leave you with that till the next time! &lt;img class=&quot;emoji&quot; title=&quot;:smiley:&quot; alt=&quot;:smiley:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f603.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/content&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang-in-anger.com/&quot;&gt;Erlang in Anger&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/time&quot;&gt;Erlang 18 and Time&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.heroku.com/archives/2013/11/7/logplex-down-the-rabbit-hole&quot;&gt;Troubleshooting Down the Logplex Rabbit Hole&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/jaerlang2/programming-erlang&quot;&gt;Programming Erlang, 2nd Edition&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 06 Jul 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</guid>
+      </item>
+    
+      <item>
+        <title>Interesting Language Features - Erlang IV</title>
+        <description>&lt;h1 id=&quot;interesting-language-features---erlang-iv&quot;&gt;Interesting Language Features - Erlang IV&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;previous blog post&lt;/a&gt; we talked about &lt;em&gt;behaviors&lt;/em&gt;, in particular about &lt;em&gt;application&lt;/em&gt; behavior. It is a primary way of reusing common abstractions.&lt;/p&gt;
+
+&lt;p&gt;It may look limiting at the first sight that we have only couple of them available by default. But fortunately, we are not limited only to the abstractions prepared by the &lt;em&gt;OTP&lt;/em&gt; team. &lt;em&gt;We can easily create new ones&lt;/em&gt; - and many &lt;em&gt;Erlang&lt;/em&gt; teams willingly takes that opportunity. In this blog post I would like to show you various abstractions hidden inside RabbitMQ.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-rabbitmq&quot;&gt;What is &lt;em&gt;RabbitMQ&lt;/em&gt;?&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class=&quot;right rabbitmq-logo&quot; alt=&quot;RabbitMQ Logo&quot; src=&quot;/assets/RabbitMQ.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is a robust, easy to use message broker ready to use with your applications - it can be a &lt;em&gt;communication backbone&lt;/em&gt; for your system. It supports multiple protocols by default - &lt;em&gt;AMQP&lt;/em&gt;, &lt;em&gt;MQTT&lt;/em&gt; and &lt;em&gt;STOMP&lt;/em&gt;. Also, it has various client libraries for many programming languages - you can integrate with it from almost any kind of environment. The main idea behind it is pretty simple - it accepts and forwards messages. You can think about it as an any abstraction related with letters and messaging e.g. post office - when you send mail to the post box you are pretty sure that postman will eventually deliver it to your recipient. Using this metaphor &lt;em&gt;RabbitMQ&lt;/em&gt; is a post box, a &lt;em&gt;post office&lt;/em&gt; and a &lt;em&gt;postman&lt;/em&gt; in one thing. If you want to get familiar with this tool, you should start with &lt;a href=&quot;https://www.rabbitmq.com/getstarted.html&quot;&gt;this article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;RabbitMQ&lt;/em&gt; is written in &lt;em&gt;Erlang&lt;/em&gt; and it is a base for its reliability and concurrency features. Also, thanks to built-in distribution it is much easier to implement custom mechanisms, even if they are using different thing than standard &lt;em&gt;Erlang&lt;/em&gt; distribution to handle that problem. As you probably know, in &lt;em&gt;Erlang&lt;/em&gt;, &lt;em&gt;behaviors&lt;/em&gt; are the main mechanism for providing reusable abstractions - we can easily use that ones prepared by an &lt;em&gt;OTP&lt;/em&gt; team like &lt;code&gt;supervisor&lt;/code&gt;, &lt;code&gt;application&lt;/code&gt; or &lt;code&gt;gen_server&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But, as we said in the introduction, we are not limited only to the prepared ones. &lt;em&gt;We can create our own behaviors&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-we-can-create-a-custom-behavior&quot;&gt;How we can create a &lt;em&gt;custom behavior&lt;/em&gt;?&lt;/h3&gt;
+
+&lt;p&gt;To create your own behavior, you must make a module that exports a function &lt;code&gt;behaviour_info/1&lt;/code&gt;. Note, that while Erlang is &lt;em&gt;American-English-friendly&lt;/em&gt; in regards to declaring behaviors, it is not as friendly when you are defining them. For example, you can use either &lt;code&gt;-behavior(gen_server).&lt;/code&gt; or &lt;code&gt;-behaviour(gen_server).&lt;/code&gt; when you declare you module implements the &lt;code&gt;gen_server&lt;/code&gt; behavior, but if you name the &lt;code&gt;behaviour_info/1&lt;/code&gt; function without the &lt;em&gt;‘u’&lt;/em&gt; it will not work.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;behaviour_info/1&lt;/code&gt; just needs to return the list of required exports of an implementation. Here’s an example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;export&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;behaviour_info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviour_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behavior_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(_)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This declares three callbacks for the &lt;code&gt;gen_foo&lt;/code&gt; behavior: &lt;code&gt;foo/0&lt;/code&gt;, &lt;code&gt;bar/1&lt;/code&gt;, and &lt;code&gt;baz/2&lt;/code&gt;. Function simply returns an array of &lt;em&gt;two elements tuples&lt;/em&gt; with the function name andan arity.&lt;/p&gt;
+
+&lt;p&gt;When a module declares that it implements &lt;code&gt;gen_foo&lt;/code&gt; now, the Erlang compiler will check to make sure it exports and implements the required callbacks, and it will print warnings if this is not the case:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fooer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;behavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;export&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also use tools like &lt;em&gt;Dialyzer&lt;/em&gt; and &lt;em&gt;Typer&lt;/em&gt; - with prepared type specifications, you can easily verify that the new behavior is used properly (according to the specification) and that there are no type errors which can be caught due to &lt;em&gt;static code analysis&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;custom-behaviors-available-inside-rabbitmq&quot;&gt;Custom behaviors available inside &lt;em&gt;RabbitMQ&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;In RabbitMQ we have implemented several routing algorithms in the form of &lt;em&gt;exchanges&lt;/em&gt; (let’s call them the &lt;em&gt;gateways&lt;/em&gt; by which messages are coming to the system). We can say that each exchange has a specific type. By default &lt;em&gt;RabbitMQ&lt;/em&gt; has four exchanges: &lt;em&gt;direct&lt;/em&gt;, &lt;em&gt;fanout&lt;/em&gt;, &lt;em&gt;topic&lt;/em&gt; and &lt;em&gt;headers&lt;/em&gt;. But also, it allows the user to add new exchange types via plugins.&lt;/p&gt;
+
+&lt;p&gt;User, which will provide new exchange type needs to implement the &lt;code&gt;rabbit_exchange_type&lt;/code&gt; behaviour. Similar pattern can be applied to the &lt;code&gt;rabbitmq_backing_queue&lt;/code&gt; which is responsible for various techniques related with backing stores and e.g. persistent queues. Aforementioned abstractions have pretty simple implementation - most of the module code is related with type specifications used for the verification. More complicated behaviors are mirroring and enhancing the standard ones - inside &lt;em&gt;RabbitMQ&lt;/em&gt; maintainers implemented &lt;code&gt;supervisor2&lt;/code&gt; and &lt;code&gt;gen_server2&lt;/code&gt; - code is really long and complex, because those behaviors need to mirror the original implementations, and also should have additional features.&lt;/p&gt;
+
+&lt;p&gt;If you have already some experience with &lt;em&gt;Erlang&lt;/em&gt; I recommend you to dive into the implementation of two mentioned behaviors (and look at the originals as well - comments are really helpful). And by that, I would like to finish that blog post - in the next one, we will switch the language - now it is time to look into a different place to search for an interesting feature. Stay tuned! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.slideshare.net/old_sound/dissecting-the-rabbit&quot;&gt;Dissecting the rabbit: RabbitMQ Internal Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://videlalvaro.github.io&quot;&gt;Alvaro Videla’s blog&lt;/a&gt; - amazing source of knowledge about RabbitMQ internals.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/rabbit_backing_queue.erl&quot;&gt;rabbitmq_backing_queue&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/rabbit_exchange_type.erl&quot;&gt;rabbitmq_exchange_type&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/gen_server2.erl&quot;&gt;gen_server2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/supervisor2.erl&quot;&gt;supervisor2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 11 Jun 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</guid>
+      </item>
+    
+      <item>
+        <title>Interesting Language Features - Erlang III</title>
+        <description>&lt;h1 id=&quot;interesting-language-features---erlang-iii&quot;&gt;Interesting Language Features - Erlang III&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;As you may know, In &lt;em&gt;Erlang&lt;/em&gt; you are building &lt;em&gt;systems&lt;/em&gt; which consists of &lt;em&gt;multiple applications&lt;/em&gt;. Do not try to match these terms on the mainstream technologies (e.g. components) - you should rather compare it to the terms related with an &lt;em&gt;operating system&lt;/em&gt;, because &lt;em&gt;Erlang VM&lt;/em&gt; behaves in a similar way.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Erlang&lt;/em&gt; was designed long before the language of design patterns was formalized, but still engineers responsible for building the platform wanted to have a solid abstractions. It is all about splitting generic code away from specific code - and that is how the &lt;em&gt;behaviors&lt;/em&gt; were created. They denote the idea that your specific code gives up its own execution flow and inserts itself as a bunch of custom functions (called &lt;em&gt;callbacks&lt;/em&gt;) to be used by the generic code. In simpler words, behaviours handle the boring parts while you are focused on the &lt;em&gt;business logic&lt;/em&gt;. In the case of &lt;em&gt;applications&lt;/em&gt;, this generic part is quite complex and not nearly as simple as other behaviours. But on the first sight it does not look like this.&lt;/p&gt;
+
+&lt;p&gt;One of the parts in aforementioned complexity is an entity called &lt;strong&gt;application_controller&lt;/strong&gt;. Whenever the &lt;em&gt;VM&lt;/em&gt; starts up, this process is started and it starts &lt;em&gt;applications&lt;/em&gt;. It supervises most of them (but not in the literal way). If you have couple of them, it will look like this:&lt;/p&gt;
+
+&lt;section class=&quot;picture-section&quot;&gt;
+  &lt;img alt=&quot;Application Controller and multiple applications with application masters.&quot; src=&quot;/assets/ApplicationController.png&quot; /&gt;
+  &lt;small&gt;Image shamelessly taken from the amazing book &lt;em&gt;Learn You Some Erlang For Great Good!&lt;/em&gt;&lt;/small&gt;
+&lt;/section&gt;
+
+&lt;p&gt;Everything that I have told you before you can find in the books (and again - I especially recommend the amazing book from &lt;a href=&quot;https://twitter.com/mononcqc&quot;&gt;@mononcqc&lt;/a&gt; - &lt;a href=&quot;http://learnyousomeerlang.com&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt;), but there is a small understatement regarding &lt;em&gt;applications&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/SupervisionTree.png&quot; alt=&quot;What are the processes at the beginning?&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This topic arisen during work on my hobby project called &lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;afronski/wolves-and-rabbits-world-simulation&lt;/a&gt;. Above you can see the &lt;em&gt;supervision tree&lt;/em&gt; of this application (pretty standard one), but at the beginning of it there are two additional processes - not just one, which I have expected (the application master). So I tried to found an explanation and literally - &lt;em&gt;I found nothing&lt;/em&gt;. There is only a small mention about that in the aforementioned book:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;The application master is in fact two processes taking charge of each individual application: they set it up and act like a middleman in between your application's top supervisor and the application controller.&lt;/quote&gt;
+
+&lt;p&gt;But that’s all. No particular explanation why the second process is necessary. This topic is missing in the &lt;em&gt;Erlang&lt;/em&gt; books that I know - if you know a book with a good explanation of this, please let me know in the comments - it can be beneficial for me (and as an additional reference).&lt;/p&gt;
+
+&lt;p&gt;So, I thought that it is an interesting topic to analyze and I started to dig into it.&lt;/p&gt;
+
+&lt;h3 id=&quot;internals&quot;&gt;Internals&lt;/h3&gt;
+
+&lt;p&gt;So, we know what the &lt;em&gt;application controller&lt;/em&gt; is, what the &lt;em&gt;application master&lt;/em&gt; is explained above in the quote. In other words &lt;em&gt;application master&lt;/em&gt; behaves like an application &lt;em&gt;nanny&lt;/em&gt;: &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;Just know that the application master acts a bit like the app's nanny (well, a pretty insane nanny). It looks over its children and grandchildren, and when things go awry, it goes berserk and terminates its whole family tree. Brutally killing children is a common topic among Erlangers.&lt;/quote&gt;
+
+&lt;p&gt;&lt;em&gt;Nanny or not&lt;/em&gt; - still we don’t know why there are actually two of them. If there is no explanation in the books, we need to look at the actual source code. And finally we found something &lt;a href=&quot;https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84&quot;&gt;useful&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;c&quot;&gt;%%% The logical and physical process structure is as follows:&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         logical                physical&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         |AM(GL)|               |AM(GL)|&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%            |                       |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         |Appl P|               |   X  |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%                                    |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%                                --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%                                |Appl P|&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%                                --------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% Where AM(GL) == Application Master (Group Leader)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%       Appl P == The application specific root process (child to AM)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%       X      == A special &amp;#39;invisible&amp;#39; process&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% The reason for not using the logical structrure is that&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% the application start function is synchronous, and&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% that the AM is GL.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% This means that if AM executed the start&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% function, and this function uses io, deadlock would occur.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% Therefore, this function is executed by the process X.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% Also, AM needs three loops;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%   - init_loop (waiting for the start function to return)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%   - main_loop&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%%   - terminate_loop (waiting for the process to die)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;%%% In each of these loops, io and other requests are handled.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;But what is a &lt;strong&gt;group leader&lt;/strong&gt;? Let’s dig into official documentation:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;Every process is a member of some process group and all groups have a group leader. All IO from the group is channeled to the group leader. When a new process is spawned, it gets the same group leader as the spawning process. Initially, at system start-up, init is both its own group leader and the group leader of all processes.&lt;/quote&gt;
+
+&lt;p&gt;Aha! Now the actual structure is pretty clear. During the &lt;code&gt;application:start/2&lt;/code&gt; anything can happen, including &lt;em&gt;I/O calls&lt;/em&gt; - but &lt;em&gt;application master&lt;/em&gt; is a group leader, owner of &lt;em&gt;I/O resources&lt;/em&gt; in its supervision tree. If the &lt;em&gt;I/O calls&lt;/em&gt; are channeled through leader, definitely a deadlock can occur if the same process is responsible for invoking that &lt;em&gt;a call&lt;/em&gt;. In order to avoid that &lt;em&gt;OTP developers&lt;/em&gt; introduced an artificial process called &lt;code&gt;X&lt;/code&gt; in the comment above, which executes the start function. Thanks to that, any &lt;em&gt;I/O calls&lt;/em&gt; from the start-up process can be forwarded through the &lt;em&gt;application master&lt;/em&gt; safely. &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;What is even more interesting, an application life cycle consists of three phases - &lt;code&gt;init_loop&lt;/code&gt; which is responsible for waiting until the start-up process will finish, &lt;code&gt;main_loop&lt;/code&gt; which is a normal work of an application and &lt;code&gt;terminate_loop&lt;/code&gt; which is responsible for shutdown all process owned by an application.&lt;/p&gt;
+
+&lt;p&gt;We finally found an useful explanation for the additional processes in the &lt;em&gt;supervision tree&lt;/em&gt;. Besides that, we introduced &lt;em&gt;behaviors&lt;/em&gt;, which are the primary mechanism where it comes to reusing common abstractions prepared by the &lt;em&gt;OTP team&lt;/em&gt;. But we, as the developers, can also create our own behaviors - and we will cover this topic in the next post.&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/building-otp-applications&quot;&gt;Learn You Some Erlang For Great Good! Chapter: Building OTP Applications&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84&quot;&gt;Application Master - Internal Structure&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang.org/doc/man/erlang.html#group_leader-0&quot;&gt;erlang:group_leader/0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 14 May 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html</guid>
+      </item>
+    
+      <item>
+        <title>Interesting Language Features - Erlang II</title>
+        <description>&lt;h1 id=&quot;interesting-language-features---erlang-ii&quot;&gt;Interesting Language Features - Erlang II&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is an article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;In previous blog post, we talked about &lt;em&gt;pattern matching&lt;/em&gt; and its usage in &lt;em&gt;functional programming&lt;/em&gt; in general. But &lt;em&gt;Erlang&lt;/em&gt; is more known in the programming community from something different. This programming language, with support for distribution and concurrency baked in since beginning, is mostly known as a solid foundation for reliable, long running systems, maintained for many years. It was developed this way &lt;strong&gt;deliberately&lt;/strong&gt; with all mentioned features in mind, because of requirements imposed by telecommunications industry from the 80s. Moreover, these requirements are still actual for today’s IT systems. We can benefit from the whole platform, especially if we have to deal with strict requirements related with &lt;em&gt;reliability&lt;/em&gt; and &lt;em&gt;fault-tolerance&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Erlang’s&lt;/em&gt; unique features related with concurrency, reliability and distribution are based on very simple concepts - &lt;em&gt;isolation&lt;/em&gt;, &lt;em&gt;lightweight processes&lt;/em&gt; and powerful &lt;em&gt;&lt;code&gt;VM&lt;/code&gt;&lt;/em&gt; implementation. Back in a days, &lt;em&gt;Erlang&lt;/em&gt; needs for distribution was argued because of &lt;em&gt;hardware redundancy&lt;/em&gt;. If you want to have &lt;em&gt;fault-tolerant&lt;/em&gt; system, you need at least two computers. You need to provide &lt;em&gt;redundancy&lt;/em&gt; and simply put - &lt;em&gt;two machines are able to handle multiple errors, one machine handles only the first error&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;But, if you have multiple concurrent processes, you need to treat errors differently - classic way of error handling or &lt;em&gt;defensive programming&lt;/em&gt; techniques will not help us here. &lt;em&gt;Erlang’s&lt;/em&gt; famous motto for that situations is &lt;strong&gt;let it crash&lt;/strong&gt;. It does not mean, that we should crash whole &lt;em&gt;VM&lt;/em&gt; in case of error, We need to deal with them in a different way and with different tools - &lt;em&gt;supervisors&lt;/em&gt; with their hierarchies and ability to &lt;em&gt;connect&lt;/em&gt; and &lt;em&gt;observe&lt;/em&gt; other processes. I would like to focus on the second group.&lt;/p&gt;
+
+&lt;h3&gt;&lt;i&gt;Links and Monitors&lt;/i&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Isolation&lt;/em&gt; is a very wise choice when it comes to the reliability, because we can avoid &lt;em&gt;cascading failures&lt;/em&gt;. But, how you will know that something actually failed? Besides &lt;em&gt;isolation&lt;/em&gt;, the very important thing is to have ability to &lt;em&gt;observe&lt;/em&gt; other processes. By connecting two processes together via &lt;em&gt;link&lt;/em&gt;, you are creating the bidirectional bond - if one of them fails, both processes will be killed.&lt;/p&gt;
+
+&lt;section class=&quot;picture-section&quot;&gt;
+  &lt;img class=&quot;half-sized-image&quot; alt=&quot;Links in Erlang&quot; src=&quot;http://learnyousomeerlang.com/static/img/link-exit.png&quot; /&gt;
+  &lt;small&gt;Image shamelessly taken from the amazing book &lt;em&gt;Learn You Some Erlang For Great Good!&lt;/em&gt;&lt;/small&gt;
+&lt;/section&gt;
+
+&lt;p&gt;It sounds useful - you can group processes together with common concerns and bring them down together in case of error. Disabling a link is possible on both sides. But what if we would like to have more granular control on the exiting flow. We can either &lt;em&gt;monitor&lt;/em&gt; a second process or &lt;em&gt;trap exits&lt;/em&gt;. Lets look on the second method at first:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;nb&quot;&gt;process_flag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trap_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;By doing that, process which trap exits will receive an additional message to the mailbox if the linked processes will exit abruptly with an erroneous reason. Also, if the process itself will exit with an error - exit signal will be trapped. Only one type of error, called a &lt;em&gt;&lt;code&gt;kill&lt;/code&gt;&lt;/em&gt; invoked by the process itself, cannot be trapped - you can do it by &lt;code&gt;exit(Pid, kill).&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Besides that you can &lt;em&gt;observe&lt;/em&gt; other processes by setting unidirectional connection called a &lt;em&gt;monitor&lt;/em&gt;. When the monitored process will go down, observer will receive a new message directly to the mailbox. As we said, it is a unidirectional relation, so it can be disabled only by the process that set up that connection earlier.&lt;/p&gt;
+
+&lt;h3 id=&quot;origin&quot;&gt;Origin&lt;/h3&gt;
+
+&lt;p&gt;All of described ideas looks like a very high level concepts, but it is actually the opposite:&lt;/p&gt;
+
+&lt;quote class=&quot;foreign&quot;&gt;Links were invented by Mike Williams and based on the idea of a C-wire (a form of electrical circuit breaker).&lt;/quote&gt;
+
+&lt;p&gt;Idea comes directly from the &lt;em&gt;“C-wire”&lt;/em&gt; in early telephones. In order to cancel a problematic call, you should ground the &lt;em&gt;C-wire&lt;/em&gt;. &lt;em&gt;Electronics&lt;/em&gt; is always a very good place to collect a valuable inspiration regarding the &lt;em&gt;system design&lt;/em&gt; and &lt;em&gt;fault-tolerance&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/errors-and-processes&quot;&gt;Learn You Some Erlang For Great Good! Chapter: Errors and Processes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://erlang.org/pipermail/erlang-questions/2014-June/079885.html&quot;&gt;Erlang Mailing List, Origin of Links&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.erlang-factory.com/upload/presentations/247/erlang_vm_1.pdf&quot;&gt;The Evolution of Erlang VM&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 27 Mar 2015 16:00:00 +0100</pubDate>
+        <link>http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</guid>
+      </item>
+    
+      <item>
         <title>Interesting Language Features - Erlang I</title>
         <description>&lt;h1 id=&quot;interesting-language-features---erlang-i&quot;&gt;Interesting Language Features - Erlang I&lt;/h1&gt;
 
@@ -118,321 +433,6 @@
         <pubDate>Tue, 10 Mar 2015 16:00:00 +0100</pubDate>
         <link>http://www.afronski.pl/interesting-language-features/2015/03/10/interesting-language-features-erlang-named-case-expressions.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/03/10/interesting-language-features-erlang-named-case-expressions.html</guid>
-      </item>
-    
-      <item>
-        <title>Interesting Language Features - Erlang II</title>
-        <description>&lt;h1 id=&quot;interesting-language-features---erlang-ii&quot;&gt;Interesting Language Features - Erlang II&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is an article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;In previous blog post, we talked about &lt;em&gt;pattern matching&lt;/em&gt; and its usage in &lt;em&gt;functional programming&lt;/em&gt; in general. But &lt;em&gt;Erlang&lt;/em&gt; is more known in the programming community from something different. This programming language, with support for distribution and concurrency baked in since beginning, is mostly known as a solid foundation for reliable, long running systems, maintained for many years. It was developed this way &lt;strong&gt;deliberately&lt;/strong&gt; with all mentioned features in mind, because of requirements imposed by telecommunications industry from the 80s. Moreover, these requirements are still actual for today’s IT systems. We can benefit from the whole platform, especially if we have to deal with strict requirements related with &lt;em&gt;reliability&lt;/em&gt; and &lt;em&gt;fault-tolerance&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Erlang’s&lt;/em&gt; unique features related with concurrency, reliability and distribution are based on very simple concepts - &lt;em&gt;isolation&lt;/em&gt;, &lt;em&gt;lightweight processes&lt;/em&gt; and powerful &lt;em&gt;&lt;code&gt;VM&lt;/code&gt;&lt;/em&gt; implementation. Back in a days, &lt;em&gt;Erlang&lt;/em&gt; needs for distribution was argued because of &lt;em&gt;hardware redundancy&lt;/em&gt;. If you want to have &lt;em&gt;fault-tolerant&lt;/em&gt; system, you need at least two computers. You need to provide &lt;em&gt;redundancy&lt;/em&gt; and simply put - &lt;em&gt;two machines are able to handle multiple errors, one machine handles only the first error&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;But, if you have multiple concurrent processes, you need to treat errors differently - classic way of error handling or &lt;em&gt;defensive programming&lt;/em&gt; techniques will not help us here. &lt;em&gt;Erlang’s&lt;/em&gt; famous motto for that situations is &lt;strong&gt;let it crash&lt;/strong&gt;. It does not mean, that we should crash whole &lt;em&gt;VM&lt;/em&gt; in case of error, We need to deal with them in a different way and with different tools - &lt;em&gt;supervisors&lt;/em&gt; with their hierarchies and ability to &lt;em&gt;connect&lt;/em&gt; and &lt;em&gt;observe&lt;/em&gt; other processes. I would like to focus on the second group.&lt;/p&gt;
-
-&lt;h3&gt;&lt;i&gt;Links and Monitors&lt;/i&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Isolation&lt;/em&gt; is a very wise choice when it comes to the reliability, because we can avoid &lt;em&gt;cascading failures&lt;/em&gt;. But, how you will know that something actually failed? Besides &lt;em&gt;isolation&lt;/em&gt;, the very important thing is to have ability to &lt;em&gt;observe&lt;/em&gt; other processes. By connecting two processes together via &lt;em&gt;link&lt;/em&gt;, you are creating the bidirectional bond - if one of them fails, both processes will be killed.&lt;/p&gt;
-
-&lt;section class=&quot;picture-section&quot;&gt;
-  &lt;img class=&quot;half-sized-image&quot; alt=&quot;Links in Erlang&quot; src=&quot;http://learnyousomeerlang.com/static/img/link-exit.png&quot; /&gt;
-  &lt;small&gt;Image shamelessly taken from the amazing book &lt;em&gt;Learn You Some Erlang For Great Good!&lt;/em&gt;&lt;/small&gt;
-&lt;/section&gt;
-
-&lt;p&gt;It sounds useful - you can group processes together with common concerns and bring them down together in case of error. Disabling a link is possible on both sides. But what if we would like to have more granular control on the exiting flow. We can either &lt;em&gt;monitor&lt;/em&gt; a second process or &lt;em&gt;trap exits&lt;/em&gt;. Lets look on the second method at first:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;nb&quot;&gt;process_flag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trap_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;By doing that, process which trap exits will receive an additional message to the mailbox if the linked processes will exit abruptly with an erroneous reason. Also, if the process itself will exit with an error - exit signal will be trapped. Only one type of error, called a &lt;em&gt;&lt;code&gt;kill&lt;/code&gt;&lt;/em&gt; invoked by the process itself, cannot be trapped - you can do it by &lt;code&gt;exit(Pid, kill).&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Besides that you can &lt;em&gt;observe&lt;/em&gt; other processes by setting unidirectional connection called a &lt;em&gt;monitor&lt;/em&gt;. When the monitored process will go down, observer will receive a new message directly to the mailbox. As we said, it is a unidirectional relation, so it can be disabled only by the process that set up that connection earlier.&lt;/p&gt;
-
-&lt;h3 id=&quot;origin&quot;&gt;Origin&lt;/h3&gt;
-
-&lt;p&gt;All of described ideas looks like a very high level concepts, but it is actually the opposite:&lt;/p&gt;
-
-&lt;quote class=&quot;foreign&quot;&gt;Links were invented by Mike Williams and based on the idea of a C-wire (a form of electrical circuit breaker).&lt;/quote&gt;
-
-&lt;p&gt;Idea comes directly from the &lt;em&gt;“C-wire”&lt;/em&gt; in early telephones. In order to cancel a problematic call, you should ground the &lt;em&gt;C-wire&lt;/em&gt;. &lt;em&gt;Electronics&lt;/em&gt; is always a very good place to collect a valuable inspiration regarding the &lt;em&gt;system design&lt;/em&gt; and &lt;em&gt;fault-tolerance&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/errors-and-processes&quot;&gt;Learn You Some Erlang For Great Good! Chapter: Errors and Processes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://erlang.org/pipermail/erlang-questions/2014-June/079885.html&quot;&gt;Erlang Mailing List, Origin of Links&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.erlang-factory.com/upload/presentations/247/erlang_vm_1.pdf&quot;&gt;The Evolution of Erlang VM&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 27 Mar 2015 16:00:00 +0100</pubDate>
-        <link>http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html</guid>
-      </item>
-    
-      <item>
-        <title>Interesting Language Features - Erlang III</title>
-        <description>&lt;h1 id=&quot;interesting-language-features---erlang-iii&quot;&gt;Interesting Language Features - Erlang III&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;As you may know, In &lt;em&gt;Erlang&lt;/em&gt; you are building &lt;em&gt;systems&lt;/em&gt; which consists of &lt;em&gt;multiple applications&lt;/em&gt;. Do not try to match these terms on the mainstream technologies (e.g. components) - you should rather compare it to the terms related with an &lt;em&gt;operating system&lt;/em&gt;, because &lt;em&gt;Erlang VM&lt;/em&gt; behaves in a similar way.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Erlang&lt;/em&gt; was designed long before the language of design patterns was formalized, but still engineers responsible for building the platform wanted to have a solid abstractions. It is all about splitting generic code away from specific code - and that is how the &lt;em&gt;behaviors&lt;/em&gt; were created. They denote the idea that your specific code gives up its own execution flow and inserts itself as a bunch of custom functions (called &lt;em&gt;callbacks&lt;/em&gt;) to be used by the generic code. In simpler words, behaviours handle the boring parts while you are focused on the &lt;em&gt;business logic&lt;/em&gt;. In the case of &lt;em&gt;applications&lt;/em&gt;, this generic part is quite complex and not nearly as simple as other behaviours. But on the first sight it does not look like this.&lt;/p&gt;
-
-&lt;p&gt;One of the parts in aforementioned complexity is an entity called &lt;strong&gt;application_controller&lt;/strong&gt;. Whenever the &lt;em&gt;VM&lt;/em&gt; starts up, this process is started and it starts &lt;em&gt;applications&lt;/em&gt;. It supervises most of them (but not in the literal way). If you have couple of them, it will look like this:&lt;/p&gt;
-
-&lt;section class=&quot;picture-section&quot;&gt;
-  &lt;img alt=&quot;Application Controller and multiple applications with application masters.&quot; src=&quot;/assets/ApplicationController.png&quot; /&gt;
-  &lt;small&gt;Image shamelessly taken from the amazing book &lt;em&gt;Learn You Some Erlang For Great Good!&lt;/em&gt;&lt;/small&gt;
-&lt;/section&gt;
-
-&lt;p&gt;Everything that I have told you before you can find in the books (and again - I especially recommend the amazing book from &lt;a href=&quot;https://twitter.com/mononcqc&quot;&gt;@mononcqc&lt;/a&gt; - &lt;a href=&quot;http://learnyousomeerlang.com&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt;), but there is a small understatement regarding &lt;em&gt;applications&lt;/em&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/SupervisionTree.png&quot; alt=&quot;What are the processes at the beginning?&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This topic arisen during work on my hobby project called &lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;afronski/wolves-and-rabbits-world-simulation&lt;/a&gt;. Above you can see the &lt;em&gt;supervision tree&lt;/em&gt; of this application (pretty standard one), but at the beginning of it there are two additional processes - not just one, which I have expected (the application master). So I tried to found an explanation and literally - &lt;em&gt;I found nothing&lt;/em&gt;. There is only a small mention about that in the aforementioned book:&lt;/p&gt;
-
-&lt;quote class=&quot;citation&quot;&gt;The application master is in fact two processes taking charge of each individual application: they set it up and act like a middleman in between your application's top supervisor and the application controller.&lt;/quote&gt;
-
-&lt;p&gt;But that’s all. No particular explanation why the second process is necessary. This topic is missing in the &lt;em&gt;Erlang&lt;/em&gt; books that I know - if you know a book with a good explanation of this, please let me know in the comments - it can be beneficial for me (and as an additional reference).&lt;/p&gt;
-
-&lt;p&gt;So, I thought that it is an interesting topic to analyze and I started to dig into it.&lt;/p&gt;
-
-&lt;h3 id=&quot;internals&quot;&gt;Internals&lt;/h3&gt;
-
-&lt;p&gt;So, we know what the &lt;em&gt;application controller&lt;/em&gt; is, what the &lt;em&gt;application master&lt;/em&gt; is explained above in the quote. In other words &lt;em&gt;application master&lt;/em&gt; behaves like an application &lt;em&gt;nanny&lt;/em&gt;: &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;quote class=&quot;citation&quot;&gt;Just know that the application master acts a bit like the app's nanny (well, a pretty insane nanny). It looks over its children and grandchildren, and when things go awry, it goes berserk and terminates its whole family tree. Brutally killing children is a common topic among Erlangers.&lt;/quote&gt;
-
-&lt;p&gt;&lt;em&gt;Nanny or not&lt;/em&gt; - still we don’t know why there are actually two of them. If there is no explanation in the books, we need to look at the actual source code. And finally we found something &lt;a href=&quot;https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84&quot;&gt;useful&lt;/a&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;c&quot;&gt;%%% The logical and physical process structure is as follows:&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%         logical                physical&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%         |AM(GL)|               |AM(GL)|&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%            |                       |&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%         |Appl P|               |   X  |&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%         --------               --------&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%                                    |&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%                                --------&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%                                |Appl P|&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%                                --------&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% Where AM(GL) == Application Master (Group Leader)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%       Appl P == The application specific root process (child to AM)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%       X      == A special &amp;#39;invisible&amp;#39; process&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% The reason for not using the logical structrure is that&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% the application start function is synchronous, and&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% that the AM is GL.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% This means that if AM executed the start&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% function, and this function uses io, deadlock would occur.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% Therefore, this function is executed by the process X.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% Also, AM needs three loops;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%   - init_loop (waiting for the start function to return)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%   - main_loop&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%%   - terminate_loop (waiting for the process to die)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;%%% In each of these loops, io and other requests are handled.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;But what is a &lt;strong&gt;group leader&lt;/strong&gt;? Let’s dig into official documentation:&lt;/p&gt;
-
-&lt;quote class=&quot;citation&quot;&gt;Every process is a member of some process group and all groups have a group leader. All IO from the group is channeled to the group leader. When a new process is spawned, it gets the same group leader as the spawning process. Initially, at system start-up, init is both its own group leader and the group leader of all processes.&lt;/quote&gt;
-
-&lt;p&gt;Aha! Now the actual structure is pretty clear. During the &lt;code&gt;application:start/2&lt;/code&gt; anything can happen, including &lt;em&gt;I/O calls&lt;/em&gt; - but &lt;em&gt;application master&lt;/em&gt; is a group leader, owner of &lt;em&gt;I/O resources&lt;/em&gt; in its supervision tree. If the &lt;em&gt;I/O calls&lt;/em&gt; are channeled through leader, definitely a deadlock can occur if the same process is responsible for invoking that &lt;em&gt;a call&lt;/em&gt;. In order to avoid that &lt;em&gt;OTP developers&lt;/em&gt; introduced an artificial process called &lt;code&gt;X&lt;/code&gt; in the comment above, which executes the start function. Thanks to that, any &lt;em&gt;I/O calls&lt;/em&gt; from the start-up process can be forwarded through the &lt;em&gt;application master&lt;/em&gt; safely. &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;What is even more interesting, an application life cycle consists of three phases - &lt;code&gt;init_loop&lt;/code&gt; which is responsible for waiting until the start-up process will finish, &lt;code&gt;main_loop&lt;/code&gt; which is a normal work of an application and &lt;code&gt;terminate_loop&lt;/code&gt; which is responsible for shutdown all process owned by an application.&lt;/p&gt;
-
-&lt;p&gt;We finally found an useful explanation for the additional processes in the &lt;em&gt;supervision tree&lt;/em&gt;. Besides that, we introduced &lt;em&gt;behaviors&lt;/em&gt;, which are the primary mechanism where it comes to reusing common abstractions prepared by the &lt;em&gt;OTP team&lt;/em&gt;. But we, as the developers, can also create our own behaviors - and we will cover this topic in the next post.&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/building-otp-applications&quot;&gt;Learn You Some Erlang For Great Good! Chapter: Building OTP Applications&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84&quot;&gt;Application Master - Internal Structure&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.erlang.org/doc/man/erlang.html#group_leader-0&quot;&gt;erlang:group_leader/0&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 14 May 2015 16:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html</guid>
-      </item>
-    
-      <item>
-        <title>Interesting Language Features - Erlang IV</title>
-        <description>&lt;h1 id=&quot;interesting-language-features---erlang-iv&quot;&gt;Interesting Language Features - Erlang IV&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from a series which contains examples, explanations and details about interesting features of various programming languages. I have collected several examples of different characteristics, which definitely extended my view regarding programming, architecture and structure in general. I would love to hear your feedback about presented choices or description of yours favorite programming language feature.&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;In the &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;previous blog post&lt;/a&gt; we talked about &lt;em&gt;behaviors&lt;/em&gt;, in particular about &lt;em&gt;application&lt;/em&gt; behavior. It is a primary way of reusing common abstractions.&lt;/p&gt;
-
-&lt;p&gt;It may look limiting at the first sight that we have only couple of them available by default. But fortunately, we are not limited only to the abstractions prepared by the &lt;em&gt;OTP&lt;/em&gt; team. &lt;em&gt;We can easily create new ones&lt;/em&gt; - and many &lt;em&gt;Erlang&lt;/em&gt; teams willingly takes that opportunity. In this blog post I would like to show you various abstractions hidden inside RabbitMQ.&lt;/p&gt;
-
-&lt;h3 id=&quot;what-is-rabbitmq&quot;&gt;What is &lt;em&gt;RabbitMQ&lt;/em&gt;?&lt;/h3&gt;
-
-&lt;p&gt;&lt;img class=&quot;right rabbitmq-logo&quot; alt=&quot;RabbitMQ Logo&quot; src=&quot;/assets/RabbitMQ.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;It is a robust, easy to use message broker ready to use with your applications - it can be a &lt;em&gt;communication backbone&lt;/em&gt; for your system. It supports multiple protocols by default - &lt;em&gt;AMQP&lt;/em&gt;, &lt;em&gt;MQTT&lt;/em&gt; and &lt;em&gt;STOMP&lt;/em&gt;. Also, it has various client libraries for many programming languages - you can integrate with it from almost any kind of environment. The main idea behind it is pretty simple - it accepts and forwards messages. You can think about it as an any abstraction related with letters and messaging e.g. post office - when you send mail to the post box you are pretty sure that postman will eventually deliver it to your recipient. Using this metaphor &lt;em&gt;RabbitMQ&lt;/em&gt; is a post box, a &lt;em&gt;post office&lt;/em&gt; and a &lt;em&gt;postman&lt;/em&gt; in one thing. If you want to get familiar with this tool, you should start with &lt;a href=&quot;https://www.rabbitmq.com/getstarted.html&quot;&gt;this article&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;RabbitMQ&lt;/em&gt; is written in &lt;em&gt;Erlang&lt;/em&gt; and it is a base for its reliability and concurrency features. Also, thanks to built-in distribution it is much easier to implement custom mechanisms, even if they are using different thing than standard &lt;em&gt;Erlang&lt;/em&gt; distribution to handle that problem. As you probably know, in &lt;em&gt;Erlang&lt;/em&gt;, &lt;em&gt;behaviors&lt;/em&gt; are the main mechanism for providing reusable abstractions - we can easily use that ones prepared by an &lt;em&gt;OTP&lt;/em&gt; team like &lt;code&gt;supervisor&lt;/code&gt;, &lt;code&gt;application&lt;/code&gt; or &lt;code&gt;gen_server&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;But, as we said in the introduction, we are not limited only to the prepared ones. &lt;em&gt;We can create our own behaviors&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;how-we-can-create-a-custom-behavior&quot;&gt;How we can create a &lt;em&gt;custom behavior&lt;/em&gt;?&lt;/h3&gt;
-
-&lt;p&gt;To create your own behavior, you must make a module that exports a function &lt;code&gt;behaviour_info/1&lt;/code&gt;. Note, that while Erlang is &lt;em&gt;American-English-friendly&lt;/em&gt; in regards to declaring behaviors, it is not as friendly when you are defining them. For example, you can use either &lt;code&gt;-behavior(gen_server).&lt;/code&gt; or &lt;code&gt;-behaviour(gen_server).&lt;/code&gt; when you declare you module implements the &lt;code&gt;gen_server&lt;/code&gt; behavior, but if you name the &lt;code&gt;behaviour_info/1&lt;/code&gt; function without the &lt;em&gt;‘u’&lt;/em&gt; it will not work.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;behaviour_info/1&lt;/code&gt; just needs to return the list of required exports of an implementation. Here’s an example:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;export&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;behaviour_info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviour_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;callbacks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behavior_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(_)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This declares three callbacks for the &lt;code&gt;gen_foo&lt;/code&gt; behavior: &lt;code&gt;foo/0&lt;/code&gt;, &lt;code&gt;bar/1&lt;/code&gt;, and &lt;code&gt;baz/2&lt;/code&gt;. Function simply returns an array of &lt;em&gt;two elements tuples&lt;/em&gt; with the function name andan arity.&lt;/p&gt;
-
-&lt;p&gt;When a module declares that it implements &lt;code&gt;gen_foo&lt;/code&gt; now, the Erlang compiler will check to make sure it exports and implements the required callbacks, and it will print warnings if this is not the case:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fooer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;behavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;export&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You can also use tools like &lt;em&gt;Dialyzer&lt;/em&gt; and &lt;em&gt;Typer&lt;/em&gt; - with prepared type specifications, you can easily verify that the new behavior is used properly (according to the specification) and that there are no type errors which can be caught due to &lt;em&gt;static code analysis&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;custom-behaviors-available-inside-rabbitmq&quot;&gt;Custom behaviors available inside &lt;em&gt;RabbitMQ&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;In RabbitMQ we have implemented several routing algorithms in the form of &lt;em&gt;exchanges&lt;/em&gt; (let’s call them the &lt;em&gt;gateways&lt;/em&gt; by which messages are coming to the system). We can say that each exchange has a specific type. By default &lt;em&gt;RabbitMQ&lt;/em&gt; has four exchanges: &lt;em&gt;direct&lt;/em&gt;, &lt;em&gt;fanout&lt;/em&gt;, &lt;em&gt;topic&lt;/em&gt; and &lt;em&gt;headers&lt;/em&gt;. But also, it allows the user to add new exchange types via plugins.&lt;/p&gt;
-
-&lt;p&gt;User, which will provide new exchange type needs to implement the &lt;code&gt;rabbit_exchange_type&lt;/code&gt; behaviour. Similar pattern can be applied to the &lt;code&gt;rabbitmq_backing_queue&lt;/code&gt; which is responsible for various techniques related with backing stores and e.g. persistent queues. Aforementioned abstractions have pretty simple implementation - most of the module code is related with type specifications used for the verification. More complicated behaviors are mirroring and enhancing the standard ones - inside &lt;em&gt;RabbitMQ&lt;/em&gt; maintainers implemented &lt;code&gt;supervisor2&lt;/code&gt; and &lt;code&gt;gen_server2&lt;/code&gt; - code is really long and complex, because those behaviors need to mirror the original implementations, and also should have additional features.&lt;/p&gt;
-
-&lt;p&gt;If you have already some experience with &lt;em&gt;Erlang&lt;/em&gt; I recommend you to dive into the implementation of two mentioned behaviors (and look at the originals as well - comments are really helpful). And by that, I would like to finish that blog post - in the next one, we will switch the language - now it is time to look into a different place to search for an interesting feature. Stay tuned! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.slideshare.net/old_sound/dissecting-the-rabbit&quot;&gt;Dissecting the rabbit: RabbitMQ Internal Architecture&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://videlalvaro.github.io&quot;&gt;Alvaro Videla’s blog&lt;/a&gt; - amazing source of knowledge about RabbitMQ internals.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/rabbit_backing_queue.erl&quot;&gt;rabbitmq_backing_queue&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/rabbit_exchange_type.erl&quot;&gt;rabbitmq_exchange_type&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/gen_server2.erl&quot;&gt;gen_server2&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/rabbitmq/rabbitmq-server/blob/master/src/supervisor2.erl&quot;&gt;supervisor2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 11 Jun 2015 16:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</guid>
-      </item>
-    
-      <item>
-        <title>Books that changed my career - Learn You Some Erlang For Great Good!</title>
-        <description>&lt;h1 id=&quot;books-that-changed-my-career---learn-you-some-erlang-for-great-good&quot;&gt;Books that changed my career - Learn You Some Erlang For Great Good!&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is another one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
-
-&lt;h3 id=&quot;why-should-i-care&quot;&gt;Why should I care?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;The shortest and simplest answer is - you should care if you are interested in &lt;em&gt;Erlang VM&lt;/em&gt; related topics&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;It is a book for a specialized audience. Probably you will not be interested if you are not interested in learning &lt;em&gt;Erlang&lt;/em&gt; or diving into ecosystem built around it. But if you would like to learn a new programming language - it is a very good book for a newcomer. Besides that, you should also read the Joe Armstrong’s book &lt;em&gt;“Programming Erlang, 2nd Edition”&lt;/em&gt; - which is a classic position, written by one of language creators.&lt;/p&gt;
-
-&lt;p&gt;Also, if you are dealing with &lt;em&gt;Erlang&lt;/em&gt; operations (e.g. you are a &lt;em&gt;DevOps&lt;/em&gt; person in the project which uses &lt;em&gt;Erlang&lt;/em&gt;), the same author wrote a book &lt;em&gt;Erlang in Anger&lt;/em&gt;, which is an awesome source of knowledge - it is full of hints, small tools and scripts and many useful guides, based on author’s extensive experience (&lt;em&gt;Heroku&lt;/em&gt; is the place when you probably can deal with &lt;a href=&quot;https://blog.heroku.com/archives/2013/11/7/logplex-down-the-rabbit-hole&quot;&gt;huge amount of unusual problems&lt;/a&gt; &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
-
-&lt;h3 id=&quot;about-the-book&quot;&gt;About the book&lt;/h3&gt;
-
-&lt;p&gt;&lt;img class=&quot;right lysefgg-logo&quot; alt=&quot;Learn You Some Erlang For Great Good! - Cover&quot; src=&quot;/assets/LYSEFGGCover.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;That book was mine entry point into the &lt;em&gt;Erlang&lt;/em&gt; world. It is a really good source of knowledge for newcomers, it is also complete - it covers all important topics from language basic syntax to more advanced topics related e.g. with &lt;em&gt;OTP&lt;/em&gt; or building distributed systems. It is very pragmatic and &lt;em&gt;Fred&lt;/em&gt; is continuously updating it (last changes are related with &lt;em&gt;maps&lt;/em&gt; and changes in handling &lt;em&gt;time&lt;/em&gt; which was introduced in the recently released 18th version of &lt;em&gt;Erlang VM&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;You will learn from this book a true &lt;em&gt;Erlang&lt;/em&gt; approach. Book contains also idioms, but it is starting from the ground up. It has a well thought structure and also - it is really well written and it has very interesting style (you will not miss &lt;em&gt;illustrations&lt;/em&gt; prepared for each chapter - they are sometimes funny).&lt;/p&gt;
-
-&lt;p&gt;The last, but not least - as I said in the previous paragraph - author &lt;a href=&quot;https://twitter.com/mononcqc&quot;&gt;Fred Trottier-Hebert&lt;/a&gt; is an experienced &lt;em&gt;Erlang&lt;/em&gt; developer, he is well-known in the community (he was an &lt;em&gt;Erlang&lt;/em&gt; user of the year), he wrote 2 books about &lt;em&gt;Erlang&lt;/em&gt; and numerous blog posts on &lt;a href=&quot;http://ferd.ca/&quot;&gt;his blog&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;i-do-not-care-about-erlang-or-elixir-should-i-still-care&quot;&gt;I do not care about &lt;code&gt;Erlang&lt;/code&gt; or &lt;code&gt;Elixir&lt;/code&gt;. Should I still care?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;The shortest and simplest answer is no&lt;/strong&gt;. The longer one, needs much more investigation of problem’s root.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;May I ask you why you don’t like Erlang?&lt;/em&gt; If you are already interested in any other language that is &lt;em&gt;functional&lt;/em&gt; and &lt;em&gt;built with concurrency in mind&lt;/em&gt;, then it is fine. But if not, you should learn a new one (pick any - &lt;code&gt;Clojure&lt;/code&gt;, &lt;code&gt;F#&lt;/code&gt; or &lt;code&gt;Erlang&lt;/code&gt;). Just use a different language than your daily tool. You can read about that &lt;a href=&quot;http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html&quot;&gt;here&lt;/a&gt;. And I will leave you with that till the next time! &lt;img class=&quot;emoji&quot; title=&quot;:smiley:&quot; alt=&quot;:smiley:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f603.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/content&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.erlang-in-anger.com/&quot;&gt;Erlang in Anger&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/time&quot;&gt;Erlang 18 and Time&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.heroku.com/archives/2013/11/7/logplex-down-the-rabbit-hole&quot;&gt;Troubleshooting Down the Logplex Rabbit Hole&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/jaerlang2/programming-erlang&quot;&gt;Programming Erlang, 2nd Edition&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 06 Jul 2015 16:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</guid>
-      </item>
-    
-      <item>
-        <title>Seven Languages in Seven Weeks - Erlang</title>
-        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---erlang&quot;&gt;Seven Languages in Seven Weeks - Erlang&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with book &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;&lt;img class=&quot;right erlang-logo&quot; alt=&quot;Erlang Logo&quot; src=&quot;/assets/ErlangLogo.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;If you did not sleep under a rock in the past 30 years or this post is not a first one which you have read on this blog, you are probably familiar what &lt;em&gt;Erlang&lt;/em&gt; is and which features are making it uniquely suited in certain class of applications. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I do not want to cover any interesting language features, because I have already written &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/10/interesting-language-features-erlang-named-case-expressions.html&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html&quot;&gt;posts&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html&quot;&gt;that&lt;/a&gt;. Instead, I would like to introduce to you a small story about origin of the &lt;em&gt;actor model&lt;/em&gt; in that particular case.&lt;/p&gt;
-
-&lt;h3 id=&quot;a-small-story-about-the-actor-model-in-erlang&quot;&gt;A small story about the &lt;em&gt;actor model&lt;/em&gt; in &lt;em&gt;Erlang&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;The easiest way to start, will be to introduce definition directly from &lt;em&gt;Wikipedia&lt;/em&gt;:&lt;/p&gt;
-
-&lt;quote class=&quot;citation&quot;&gt;The actor model in computer science is a mathematical model of concurrent computation that treats &quot;actors&quot; as the universal primitives of concurrent computation: in response to a message that it receives, an actor can make local decisions, create more actors, send more messages, and determine how to respond to the next message received. The actor model originated in 1973. It has been used both as a framework for a theoretical understanding of computation and as the theoretical basis for several practical implementations of concurrent systems. The relationship of the model to other work is discussed in Indeterminacy in concurrent computation and Actor model and process calculi.&lt;/quote&gt;
-
-&lt;p&gt;More or less at the same time, Erlang was created - with similar concepts inside. At first sight it looks like an industrial implementation of academic theory. However, creators did not call that an &lt;em&gt;actor model&lt;/em&gt;, but all features are reflecting that idea pretty much entirely - core of this idea is a lightweight processes implementation, which use message passing for communication between them and complete isolation from each other.&lt;/p&gt;
-
-&lt;p&gt;It may sound as an impossible and strange coincidence, but that implementation &lt;strong&gt;was not inspired by work of Hewitt, Bishop and Steiger at all&lt;/strong&gt;. As &lt;a href=&quot;https://twitter.com/rvirding&quot;&gt;Robert Virding&lt;/a&gt; said &lt;a href=&quot;http://rvirding.blogspot.com/2008/01/virdings-first-rule-of-programming.html?showComment=1400761539472#c5295780053912797163&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
-
-&lt;quote class=&quot;citation&quot;&gt;No, we didn't as such &quot;invent&quot; them, but at the same time we didn't take them from anywhere either. We arrived at these properties on our own as the best ways of solving our problems. We never heard about actors till years later.&lt;/quote&gt;
-
-&lt;p&gt;It means that &lt;em&gt;actor model&lt;/em&gt; has a solid industrial motivation and inspiration in the Telecommunication domain. Looking at this from a different perspective - it is how the phone calls are working at the highest conceptual level (also you can easily find analogies to that process in nature and biology). They have arrived to the same properties on their own, distilling and solving the domain problems over and over again - in complete isolation from the academic theory, as a best fit for set of their problems. I am convinced that this model is a valuable thing by that, because it means that at least two sets of people came up with same idea which is a perfect fit for handling certain class of problems related with concurrent operations.&lt;/p&gt;
-
-&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
-
-&lt;p&gt;We are heading inevitably to the end of first book - following blog posts in that series will cover two last programming languages - &lt;em&gt;Clojure&lt;/em&gt; and &lt;em&gt;Haskell&lt;/em&gt;. After that, we will have a short break, for one or two blog posts about other languages which are not covered in neither both aforementioned books. Then, we will start again with first language described in the sequel &lt;a href=&quot;https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks&quot;&gt;&lt;em&gt;Seven More Languages in Seven Weeks&lt;/em&gt;&lt;/a&gt;. See you next time then! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Actor_model&quot;&gt;Actor Model - Wikipedia&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://worrydream.com/refs/Hewitt-ActorModel.pdf&quot;&gt;A Universal Modular Actor Formalism for Artificial Intelligence - Hewitt, Bishop, Steiger&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.erlang.org/&quot;&gt;Erlang - Official Website&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 13 Jul 2015 18:15:00 +0200</pubDate>
-        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</guid>
       </item>
     
   </channel>

@@ -7,6 +7,188 @@
     <atom:link href="http://www.afronski.pl/tag/tutorial/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Low-level Node.js debugging on production</title>
+        <description>&lt;h1 id=&quot;low-level-nodejs-debugging-on-production&quot;&gt;Low-level Node.js debugging on production&lt;/h1&gt;
+
+&lt;p&gt;Sometimes when you want to run your Node.js application on production environment, you will receive:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;node-stuff &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node index.js
+Segmentation fault&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Yeah… and &lt;em&gt;now&lt;/em&gt; what?&lt;/p&gt;
+
+&lt;p&gt;Welcome to the dungeon, &lt;em&gt;DevOps&lt;/em&gt; marine &lt;img class=&quot;emoji&quot; title=&quot;:grin:&quot; alt=&quot;:grin:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f601.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;First of all, if you deployed an application on an &lt;em&gt;OS&lt;/em&gt; different than &lt;em&gt;SmartOS&lt;/em&gt;, you lost the ability to use many impressive tools which could definitely help you in that case (the most impressive ones are &lt;code&gt;mdb&lt;/code&gt; and &lt;code&gt;dtrace&lt;/code&gt;, you can find details in the references section of this post).&lt;/p&gt;
+
+&lt;p&gt;So there is no &lt;em&gt;&lt;code&gt;mdb&lt;/code&gt;&lt;/em&gt;, no &lt;em&gt;&lt;code&gt;dtrace&lt;/code&gt;&lt;/em&gt;, no &lt;em&gt;SmartOS&lt;/em&gt;. You can’t also use your favorite debugger like &lt;a href=&quot;https://trace.gl/&quot;&gt;trace.gl&lt;/a&gt;, &lt;a href=&quot;https://github.com/jwarkentin/node-monkey&quot;&gt;node-monkey&lt;/a&gt; or &lt;a href=&quot;https://github.com/node-inspector/node-inspector&quot;&gt;node-inspector&lt;/a&gt;. You have got only &lt;code&gt;gdb&lt;/code&gt; and your brain filled with low-level computer knowledge &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before you dive deeper into the internals of your application, let’s begin the voodoo that is the process of setting the proper options in your &lt;em&gt;OS&lt;/em&gt;. First you will remove the limit related with the &lt;em&gt;core dump&lt;/em&gt; size:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo &lt;span class=&quot;nb&quot;&gt;ulimit&lt;/span&gt; -c unlimited&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, you set different path for these files (remember to put them on a partition with a huge amount of the free disk space):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/tmp/core_%e.%p&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sudo tee /proc/sys/kernel/core_pattern&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, if you are using native Node.js extensions you have to recompile them with the debugging flag &lt;em&gt;&lt;code&gt;-g&lt;/code&gt;&lt;/em&gt; (configuration file taken from the &lt;em&gt;&lt;code&gt;node_xslt&lt;/code&gt;&lt;/em&gt; module):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;targets&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;target_name&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;node_xslt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;sources&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;node_xslt.cc&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;cflags&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;cflags_cc&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;xcode_settings&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;OTHER_CFLAGS&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;libraries&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;-lxml2&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;-lxslt&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;-lexslt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;library_dirs&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/usr/lib&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, look at the dependencies (in our case &lt;code&gt;libxslt&lt;/code&gt;, &lt;code&gt;libxml2&lt;/code&gt;) and reinstall them in the development version (sometimes marked with a &lt;code&gt;-devel&lt;/code&gt; postfix).&lt;/p&gt;
+
+&lt;p&gt;After modifications and installing dependencies in the &lt;em&gt;debugging mode&lt;/em&gt;, you have to run installation process inside the directory of the modified module (but only there, not on the upper level, because it will remove our changes in the modified module):&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;node_xslt &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm install --verbose&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Somewhere inside the long output you will find information about flags used in compilation process (and you should see a &lt;em&gt;&lt;code&gt;-g&lt;/code&gt;&lt;/em&gt; flag, responsible for attaching debugging informations).&lt;/p&gt;
+
+&lt;p&gt;Next, you have to simulate again situation with &lt;em&gt;&lt;code&gt;Segmentation fault&lt;/code&gt;&lt;/em&gt; behavior. When application receive unwanted signal, it will dump file with the &lt;em&gt;post-mortem&lt;/em&gt; internal structure, ready for using inside &lt;code&gt;gdb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gdb /usr/bin/node /tmp/core_XXX.YYY&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And now you are inside the belly of the monster, so you can move around:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;...
+Program received signal SIGSEGV, Segmentation fault.
+
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; bt
+&lt;span class=&quot;c&quot;&gt;# It shows the stack trace (but from the native code).&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; print V8_Fatal&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;a&amp;quot;&lt;/span&gt;, 11, &lt;span class=&quot;s2&quot;&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# It shows the stack trace inside V8.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Values &amp;quot;a&amp;quot;, 11 and &amp;quot;c&amp;quot; are irrelevant.&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; quit
+&lt;span class=&quot;c&quot;&gt;# It exits gdb.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to attach to the running process, you have to invoke the command specified below:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gdb attach &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;pidof node&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, if your application is running in a cluster mode (or you are running more than one Node.js application on your machine), this will fail and instead of &lt;em&gt;&lt;code&gt;pidof&lt;/code&gt;&lt;/em&gt; you have to pass a single &lt;em&gt;PID&lt;/em&gt; value (from one application, master or one of the slaves, depends on what is interesting for you).&lt;/p&gt;
+
+&lt;p&gt;You can also run &lt;em&gt;&lt;code&gt;strace&lt;/code&gt;&lt;/em&gt; in order to determine which system calls does your program invoke before &lt;em&gt;death&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -ttT&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After gathering a certain amount of knowledge, armed with the stack traces, system call invocations and the memory footprint you have to &lt;em&gt;dig deeper&lt;/em&gt; into the actual application code and maybe try to reproduce that behavior in a more &lt;em&gt;debuggable&lt;/em&gt; environment &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dtrace.org/blogs/dap/2012/01/13/playing-with-nodev8-postmortem-debugging&quot;&gt;Using &lt;code&gt;mdb&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dtrace.org/blogs/dap/2012/01/05/where-does-your-node-program-spend-its-time&quot;&gt;Using &lt;code&gt;dtrace&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linux.die.net/man/3/ulimit&quot;&gt;&lt;code&gt;ulimit&lt;/code&gt; man pages&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bsuh/node_xslt&quot;&gt;node_xslt&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linux.die.net/man/1/strace&quot;&gt;&lt;code&gt;strace&lt;/code&gt; man pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 02 Nov 2013 10:45:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2013/11/02/low-level-nodejs-debugging-on-production.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2013/11/02/low-level-nodejs-debugging-on-production.html</guid>
+      </item>
+    
+      <item>
+        <title>Tips and tricks for chef-solo and vagrant</title>
+        <description>&lt;h1 id=&quot;tips-and-tricks-for-chef-solo-and-vagrant&quot;&gt;Tips and tricks for chef-solo and vagrant&lt;/h1&gt;
+
+&lt;p&gt;In your daily work at the kitchen sink &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;, sometimes you have to be a &lt;em&gt;plumber&lt;/em&gt; and get dirty. In order to do that you have to be familiar with the concept of debugging &lt;em&gt;vagrant&lt;/em&gt;, &lt;em&gt;chef-solo&lt;/em&gt; and some other useful tricks.&lt;/p&gt;
+
+&lt;h2 id=&quot;debugging-vagrant&quot;&gt;Debugging vagrant&lt;/h2&gt;
+
+&lt;p&gt;If you want to enable a verbose mode for &lt;em&gt;vagrant&lt;/em&gt;, you need to set the environment variable &lt;code&gt;VAGRANT_LOG&lt;/code&gt; to &lt;code&gt;DEBUG&lt;/code&gt; or &lt;code&gt;INFO&lt;/code&gt; value, as in the example below:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ VAGRANT_LOG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;DEBUG vagrant up&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;debugging-chef-solo&quot;&gt;Debugging chef-solo&lt;/h2&gt;
+
+&lt;p&gt;You have got two options how to enable verbose mode for &lt;em&gt;chef-solo&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;First, you can &lt;em&gt;&lt;code&gt;SSH&lt;/code&gt;&lt;/em&gt; into a created virtual machine and invoke the &lt;em&gt;magic command&lt;/em&gt; in a certain directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vagrant ssh
+
+vagrant@localhost ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /tmp/vagrant-chef-1
+vagrant@localhost /tmp/vagrant-chef-1 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo chef-solo -c solo.rb -j dna.json -l debug&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In this &lt;em&gt;magic command&lt;/em&gt; the parameter &lt;code&gt;-c&lt;/code&gt; is responsible for setting a configuration file, &lt;code&gt;-j&lt;/code&gt; is for passing a file with attributes, which is later called a &lt;em&gt;node specification&lt;/em&gt;. Last parameter &lt;code&gt;-l&lt;/code&gt; - most important for us - enables the verbose mode at a certain logging level.&lt;/p&gt;
+
+&lt;p&gt;You may be wondering why you are entering a &lt;code&gt;/tmp/vagrant-chef-1&lt;/code&gt; directory with a digit at the end?&lt;/p&gt;
+
+&lt;p&gt;The actual value depends on the number of concurrent and active provisioning processes running on the virtual machine and is represented by the &lt;a href=&quot;https://github.com/mitchellh/vagrant/blob/master/plugins/provisioners/chef/provisioner/base.rb#L22&quot;&gt;get_and_update_counter&lt;/a&gt; method and the &lt;a href=&quot;https://github.com/mitchellh/vagrant/blob/master/lib/vagrant/util/counter.rb&quot;&gt;Counter&lt;/a&gt; module.&lt;/p&gt;
+
+&lt;p&gt;But you can enable it in a different way - by passing the arguments to a provisioner inside &lt;em&gt;Vagrantfile&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Vagrant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;provision&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:chef_solo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;chef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;-l debug&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;mutating-the-dna&quot;&gt;Mutating the DNA&lt;/h2&gt;
+
+&lt;p&gt;As you can see in the example above, related with the chef-solo debugging, you have got a &lt;code&gt;dna.json&lt;/code&gt; file with attributes generated on the basis of provisioner configuration attached in &lt;em&gt;Vagrantfile&lt;/em&gt;. We call it a &lt;em&gt;node specification&lt;/em&gt;. But what if you already have an existing node specification, and you want to use it?&lt;/p&gt;
+
+&lt;p&gt;There is an attribute for that, called &lt;code&gt;json&lt;/code&gt;, but it is a dictionary. You cannot pass a plain string with a path to the node file, like the role name in the &lt;em&gt;add_role&lt;/em&gt; method or setting a value in the &lt;em&gt;environment&lt;/em&gt; field.&lt;/p&gt;
+
+&lt;p&gt;In order to inject our attributes you need to read the file first, then parse the content as JSON and finally merge it with the existing value of the field:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Vagrant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;provision&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:chef_solo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;chef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;merge!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;path/to/json/file&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;links&quot;&gt;Links&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/mitchellh/vagrant&quot;&gt;Vagrant Github repository&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.vagrantup.com/v2/&quot;&gt;Vagrant documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 18 Oct 2013 20:10:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2013/10/18/chef-solo-dna-mutation.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2013/10/18/chef-solo-dna-mutation.html</guid>
+      </item>
+    
+      <item>
         <title>Creating a custom Vagrant box</title>
         <description>&lt;h1 id=&quot;creating-a-custom-vagrant-box&quot;&gt;Creating a custom Vagrant box&lt;/h1&gt;
 
@@ -143,188 +325,6 @@ Default requiretty&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         <pubDate>Tue, 08 Oct 2013 21:50:00 +0200</pubDate>
         <link>http://www.afronski.pl/2013/10/08/creating-a-custom-vagrant-box.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/2013/10/08/creating-a-custom-vagrant-box.html</guid>
-      </item>
-    
-      <item>
-        <title>Tips and tricks for chef-solo and vagrant</title>
-        <description>&lt;h1 id=&quot;tips-and-tricks-for-chef-solo-and-vagrant&quot;&gt;Tips and tricks for chef-solo and vagrant&lt;/h1&gt;
-
-&lt;p&gt;In your daily work at the kitchen sink &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;, sometimes you have to be a &lt;em&gt;plumber&lt;/em&gt; and get dirty. In order to do that you have to be familiar with the concept of debugging &lt;em&gt;vagrant&lt;/em&gt;, &lt;em&gt;chef-solo&lt;/em&gt; and some other useful tricks.&lt;/p&gt;
-
-&lt;h2 id=&quot;debugging-vagrant&quot;&gt;Debugging vagrant&lt;/h2&gt;
-
-&lt;p&gt;If you want to enable a verbose mode for &lt;em&gt;vagrant&lt;/em&gt;, you need to set the environment variable &lt;code&gt;VAGRANT_LOG&lt;/code&gt; to &lt;code&gt;DEBUG&lt;/code&gt; or &lt;code&gt;INFO&lt;/code&gt; value, as in the example below:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ VAGRANT_LOG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;DEBUG vagrant up&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;debugging-chef-solo&quot;&gt;Debugging chef-solo&lt;/h2&gt;
-
-&lt;p&gt;You have got two options how to enable verbose mode for &lt;em&gt;chef-solo&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;First, you can &lt;em&gt;&lt;code&gt;SSH&lt;/code&gt;&lt;/em&gt; into a created virtual machine and invoke the &lt;em&gt;magic command&lt;/em&gt; in a certain directory:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vagrant ssh
-
-vagrant@localhost ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /tmp/vagrant-chef-1
-vagrant@localhost /tmp/vagrant-chef-1 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo chef-solo -c solo.rb -j dna.json -l debug&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;In this &lt;em&gt;magic command&lt;/em&gt; the parameter &lt;code&gt;-c&lt;/code&gt; is responsible for setting a configuration file, &lt;code&gt;-j&lt;/code&gt; is for passing a file with attributes, which is later called a &lt;em&gt;node specification&lt;/em&gt;. Last parameter &lt;code&gt;-l&lt;/code&gt; - most important for us - enables the verbose mode at a certain logging level.&lt;/p&gt;
-
-&lt;p&gt;You may be wondering why you are entering a &lt;code&gt;/tmp/vagrant-chef-1&lt;/code&gt; directory with a digit at the end?&lt;/p&gt;
-
-&lt;p&gt;The actual value depends on the number of concurrent and active provisioning processes running on the virtual machine and is represented by the &lt;a href=&quot;https://github.com/mitchellh/vagrant/blob/master/plugins/provisioners/chef/provisioner/base.rb#L22&quot;&gt;get_and_update_counter&lt;/a&gt; method and the &lt;a href=&quot;https://github.com/mitchellh/vagrant/blob/master/lib/vagrant/util/counter.rb&quot;&gt;Counter&lt;/a&gt; module.&lt;/p&gt;
-
-&lt;p&gt;But you can enable it in a different way - by passing the arguments to a provisioner inside &lt;em&gt;Vagrantfile&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Vagrant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;provision&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:chef_solo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;chef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;-l debug&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;mutating-the-dna&quot;&gt;Mutating the DNA&lt;/h2&gt;
-
-&lt;p&gt;As you can see in the example above, related with the chef-solo debugging, you have got a &lt;code&gt;dna.json&lt;/code&gt; file with attributes generated on the basis of provisioner configuration attached in &lt;em&gt;Vagrantfile&lt;/em&gt;. We call it a &lt;em&gt;node specification&lt;/em&gt;. But what if you already have an existing node specification, and you want to use it?&lt;/p&gt;
-
-&lt;p&gt;There is an attribute for that, called &lt;code&gt;json&lt;/code&gt;, but it is a dictionary. You cannot pass a plain string with a path to the node file, like the role name in the &lt;em&gt;add_role&lt;/em&gt; method or setting a value in the &lt;em&gt;environment&lt;/em&gt; field.&lt;/p&gt;
-
-&lt;p&gt;In order to inject our attributes you need to read the file first, then parse the content as JSON and finally merge it with the existing value of the field:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Vagrant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;provision&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:chef_solo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;chef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;merge!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;path/to/json/file&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;links&quot;&gt;Links&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/mitchellh/vagrant&quot;&gt;Vagrant Github repository&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://docs.vagrantup.com/v2/&quot;&gt;Vagrant documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 18 Oct 2013 20:10:00 +0200</pubDate>
-        <link>http://www.afronski.pl/2013/10/18/chef-solo-dna-mutation.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2013/10/18/chef-solo-dna-mutation.html</guid>
-      </item>
-    
-      <item>
-        <title>Low-level Node.js debugging on production</title>
-        <description>&lt;h1 id=&quot;low-level-nodejs-debugging-on-production&quot;&gt;Low-level Node.js debugging on production&lt;/h1&gt;
-
-&lt;p&gt;Sometimes when you want to run your Node.js application on production environment, you will receive:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;node-stuff &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node index.js
-Segmentation fault&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Yeah… and &lt;em&gt;now&lt;/em&gt; what?&lt;/p&gt;
-
-&lt;p&gt;Welcome to the dungeon, &lt;em&gt;DevOps&lt;/em&gt; marine &lt;img class=&quot;emoji&quot; title=&quot;:grin:&quot; alt=&quot;:grin:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f601.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
-
-&lt;p&gt;First of all, if you deployed an application on an &lt;em&gt;OS&lt;/em&gt; different than &lt;em&gt;SmartOS&lt;/em&gt;, you lost the ability to use many impressive tools which could definitely help you in that case (the most impressive ones are &lt;code&gt;mdb&lt;/code&gt; and &lt;code&gt;dtrace&lt;/code&gt;, you can find details in the references section of this post).&lt;/p&gt;
-
-&lt;p&gt;So there is no &lt;em&gt;&lt;code&gt;mdb&lt;/code&gt;&lt;/em&gt;, no &lt;em&gt;&lt;code&gt;dtrace&lt;/code&gt;&lt;/em&gt;, no &lt;em&gt;SmartOS&lt;/em&gt;. You can’t also use your favorite debugger like &lt;a href=&quot;https://trace.gl/&quot;&gt;trace.gl&lt;/a&gt;, &lt;a href=&quot;https://github.com/jwarkentin/node-monkey&quot;&gt;node-monkey&lt;/a&gt; or &lt;a href=&quot;https://github.com/node-inspector/node-inspector&quot;&gt;node-inspector&lt;/a&gt;. You have got only &lt;code&gt;gdb&lt;/code&gt; and your brain filled with low-level computer knowledge &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
-
-&lt;p&gt;Before you dive deeper into the internals of your application, let’s begin the voodoo that is the process of setting the proper options in your &lt;em&gt;OS&lt;/em&gt;. First you will remove the limit related with the &lt;em&gt;core dump&lt;/em&gt; size:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo &lt;span class=&quot;nb&quot;&gt;ulimit&lt;/span&gt; -c unlimited&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Next, you set different path for these files (remember to put them on a partition with a huge amount of the free disk space):&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/tmp/core_%e.%p&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sudo tee /proc/sys/kernel/core_pattern&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Then, if you are using native Node.js extensions you have to recompile them with the debugging flag &lt;em&gt;&lt;code&gt;-g&lt;/code&gt;&lt;/em&gt; (configuration file taken from the &lt;em&gt;&lt;code&gt;node_xslt&lt;/code&gt;&lt;/em&gt; module):&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&amp;quot;targets&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&amp;quot;target_name&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;node_xslt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&amp;quot;sources&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;node_xslt.cc&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-
-    &lt;span class=&quot;s2&quot;&gt;&amp;quot;cflags&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-
-      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-
-    &lt;span class=&quot;s2&quot;&gt;&amp;quot;cflags_cc&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-
-      &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-
-    &lt;span class=&quot;s2&quot;&gt;&amp;quot;xcode_settings&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&amp;quot;OTHER_CFLAGS&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;!(xml2-config --cflags)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s2&quot;&gt;&amp;quot;-fexceptions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-
-        &lt;span class=&quot;s2&quot;&gt;&amp;quot;-g&amp;quot;&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&amp;quot;libraries&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;-lxml2&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;-lxslt&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;-lexslt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&amp;quot;library_dirs&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/usr/lib&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Then, look at the dependencies (in our case &lt;code&gt;libxslt&lt;/code&gt;, &lt;code&gt;libxml2&lt;/code&gt;) and reinstall them in the development version (sometimes marked with a &lt;code&gt;-devel&lt;/code&gt; postfix).&lt;/p&gt;
-
-&lt;p&gt;After modifications and installing dependencies in the &lt;em&gt;debugging mode&lt;/em&gt;, you have to run installation process inside the directory of the modified module (but only there, not on the upper level, because it will remove our changes in the modified module):&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;node_xslt &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm install --verbose&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Somewhere inside the long output you will find information about flags used in compilation process (and you should see a &lt;em&gt;&lt;code&gt;-g&lt;/code&gt;&lt;/em&gt; flag, responsible for attaching debugging informations).&lt;/p&gt;
-
-&lt;p&gt;Next, you have to simulate again situation with &lt;em&gt;&lt;code&gt;Segmentation fault&lt;/code&gt;&lt;/em&gt; behavior. When application receive unwanted signal, it will dump file with the &lt;em&gt;post-mortem&lt;/em&gt; internal structure, ready for using inside &lt;code&gt;gdb&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gdb /usr/bin/node /tmp/core_XXX.YYY&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And now you are inside the belly of the monster, so you can move around:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;...
-Program received signal SIGSEGV, Segmentation fault.
-
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; bt
-&lt;span class=&quot;c&quot;&gt;# It shows the stack trace (but from the native code).&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; print V8_Fatal&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;a&amp;quot;&lt;/span&gt;, 11, &lt;span class=&quot;s2&quot;&gt;&amp;quot;c&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# It shows the stack trace inside V8.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# Values &amp;quot;a&amp;quot;, 11 and &amp;quot;c&amp;quot; are irrelevant.&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; quit
-&lt;span class=&quot;c&quot;&gt;# It exits gdb.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If you want to attach to the running process, you have to invoke the command specified below:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gdb attach &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;pidof node&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;However, if your application is running in a cluster mode (or you are running more than one Node.js application on your machine), this will fail and instead of &lt;em&gt;&lt;code&gt;pidof&lt;/code&gt;&lt;/em&gt; you have to pass a single &lt;em&gt;PID&lt;/em&gt; value (from one application, master or one of the slaves, depends on what is interesting for you).&lt;/p&gt;
-
-&lt;p&gt;You can also run &lt;em&gt;&lt;code&gt;strace&lt;/code&gt;&lt;/em&gt; in order to determine which system calls does your program invoke before &lt;em&gt;death&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -ttT&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;After gathering a certain amount of knowledge, armed with the stack traces, system call invocations and the memory footprint you have to &lt;em&gt;dig deeper&lt;/em&gt; into the actual application code and maybe try to reproduce that behavior in a more &lt;em&gt;debuggable&lt;/em&gt; environment &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dtrace.org/blogs/dap/2012/01/13/playing-with-nodev8-postmortem-debugging&quot;&gt;Using &lt;code&gt;mdb&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dtrace.org/blogs/dap/2012/01/05/where-does-your-node-program-spend-its-time&quot;&gt;Using &lt;code&gt;dtrace&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://linux.die.net/man/3/ulimit&quot;&gt;&lt;code&gt;ulimit&lt;/code&gt; man pages&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/bsuh/node_xslt&quot;&gt;node_xslt&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://linux.die.net/man/1/strace&quot;&gt;&lt;code&gt;strace&lt;/code&gt; man pages&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sat, 02 Nov 2013 10:45:00 +0100</pubDate>
-        <link>http://www.afronski.pl/2013/11/02/low-level-nodejs-debugging-on-production.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/2013/11/02/low-level-nodejs-debugging-on-production.html</guid>
       </item>
     
   </channel>
