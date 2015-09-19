@@ -185,68 +185,72 @@
 <span class="lineno"> 3</span> <span class="c1">;; It represents a *signal state* and list of actions called *effects*</span>
 <span class="lineno"> 4</span> <span class="c1">;; which are executed after the signal propagates through the wire.</span>
 <span class="lineno"> 5</span> 
-<span class="lineno"> 6</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">make-wire</span> <span class="p">[]</span>
-<span class="lineno"> 7</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">signal</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">false</span><span class="p">)</span>
-<span class="lineno"> 8</span>         <span class="nv">effects</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">(</span><span class="nf">list</span><span class="p">))]</span>
-<span class="lineno"> 9</span>     <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">set-signal!</span> <span class="p">[</span><span class="nv">new</span><span class="p">]</span>
-<span class="lineno">10</span>               <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">= </span><span class="nv">signal</span> <span class="nv">new</span><span class="p">))</span>
-<span class="lineno">11</span>                 <span class="p">(</span><span class="k">do </span><span class="p">(</span><span class="nf">swap!</span> <span class="nv">signal</span> <span class="nv">new</span><span class="p">)</span>
-<span class="lineno">12</span>                     <span class="p">(</span><span class="nf">invoke-all</span> <span class="o">@</span><span class="nv">effects</span><span class="p">))</span>
-<span class="lineno">13</span>                 <span class="ss">:done</span><span class="p">))</span>
-<span class="lineno">14</span> 
-<span class="lineno">15</span>             <span class="p">(</span><span class="nf">accept-action!</span> <span class="p">[</span><span class="nv">procedure</span><span class="p">]</span>
-<span class="lineno">16</span>               <span class="p">(</span><span class="nf">swap!</span> <span class="nv">effects</span> <span class="nb">conj </span><span class="nv">procedure</span><span class="p">)</span>
-<span class="lineno">17</span>               <span class="p">(</span><span class="nf">procedure</span><span class="p">))</span>
+<span class="lineno"> 6</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">get-signal</span> <span class="p">[</span><span class="nv">wire</span><span class="p">]</span> <span class="p">(</span><span class="nf">wire</span> <span class="ss">:get-signal</span><span class="p">))</span>
+<span class="lineno"> 7</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">set-signal!</span> <span class="p">[</span><span class="nv">wire</span> <span class="nv">v</span><span class="p">]</span> <span class="p">((</span><span class="nf">wire</span> <span class="ss">:set-signal!</span><span class="p">)</span> <span class="nv">v</span><span class="p">))</span>
+<span class="lineno"> 8</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">add-action!</span> <span class="p">[</span><span class="nv">wire</span> <span class="nv">p</span><span class="p">]</span> <span class="p">((</span><span class="nf">wire</span> <span class="ss">:add-action!</span><span class="p">)</span> <span class="nv">p</span><span class="p">))</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">make-wire</span> <span class="p">[]</span>
+<span class="lineno">11</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">signal</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">false</span><span class="p">)</span>
+<span class="lineno">12</span>         <span class="nv">effects</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">(</span><span class="nf">list</span><span class="p">))]</span>
+<span class="lineno">13</span>     <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">set-signal!</span> <span class="p">[</span><span class="nv">new</span><span class="p">]</span>
+<span class="lineno">14</span>               <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">= </span><span class="nv">signal</span> <span class="nv">new</span><span class="p">))</span>
+<span class="lineno">15</span>                 <span class="p">(</span><span class="k">do </span><span class="p">(</span><span class="nf">reset!</span> <span class="nv">signal</span> <span class="nv">new</span><span class="p">)</span>
+<span class="lineno">16</span>                     <span class="p">(</span><span class="nf">invoke-all</span> <span class="o">@</span><span class="nv">effects</span><span class="p">))</span>
+<span class="lineno">17</span>                 <span class="ss">:done</span><span class="p">))</span>
 <span class="lineno">18</span> 
-<span class="lineno">19</span>             <span class="p">(</span><span class="nf">dispatch</span> <span class="p">[</span><span class="nv">action</span><span class="p">]</span>
-<span class="lineno">20</span>               <span class="p">(</span><span class="nf">condp</span> <span class="nb">= </span><span class="nv">action</span>
-<span class="lineno">21</span>                 <span class="ss">:get-signal</span> <span class="o">@</span><span class="nv">signal</span>
-<span class="lineno">22</span>                 <span class="ss">:set-signal!</span> <span class="nv">set-signal!</span>
-<span class="lineno">23</span>                 <span class="ss">:add-action!</span> <span class="nv">add-action!</span>
-<span class="lineno">24</span>                 <span class="nb">assert </span><span class="nv">false</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Unknown operation &quot;</span> <span class="nv">action</span> <span class="s">&quot; in make-wire.&quot;</span><span class="p">)))]</span>
-<span class="lineno">25</span>       <span class="nv">dispatch</span><span class="p">)))</span>
-<span class="lineno">26</span> 
-<span class="lineno">27</span> <span class="c1">;; ...</span>
-<span class="lineno">28</span> 
-<span class="lineno">29</span> <span class="c1">;; Adders - the functional composition of previously defined smaller elements, with</span>
-<span class="lineno">30</span> <span class="c1">;; use of local computational objects with state, represented by wires.</span>
-<span class="lineno">31</span> 
-<span class="lineno">32</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">half-adder</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span> <span class="nv">s</span> <span class="nv">c</span><span class="p">]</span>
-<span class="lineno">33</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)</span>
-<span class="lineno">34</span>         <span class="nv">e</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)]</span>
-<span class="lineno">35</span>     <span class="p">(</span><span class="nf">or-gate</span> <span class="nv">a</span> <span class="nv">b</span> <span class="nv">d</span><span class="p">)</span>
-<span class="lineno">36</span>     <span class="p">(</span><span class="nf">and-gate</span> <span class="nv">a</span> <span class="nv">b</span> <span class="nv">c</span><span class="p">)</span>
-<span class="lineno">37</span>     <span class="p">(</span><span class="nf">not-gate</span> <span class="nv">c</span> <span class="nv">e</span><span class="p">)</span>
-<span class="lineno">38</span>     <span class="p">(</span><span class="nf">and-gate</span> <span class="nv">d</span> <span class="nv">e</span> <span class="nv">s</span><span class="p">)</span>
-<span class="lineno">39</span>     <span class="ss">:ok</span><span class="p">))</span>
-<span class="lineno">40</span> 
-<span class="lineno">41</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">full-adder</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span> <span class="nv">c-in</span> <span class="nv">sum</span> <span class="nv">c-out</span><span class="p">]</span>
-<span class="lineno">42</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">s</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)</span>
-<span class="lineno">43</span>         <span class="nv">c1</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)</span>
-<span class="lineno">44</span>         <span class="nv">c2</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)]</span>
-<span class="lineno">45</span>     <span class="p">(</span><span class="nf">half-adder</span> <span class="nv">b</span> <span class="nv">c-in</span> <span class="nv">s</span> <span class="nv">c1</span><span class="p">)</span>
-<span class="lineno">46</span>     <span class="p">(</span><span class="nf">half-adder</span> <span class="nv">a</span> <span class="nv">s</span> <span class="nv">sum</span> <span class="nv">c2</span><span class="p">)</span>
-<span class="lineno">47</span>     <span class="p">(</span><span class="nf">or-gate</span> <span class="nv">c1</span> <span class="nv">c2</span> <span class="nv">c-out</span><span class="p">)</span>
-<span class="lineno">48</span>     <span class="ss">:ok</span><span class="p">))</span>
-<span class="lineno">49</span> 
-<span class="lineno">50</span> <span class="c1">;; Simulation - the actual use of the system. Scheduling, gate propagation</span>
-<span class="lineno">51</span> <span class="c1">;; delay and agenda are hidden underneath the `step` and `set-signal!` functions.</span>
-<span class="lineno">52</span> 
-<span class="lineno">53</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">input-1</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">))</span>
-<span class="lineno">54</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">input-2</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">))</span>
-<span class="lineno">55</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">sum</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">))</span>
-<span class="lineno">56</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">carry</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">))</span>
-<span class="lineno">57</span> 
-<span class="lineno">58</span> <span class="p">(</span><span class="nf">probe</span> <span class="ss">:sum</span> <span class="nv">sum</span><span class="p">)</span>
-<span class="lineno">59</span> <span class="p">(</span><span class="nf">probe</span> <span class="ss">:carry</span> <span class="nv">carry</span><span class="p">)</span>
-<span class="lineno">60</span> 
-<span class="lineno">61</span> <span class="p">(</span><span class="nf">half-adder</span> <span class="nv">input-1</span> <span class="nv">input2</span> <span class="nv">sum</span> <span class="nv">carry</span><span class="p">)</span>
-<span class="lineno">62</span> 
-<span class="lineno">63</span> <span class="p">(</span><span class="nf">set-signal!</span> <span class="nv">input-1</span> <span class="nv">true</span><span class="p">)</span>
-<span class="lineno">64</span> <span class="p">(</span><span class="nf">step</span><span class="p">)</span>
-<span class="lineno">65</span> 
-<span class="lineno">66</span> <span class="p">(</span><span class="nf">set-signal!</span> <span class="nv">input-2</span> <span class="nv">true</span><span class="p">)</span>
-<span class="lineno">67</span> <span class="p">(</span><span class="nf">step</span><span class="p">)</span></code></pre></div>
+<span class="lineno">19</span>             <span class="p">(</span><span class="nf">add-action!</span> <span class="p">[</span><span class="nv">procedure</span><span class="p">]</span>
+<span class="lineno">20</span>               <span class="p">(</span><span class="nf">swap!</span> <span class="nv">effects</span> <span class="nb">conj </span><span class="nv">procedure</span><span class="p">)</span>
+<span class="lineno">21</span>               <span class="p">(</span><span class="nf">procedure</span><span class="p">))</span>
+<span class="lineno">22</span> 
+<span class="lineno">23</span>             <span class="p">(</span><span class="nf">dispatch</span> <span class="p">[</span><span class="nv">action</span><span class="p">]</span>
+<span class="lineno">24</span>               <span class="p">(</span><span class="nf">condp</span> <span class="nb">= </span><span class="nv">action</span>
+<span class="lineno">25</span>                 <span class="ss">:get-signal</span> <span class="o">@</span><span class="nv">signal</span>
+<span class="lineno">26</span>                 <span class="ss">:set-signal!</span> <span class="nv">set-signal!</span>
+<span class="lineno">27</span>                 <span class="ss">:add-action!</span> <span class="nv">add-action!</span>
+<span class="lineno">28</span>                 <span class="p">(</span><span class="nb">assert </span><span class="nv">false</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Unknown operation &quot;</span> <span class="nv">action</span> <span class="s">&quot; in make-wire.&quot;</span><span class="p">))))]</span>
+<span class="lineno">29</span>       <span class="nv">dispatch</span><span class="p">)))</span>
+<span class="lineno">30</span> 
+<span class="lineno">31</span> <span class="c1">;; ...</span>
+<span class="lineno">32</span> 
+<span class="lineno">33</span> <span class="c1">;; Adders - the functional composition of previously defined smaller elements, with</span>
+<span class="lineno">34</span> <span class="c1">;; use of local computational objects with state, represented by wires.</span>
+<span class="lineno">35</span> 
+<span class="lineno">36</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">half-adder</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span> <span class="nv">s</span> <span class="nv">c</span><span class="p">]</span>
+<span class="lineno">37</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)</span>
+<span class="lineno">38</span>         <span class="nv">e</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)]</span>
+<span class="lineno">39</span>     <span class="p">(</span><span class="nf">or-gate</span> <span class="nv">a</span> <span class="nv">b</span> <span class="nv">d</span><span class="p">)</span>
+<span class="lineno">40</span>     <span class="p">(</span><span class="nf">and-gate</span> <span class="nv">a</span> <span class="nv">b</span> <span class="nv">c</span><span class="p">)</span>
+<span class="lineno">41</span>     <span class="p">(</span><span class="nf">not-gate</span> <span class="nv">c</span> <span class="nv">e</span><span class="p">)</span>
+<span class="lineno">42</span>     <span class="p">(</span><span class="nf">and-gate</span> <span class="nv">d</span> <span class="nv">e</span> <span class="nv">s</span><span class="p">)</span>
+<span class="lineno">43</span>     <span class="ss">:ok</span><span class="p">))</span>
+<span class="lineno">44</span> 
+<span class="lineno">45</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">full-adder</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span> <span class="nv">c-in</span> <span class="nv">sum</span> <span class="nv">c-out</span><span class="p">]</span>
+<span class="lineno">46</span>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">s</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)</span>
+<span class="lineno">47</span>         <span class="nv">c1</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)</span>
+<span class="lineno">48</span>         <span class="nv">c2</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">)]</span>
+<span class="lineno">49</span>     <span class="p">(</span><span class="nf">half-adder</span> <span class="nv">b</span> <span class="nv">c-in</span> <span class="nv">s</span> <span class="nv">c1</span><span class="p">)</span>
+<span class="lineno">50</span>     <span class="p">(</span><span class="nf">half-adder</span> <span class="nv">a</span> <span class="nv">s</span> <span class="nv">sum</span> <span class="nv">c2</span><span class="p">)</span>
+<span class="lineno">51</span>     <span class="p">(</span><span class="nf">or-gate</span> <span class="nv">c1</span> <span class="nv">c2</span> <span class="nv">c-out</span><span class="p">)</span>
+<span class="lineno">52</span>     <span class="ss">:ok</span><span class="p">))</span>
+<span class="lineno">53</span> 
+<span class="lineno">54</span> <span class="c1">;; Simulation - the actual use of the system. Scheduling, gate propagation</span>
+<span class="lineno">55</span> <span class="c1">;; delay and agenda are hidden underneath the `step` and `set-signal!` functions.</span>
+<span class="lineno">56</span> 
+<span class="lineno">57</span> <span class="p">(</span><span class="k">def </span><span class="nv">input-1</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">))</span>
+<span class="lineno">58</span> <span class="p">(</span><span class="k">def </span><span class="nv">input-2</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">))</span>
+<span class="lineno">59</span> <span class="p">(</span><span class="k">def </span><span class="nv">sum</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">))</span>
+<span class="lineno">60</span> <span class="p">(</span><span class="k">def </span><span class="nv">carry</span> <span class="p">(</span><span class="nf">make-wire</span><span class="p">))</span>
+<span class="lineno">61</span> 
+<span class="lineno">62</span> <span class="p">(</span><span class="nf">probe</span> <span class="ss">:sum</span> <span class="nv">sum</span><span class="p">)</span>
+<span class="lineno">63</span> <span class="p">(</span><span class="nf">probe</span> <span class="ss">:carry</span> <span class="nv">carry</span><span class="p">)</span>
+<span class="lineno">64</span> 
+<span class="lineno">65</span> <span class="p">(</span><span class="nf">half-adder</span> <span class="nv">input-1</span> <span class="nv">input-2</span> <span class="nv">sum</span> <span class="nv">carry</span><span class="p">)</span>
+<span class="lineno">66</span> 
+<span class="lineno">67</span> <span class="p">(</span><span class="nf">set-signal!</span> <span class="nv">input-1</span> <span class="nv">true</span><span class="p">)</span>
+<span class="lineno">68</span> <span class="p">(</span><span class="nf">step</span><span class="p">)</span>
+<span class="lineno">69</span> 
+<span class="lineno">70</span> <span class="p">(</span><span class="nf">set-signal!</span> <span class="nv">input-2</span> <span class="nv">true</span><span class="p">)</span>
+<span class="lineno">71</span> <span class="p">(</span><span class="nf">step</span><span class="p">)</span></code></pre></div>
 
 <p>Even if using the system, is really easy (last part is actually a very pleasant and simple <em>DSL</em>) - reasoning about the state is definitely harder. I encourage you to analyze the actual implementation (and how the <em>agenda</em> mechanism works).</p>
 
