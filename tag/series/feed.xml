@@ -7,6 +7,121 @@
     <atom:link href="http://www.afronski.pl/tag/series/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>SICP in Clojure - Chapter 5</title>
+        <description>&lt;h1 id=&quot;sicp-in-clojure---chapter-5&quot;&gt;SICP in Clojure - Chapter 5&lt;/h1&gt;
+
+&lt;quote class=&quot;disclaimer&quot;&gt;In one of the &lt;a href=&quot;http://www.afronski.pl/books-that-changed-my-career/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html&quot;&gt;previous blog posts&lt;/a&gt; I have announced that I would like to start a new series of posts. It is a persistent journal from my journey through aforementioned book. I hope that you will enjoy it and find it useful - the main goal is to make this series a place where we can return in future, recall ideas and thoughts that accompanied reading process.&lt;/quote&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;We are heading to the end of the book. It is the last chapter, and in the &lt;a href=&quot;http://www.afronski.pl/sicp-in-clojure/2015/10/05/sicp-in-clojure-chapter-4.html&quot;&gt;previous blog post&lt;/a&gt; I have already mentioned that last two chapters are really specific. And that is true, especially in terms of 5th chapter’s content.&lt;/p&gt;
+
+&lt;h3 id=&quot;high-level-convenience&quot;&gt;High-level Convenience&lt;/h3&gt;
+
+&lt;p&gt;Using high-level languages have many benefits. In terms of &lt;em&gt;Clojure&lt;/em&gt; and other &lt;em&gt;Lisp&lt;/em&gt;-like languages I would start with an &lt;em&gt;automatic memory management&lt;/em&gt; and &lt;em&gt;GC&lt;/em&gt;, &lt;em&gt;various data structures&lt;/em&gt; or various optimizations, like &lt;em&gt;tail-recursion&lt;/em&gt; etc. We do not think very often about how it is implemented, especially at the lowest level - in the hardware.&lt;/p&gt;
+
+&lt;p&gt;Can you imagine how the hardware should look like, to be capable of running code written in programming language from &lt;em&gt;Lisp&lt;/em&gt; family? This is the main topic of the last chapter. Authors are starting with basic theory related to &lt;em&gt;register machines&lt;/em&gt; and ending with the recipe for building a &lt;em&gt;compiler&lt;/em&gt;. This blog post will be mostly theoretical, and instead of code examples, and exercises related with a topic “How to build a &lt;em&gt;Clojure&lt;/em&gt; compiler”, we will take a peek &lt;em&gt;under the hood&lt;/em&gt;, directly into the language implementation.&lt;/p&gt;
+
+&lt;p&gt;But first, let’s bring some definitions to the table.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-a-register-machine&quot;&gt;What is a &lt;em&gt;register machine&lt;/em&gt;?&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Register machine&lt;/em&gt; is a type of a computer, which &lt;em&gt;sequentially&lt;/em&gt; executes instructions. Those instructions are operating and modifying a set of a memory elements called &lt;em&gt;registers&lt;/em&gt;. A typical operation will take operation arguments from registers, and it will push the result of that instruction to another register. When it comes to the designing of such machines, at first you need to create its data paths - which the wiring and placement of registers and defining possible operations. Of course we need someting which is supervising the execution process (e.g. preserving order) and that it is a responsibility of the &lt;em&gt;controller&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;register-machines&quot;&gt;
+  &lt;img alt=&quot;Data paths in register machine.&quot; class=&quot;data-paths&quot; src=&quot;/assets/RegisterMachine-1.gif&quot; /&gt;
+  &lt;img alt=&quot;Controller for a register machine.&quot; class=&quot;controller&quot; src=&quot;/assets/RegisterMachine-2.gif&quot; /&gt;
+&lt;/div&gt;
+
+&lt;quote class=&quot;legend&quot;&gt;Example representation of register machine for calculating &lt;code&gt;GCD&lt;/code&gt; - first image shows the data paths, second an example controller.&lt;/quote&gt;
+
+&lt;h3 id=&quot;how-to-force-the-classic-hardware-to-play-nicely-with-functional-programming-languages&quot;&gt;How to force the classic hardware to play nicely with functional programming languages?&lt;/h3&gt;
+
+&lt;p&gt;Those representations of register machines, even if they are closer to hardware than usual functional code, are still require various tricks and techniques how to achieve convenience of high-level language at the lowest level. In the book authors presented couple of interesting concepts and their possible implementations for those machines.&lt;/p&gt;
+
+&lt;h4 id=&quot;recursion-and-tail-recursion&quot;&gt;Recursion and Tail Recursion&lt;/h4&gt;
+
+&lt;p&gt;First concept explained in the chapter is &lt;em&gt;recursion&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;In order to handle properly recursion, register machine needs to implement instructions for &lt;code&gt;save&lt;/code&gt; and &lt;code&gt;restore&lt;/code&gt; values of registers in the stack data structure. Of course there is a problem of having such data structure and allocating memory for it.&lt;/p&gt;
+
+&lt;p&gt;That need can be partially fixed by optimizing recurrent calls which have property of being a &lt;em&gt;tail call&lt;/em&gt; (it means that the same function invocation is a last instruction executed just before the end of that function). In that case there is no point of saving and restoring previous values from the stack, because it can reuse existing frame of reference and registers in the next call.&lt;/p&gt;
+
+&lt;h4 id=&quot;data-structures&quot;&gt;Data Structures&lt;/h4&gt;
+
+&lt;p&gt;In the book, authors decided to implement &lt;em&gt;lists&lt;/em&gt; as a &lt;em&gt;tagged pair&lt;/em&gt; of &lt;em&gt;value&lt;/em&gt;, and &lt;em&gt;pointer&lt;/em&gt; to the next element. By a &lt;em&gt;tagging&lt;/em&gt; authors mean using an additional type information for differentiate between different data structures.&lt;/p&gt;
+
+&lt;p&gt;Very important concept related with those data structures is memory representation. In the proposed implementation they have treated memory as the vector of cells, and each one has a unique address. Also, it depends on the use case, you can use the pointer arithmetic for calculating index values (either as an absolute address or based on base address with an offset).&lt;/p&gt;
+
+&lt;h4 id=&quot;laziness-infinite-collections-and-streams&quot;&gt;Laziness, Infinite Collections and Streams&lt;/h4&gt;
+
+&lt;p&gt;Everyone who deals with computers knows that an infinite collections (and in consequence - unlimited memory) is impossible. But you can create an illusion of that, by constantly reducing amount of unnecessary information. By transforming one element of an collection old values are unused anymore, also some parts of the program can be cleaned-up. In order to preserve this simple trick, you need take care of &lt;em&gt;garbage collection&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;garbage-collection-and-memory-management&quot;&gt;Garbage Collection and Memory Management&lt;/h4&gt;
+
+&lt;p&gt;This is a huge topic in itself, there are many algorithms which can be used for that - &lt;em&gt;stop-and-copy&lt;/em&gt;, &lt;em&gt;mark-and-sweep&lt;/em&gt; etc. The main purpose of that is to detect and clean up unused previously allocated objects, in order to preserve illusion of the infinite memory. Obviously, if the program will exhaust anyway available memory and it will use all of allocated objects without releasing them, &lt;em&gt;GC&lt;/em&gt; will not help us at all.&lt;/p&gt;
+
+&lt;p&gt;As a side note, I would like to point out that if you will have to choose a single heritage of the &lt;em&gt;Lisp&lt;/em&gt; language to the computer science, &lt;em&gt;garbage collection&lt;/em&gt; will be a really a significant one, with no doubt.&lt;/p&gt;
+
+&lt;h3 id=&quot;deconstructing-clojure&quot;&gt;Deconstructing &lt;em&gt;Clojure&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;So instead of building our own &lt;em&gt;Clojure&lt;/em&gt; compiler, we will go under the hood for a while. Do not worry, we will not go too deep into the internals, but hopefully we will get a better understanding about the language itself. I would like to focus on two topics - &lt;em&gt;Clojure&lt;/em&gt; evaluation and &lt;em&gt;data structures&lt;/em&gt; implementation available in the language, which are leveraging very interesting properties.&lt;/p&gt;
+
+&lt;h4 id=&quot;is-clojure--clojurescript-interpreted-or-compiled&quot;&gt;Is &lt;em&gt;Clojure&lt;/em&gt; / &lt;em&gt;ClojureScript&lt;/em&gt; interpreted or compiled?&lt;/h4&gt;
+
+&lt;p&gt;Answer is like an usual one - &lt;strong&gt;it depends&lt;/strong&gt;. It can be loaded dynamically directly to the &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt; via &lt;code&gt;load / eval&lt;/code&gt; (it is called &lt;em&gt;a dynamic compilation&lt;/em&gt;) or compiled &lt;em&gt;ahead of time&lt;/em&gt; to the &lt;em&gt;Java bytecode&lt;/em&gt;, and then loaded into &lt;em&gt;VM&lt;/em&gt; (it is called &lt;em&gt;AOT compilation&lt;/em&gt;). But even in the case of dynamic compilation, you are preprocessing everything to the &lt;em&gt;bytecode&lt;/em&gt; representation - the only difference is that it does not land in the file (it is generated during the run-time). As you may expected it means that &lt;em&gt;VM&lt;/em&gt; does not understand &lt;em&gt;Clojure&lt;/em&gt; or even &lt;em&gt;Java&lt;/em&gt; languages directly - &lt;em&gt;bytecode&lt;/em&gt; is a collection of class files. Each one contains description of a class and methods, which have been translated to intermediate representation suitable for &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt; (you can find details &lt;a href=&quot;http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html&quot;&gt;here&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;If we already have such code, then &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt; &lt;em&gt;loads&lt;/em&gt;, &lt;em&gt;links&lt;/em&gt; and &lt;em&gt;initializes&lt;/em&gt; class files provided during execution. During the first phase it finds a binary representation of the class and creates the &lt;em&gt;VM&lt;/em&gt; internal representation from that. Then (during the &lt;em&gt;linking&lt;/em&gt; phase) it adds prepared representations to the &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt; state, and during that it also verifies is everything is structurally correct. At this point it also can resolve the symbolic references and it will prepare static fields, prefilled with the default variables. In the last step it invokes the initializers, but only when the class is needed (e.g. they are referenced by &lt;code&gt;new&lt;/code&gt; or static method invocations, and obviously by associating it with the main class).&lt;/p&gt;
+
+&lt;p&gt;BTW. Sometimes I hear people complaining about the &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt; start-up time, in terms of loading &lt;em&gt;Clojure&lt;/em&gt; &lt;em&gt;&lt;code&gt;REPL&lt;/code&gt;&lt;/em&gt;’ - it has been already improved a lot, but if someone is interested in the details and why the &lt;em&gt;Clojure&lt;/em&gt; (and not actually &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt;) takes so long to bootstrap, I encourage you to dive deeper into those articles - &lt;a href=&quot;http://blog.ndk.io/2014/02/11/jvm-slow-startup.html&quot;&gt;1&lt;/a&gt;, &lt;a href=&quot;http://blog.ndk.io/2014/02/25/clojure-bootstrapping.html&quot;&gt;2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Situation is slightly simpler, when it comes to &lt;em&gt;ClojureScript&lt;/em&gt; - it is always compiled to the &lt;em&gt;JavaScript&lt;/em&gt; representation. But the compilation process is somehow interesting anyway. Under the hood, it uses &lt;em&gt;Google Closure Compiler&lt;/em&gt; and if you are familiar with it, it requires a specific structure to be built in order preserve certain features, especially during the optimization phase. By leveraging the &lt;em&gt;libraries&lt;/em&gt;, &lt;em&gt;Google Closure Modules&lt;/em&gt;, specific dependency management, &lt;code&gt;cljsc&lt;/code&gt; compiler can do amazing things - to name just one, &lt;em&gt;dead code analysis&lt;/em&gt; which can prune properly even the external libraries code (assuming that external dependency somehow supports &lt;em&gt;Google Closure&lt;/em&gt; as well). Obviously there is a trade-off - there are &lt;a href=&quot;https://developers.google.com/closure/compiler/docs/limitations?csw=1&quot;&gt;limitations&lt;/a&gt;, and if you want to do the most advanced optimizations you have to be compliant with them. That is the way how compiler can assume certain things and then safely do optimizations.&lt;/p&gt;
+
+&lt;p&gt;If you want grab a brief overview what kind of optimizations it can apply, I strongly suggest you to follow the tutorial from &lt;a href=&quot;https://github.com/swannodette/hello-cljsc/blob/master/src/hello_cljsc/core.clj&quot;&gt;swanodette/hello-cljsc&lt;/a&gt; - at the end, there is a small example how enabling just &lt;code&gt;{:optimizations :simple}&lt;/code&gt; can nicely optimize the initial source code. And there is still &lt;code&gt;{:optimizations :advanced}&lt;/code&gt; mode. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;data-structures-1&quot;&gt;Data Structures&lt;/h4&gt;
+
+&lt;p&gt;If we will consider immutability in a functional programming world, we may think at first that having two values, before transformation and after it, can be very inefficient in terms of available resources. We need to preserve two copies in memory and probably spent some time on copying values from one place to another. That should especially true in &lt;em&gt;Lisp&lt;/em&gt;-like languages, where data structures are our primary tool.&lt;/p&gt;
+
+&lt;p&gt;Those guarantees are really nice when it comes to the program analysis, but also from the compiler and optimization perspective. If that previous value is immutable and it will not change at all, we can leverage certain techniques of &lt;em&gt;sharing&lt;/em&gt; parts of our collections between different values. We do not have to copy a whole collection, but only an updated part, where the old stuff can be just a reference (e.g. a pointer). It means that some collection persists on despite being created on top of another one.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Structural sharing representation&quot; src=&quot;/assets/ClojureTrees.png&quot; /&gt;&lt;/p&gt;
+
+&lt;quote class=&quot;legend&quot;&gt;Image shamelessly taken from &lt;a href=&quot;http://blip.tv/file/812787&quot;&gt;Rich Hickey's &quot;Clojure Concurrency&quot; talk&lt;/a&gt;.&lt;/quote&gt;
+
+&lt;p&gt;This technique is called a &lt;em&gt;structural sharing&lt;/em&gt; and it is &lt;em&gt;thread&lt;/em&gt; and &lt;em&gt;iteration&lt;/em&gt; safe way of reusing memory and reducing amount of necessary operations. All &lt;em&gt;Clojure&lt;/em&gt; data structures are persistent (which means that they are shared), especially the hash maps, sets and vectors are based on top of very interesting concept called &lt;em&gt;bit-partitioned hash tries&lt;/em&gt;. This is an enhanced concept of something called a &lt;em&gt;hashed tree&lt;/em&gt; or &lt;em&gt;trie&lt;/em&gt;, introduced by Phil Bagwell in that &lt;a href=&quot;http://infoscience.epfl.ch/record/64398/files/idealhashtrees.pdf&quot;&gt;paper&lt;/a&gt;. The main change is related with the index values and bit-partitioning of hash codes, where a certain bit parts is responsible for indexing on a specific depth level of that tree. Details are really nicely explained in those two articles &lt;a href=&quot;http://blog.higher-order.net/2009/02/01/understanding-clojures-persistentvector-implementation.html&quot;&gt;1&lt;/a&gt;, &lt;a href=&quot;http://blog.higher-order.net/2009/09/08/understanding-clojures-persistenthashmap-deftwice.html&quot;&gt;2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;limitations-of-the-jvm&quot;&gt;Limitations of the &lt;code&gt;JVM&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Author of &lt;em&gt;Clojure&lt;/em&gt;, Rich Hickey, &lt;a href=&quot;http://wiki.jvmlangsummit.com/pdf/27_Hickey_clojure.pdf&quot;&gt;even if he was pretty much very happy with using &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt;&lt;/a&gt; (mostly because of platform maturity, tooling and libraries) presented also a pain points regarding the aforementioned choice.&lt;/p&gt;
+
+&lt;p&gt;The main issue is related with &lt;em&gt;no tail call optimization&lt;/em&gt;. It affects other programming languages on top of &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt; and each one solves that in a different way (e.g. sometimes by introducing an additional concepts like function annotations and generating &lt;em&gt;trampolines&lt;/em&gt; - as it is done in &lt;a href=&quot;http://www.scala-lang.org/&quot;&gt;Scala&lt;/a&gt; or &lt;a href=&quot;https://github.com/Frege/frege&quot;&gt;Frege&lt;/a&gt;). &lt;em&gt;Clojure&lt;/em&gt; attacks this problem from a different angle using &lt;code&gt;loop&lt;/code&gt; and &lt;code&gt;recur&lt;/code&gt; constructs which are really in phase with language philosophy. But for now, platform does not have support for that anyway, so under the hood it has to generate a loop or a any other suitable workaround.&lt;/p&gt;
+
+&lt;p&gt;Another pain point is related with use of Java’s boxed numbers and other &lt;em&gt;math-related&lt;/em&gt; types. You have got plenty of options on &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt; like &lt;em&gt;Integer&lt;/em&gt;, &lt;em&gt;Long&lt;/em&gt;, &lt;em&gt;BigInteger&lt;/em&gt; etc., but by using you will inherit all problems related with choosing a proper type in &lt;em&gt;Clojure&lt;/em&gt; as well. By relying on &lt;em&gt;Clojure&lt;/em&gt; built-in types only, you will have problems related with &lt;em&gt;interoperability&lt;/em&gt; between your code and &lt;em&gt;&lt;code&gt;JVM&lt;/code&gt;&lt;/em&gt; world, and you will have to deal with casting and types promotion by yourself. Another side-effect of that design is that it is also slower (because those numbers are really objects, and they are available on the &lt;em&gt;heap&lt;/em&gt;). Having proper number types in the language, and hiding complexity of it inside compiler (related with optimizations or casting) could be really beneficial.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;Over the course of five blog posts, we have went through whole book. We covered a lot of ground and prepared a lot of exercises from the book. We also learned &lt;em&gt;Clojure&lt;/em&gt; during the process. If I have to choose the most interesting example from the book, I would go with the &lt;a href=&quot;https://github.com/afronski/sicp-examples/blob/master/chapters/2/2.3.2/deriv.clj&quot;&gt;symbolic derivation&lt;/a&gt; or &lt;a href=&quot;https://github.com/afronski/sicp-examples/blob/master/chapters/3/3.3.4/electronic-circuit.clj&quot;&gt;electronic circuit simulator&lt;/a&gt;. I did not change my opinion about the book - I still think that it is &lt;strong&gt;one of the most important publications for a computer scientist&lt;/strong&gt;. Or for a programmer, who is just eager to learn and know more. Especially about &lt;em&gt;functional programming&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;I hope that you have enjoyed the series as much as I did. &lt;img class=&quot;emoji&quot; title=&quot;:smile:&quot; alt=&quot;:smile:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f604.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mitpress.mit.edu/books/structure-and-interpretation-computer-programs&quot;&gt;Structure and Interpretation of Computer Programs&lt;/a&gt;, &lt;em&gt;Harold Abelson&lt;/em&gt;, &lt;em&gt;Gerald Jay Sussman&lt;/em&gt; and &lt;em&gt;Julie Sussman&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Full book available online&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/clojure/clojure&quot;&gt;clojure/clojure&lt;/a&gt; - Source code.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/swannodette/hello-cljsc&quot;&gt;swanodette/hello-cljsc&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wiki.jvmlangsummit.com/pdf/27_Hickey_clojure.pdf&quot;&gt;Clojure, A Dynamic Programming Language for the JVM&lt;/a&gt; - Slides from Rich Hickey’s talk about &lt;em&gt;Clojure&lt;/em&gt; internals.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/sicp-examples&quot;&gt;afronski/sicp-examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 19 Oct 2015 16:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/sicp-in-clojure/2015/10/19/sicp-in-clojure-chapter-5.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/sicp-in-clojure/2015/10/19/sicp-in-clojure-chapter-5.html</guid>
+      </item>
+    
+      <item>
         <title>SICP in Clojure - Chapter 4</title>
         <description>&lt;h1 id=&quot;sicp-in-clojure---chapter-4&quot;&gt;SICP in Clojure - Chapter 4&lt;/h1&gt;
 
@@ -1254,141 +1369,6 @@
         <pubDate>Thu, 11 Jun 2015 16:00:00 +0200</pubDate>
         <link>http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html</guid>
-      </item>
-    
-      <item>
-        <title>SICP in Clojure - Chapter 1</title>
-        <description>&lt;h1 id=&quot;sicp-in-clojure---chapter-1&quot;&gt;SICP in Clojure - Chapter 1&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;In one of the &lt;a href=&quot;http://www.afronski.pl/books-that-changed-my-career/2015/06/01/books-that-changed-my-career-structure-and-interpretation-of-computer-programs.html&quot;&gt;previous blog posts&lt;/a&gt; I have announced that I would like to start a new series of posts. It is a persistent journal from my journey through aforementioned book. I hope that you will enjoy it and find it useful - the main goal is to make this series a place where we can return in future, recall ideas and thoughts that accompanied reading process.&lt;/quote&gt;
-
-&lt;h3 id=&quot;what-is-a-sicp-and-why-should-you-care&quot;&gt;What is a &lt;em&gt;SICP&lt;/em&gt; and why should you care?&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;SICP&lt;/em&gt; is an acronym which represents a classic computer science book and stands for &lt;em&gt;“Structure and Interpretation of Computer Programs”&lt;/em&gt;. It is written by Harold Abelson, Gerald Jay Sussman and Julie Sussman. It is a base book for &lt;a href=&quot;http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005&quot;&gt;an introductory course in programming on MIT&lt;/a&gt;. Original examples are written in &lt;em&gt;Scheme&lt;/em&gt;, which is still a very popular &lt;em&gt;Lisp&lt;/em&gt; dialect. Well, it is not so popular as &lt;em&gt;Clojure&lt;/em&gt; these days, so I would like to convert prepared examples to that language instead.&lt;/p&gt;
-
-&lt;p&gt;At the beginning, I would like to focus on one thing - I will tell you, why this book is different, and why you should care about it. There are plenty books out there, which are doing a fairly well introduction to the programming, why do we even care about another one? Especially, if you are more than a beginner. &lt;em&gt;You should care because of two things&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;As every book related with teaching programming from the scratch, it introduces you to the topic from the ground up. It starts from the most basic concepts related with programming. Actually, if you are an experienced programmer, you will be disappointed by a first few dozens of pages. It will not introduce anything new, however it is written in a very interesting way - during the process you may think &lt;em&gt;“Well, at least it feels interesting when I am reading it”&lt;/em&gt;. After first 50 pages, you will start seeing the first benefits of that book - it introduces you to the topic from the side of functional programming. In this book, assignment operator is introduced around 250 page. Every single concept introduced before that (e.g. various data structures, interesting tasks and algorithms) is literally pure (&lt;em&gt;free from shared state and side effects&lt;/em&gt;) and immutable. Why this is an important thing? &lt;em&gt;Well, now I would like to introduce a second reason&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.gotw.ca/publications/concurrency-ddj.htm&quot;&gt;Free lunch is over&lt;/a&gt;. Last few decades we surf on top of huge wave directed by &lt;em&gt;Moore’s Law&lt;/em&gt;. Computer chips are getting smaller, faster and more effective in terms of power usage. But everything has its limits. Laws of physics are inexorable. We cannot bend the basic laws of nature, so instead making chips faster and smaller, we have to make &lt;em&gt;more&lt;/em&gt; of them. And when I say &lt;em&gt;more&lt;/em&gt;, I mean dozens, not only couple of them. In that case, not every responsibility can be dropped on the operating system and many of our programs should have notion of a &lt;em&gt;parallel execution&lt;/em&gt; inside. But too many things related with &lt;em&gt;software engineering&lt;/em&gt; today - programming languages, paradigms, solutions - are oriented around mutable and shared state.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://upload.wikimedia.org/wikipedia/commons/e/ea/AmdahlsLaw.svg&quot; alt=&quot;Amdahl's Law - Graph&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Metaphorically, we may say that instead of getting profits from &lt;em&gt;Moore’s Law&lt;/em&gt;, we have to deal with &lt;em&gt;Amdahl’s Law&lt;/em&gt; now. And that one of the basics truths inside computer science is also inexorable. It says that the maximum speedup in parallel environment is strictly related with its sequential part. Obviously, some parts have to be sequential, because of the inherent complexity related with the problem domain, however putting more and more constraints (related with mutability and shared state) increases this factor significantly. And in that case our parallel environment will be used inefficiently, or even worse - we are blocking resources which can be utilized in other parts of the system.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Functional programming&lt;/em&gt; exceeds your toolbox and enhances your programming skills, by bending them and enforcing to use them in a different way. By adding value to your toolbox, it introduces many powerful elements such as &lt;em&gt;referential transparency&lt;/em&gt;, &lt;em&gt;mathematical conciseness&lt;/em&gt;, &lt;em&gt;immutability&lt;/em&gt;, &lt;em&gt;composability&lt;/em&gt;, designing and thinking about parts of the system which are &lt;em&gt;pure&lt;/em&gt; (side-effect free) and &lt;em&gt;impure&lt;/em&gt; (abstracting side-effects away into different constructs like &lt;em&gt;Monads&lt;/em&gt;). Those benefits are key factors when we have to deal with a concurrency and parallel environment - it is just easier to manage complexity in that way. Certain classes of problems, also related with concurrency, will disappear after choosing proper tool. Inferring the execution flow in such languages is also easier, because it is transparent (&lt;em&gt;no side effects&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;I would like to introduce some amazing concepts from this book by emphasizing them in a series of articles posted on the blog. Starting from this one, I will speak about each chapter separately, mentioning important concepts, documented with a code samples written in &lt;em&gt;Clojure&lt;/em&gt;. I will not focus on documenting things from the beginners point of view, but rather looking for analogies which an experienced programmer should understand. Let’s start!&lt;/p&gt;
-
-&lt;h3 id=&quot;example&quot;&gt;Example&lt;/h3&gt;
-
-&lt;p&gt;I would like to introduce to you a set of examples which will be a base for our discussion:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;c1&quot;&gt;;; Recurrency is a powerful concept, which helps us traverse&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; collections. We can also abstract the actual transformation,&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; (which is represented as `term` here) and the evaluation&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; of the next step (represented as `next`).&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;term&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;next &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;term&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;term&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;next &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;next &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;;; Constructing new functions from other functions.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; Remember, that operators are actually functions.&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cube&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;incr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;;; Reusing the existing function inside the transformation.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; Please, look that we describe what should be calculated,&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; not how it should iterate through range.&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sum-cubes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cube&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;incr&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;println &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum-cubes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;;; Private functions can be created inside the scope.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; Thanks to that we can hide unnecessary details from&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; the others.&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pi-sum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;letfn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pi-term&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;/ &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pi-next&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pi-term&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pi-next&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;println &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pi-sum&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;;; Please look at the `add-dx` function - in that case&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; we are using function arguments inside from the higher&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; scope.&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;integral&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;letfn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add-dx&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;/ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;add-dx&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;println &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;integral&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;cube&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;function-as-a-first-class-citizen&quot;&gt;Function as a &lt;em&gt;first-class citizen&lt;/em&gt;&lt;/h4&gt;
-
-&lt;p&gt;It is not a new concept. Literally every single mainstream programming language these days introduced the concept of &lt;em&gt;lambdas&lt;/em&gt; (even Java &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;). And prerequisite for that concept is having a notion of functions which are the &lt;em&gt;first-class citizens&lt;/em&gt; in the language. It means that they can be passed around via variables and arguments, they can be returned and thanks to that - &lt;em&gt;they can be built&lt;/em&gt; almost in a dynamic manner.&lt;/p&gt;
-
-&lt;p&gt;I you have experience and background in the &lt;em&gt;OOP&lt;/em&gt;, you often worked with interfaces, which define only the protocol how rest of the code is using that specific part. If you worked with &lt;em&gt;C&lt;/em&gt;, you used &lt;em&gt;function pointers&lt;/em&gt; - it is also a definition of the protocol. Those concepts are the poor replacement of aforementioned mechanism.&lt;/p&gt;
-
-&lt;h4 id=&quot;just-enough-abstraction&quot;&gt;&lt;em&gt;Just-enough&lt;/em&gt; abstraction&lt;/h4&gt;
-
-&lt;p&gt;Function is a &lt;em&gt;smallest possible abstraction&lt;/em&gt;. Everything is transparent - it should have meaningful name, it has input arguments and it returns a result. Function will not mutate any global state, it will not mutate its arguments either. This means that it will not propagate any change outside of function. In the pure functional programming languages it cannot have even a single side-effect (e.g. using &lt;em&gt;I/O&lt;/em&gt;). If we add that to the previous point - we have almost infinite possibilities to build and modify our &lt;em&gt;just-enough abstraction&lt;/em&gt;, which will be safe and clean. Constructs like currying, recurrency, partial application will be our daily tool (we will talk about them in later posts).&lt;/p&gt;
-
-&lt;p&gt;I would like to point out one more thing. Many abstractions described as &lt;em&gt;a design patterns&lt;/em&gt; can be represented as a such &lt;em&gt;just-enough abstractions&lt;/em&gt; - e.g. decorator, facade, adapter. All of them can be represented as a single function.&lt;/p&gt;
-
-&lt;h4 id=&quot;gentle-start-into-composability&quot;&gt;Gentle start into &lt;em&gt;composability&lt;/em&gt;&lt;/h4&gt;
-
-&lt;p&gt;Composition is a very powerful mechanism. It is as a primary way to create new behaviours from the others. We can defer the execution by constructing the pipeline - it is a definition of &lt;em&gt;lazy computation&lt;/em&gt;. Also composition is often useful, when we have to deal with transformations. In that case we are focusing on building the algorithm in a declarative way, modelling the purpose of it (&lt;em&gt;what should be done or calculated&lt;/em&gt;) instead of describing every single bit and piece (&lt;em&gt;how it should be done&lt;/em&gt;).&lt;/p&gt;
-
-&lt;h3 id=&quot;interesting-examples&quot;&gt;&lt;em&gt;Interesting Examples&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;At the end I would like to present the power of conciseness:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;first-denomization&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;condp&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cond &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;or &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;&amp;lt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-        &lt;span class=&quot;ss&quot;&gt;:else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt;
-                     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-                 &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt;
-                        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first-denomization&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-                     &lt;span class=&quot;nv&quot;&gt;kinds-of-coins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;count-change&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;amount&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;println &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;count-change&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;That algorithm calculates how many combinations of coin exchanges we can have from a given amount. Thanks to the recurrency and splitting responsibilities into small functions, code is very readable and self explanatory.&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://upload.wikimedia.org/wikipedia/commons/e/ea/AmdahlsLaw.svg&quot;&gt;Amdahl’s Law&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://mitpress.mit.edu/books/structure-and-interpretation-computer-programs&quot;&gt;Structure and Interpretation of Computer Programs&lt;/a&gt;, &lt;em&gt;Harold Abelson&lt;/em&gt;, &lt;em&gt;Gerald Jay Sussman&lt;/em&gt; and &lt;em&gt;Julie Sussman&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://mitpress.mit.edu/sicp/full-text/book/book.html&quot;&gt;Full book available online&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 04 Jun 2015 11:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html</guid>
       </item>
     
   </channel>
