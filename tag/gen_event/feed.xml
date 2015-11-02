@@ -14,7 +14,7 @@
 
 &lt;p&gt;At first it may look like a controversial statement, but I heard a lot of those complaints from other people. Originally, I heard that exact statement during the presentation &lt;a href=&quot;https://www.youtube.com/watch?v=UUvU8cjCIcs&quot;&gt;made by Garrett Smith about pattern language&lt;/a&gt; - someone asked about that behavior at the end. More recently I heard similar thing in &lt;a href=&quot;https://www.youtube.com/watch?v=9RB1JCKe3GY&quot;&gt;José Valim’s presentation about what will come next in Elixir&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;It confused me every time I heard that, so I wanted to investigate the topic more deeply. But before we will dive into reasons and explanations, let’s recall what is the purpose of this behavior.&lt;/p&gt;
+&lt;p&gt;It confuses me every time I hear that, so I want to investigate topic more deeply. But before we will dive into reasons and explanations, let’s recall what is the purpose of this behavior.&lt;/p&gt;
 
 &lt;h2 id=&quot;what-is-genevent&quot;&gt;What is &lt;code&gt;gen_event&lt;/code&gt;?&lt;/h2&gt;
 
@@ -22,9 +22,9 @@
 
 &lt;p&gt;Responsibility of &lt;em&gt;event manager&lt;/em&gt; is being a named object which can receive events. An &lt;em&gt;event&lt;/em&gt; can be, for example: an error, an alarm, or some information that is to be logged. Inside manager we can have 0, 1 or more &lt;em&gt;event handlers&lt;/em&gt; installed. Responsibility of the handler is to process an &lt;em&gt;event&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;When the &lt;em&gt;event manager&lt;/em&gt; is notified about an event, it will be processed by all installed handlers. The easiest way to imagine that is to think about manager as a sink for incoming messages and handlers different implementations which are writing messages to disk, database or terminal.&lt;/p&gt;
+&lt;p&gt;When the &lt;em&gt;event manager&lt;/em&gt; is notified about an event, it will be processed by all installed handlers. The easiest way to imagine that is to think about manager as a sink for incoming messages and handlers as different implementations which are writing messages to disk, database or terminal.&lt;/p&gt;
 
-&lt;p&gt;Another example can be taken from my implementation of Francesco Cesarini’s assignment called &lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;Wolves, Rabbits and Carrots simulation&lt;/a&gt;. Main purpose of that task is to introduce concurrency, but internally it is a simulation - so certain events are happening, and they will be broadcasted to the rest of the interested entities.&lt;/p&gt;
+&lt;p&gt;Another example can be taken from my implementation of Francesco Cesarini’s assignment called &lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;Wolves, Rabbits and Carrots simulation&lt;/a&gt;. Main purpose of that task is to introduce concurrency, but internally it is a simulation - so certain events are happening, and they will be broadcasted to the rest of entities.&lt;/p&gt;
 
 &lt;p&gt;In that case &lt;code&gt;simulation_event_stream&lt;/code&gt; is an &lt;em&gt;event manager&lt;/em&gt;:&lt;/p&gt;
 
@@ -61,7 +61,7 @@
 
 &lt;p&gt;We can easily add and remove &lt;em&gt;event handlers&lt;/em&gt;. The &lt;em&gt;event manager&lt;/em&gt; essentially maintains a list of &lt;code&gt;{Module, State}&lt;/code&gt; pairs, where each &lt;code&gt;Module&lt;/code&gt; is an event handler, and &lt;code&gt;State&lt;/code&gt; is the internal state of that event handler.&lt;/p&gt;
 
-&lt;p&gt;One of the &lt;em&gt;handlers&lt;/em&gt; implementation - &lt;code&gt;simulation_cli_handler&lt;/code&gt; - is related with writing messages to the console. It is the actual &lt;code&gt;gen_event&lt;/code&gt; behavior implementation, so all event handlers are the representatives of that abstraction:&lt;/p&gt;
+&lt;p&gt;One of the &lt;em&gt;handlers&lt;/em&gt; implementation - &lt;code&gt;simulation_cli_handler&lt;/code&gt; - is related with writing messages to the console. It is the actual &lt;code&gt;gen_event&lt;/code&gt; callback module, so all handlers are implementations of that abstraction:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erlang&quot; data-lang=&quot;erlang&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;simulation_cli_handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;behavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gen_event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
@@ -102,9 +102,9 @@
 
 &lt;h2 id=&quot;why-it-is-problematic&quot;&gt;Why it is problematic?&lt;/h2&gt;
 
-&lt;p&gt;Let me reiterate on that - after spawning &lt;code&gt;gen_event&lt;/code&gt; manager and installing handlers on it, handlers exist in the same process that the manager.&lt;/p&gt;
+&lt;p&gt;Let me reiterate on that - after spawning &lt;code&gt;gen_event&lt;/code&gt; manager and installing handlers on it, handlers exist in the same process as the manager.&lt;/p&gt;
 
-&lt;p&gt;That causes two biggest issues - handlers are not executed concurrently and they are not isolated from each other, in the process sense. But there is more - we heard explicitly that &lt;em&gt;I never used &lt;code&gt;gen_event&lt;/code&gt;, I think it is a bad pattern&lt;/em&gt; and whole statement can be summed by:&lt;/p&gt;
+&lt;p&gt;That causes two biggest issues - handlers are not executed concurrently and they are not isolated from each other, in the process sense. But there is more - we heard explicitly that &lt;em&gt;I never used &lt;code&gt;gen_event&lt;/code&gt;, I think it is a bad pattern&lt;/em&gt; and whole argumentation about that can be summed by:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;That aforementioned behavior it is not used anywhere besides &lt;code&gt;error_handler&lt;/code&gt; and alerts mechanism in OTP.&lt;/li&gt;
@@ -113,19 +113,19 @@
   &lt;li&gt;It is tricky to manage state in manager, it may be tempting to use e.g. process dictionary, but you should be rather push it down to handlers (which is not obvious on the first sight).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;So let’s try to analyze the root causes of each complaint separately.&lt;/p&gt;
+&lt;p&gt;So let’s analyze the root causes of each complaint separately.&lt;/p&gt;
 
 &lt;h3 id=&quot;not-widely-used-in-the-erts-and-otp&quot;&gt;Not widely used in the &lt;code&gt;erts&lt;/code&gt; and &lt;code&gt;OTP&lt;/code&gt;&lt;/h3&gt;
 
-&lt;p&gt;First objection related to that behavior is that it is not widely used in the Erlang core libraries and platform itself. And that’s partially true - as a behavior it is used for &lt;code&gt;error_logger&lt;/code&gt;, &lt;code&gt;alarm_handler&lt;/code&gt; and &lt;code&gt;error_handler&lt;/code&gt; facilities. Is that a major reason to drop the behavior completely? No, but I think that it is a guide that responsibilities and use cases of that behavior are kind of limited, and narrower than those we assigned to it.&lt;/p&gt;
+&lt;p&gt;First objection related to that behavior is that it is not widely used in the Erlang core libraries and platform itself. And that’s partially true - as a behavior it is used for &lt;code&gt;error_logger&lt;/code&gt;, &lt;code&gt;alarm_handler&lt;/code&gt; and &lt;code&gt;error_handler&lt;/code&gt; facilities. Is that a major reason to drop the behavior completely? No, but I think that it is a guide that responsibilities and use cases of that behavior are kind of limited, and much narrower than those we are trying to assign them.&lt;/p&gt;
 
 &lt;h3 id=&quot;it-is-the-same-process-for-all-handlers&quot;&gt;It is the same process for all handlers&lt;/h3&gt;
 
-&lt;p&gt;This one was not explicitly stated on the list but it manifests it itself when it comes to failure handling and supervision. And also it has another, really significant drawback - which is obvious when you will think about it - all handlers are invoked synchronously and sequentially in one process.&lt;/p&gt;
+&lt;p&gt;This one was not explicitly stated on the list, but it manifests itself when it comes to failure handling and supervision. And also it has another, really significant drawback - which is obvious when you will think about it - all handlers are invoked synchronously and sequentially in one process.&lt;/p&gt;
 
 &lt;p&gt;In order to dispatch an event to manager you can use one of two &lt;code&gt;gen_event&lt;/code&gt; functions - &lt;code&gt;notify&lt;/code&gt; and &lt;code&gt;sync_notify&lt;/code&gt;. With first you can dispatch event as quickly as possible, but you have no backpressure applied, and you can end up in the situation when events are incoming really fast, but processing is slower. That will cause process queue to grow and eventually it can cause even a crash. It does not check also the manager presence, so you can easily throw messages to the void. From the other hand - synchronous dispatch waits until event will be processed by all handlers, which can be slow and eventually will become a system bottleneck.&lt;/p&gt;
 
-&lt;p&gt;This problem is also very nicely described in the &lt;a href=&quot;https://www.youtube.com/watch?v=yBReonQlfL4&quot;&gt;Nick DeMonner talk&lt;/a&gt; from this year’s &lt;em&gt;ElixirConf US&lt;/em&gt; conference - check this out if you are interested. Elixir &lt;code&gt;GenEvent&lt;/code&gt; implementation has also third function - &lt;code&gt;ack_notify&lt;/code&gt; which acknowledges the incoming messages, and it is something softer than &lt;code&gt;sync_notify&lt;/code&gt;, but still asynchronous when it comes to processing.&lt;/p&gt;
+&lt;p&gt;This problem is also very nicely described in the &lt;a href=&quot;https://www.youtube.com/watch?v=yBReonQlfL4&quot;&gt;Nick DeMonner talk&lt;/a&gt; from this year &lt;em&gt;ElixirConf US&lt;/em&gt; conference - check this out if you are interested. Elixir &lt;code&gt;GenEvent&lt;/code&gt; implementation has also third function - &lt;code&gt;ack_notify&lt;/code&gt; which acknowledges the incoming messages, and it is something softer than &lt;code&gt;sync_notify&lt;/code&gt;, but still asynchronous when it comes to processing.&lt;/p&gt;
 
 &lt;h3 id=&quot;it-is-hard-to-supervise&quot;&gt;It is hard to supervise&lt;/h3&gt;
 
@@ -141,11 +141,11 @@
 
 &lt;p&gt;But we can use different facility exposed by &lt;code&gt;gen_event&lt;/code&gt; called &lt;code&gt;add_sup_handler&lt;/code&gt;. It means that the connection between process that wants to dispatch an event and the handler will be supervised. What does it mean? If the event handler is deleted due to a fault, the manager sends a message &lt;code&gt;{gen_event_EXIT, Handler, Reason}&lt;/code&gt; to the caller. It means that we need to provide additional process, often called a &lt;em&gt;guard&lt;/em&gt; for the possibly faulty handler. Then, dispatching of an event will happen through that &lt;em&gt;guardian&lt;/em&gt; process, and when it receives the failure message (via &lt;code&gt;handle_info&lt;/code&gt;) we can act accordingly to the requirements.&lt;/p&gt;
 
-&lt;p&gt;Keep in mind that underneath it uses &lt;em&gt;links&lt;/em&gt;, not monitors - &lt;a href=&quot;http://learnyousomeerlang.com/event-handler&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt; event handler chapter has really good explanation why it may be dangerous and what issues it causes. Long story short, after using &lt;code&gt;add_sup_handler&lt;/code&gt; you need to be cautious when it comes to the event manager shutdown.&lt;/p&gt;
+&lt;p&gt;Keep in mind that underneath it uses &lt;em&gt;links&lt;/em&gt;, not monitors - event handler chapter from &lt;a href=&quot;http://learnyousomeerlang.com/event-handler&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt; has really good explanation why it may be dangerous and what issues it causes. Long story short, after using &lt;code&gt;add_sup_handler&lt;/code&gt; you need to be cautious when it comes to the event manager shutdown.&lt;/p&gt;
 
 &lt;h3 id=&quot;state-management&quot;&gt;State management&lt;/h3&gt;
 
-&lt;p&gt;One more thing that I think is not emphasized enough is the state management and that you should always pass down state to your handlers. It is really well described in the example code above, but also when it comes to the fault tolerance - each handler can be removed due to failure operation and after restoring it we can pass the new state. If we will preserve state of that handler in the manager (and we will build facility for exposing that), it may cause very strange and hard to debug behavior related with the state of the newly created handler.&lt;/p&gt;
+&lt;p&gt;One more thing that I think is not emphasized enough is the state management and that you should always pass down state to your handlers. It is really well described in the example code above, but also when it comes to the fault tolerance - each handler can be removed due to failure operation and after restoring it we can pass the new state. If we will preserve state of that handler in the manager (and we will build facility for exposing that), it may cause strange and hard to debug side effects related with the state of the newly created handler.&lt;/p&gt;
 
 &lt;h2 id=&quot;alternatives&quot;&gt;Alternatives?&lt;/h2&gt;
 

@@ -34,7 +34,7 @@
 
 <p>At first it may look like a controversial statement, but I heard a lot of those complaints from other people. Originally, I heard that exact statement during the presentation <a href="https://www.youtube.com/watch?v=UUvU8cjCIcs">made by Garrett Smith about pattern language</a> - someone asked about that behavior at the end. More recently I heard similar thing in <a href="https://www.youtube.com/watch?v=9RB1JCKe3GY">José Valim’s presentation about what will come next in Elixir</a>.</p>
 
-<p>It confused me every time I heard that, so I wanted to investigate the topic more deeply. But before we will dive into reasons and explanations, let’s recall what is the purpose of this behavior.</p>
+<p>It confuses me every time I hear that, so I want to investigate topic more deeply. But before we will dive into reasons and explanations, let’s recall what is the purpose of this behavior.</p>
 
 <h2 id="what-is-genevent">What is <code>gen_event</code>?</h2>
 
@@ -42,9 +42,9 @@
 
 <p>Responsibility of <em>event manager</em> is being a named object which can receive events. An <em>event</em> can be, for example: an error, an alarm, or some information that is to be logged. Inside manager we can have 0, 1 or more <em>event handlers</em> installed. Responsibility of the handler is to process an <em>event</em>.</p>
 
-<p>When the <em>event manager</em> is notified about an event, it will be processed by all installed handlers. The easiest way to imagine that is to think about manager as a sink for incoming messages and handlers different implementations which are writing messages to disk, database or terminal.</p>
+<p>When the <em>event manager</em> is notified about an event, it will be processed by all installed handlers. The easiest way to imagine that is to think about manager as a sink for incoming messages and handlers as different implementations which are writing messages to disk, database or terminal.</p>
 
-<p>Another example can be taken from my implementation of Francesco Cesarini’s assignment called <a href="https://github.com/afronski/wolves-and-rabbits-world-simulation">Wolves, Rabbits and Carrots simulation</a>. Main purpose of that task is to introduce concurrency, but internally it is a simulation - so certain events are happening, and they will be broadcasted to the rest of the interested entities.</p>
+<p>Another example can be taken from my implementation of Francesco Cesarini’s assignment called <a href="https://github.com/afronski/wolves-and-rabbits-world-simulation">Wolves, Rabbits and Carrots simulation</a>. Main purpose of that task is to introduce concurrency, but internally it is a simulation - so certain events are happening, and they will be broadcasted to the rest of entities.</p>
 
 <p>In that case <code>simulation_event_stream</code> is an <em>event manager</em>:</p>
 
@@ -81,7 +81,7 @@
 
 <p>We can easily add and remove <em>event handlers</em>. The <em>event manager</em> essentially maintains a list of <code>{Module, State}</code> pairs, where each <code>Module</code> is an event handler, and <code>State</code> is the internal state of that event handler.</p>
 
-<p>One of the <em>handlers</em> implementation - <code>simulation_cli_handler</code> - is related with writing messages to the console. It is the actual <code>gen_event</code> behavior implementation, so all event handlers are the representatives of that abstraction:</p>
+<p>One of the <em>handlers</em> implementation - <code>simulation_cli_handler</code> - is related with writing messages to the console. It is the actual <code>gen_event</code> callback module, so all handlers are implementations of that abstraction:</p>
 
 <div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="lineno"> 1</span> <span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">simulation_cli_handler</span><span class="p">).</span>
 <span class="lineno"> 2</span> <span class="p">-</span><span class="ni">behavior</span><span class="p">(</span><span class="n">gen_event</span><span class="p">).</span>
@@ -122,9 +122,9 @@
 
 <h2 id="why-it-is-problematic">Why it is problematic?</h2>
 
-<p>Let me reiterate on that - after spawning <code>gen_event</code> manager and installing handlers on it, handlers exist in the same process that the manager.</p>
+<p>Let me reiterate on that - after spawning <code>gen_event</code> manager and installing handlers on it, handlers exist in the same process as the manager.</p>
 
-<p>That causes two biggest issues - handlers are not executed concurrently and they are not isolated from each other, in the process sense. But there is more - we heard explicitly that <em>I never used <code>gen_event</code>, I think it is a bad pattern</em> and whole statement can be summed by:</p>
+<p>That causes two biggest issues - handlers are not executed concurrently and they are not isolated from each other, in the process sense. But there is more - we heard explicitly that <em>I never used <code>gen_event</code>, I think it is a bad pattern</em> and whole argumentation about that can be summed by:</p>
 
 <ul>
   <li>That aforementioned behavior it is not used anywhere besides <code>error_handler</code> and alerts mechanism in OTP.</li>
@@ -133,19 +133,19 @@
   <li>It is tricky to manage state in manager, it may be tempting to use e.g. process dictionary, but you should be rather push it down to handlers (which is not obvious on the first sight).</li>
 </ul>
 
-<p>So let’s try to analyze the root causes of each complaint separately.</p>
+<p>So let’s analyze the root causes of each complaint separately.</p>
 
 <h3 id="not-widely-used-in-the-erts-and-otp">Not widely used in the <code>erts</code> and <code>OTP</code></h3>
 
-<p>First objection related to that behavior is that it is not widely used in the Erlang core libraries and platform itself. And that’s partially true - as a behavior it is used for <code>error_logger</code>, <code>alarm_handler</code> and <code>error_handler</code> facilities. Is that a major reason to drop the behavior completely? No, but I think that it is a guide that responsibilities and use cases of that behavior are kind of limited, and narrower than those we assigned to it.</p>
+<p>First objection related to that behavior is that it is not widely used in the Erlang core libraries and platform itself. And that’s partially true - as a behavior it is used for <code>error_logger</code>, <code>alarm_handler</code> and <code>error_handler</code> facilities. Is that a major reason to drop the behavior completely? No, but I think that it is a guide that responsibilities and use cases of that behavior are kind of limited, and much narrower than those we are trying to assign them.</p>
 
 <h3 id="it-is-the-same-process-for-all-handlers">It is the same process for all handlers</h3>
 
-<p>This one was not explicitly stated on the list but it manifests it itself when it comes to failure handling and supervision. And also it has another, really significant drawback - which is obvious when you will think about it - all handlers are invoked synchronously and sequentially in one process.</p>
+<p>This one was not explicitly stated on the list, but it manifests itself when it comes to failure handling and supervision. And also it has another, really significant drawback - which is obvious when you will think about it - all handlers are invoked synchronously and sequentially in one process.</p>
 
 <p>In order to dispatch an event to manager you can use one of two <code>gen_event</code> functions - <code>notify</code> and <code>sync_notify</code>. With first you can dispatch event as quickly as possible, but you have no backpressure applied, and you can end up in the situation when events are incoming really fast, but processing is slower. That will cause process queue to grow and eventually it can cause even a crash. It does not check also the manager presence, so you can easily throw messages to the void. From the other hand - synchronous dispatch waits until event will be processed by all handlers, which can be slow and eventually will become a system bottleneck.</p>
 
-<p>This problem is also very nicely described in the <a href="https://www.youtube.com/watch?v=yBReonQlfL4">Nick DeMonner talk</a> from this year’s <em>ElixirConf US</em> conference - check this out if you are interested. Elixir <code>GenEvent</code> implementation has also third function - <code>ack_notify</code> which acknowledges the incoming messages, and it is something softer than <code>sync_notify</code>, but still asynchronous when it comes to processing.</p>
+<p>This problem is also very nicely described in the <a href="https://www.youtube.com/watch?v=yBReonQlfL4">Nick DeMonner talk</a> from this year <em>ElixirConf US</em> conference - check this out if you are interested. Elixir <code>GenEvent</code> implementation has also third function - <code>ack_notify</code> which acknowledges the incoming messages, and it is something softer than <code>sync_notify</code>, but still asynchronous when it comes to processing.</p>
 
 <h3 id="it-is-hard-to-supervise">It is hard to supervise</h3>
 
@@ -161,11 +161,11 @@
 
 <p>But we can use different facility exposed by <code>gen_event</code> called <code>add_sup_handler</code>. It means that the connection between process that wants to dispatch an event and the handler will be supervised. What does it mean? If the event handler is deleted due to a fault, the manager sends a message <code>{gen_event_EXIT, Handler, Reason}</code> to the caller. It means that we need to provide additional process, often called a <em>guard</em> for the possibly faulty handler. Then, dispatching of an event will happen through that <em>guardian</em> process, and when it receives the failure message (via <code>handle_info</code>) we can act accordingly to the requirements.</p>
 
-<p>Keep in mind that underneath it uses <em>links</em>, not monitors - <a href="http://learnyousomeerlang.com/event-handler">Learn You Some Erlang For Great Good!</a> event handler chapter has really good explanation why it may be dangerous and what issues it causes. Long story short, after using <code>add_sup_handler</code> you need to be cautious when it comes to the event manager shutdown.</p>
+<p>Keep in mind that underneath it uses <em>links</em>, not monitors - event handler chapter from <a href="http://learnyousomeerlang.com/event-handler">Learn You Some Erlang For Great Good!</a> has really good explanation why it may be dangerous and what issues it causes. Long story short, after using <code>add_sup_handler</code> you need to be cautious when it comes to the event manager shutdown.</p>
 
 <h3 id="state-management">State management</h3>
 
-<p>One more thing that I think is not emphasized enough is the state management and that you should always pass down state to your handlers. It is really well described in the example code above, but also when it comes to the fault tolerance - each handler can be removed due to failure operation and after restoring it we can pass the new state. If we will preserve state of that handler in the manager (and we will build facility for exposing that), it may cause very strange and hard to debug behavior related with the state of the newly created handler.</p>
+<p>One more thing that I think is not emphasized enough is the state management and that you should always pass down state to your handlers. It is really well described in the example code above, but also when it comes to the fault tolerance - each handler can be removed due to failure operation and after restoring it we can pass the new state. If we will preserve state of that handler in the manager (and we will build facility for exposing that), it may cause strange and hard to debug side effects related with the state of the newly created handler.</p>
 
 <h2 id="alternatives">Alternatives?</h2>
 
