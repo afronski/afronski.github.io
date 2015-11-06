@@ -143,13 +143,15 @@
 
 &lt;p&gt;Keep in mind that underneath it uses &lt;em&gt;links&lt;/em&gt;, not monitors - event handler chapter from &lt;a href=&quot;http://learnyousomeerlang.com/event-handler&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt; has really good explanation why it may be dangerous and what issues it causes. Long story short, after using &lt;code&gt;add_sup_handler&lt;/code&gt; you need to be cautious when it comes to the event manager shutdown.&lt;/p&gt;
 
+&lt;p&gt;What is interesting, Elixir’s version of that behavior (&lt;code&gt;GenEvent&lt;/code&gt;) has solved this problem by exposing &lt;a href=&quot;http://elixir-lang.org/docs/v1.0/elixir/GenEvent.html#add_mon_handler/3&quot;&gt;&lt;code&gt;add_mon_handler/3&lt;/code&gt;&lt;/a&gt;, which uses monitor under the hood. Still both solutions have another problem - &lt;code&gt;{gen_event_EXIT, Handler, Reason}&lt;/code&gt; message will not be delivered if manager process will crash. It is another edge case for which you have to be prepared - you either need to monitor manager or link it and trap exits in all handlers.&lt;/p&gt;
+
 &lt;h3 id=&quot;state-management&quot;&gt;State management&lt;/h3&gt;
 
 &lt;p&gt;One more thing that I think is not emphasized enough is the state management and that you should always pass down state to your handlers. It is really well described in the example code above, but also when it comes to the fault tolerance - each handler can be removed due to failure operation and after restoring it we can pass the new state. If we will preserve state of that handler in the manager (and we will build facility for exposing that), it may cause strange and hard to debug side effects related with the state of the newly created handler.&lt;/p&gt;
 
 &lt;h2 id=&quot;alternatives&quot;&gt;Alternatives?&lt;/h2&gt;
 
-&lt;p&gt;Is there something that we can use instead? Without using third parties I am afraid that there is nothing like that in the core.&lt;/p&gt;
+&lt;p&gt;Is there something that we can use instead? Without using third parties (like &lt;a href=&quot;https://github.com/uwiger/gproc&quot;&gt;uwiger/gproc&lt;/a&gt;) I am afraid that there is nothing like that in the core.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/GenRouterExample.png&quot; alt=&quot;GenRouter example from José Valim's presentation.&quot; /&gt;&lt;/p&gt;
 
