@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: annual-review</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/annual-review/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>My year in review - 2015</title>
+        <description>&lt;h1 id=&quot;my-year-in-review---2015&quot;&gt;My year in review - 2015&lt;/h1&gt;
+
+&lt;h2 id=&quot;github&quot;&gt;Github&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Streak.png&quot; alt=&quot;My Github Streak&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;talks&quot;&gt;Talks&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Nov 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/november-2015-microservices-evolution@spreadit-glw/presentation.html&quot;&gt;Evolution &amp;gt; Revolution – how should microservices be built?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Sep 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/september-2015-elixir-plus-phoenix@kariera-it-ktw/resources/public/index.html&quot;&gt;Elixir + Phoenix&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Jun 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/june-2015-zeromq-in-nodejs@berlinjs/presentation.html#1&quot;&gt;ZeroMQ in Node.js&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Apr 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/april-2015-erlang-ecosystem@dwo-2015/index.html#/&quot;&gt;Erlang Ecosystem (PL)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Feb 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/february-2015-elixir@SRUG/presentation.html#1&quot;&gt;Elixir&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Feb 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/february-2015-clojurescript-om@meetjsktw/presentation.html#1&quot;&gt;ClojureScript + Om = ♥&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Details: &lt;a href=&quot;http://www.afronski.pl/presentations&quot;&gt;My Talks&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;meetups&quot;&gt;Meetups&lt;/h2&gt;
+
+&lt;p&gt;Two meet-up groups created and continued in 2015:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/silesia/&quot;&gt;NodeSchool Silesia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://silesian-beamers.github.io/&quot;&gt;Silesian BEAMers&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;blog&quot;&gt;Blog&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/YearlyBlogReview.png&quot; alt=&quot;Blog statistics&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;most-viewed-blog-posts-by-me&quot;&gt;Most viewed blog posts by me&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/YearlyBlogReviewArticles.png&quot; alt=&quot;Blog statistics&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;books&quot;&gt;Books&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.goodreads.com/user_challenges/1849322&quot;&gt;List of book which I’ve read in 2015 and reading challenge&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;favorite-technical-book-of-2015&quot;&gt;Favorite technical book of 2015&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.goodreads.com/owned_books/26693851&quot;&gt;Pragmatic Thinking and Learning: Refactor Your Wetware&lt;/a&gt; - &lt;a href=&quot;http://www.afronski.pl/books-that-changed-my-career/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html&quot;&gt;blog post about it&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;number-of-books-read&quot;&gt;Number of books read&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.goodreads.com/user_challenges/1849322&quot;&gt;20&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;programming&quot;&gt;Programming&lt;/h2&gt;
+
+&lt;h3 id=&quot;favorite-programming-languages-or-related-ive-hacked-onwith-this-year&quot;&gt;Favorite programming languages (or related) I’ve hacked on/with this year&lt;/h3&gt;
+
+&lt;p&gt;Languages with pet projects:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;Erlang #1&lt;/a&gt;, &lt;a href=&quot;https://github.com/afronski/bferl&quot;&gt;Erlang #2&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation-ui&quot;&gt;Elixir #1&lt;/a&gt;, &lt;a href=&quot;https://github.com/afronski/cartographer&quot;&gt;Elixir #2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/om-my-game-of-life&quot;&gt;ClojureScript&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;programming-languages-used-for-work-related-projects-this-year&quot;&gt;Programming languages used for work-related projects this year&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/JavaScript&quot;&gt;JavaScript - ES 5 (Node.js, Front-End)&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/JavaScript&quot;&gt;JavaScript - ES6 (Front-End)&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Java_(programming_language)&quot;&gt;Java&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/C_(programming_language)&quot;&gt;C&lt;/a&gt;, &lt;a href=&quot;https://www.ruby-lang.org/pl&quot;&gt;Ruby&lt;/a&gt;, &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&quot;&gt;Bash&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;programming-languages-that-i-hope-to-explore-next-year&quot;&gt;Programming languages that I hope to explore next year&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.idris-lang.org&quot;&gt;Idris&lt;/a&gt;, &lt;a href=&quot;https://www.rust-lang.org/&quot;&gt;Rust&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Prolog&quot;&gt;Prolog&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;plans-for-2016&quot;&gt;Plans for 2016&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apply &lt;a href=&quot;http://blog.fogus.me/2015/11/04/the-100101-method-my-approach-to-open-source/&quot;&gt;100:10:1 rule&lt;/a&gt; to my open source work.&lt;/li&gt;
+  &lt;li&gt;Proceed with &lt;em&gt;cost-benefit analysis&lt;/em&gt; and focus on &lt;em&gt;monetization&lt;/em&gt; in terms of open source work.&lt;/li&gt;
+  &lt;li&gt;Try to kick-off another meet up in Silesia region - &lt;a href=&quot;http://paperswelove.org/&quot;&gt;Papers We Love&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Learning (even more than previously) about theory and how to design distributed and real-time systems.&lt;/li&gt;
+  &lt;li&gt;Focus on doing &lt;em&gt;interactive blog posts&lt;/em&gt; and higher quality (premium?) materials.&lt;/li&gt;
+  &lt;li&gt;Push even harder work related with &lt;em&gt;quality&lt;/em&gt; and &lt;em&gt;visibility&lt;/em&gt; of blog posts.&lt;/li&gt;
+  &lt;li&gt;Take more time to &lt;a href=&quot;http://www.last.fm/user/afronski&quot;&gt;discover new music&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Happy New Year! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 31 Dec 2015 16:00:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2015/12/31/my-year-in-review-2015.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/12/31/my-year-in-review-2015.html</guid>
+      </item>
+    
+  </channel>
+</rss>

@@ -7,6 +7,95 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>My year in review - 2015</title>
+        <description>&lt;h1 id=&quot;my-year-in-review---2015&quot;&gt;My year in review - 2015&lt;/h1&gt;
+
+&lt;h2 id=&quot;github&quot;&gt;Github&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Streak.png&quot; alt=&quot;My Github Streak&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;talks&quot;&gt;Talks&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Nov 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/november-2015-microservices-evolution@spreadit-glw/presentation.html&quot;&gt;Evolution &amp;gt; Revolution – how should microservices be built?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Sep 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/september-2015-elixir-plus-phoenix@kariera-it-ktw/resources/public/index.html&quot;&gt;Elixir + Phoenix&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Jun 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/june-2015-zeromq-in-nodejs@berlinjs/presentation.html#1&quot;&gt;ZeroMQ in Node.js&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Apr 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/april-2015-erlang-ecosystem@dwo-2015/index.html#/&quot;&gt;Erlang Ecosystem (PL)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Feb 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/february-2015-elixir@SRUG/presentation.html#1&quot;&gt;Elixir&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Feb 2015 - &lt;a href=&quot;http://www.afronski.pl/presentations/february-2015-clojurescript-om@meetjsktw/presentation.html#1&quot;&gt;ClojureScript + Om = ♥&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Details: &lt;a href=&quot;http://www.afronski.pl/presentations&quot;&gt;My Talks&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;meetups&quot;&gt;Meetups&lt;/h2&gt;
+
+&lt;p&gt;Two meet-up groups created and continued in 2015:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nodeschool.io/silesia/&quot;&gt;NodeSchool Silesia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://silesian-beamers.github.io/&quot;&gt;Silesian BEAMers&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;blog&quot;&gt;Blog&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/YearlyBlogReview.png&quot; alt=&quot;Blog statistics&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;most-viewed-blog-posts-by-me&quot;&gt;Most viewed blog posts by me&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/YearlyBlogReviewArticles.png&quot; alt=&quot;Blog statistics&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;books&quot;&gt;Books&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.goodreads.com/user_challenges/1849322&quot;&gt;List of book which I’ve read in 2015 and reading challenge&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;favorite-technical-book-of-2015&quot;&gt;Favorite technical book of 2015&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.goodreads.com/owned_books/26693851&quot;&gt;Pragmatic Thinking and Learning: Refactor Your Wetware&lt;/a&gt; - &lt;a href=&quot;http://www.afronski.pl/books-that-changed-my-career/2015/03/07/books-that-changed-my-career-pragmatic-thinking-and-learning.html&quot;&gt;blog post about it&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;number-of-books-read&quot;&gt;Number of books read&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.goodreads.com/user_challenges/1849322&quot;&gt;20&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;programming&quot;&gt;Programming&lt;/h2&gt;
+
+&lt;h3 id=&quot;favorite-programming-languages-or-related-ive-hacked-onwith-this-year&quot;&gt;Favorite programming languages (or related) I’ve hacked on/with this year&lt;/h3&gt;
+
+&lt;p&gt;Languages with pet projects:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;Erlang #1&lt;/a&gt;, &lt;a href=&quot;https://github.com/afronski/bferl&quot;&gt;Erlang #2&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation-ui&quot;&gt;Elixir #1&lt;/a&gt;, &lt;a href=&quot;https://github.com/afronski/cartographer&quot;&gt;Elixir #2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/om-my-game-of-life&quot;&gt;ClojureScript&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;programming-languages-used-for-work-related-projects-this-year&quot;&gt;Programming languages used for work-related projects this year&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/JavaScript&quot;&gt;JavaScript - ES 5 (Node.js, Front-End)&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/JavaScript&quot;&gt;JavaScript - ES6 (Front-End)&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Java_(programming_language)&quot;&gt;Java&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/C_(programming_language)&quot;&gt;C&lt;/a&gt;, &lt;a href=&quot;https://www.ruby-lang.org/pl&quot;&gt;Ruby&lt;/a&gt;, &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&quot;&gt;Bash&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;programming-languages-that-i-hope-to-explore-next-year&quot;&gt;Programming languages that I hope to explore next year&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.idris-lang.org&quot;&gt;Idris&lt;/a&gt;, &lt;a href=&quot;https://www.rust-lang.org/&quot;&gt;Rust&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Prolog&quot;&gt;Prolog&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;plans-for-2016&quot;&gt;Plans for 2016&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apply &lt;a href=&quot;http://blog.fogus.me/2015/11/04/the-100101-method-my-approach-to-open-source/&quot;&gt;100:10:1 rule&lt;/a&gt; to my open source work.&lt;/li&gt;
+  &lt;li&gt;Proceed with &lt;em&gt;cost-benefit analysis&lt;/em&gt; and focus on &lt;em&gt;monetization&lt;/em&gt; in terms of open source work.&lt;/li&gt;
+  &lt;li&gt;Try to kick-off another meet up in Silesia region - &lt;a href=&quot;http://paperswelove.org/&quot;&gt;Papers We Love&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Learning (even more than previously) about theory and how to design distributed and real-time systems.&lt;/li&gt;
+  &lt;li&gt;Focus on doing &lt;em&gt;interactive blog posts&lt;/em&gt; and higher quality (premium?) materials.&lt;/li&gt;
+  &lt;li&gt;Push even harder work related with &lt;em&gt;quality&lt;/em&gt; and &lt;em&gt;visibility&lt;/em&gt; of blog posts.&lt;/li&gt;
+  &lt;li&gt;Take more time to &lt;a href=&quot;http://www.last.fm/user/afronski&quot;&gt;discover new music&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Happy New Year! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 31 Dec 2015 16:00:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2015/12/31/my-year-in-review-2015.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2015/12/31/my-year-in-review-2015.html</guid>
+      </item>
+    
+      <item>
         <title>What is wrong with gen_event?</title>
         <description>&lt;h1 id=&quot;what-is-wrong-with-genevent&quot;&gt;What is wrong with &lt;code&gt;gen_event&lt;/code&gt;?&lt;/h1&gt;
 
@@ -1074,7 +1163,7 @@
 
 &lt;h3 id=&quot;we-have-other-choices-on-the-jvm&quot;&gt;We have other choices on the JVM…&lt;/h3&gt;
 
-&lt;p&gt;Yes and I do not want to say that they are worse than &lt;em&gt;Clojure&lt;/em&gt;. They are different and most of them (&lt;em&gt;Groovy&lt;/em&gt;, &lt;em&gt;Kotlin&lt;/em&gt;, &lt;em&gt;Java&lt;/em&gt;) they are not adding anything new or revolutionary. Also, I have got a feeling that Scala, which was (still is?) a promising language, floats in a very unstable and dangerous direction - forks, difficult stewardship and adding too many features to the language, often in a very chaotic way (&lt;a href=&quot;http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html&quot;&gt;I wrote about that here&lt;/a&gt;) - everything adds up, I hope that it will not collapse underneath its own weight. Please, do not get me wrong - &lt;em&gt;Scala&lt;/em&gt; is not a bad language, only some decisions made related with its future and development direction are slightly disturbing. &lt;/p&gt;
+&lt;p&gt;Yes and I do not want to say that they are worse than &lt;em&gt;Clojure&lt;/em&gt;. They are different and most of them (&lt;em&gt;Groovy&lt;/em&gt;, &lt;em&gt;Kotlin&lt;/em&gt;, &lt;em&gt;Java&lt;/em&gt;) they are not adding anything new or revolutionary. Also, I have got a feeling that Scala, which was (still is?) a promising language, floats in a very unstable and dangerous direction - forks, difficult stewardship and adding too many features to the language, often in a very chaotic way (&lt;a href=&quot;http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html&quot;&gt;I wrote about that here&lt;/a&gt;) - everything adds up, I hope that it will not collapse underneath its own weight. Please, do not get me wrong - &lt;em&gt;Scala&lt;/em&gt; is not a bad language, only some decisions made related with its future and development direction are slightly disturbing.&lt;/p&gt;
 
 &lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
 
@@ -1402,67 +1491,6 @@
         <pubDate>Mon, 06 Jul 2015 16:00:00 +0200</pubDate>
         <link>http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</guid>
-      </item>
-    
-      <item>
-        <title>Seven Languages in Seven Weeks - Scala</title>
-        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---scala&quot;&gt;Seven Languages in Seven Weeks - Scala&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with books &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;&lt;img class=&quot;right scala-logo&quot; alt=&quot;Scala Logo&quot; src=&quot;/assets/ScalaLogo.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I have got a small sentiment for that language. After couple of years working primarily with &lt;em&gt;OOP&lt;/em&gt; languages, I have tried something new. I enrolled into &lt;em&gt;Functional Programming Principles in Scala&lt;/em&gt;. It was a &lt;em&gt;great choice&lt;/em&gt; - the course itself was an amazing experience, I have learned a lot. Basically, it was my first functional language adventure - and I liked it (it may sound strange, but I have not, literally, even a single hour related to that topic during my studies in the college).&lt;/p&gt;
-
-&lt;p&gt;After that experience, I dived deeper into that topic. I have worked with other programming languages, I built more and more projects in that methodology - starting from smaller things to a bigger ones. I have read more and more books related with that topic. And my perspective also changed. In that blog post I would like to focus not on the language features, but some things which I consider, at the same time, the &lt;em&gt;advantages&lt;/em&gt; and &lt;em&gt;curses&lt;/em&gt; of Scala.&lt;/p&gt;
-
-&lt;h3 id=&quot;object-oriented-meets-functional&quot;&gt;“Object-Oriented Meets Functional”&lt;/h3&gt;
-
-&lt;p&gt;As you probably know, &lt;em&gt;Scala&lt;/em&gt; has both paradigms inscribed in its nature. It is easy and approachable for newcomers - it is often described as a &lt;em&gt;hybrid&lt;/em&gt; or a &lt;em&gt;bridge&lt;/em&gt; programming language. Another important advantage is that one related with a platform - it has seamless integration with Java and it brings whole power of JVM to the table.&lt;/p&gt;
-
-&lt;p&gt;The whole problem which I have with that approach is the following - it is really easy to start and employ certain functional constructs in the &lt;em&gt;OOP&lt;/em&gt; world, but in order to start thinking in a purely functional manner you need to drop almost everything related with the conventional and mainstream &lt;em&gt;OOP&lt;/em&gt; (which is - surprise, surprise - &lt;a href=&quot;http://c2.com/cgi/wiki?AlanKaysDefinitionOfObjectOriented&quot;&gt;a broken model&lt;/a&gt;). Is it hard to believe? Try to seek a &lt;em&gt;“truly”&lt;/em&gt; object oriented stuff in &lt;a href=&quot;http://www.manning.com/bjarnason/&quot;&gt;that book&lt;/a&gt; - Good luck with that. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;It is also impossible to enforce &lt;em&gt;pureness&lt;/em&gt; and e.g. &lt;em&gt;immutability&lt;/em&gt;. It is impossible on the compiler side to do it on the compiler side. It is possible to build another layer on top of that, but it is really hard to develop such safety net with a type system - and most people will consider this rather impractical. So it means, that the all good practices and good features attached to the language can be destroyed by a single decision (often caused by a laziness, pragmatism or convenience). &lt;em&gt;I do not think that it is a good idea&lt;/em&gt; - I would rather go in a &lt;em&gt;“painful”&lt;/em&gt; path with e.g. being immutable from the beginning.&lt;/p&gt;
-
-&lt;h3 id=&quot;feature-bloat&quot;&gt;Feature Bloat&lt;/h3&gt;
-
-&lt;p&gt;Another problem that I have with &lt;em&gt;Scala&lt;/em&gt; it is its size - in terms of &lt;em&gt;features&lt;/em&gt; and ways to &lt;em&gt;do something&lt;/em&gt;. It is really hard to grasp all possible syntactical choices related with various constructs. Core of the language has really strange capabilities - my &lt;em&gt;“favorite”&lt;/em&gt; one is built-in support for &lt;em&gt;XML&lt;/em&gt; (I do not get why it is not defined in a user space, especially that &lt;em&gt;Scala&lt;/em&gt; is well known from its relaxed syntax, which is really nice when it comes to the &lt;em&gt;DSL&lt;/em&gt; creation). Why it does not have a JSON then? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The same thing applies to the &lt;em&gt;operator overloading&lt;/em&gt; (please look at the &lt;em&gt;Scalaz&lt;/em&gt; library - for a person not familiar with that library, code written in that manner is illegible) or different (and &lt;em&gt;strange&lt;/em&gt;) syntactical rules e.g. related with &lt;a href=&quot;https://www.agilelearner.com/presentation/81&quot;&gt;somersault of operands&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;From the other hand &lt;em&gt;Scala&lt;/em&gt; core language features does not have anything related with concurrency besides &lt;code&gt;Future[T]&lt;/code&gt; and &lt;code&gt;promise[T]&lt;/code&gt;. This is really a strange choice, especially looking at the &lt;em&gt;XML&lt;/em&gt; support in the core. And I am not only whining here, because &lt;em&gt;Scala&lt;/em&gt; has also many awesome features - the best ones are &lt;em&gt;Partial Functions&lt;/em&gt; and &lt;em&gt;Traits&lt;/em&gt;. It has also very decent &lt;em&gt;pattern matching&lt;/em&gt; and impressive &lt;em&gt;type inference&lt;/em&gt;. But the core language with libraries size it is definitely too big.&lt;/p&gt;
-
-&lt;h3 id=&quot;jvm-oh-sweet-jvm&quot;&gt;JVM, oh sweet JVM…&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html&quot;&gt;There is no doubt&lt;/a&gt;, Java is still the most popular programming language - it automatically means that the &lt;em&gt;JVM&lt;/em&gt; is very popular, and all languages based on that platform can easily employ that power. &lt;em&gt;Scala&lt;/em&gt; also does that.&lt;/p&gt;
-
-&lt;p&gt;Mentioned popularity is even more visible when it comes to the books. &lt;a href=&quot;https://youtu.be/HLCFJ9hnR1M?t=808&quot;&gt;In 20015, 5 out of 6 books in the functional programming space are about &lt;em&gt;Scala&lt;/em&gt;&lt;/a&gt;. During last 4 years &lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming in Scala&lt;/a&gt; was the most popular book in the functional programming space.&lt;/p&gt;
-
-&lt;p&gt;Basing design of a new language on top of the existing platform can be sometimes &lt;a href=&quot;http://docs.scala-lang.org/overviews/core/value-classes.html&quot;&gt;a constraining path&lt;/a&gt;. The canonical example is &lt;a href=&quot;http://www.scala-lang.org/api/current/#scala.util.control.TailCalls$&quot;&gt;&lt;code&gt;scala.util.control.TailCalls&lt;/code&gt;&lt;/a&gt;. I hope that amount of work related with providing workarounds for &lt;code&gt;JVM&lt;/code&gt; limitations is still smaller than the amount of actual work. And last but not least - tooling. I have nothing against &lt;em&gt;&lt;code&gt;scalac&lt;/code&gt;&lt;/em&gt; or &lt;em&gt;&lt;code&gt;REPL&lt;/code&gt;&lt;/em&gt;, but &lt;code&gt;sbt&lt;/code&gt; - really? Are we still in XXI century, or did I miss something? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; In the ranking of the most obscure programming tools &lt;code&gt;sbt&lt;/code&gt; will be on the podium.&lt;/p&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
-
-&lt;p&gt;It does not mean that &lt;em&gt;Scala&lt;/em&gt; is a bad programming language - it has huge minds behind, it has certain merits (even for me - it somehow introduced me to the topic of the &lt;em&gt;functional programming&lt;/em&gt;), but it should provide something more - and by &lt;em&gt;more&lt;/em&gt;, I do not mean more features. Without that it will be just another language on top of &lt;em&gt;JVM&lt;/em&gt;, which brings some of functional concepts to the crowd - and it will stay in that way.&lt;/p&gt;
-
-&lt;p&gt;I think that one of such things that are different and brings real value to the community is the &lt;a href=&quot;http://www.manning.com/bjarnason/&quot;&gt;Functional Programming in Scala&lt;/a&gt; book. It is a masterpiece, I have not read it fully yet, but from the very first chapters I see that it brings thinking about &lt;em&gt;FP&lt;/em&gt; on the different level. &lt;em&gt;This book is definitely recommended for everyone who is interested in functional paradigm&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
-
-&lt;p&gt;In the next blog post we will talk about my favorite programming language, &lt;em&gt;&lt;a href=&quot;http://www.erlang.org&quot;&gt;Erlang&lt;/a&gt;&lt;/em&gt;. It has unique approach to the concurrency, it is a mature and battle-tested platform, which has still active and vibrant community (recently expanded by a fast growing &lt;em&gt;Elixir&lt;/em&gt; community). See you in the next blog post! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.scala-lang.org/&quot;&gt;Scala&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming in Scala, 2nd Edition&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 29 Jun 2015 16:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/06/29/seven-languages-in-seven-weeks-scala.html</guid>
       </item>
     
   </channel>
