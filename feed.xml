@@ -7,6 +7,66 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>500 shades of Green</title>
+        <description>&lt;h1 id=&quot;shades-of-green&quot;&gt;500 shades of Green&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/PublicContributionsGithub.png&quot; alt=&quot;Public contributions&quot; /&gt;
+&lt;img src=&quot;/assets/PrivateContributionsGithub.png&quot; alt=&quot;Private contributions&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;No, it is not fake. I did it - I have managed to have real streak which last 500 days in a row and document it on Github. But, you can do it in a different way - there are couple of projects which allows you to create arbitrary history of your contributions (it uses a separate repository for that and well - it cheats using ability of &lt;code&gt;git&lt;/code&gt; to bend the time).&lt;/p&gt;
+
+&lt;p&gt;One is &lt;a href=&quot;https://github.com/gelstudios/gitfiti&quot;&gt;here&lt;/a&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;No, it does not mean anything. I am not a better programmer than anyone else, definitely quantity does not involve quality (I will describe this in details below).&lt;/p&gt;
+
+&lt;p&gt;No, it does not mean that I did not have proper holidays or that I have spent all my free time on that.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-did-you-do-that&quot;&gt;Why did you do that?&lt;/h2&gt;
+
+&lt;p&gt;Mainly because of two reasons: &lt;em&gt;documentation&lt;/em&gt; and &lt;em&gt;creating habits&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Many of the repositories like &lt;a href=&quot;https://github.com/afronski/playground-notes&quot;&gt;afronski/playground-notes&lt;/a&gt;, &lt;a href=&quot;https://github.com/afronski/dotfiles&quot;&gt;afronski/dotfiles&lt;/a&gt; or &lt;a href=&quot;https://github.com/afronski/papers_i_love&quot;&gt;afronski/papers_i_love&lt;/a&gt; are pure and private documentation of my notes, publicly visible settings and observations with commit history.&lt;/p&gt;
+
+&lt;p&gt;It also helped me when it comes to developing new habits:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Taking care about commit history, proper commit messages, linear and nice history. Working with facilities like &lt;em&gt;rebase&lt;/em&gt;, &lt;em&gt;squash&lt;/em&gt; or &lt;em&gt;fix-ups&lt;/em&gt; helped me a lot in daily job.
+    &lt;ul&gt;
+      &lt;li&gt;Besides that some commits have attached story with explanation why I applied that change. It is sometimes priceless, because I can drop my mental overhead related to &lt;em&gt;fear of forgetting something important&lt;/em&gt;. And when I hit the same wall again I can tackle it with certainty and exact solution. Example &lt;a href=&quot;https://github.com/afronski/dotfiles/commit/12305ca407a1fed3b2aafb0f3ccb194d8f429c81&quot;&gt;here&lt;/a&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Also having a daily habit of delivering something valuable is crucial. It helps a lot when it comes to daily work, when it comes to planning the workload, actual steps to be done.
+    &lt;ul&gt;
+      &lt;li&gt;It also helps regarding planning my weeks and during a lot of other related activities - like meet-up organization, building community around them or preparing real contributions to &lt;em&gt;open source projects&lt;/em&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Another point is related with developing other habits. It is easier to develop a new habit on top of existing foundation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I cannot overlook the &lt;em&gt;fun factor&lt;/em&gt; and that &lt;em&gt;all the small things&lt;/em&gt; delivered daily sometimes formed something bigger, and &lt;em&gt;endorphin’s rush&lt;/em&gt; related with a finished project cannot be underestimated.&lt;/p&gt;
+
+&lt;h2 id=&quot;god-mode&quot;&gt;God Mode&lt;/h2&gt;
+
+&lt;p&gt;Obviously, if you know &lt;code&gt;git&lt;/code&gt; well you can cheat with the dates (e.g. when you skipped a day or two) - especially if that repository (or branch) is not used by anyone:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+~ (my-private-branch) $ git commit --amend --date=&quot;Wed Feb 01 23:50 2016 +0100&quot;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;All rules regarding rewriting commit history of pushed shared branches are applicable also in this case, so you have been warned. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;quality--quantity&quot;&gt;Quality != Quantity&lt;/h2&gt;
+
+&lt;p&gt;Last, but not least - my daily streak means literally &lt;em&gt;nothing&lt;/em&gt; when it comes to my skills. It can be only a indicator of my &lt;em&gt;stubborn nature&lt;/em&gt; and &lt;em&gt;persistence&lt;/em&gt;. Also, there are a lot of days which are really low when it comes to contributions value (like changing a thing or two in a &lt;code&gt;README.md&lt;/code&gt; file). That’s definitely not a full-blown contribution, but it still helps preserving the habit and it keeps you in the loop.&lt;/p&gt;
+
+&lt;p&gt;Hey - it still counts if you feel better afterwards! &lt;em&gt;Why so serious&lt;/em&gt;? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; It is just a pile of green squares. Just don’t break the chain, and try as much as you can to deliver something - it will be still awesome, even if it will serve purpose only for you. For me it is like a &lt;em&gt;motivational perpetuum mobile&lt;/em&gt; - I wish you the same thing!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Feb 2016 23:30:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2016/02/17/500-shades-of-green.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2016/02/17/500-shades-of-green.html</guid>
+      </item>
+    
+      <item>
         <title>My year in review - 2015</title>
         <description>&lt;h1 id=&quot;my-year-in-review---2015&quot;&gt;My year in review - 2015&lt;/h1&gt;
 
@@ -1446,51 +1506,6 @@
         <pubDate>Mon, 13 Jul 2015 18:15:00 +0200</pubDate>
         <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</guid>
-      </item>
-    
-      <item>
-        <title>Books that changed my career - Learn You Some Erlang For Great Good!</title>
-        <description>&lt;h1 id=&quot;books-that-changed-my-career---learn-you-some-erlang-for-great-good&quot;&gt;Books that changed my career - Learn You Some Erlang For Great Good!&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is another one in the series which contains the most influential books that I have read in my programming career. This is my private ranking, each post contains a good dose of my private opinions (you have been warned &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;), but besides that I hope that you will find it valuable.&lt;/quote&gt;
-
-&lt;h3 id=&quot;why-should-i-care&quot;&gt;Why should I care?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;The shortest and simplest answer is - you should care if you are interested in &lt;em&gt;Erlang VM&lt;/em&gt; related topics&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;It is a book for a specialized audience. Probably you will not be interested if you are not interested in learning &lt;em&gt;Erlang&lt;/em&gt; or diving into ecosystem built around it. But if you would like to learn a new programming language - it is a very good book for a newcomer. Besides that, you should also read the Joe Armstrong’s book &lt;em&gt;“Programming Erlang, 2nd Edition”&lt;/em&gt; - which is a classic position, written by one of language creators.&lt;/p&gt;
-
-&lt;p&gt;Also, if you are dealing with &lt;em&gt;Erlang&lt;/em&gt; operations (e.g. you are a &lt;em&gt;DevOps&lt;/em&gt; person in the project which uses &lt;em&gt;Erlang&lt;/em&gt;), the same author wrote a book &lt;em&gt;Erlang in Anger&lt;/em&gt;, which is an awesome source of knowledge - it is full of hints, small tools and scripts and many useful guides, based on author’s extensive experience (&lt;em&gt;Heroku&lt;/em&gt; is the place when you probably can deal with &lt;a href=&quot;https://blog.heroku.com/archives/2013/11/7/logplex-down-the-rabbit-hole&quot;&gt;huge amount of unusual problems&lt;/a&gt; &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;).&lt;/p&gt;
-
-&lt;h3 id=&quot;about-the-book&quot;&gt;About the book&lt;/h3&gt;
-
-&lt;p&gt;&lt;img class=&quot;right lysefgg-logo&quot; alt=&quot;Learn You Some Erlang For Great Good! - Cover&quot; src=&quot;/assets/LYSEFGGCover.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;That book was mine entry point into the &lt;em&gt;Erlang&lt;/em&gt; world. It is a really good source of knowledge for newcomers, it is also complete - it covers all important topics from language basic syntax to more advanced topics related e.g. with &lt;em&gt;OTP&lt;/em&gt; or building distributed systems. It is very pragmatic and &lt;em&gt;Fred&lt;/em&gt; is continuously updating it (last changes are related with &lt;em&gt;maps&lt;/em&gt; and changes in handling &lt;em&gt;time&lt;/em&gt; which was introduced in the recently released 18th version of &lt;em&gt;Erlang VM&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;You will learn from this book a true &lt;em&gt;Erlang&lt;/em&gt; approach. Book contains also idioms, but it is starting from the ground up. It has a well thought structure and also - it is really well written and it has very interesting style (you will not miss &lt;em&gt;illustrations&lt;/em&gt; prepared for each chapter - they are sometimes funny).&lt;/p&gt;
-
-&lt;p&gt;The last, but not least - as I said in the previous paragraph - author &lt;a href=&quot;https://twitter.com/mononcqc&quot;&gt;Fred Trottier-Hebert&lt;/a&gt; is an experienced &lt;em&gt;Erlang&lt;/em&gt; developer, he is well-known in the community (he was an &lt;em&gt;Erlang&lt;/em&gt; user of the year), he wrote 2 books about &lt;em&gt;Erlang&lt;/em&gt; and numerous blog posts on &lt;a href=&quot;http://ferd.ca/&quot;&gt;his blog&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;i-do-not-care-about-erlang-or-elixir-should-i-still-care&quot;&gt;I do not care about &lt;code&gt;Erlang&lt;/code&gt; or &lt;code&gt;Elixir&lt;/code&gt;. Should I still care?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;The shortest and simplest answer is no&lt;/strong&gt;. The longer one, needs much more investigation of problem’s root.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;May I ask you why you don’t like Erlang?&lt;/em&gt; If you are already interested in any other language that is &lt;em&gt;functional&lt;/em&gt; and &lt;em&gt;built with concurrency in mind&lt;/em&gt;, then it is fine. But if not, you should learn a new one (pick any - &lt;code&gt;Clojure&lt;/code&gt;, &lt;code&gt;F#&lt;/code&gt; or &lt;code&gt;Erlang&lt;/code&gt;). Just use a different language than your daily tool. You can read about that &lt;a href=&quot;http://www.afronski.pl/sicp-in-clojure/2015/06/04/sicp-in-clojure-chapter-1.html&quot;&gt;here&lt;/a&gt;. And I will leave you with that till the next time! &lt;img class=&quot;emoji&quot; title=&quot;:smiley:&quot; alt=&quot;:smiley:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f603.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/content&quot;&gt;Learn You Some Erlang For Great Good!&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.erlang-in-anger.com/&quot;&gt;Erlang in Anger&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://learnyousomeerlang.com/time&quot;&gt;Erlang 18 and Time&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.heroku.com/archives/2013/11/7/logplex-down-the-rabbit-hole&quot;&gt;Troubleshooting Down the Logplex Rabbit Hole&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/jaerlang2/programming-erlang&quot;&gt;Programming Erlang, 2nd Edition&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 06 Jul 2015 16:00:00 +0200</pubDate>
-        <link>http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/books-that-changed-my-career/2015/07/06/books-that-changed-my-career-learn-you-some-erlang-for-great-good.html</guid>
       </item>
     
   </channel>

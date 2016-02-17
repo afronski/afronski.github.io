@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: github</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/github/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>500 shades of Green</title>
+        <description>&lt;h1 id=&quot;shades-of-green&quot;&gt;500 shades of Green&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/PublicContributionsGithub.png&quot; alt=&quot;Public contributions&quot; /&gt;
+&lt;img src=&quot;/assets/PrivateContributionsGithub.png&quot; alt=&quot;Private contributions&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;No, it is not fake. I did it - I have managed to have real streak which last 500 days in a row and document it on Github. But, you can do it in a different way - there are couple of projects which allows you to create arbitrary history of your contributions (it uses a separate repository for that and well - it cheats using ability of &lt;code&gt;git&lt;/code&gt; to bend the time).&lt;/p&gt;
+
+&lt;p&gt;One is &lt;a href=&quot;https://github.com/gelstudios/gitfiti&quot;&gt;here&lt;/a&gt;. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;No, it does not mean anything. I am not a better programmer than anyone else, definitely quantity does not involve quality (I will describe this in details below).&lt;/p&gt;
+
+&lt;p&gt;No, it does not mean that I did not have proper holidays or that I have spent all my free time on that.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-did-you-do-that&quot;&gt;Why did you do that?&lt;/h2&gt;
+
+&lt;p&gt;Mainly because of two reasons: &lt;em&gt;documentation&lt;/em&gt; and &lt;em&gt;creating habits&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Many of the repositories like &lt;a href=&quot;https://github.com/afronski/playground-notes&quot;&gt;afronski/playground-notes&lt;/a&gt;, &lt;a href=&quot;https://github.com/afronski/dotfiles&quot;&gt;afronski/dotfiles&lt;/a&gt; or &lt;a href=&quot;https://github.com/afronski/papers_i_love&quot;&gt;afronski/papers_i_love&lt;/a&gt; are pure and private documentation of my notes, publicly visible settings and observations with commit history.&lt;/p&gt;
+
+&lt;p&gt;It also helped me when it comes to developing new habits:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Taking care about commit history, proper commit messages, linear and nice history. Working with facilities like &lt;em&gt;rebase&lt;/em&gt;, &lt;em&gt;squash&lt;/em&gt; or &lt;em&gt;fix-ups&lt;/em&gt; helped me a lot in daily job.
+    &lt;ul&gt;
+      &lt;li&gt;Besides that some commits have attached story with explanation why I applied that change. It is sometimes priceless, because I can drop my mental overhead related to &lt;em&gt;fear of forgetting something important&lt;/em&gt;. And when I hit the same wall again I can tackle it with certainty and exact solution. Example &lt;a href=&quot;https://github.com/afronski/dotfiles/commit/12305ca407a1fed3b2aafb0f3ccb194d8f429c81&quot;&gt;here&lt;/a&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Also having a daily habit of delivering something valuable is crucial. It helps a lot when it comes to daily work, when it comes to planning the workload, actual steps to be done.
+    &lt;ul&gt;
+      &lt;li&gt;It also helps regarding planning my weeks and during a lot of other related activities - like meet-up organization, building community around them or preparing real contributions to &lt;em&gt;open source projects&lt;/em&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Another point is related with developing other habits. It is easier to develop a new habit on top of existing foundation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I cannot overlook the &lt;em&gt;fun factor&lt;/em&gt; and that &lt;em&gt;all the small things&lt;/em&gt; delivered daily sometimes formed something bigger, and &lt;em&gt;endorphin’s rush&lt;/em&gt; related with a finished project cannot be underestimated.&lt;/p&gt;
+
+&lt;h2 id=&quot;god-mode&quot;&gt;God Mode&lt;/h2&gt;
+
+&lt;p&gt;Obviously, if you know &lt;code&gt;git&lt;/code&gt; well you can cheat with the dates (e.g. when you skipped a day or two) - especially if that repository (or branch) is not used by anyone:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+~ (my-private-branch) $ git commit --amend --date=&quot;Wed Feb 01 23:50 2016 +0100&quot;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;All rules regarding rewriting commit history of pushed shared branches are applicable also in this case, so you have been warned. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;quality--quantity&quot;&gt;Quality != Quantity&lt;/h2&gt;
+
+&lt;p&gt;Last, but not least - my daily streak means literally &lt;em&gt;nothing&lt;/em&gt; when it comes to my skills. It can be only a indicator of my &lt;em&gt;stubborn nature&lt;/em&gt; and &lt;em&gt;persistence&lt;/em&gt;. Also, there are a lot of days which are really low when it comes to contributions value (like changing a thing or two in a &lt;code&gt;README.md&lt;/code&gt; file). That’s definitely not a full-blown contribution, but it still helps preserving the habit and it keeps you in the loop.&lt;/p&gt;
+
+&lt;p&gt;Hey - it still counts if you feel better afterwards! &lt;em&gt;Why so serious&lt;/em&gt;? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; It is just a pile of green squares. Just don’t break the chain, and try as much as you can to deliver something - it will be still awesome, even if it will serve purpose only for you. For me it is like a &lt;em&gt;motivational perpetuum mobile&lt;/em&gt; - I wish you the same thing!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Feb 2016 23:30:00 +0100</pubDate>
+        <link>http://www.afronski.pl/2016/02/17/500-shades-of-green.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2016/02/17/500-shades-of-green.html</guid>
+      </item>
+    
+  </channel>
+</rss>
