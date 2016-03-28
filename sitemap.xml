@@ -4,6 +4,15 @@
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.afronski.pl/2016/03/28/writing-custom-modules-for-ansible.html</loc>
+    
+    <lastmod>2016-03-28T21:00:00+02:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.afronski.pl/2016/02/17/500-shades-of-green.html</loc>
     
     <lastmod>2016-02-17T23:30:00+01:00</lastmod>
@@ -483,6 +492,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+    
+  
+    
+  
+    
+  
+    
+  
     
   
     

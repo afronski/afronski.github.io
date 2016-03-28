@@ -7,6 +7,105 @@
     <atom:link href="http://www.afronski.pl/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Writing custom modules for Ansible</title>
+        <description>&lt;h1 id=&quot;writing-custom-modules-for-ansible&quot;&gt;Writing custom modules for Ansible&lt;/h1&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;h3 id=&quot;what-is-ansible-and-what-is-a-module&quot;&gt;What is Ansible and what is a &lt;code&gt;module&lt;/code&gt;?&lt;/h3&gt;
+
+&lt;p&gt;If you are a big fan of &lt;em&gt;automation&lt;/em&gt;, if you are focused on spreading and building software in line with &lt;em&gt;DevOps&lt;/em&gt; culture tools related with automation / configuration management like &lt;em&gt;Chef&lt;/em&gt; or &lt;em&gt;Ansible&lt;/em&gt; are probably well known to you. Differences between various types of those tools is a topic for a next blog post. Let’s briefly zoom into details for those people which do not know what &lt;em&gt;Ansible&lt;/em&gt; and &lt;em&gt;modules&lt;/em&gt; are.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Ansible&lt;/em&gt; is a free-software platform for configuring and managing machines. It combines deployment, ad hoc tasks execution and configuration management. This tool uses &lt;em&gt;YAML&lt;/em&gt; and declarative way of defining steps, which are modifying state of your fleet. &lt;em&gt;Module&lt;/em&gt; is a single piece of those steps, well defined way of executing certain tasks on remote infrastructure. It works by outputting JSON to standard output, and it can be written in any programming language.&lt;/p&gt;
+
+&lt;h2 id=&quot;development&quot;&gt;Development&lt;/h2&gt;
+
+&lt;p&gt;Before we’ll start actual implementation we need to know how it works underneath.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+
+&lt;p&gt;If you want to write a custom module, we stated above that you have to be aware of two things. Your module code will be executed on the provisioned machine, &lt;strong&gt;so all dependencies which your module requires, have to be there&lt;/strong&gt;. Second, your module communicates over specific input and output protocols. It uses certain syntax for sending input parameters (either sent as a &lt;code&gt;stdin&lt;/code&gt; or file) and JSON protocol which will be consumed as an output of the module. And nothing more - any other, non-JSON compliant output will be treated as an error, and would not be consumed by &lt;em&gt;Ansible&lt;/em&gt; properly.&lt;/p&gt;
+
+&lt;h3 id=&quot;case-study&quot;&gt;Case Study&lt;/h3&gt;
+
+&lt;p&gt;We would like to consume &lt;em&gt;XMLified&lt;/em&gt; status pages and do certain actions based on checked and exposed facts, scraped from aforementioned place. Because I like Erlang, I will use that language to implement that module. We will do it using &lt;code&gt;escript&lt;/code&gt;. What is it? Quoting official documentation:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;&lt;code&gt;escript&lt;/code&gt; provides support for running short Erlang programs without having to compile them first and an easy way to retrieve the command line arguments.&lt;/quote&gt;
+
+&lt;p&gt;Besides way of executing code, we need to have XML parser and HTTP client - in both cases we will use built-in thins from Erlang library - &lt;code&gt;xmerl&lt;/code&gt; and &lt;code&gt;httpc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;developing-outside-ansible&quot;&gt;Developing outside Ansible&lt;/h3&gt;
+
+&lt;p&gt;First we need to setup our environment for Ansible. The easiest way to do it in Python world is to spin up a &lt;code&gt;virtualenv&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virtualenv -p python2.7 .local
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; .local/bin/activate
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip install &lt;span class=&quot;nv&quot;&gt;ansible&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.9.4                                            &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;.local&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then we can fiddle with it.&lt;/p&gt;
+
+&lt;h4 id=&quot;input-arguments&quot;&gt;Input arguments&lt;/h4&gt;
+
+&lt;p&gt;How to pass an arguments to it? You can observe it either when you define task parameters inside &lt;em&gt;YAML&lt;/em&gt; file or when you invoke ad hoc task in &lt;em&gt;Ansible&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible host&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;001-002&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; -i production_hosts -m stat -a &lt;span class=&quot;s2&quot;&gt;&amp;quot;path=/etc/passwd&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Everything stated inside &lt;code&gt;-a&lt;/code&gt; attribute defines list of named parameters. In that case an argument named &lt;code&gt;path&lt;/code&gt; has value &lt;code&gt;/etc/passwd&lt;/code&gt;. This will be formatted and printed to a file. Path and name will be delivered as a first argument of command line invocation of our module.&lt;/p&gt;
+
+&lt;h4 id=&quot;output-format&quot;&gt;Output format&lt;/h4&gt;
+
+&lt;p&gt;As we specified above, our module will be executed in the context of actually modified machine. It communicates with Ansible over well defined JSON protocol, collected from &lt;code&gt;stdout&lt;/code&gt;. We have two basic forms - error:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;failed&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;msg&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Details of the error.&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And success:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;changed&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If we want to communicate new facts, which can be used in further tasks (e.g. as an argument for conditional statements) we can add it inside &lt;code&gt;ansible_facts&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;changed&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;ansible_facts&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;new_fact&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;new_value&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It is a good practice to prefix your facts with name of the module (for avoiding name conflicts and preserving clean structure).&lt;/p&gt;
+
+&lt;h4 id=&quot;implementation&quot;&gt;Implementation&lt;/h4&gt;
+
+&lt;p&gt;Further implementation is pretty straightforward, especially that we’re writing a sequential script using all power of Erlang related with &lt;a href=&quot;https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L40&quot;&gt;pattern matching&lt;/a&gt;, &lt;a href=&quot;https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L26&quot;&gt;&lt;em&gt;HTTP client&lt;/em&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L60&quot;&gt;flow control&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;testing-with-ansible&quot;&gt;Testing with Ansible&lt;/h3&gt;
+
+&lt;p&gt;When you want to test your module with Ansible, you can set it up from source inside your &lt;code&gt;virtualenv&lt;/code&gt; and then invoke it by this series of commands:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone git://github.com/ansible/ansible.git --recursive
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;ansible/hacking/env-setup
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chmod +x ansible/hacking/test-module
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible/hacking/test-module
+               -m ./xml_status_page
+               -a &lt;span class=&quot;s2&quot;&gt;&amp;quot;host=localhost port=9999 xpath=//statistics name=version&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;Thanks to the good architecture and separation of concerns in Ansible, we can easily create modules using different languages and techniques, which will be executed on the provisioned host by a runner. There is no cleaner way to separate executor from task implementation, if you can separate it via programming language.&lt;/p&gt;
+
+&lt;p&gt;Also nice structure of this tool and ability to combine it with &lt;code&gt;virtalenv&lt;/code&gt; allows us to use locally modified versions and prepare our own tailored toolboxes, customized to our projects and needs.&lt;/p&gt;
+
+&lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.ansible.com/ansible/developing_modules.html&quot;&gt;Developing modules - Ansible documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ansible/ansible-modules-extras&quot;&gt;Modules Extras - Ansible&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.lelonek.me/how-to-write-ansible-module-in-clojure-5b340df90f5a#.f5aqkjrlk&quot;&gt;How to write Ansible module in Clojure? - Kamil Lelonek’s blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/escript.html&quot;&gt;&lt;code&gt;escript&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/xmerl.html&quot;&gt;&lt;code&gt;xmerl&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/httpc.html&quot;&gt;&lt;code&gt;httpc&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 28 Mar 2016 21:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2016/03/28/writing-custom-modules-for-ansible.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2016/03/28/writing-custom-modules-for-ansible.html</guid>
+      </item>
+    
+      <item>
         <title>500 shades of Green</title>
         <description>&lt;h1 id=&quot;shades-of-green&quot;&gt;500 shades of Green&lt;/h1&gt;
 
@@ -1458,52 +1557,6 @@
         <pubDate>Fri, 07 Aug 2015 16:00:00 +0200</pubDate>
         <link>http://www.afronski.pl/sicp-in-clojure/2015/08/07/sicp-in-clojure-chapter-2.html</link>
         <guid isPermaLink="true">http://www.afronski.pl/sicp-in-clojure/2015/08/07/sicp-in-clojure-chapter-2.html</guid>
-      </item>
-    
-      <item>
-        <title>Seven Languages in Seven Weeks - Erlang</title>
-        <description>&lt;h1 id=&quot;seven-languages-in-seven-weeks---erlang&quot;&gt;Seven Languages in Seven Weeks - Erlang&lt;/h1&gt;
-
-&lt;quote class=&quot;disclaimer&quot;&gt;This blog post is a next article from series related with book &quot;Seven Languages in Seven Weeks&quot; and its sequel. Each post will describe a single language chosen by this book and its most interesting and influencing features, from my point of view and previous experiences. I hope that you will find this series interesting. Do not hesitate with sharing your feedback and comments below!&lt;/quote&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;p&gt;&lt;img class=&quot;right erlang-logo&quot; alt=&quot;Erlang Logo&quot; src=&quot;/assets/ErlangLogo.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;If you did not sleep under a rock in the past 30 years or this post is not a first one which you have read on this blog, you are probably familiar what &lt;em&gt;Erlang&lt;/em&gt; is and which features are making it uniquely suited in certain class of applications. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I do not want to cover any interesting language features, because I have already written &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/10/interesting-language-features-erlang-named-case-expressions.html&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html&quot;&gt;posts&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html&quot;&gt;about&lt;/a&gt; &lt;a href=&quot;http://www.afronski.pl/interesting-language-features/2015/06/11/interesting-language-features-erlang-custom-behaviors.html&quot;&gt;that&lt;/a&gt;. Instead, I would like to introduce to you a small story about origin of the &lt;em&gt;actor model&lt;/em&gt; in that particular case.&lt;/p&gt;
-
-&lt;h3 id=&quot;a-small-story-about-the-actor-model-in-erlang&quot;&gt;A small story about the &lt;em&gt;actor model&lt;/em&gt; in &lt;em&gt;Erlang&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;The easiest way to start, will be to introduce definition directly from &lt;em&gt;Wikipedia&lt;/em&gt;:&lt;/p&gt;
-
-&lt;quote class=&quot;citation&quot;&gt;The actor model in computer science is a mathematical model of concurrent computation that treats &quot;actors&quot; as the universal primitives of concurrent computation: in response to a message that it receives, an actor can make local decisions, create more actors, send more messages, and determine how to respond to the next message received. The actor model originated in 1973. It has been used both as a framework for a theoretical understanding of computation and as the theoretical basis for several practical implementations of concurrent systems. The relationship of the model to other work is discussed in Indeterminacy in concurrent computation and Actor model and process calculi.&lt;/quote&gt;
-
-&lt;p&gt;More or less at the same time, Erlang was created - with similar concepts inside. At first sight it looks like an industrial implementation of academic theory. However, creators did not call that an &lt;em&gt;actor model&lt;/em&gt;, but all features are reflecting that idea pretty much entirely - core of this idea is a lightweight processes implementation, which use message passing for communication between them and complete isolation from each other.&lt;/p&gt;
-
-&lt;p&gt;It may sound as an impossible and strange coincidence, but that implementation &lt;strong&gt;was not inspired by work of Hewitt, Bishop and Steiger at all&lt;/strong&gt;. As &lt;a href=&quot;https://twitter.com/rvirding&quot;&gt;Robert Virding&lt;/a&gt; said &lt;a href=&quot;http://rvirding.blogspot.com/2008/01/virdings-first-rule-of-programming.html?showComment=1400761539472#c5295780053912797163&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
-
-&lt;quote class=&quot;citation&quot;&gt;No, we didn't as such &quot;invent&quot; them, but at the same time we didn't take them from anywhere either. We arrived at these properties on our own as the best ways of solving our problems. We never heard about actors till years later.&lt;/quote&gt;
-
-&lt;p&gt;It means that &lt;em&gt;actor model&lt;/em&gt; has a solid industrial motivation and inspiration in the Telecommunication domain. Looking at this from a different perspective - it is how the phone calls are working at the highest conceptual level (also you can easily find analogies to that process in nature and biology). They have arrived to the same properties on their own, distilling and solving the domain problems over and over again - in complete isolation from the academic theory, as a best fit for set of their problems. I am convinced that this model is a valuable thing by that, because it means that at least two sets of people came up with same idea which is a perfect fit for handling certain class of problems related with concurrent operations.&lt;/p&gt;
-
-&lt;h3 id=&quot;what-is-next&quot;&gt;What is next?&lt;/h3&gt;
-
-&lt;p&gt;We are heading inevitably to the end of first book - following blog posts in that series will cover two last programming languages - &lt;em&gt;Clojure&lt;/em&gt; and &lt;em&gt;Haskell&lt;/em&gt;. After that, we will have a short break, for one or two blog posts about other languages which are not covered in neither both aforementioned books. Then, we will start again with first language described in the sequel &lt;a href=&quot;https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks&quot;&gt;&lt;em&gt;Seven More Languages in Seven Weeks&lt;/em&gt;&lt;/a&gt;. See you next time then! &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;credits&quot;&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Actor_model&quot;&gt;Actor Model - Wikipedia&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://worrydream.com/refs/Hewitt-ActorModel.pdf&quot;&gt;A Universal Modular Actor Formalism for Artificial Intelligence - Hewitt, Bishop, Steiger&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.erlang.org/&quot;&gt;Erlang - Official Website&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pragprog.com/book/btlang/seven-languages-in-seven-weeks&quot;&gt;Seven Languages in Seven Weeks&lt;/a&gt;, &lt;em&gt;Bruce A. Tate&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 13 Jul 2015 18:15:00 +0200</pubDate>
-        <link>http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</link>
-        <guid isPermaLink="true">http://www.afronski.pl/7-languages-in-7-weeks/2015/07/13/seven-languages-in-seven-weeks-erlang.html</guid>
       </item>
     
   </channel>

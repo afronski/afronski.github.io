@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js,Clojure,SICP" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>Writing custom modules for Ansible</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <section class="ads">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9524821705718873" data-ad-slot="3234654745" data-ad-format="auto"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </section>
+
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="writing-custom-modules-for-ansible">Writing custom modules for Ansible</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<h3 id="what-is-ansible-and-what-is-a-module">What is Ansible and what is a <code>module</code>?</h3>
+
+<p>If you are a big fan of <em>automation</em>, if you are focused on spreading and building software in line with <em>DevOps</em> culture tools related with automation / configuration management like <em>Chef</em> or <em>Ansible</em> are probably well known to you. Differences between various types of those tools is a topic for a next blog post. Let’s briefly zoom into details for those people which do not know what <em>Ansible</em> and <em>modules</em> are.</p>
+
+<p><em>Ansible</em> is a free-software platform for configuring and managing machines. It combines deployment, ad hoc tasks execution and configuration management. This tool uses <em>YAML</em> and declarative way of defining steps, which are modifying state of your fleet. <em>Module</em> is a single piece of those steps, well defined way of executing certain tasks on remote infrastructure. It works by outputting JSON to standard output, and it can be written in any programming language.</p>
+
+<h2 id="development">Development</h2>
+
+<p>Before we’ll start actual implementation we need to know how it works underneath.</p>
+
+<h3 id="requirements">Requirements</h3>
+
+<p>If you want to write a custom module, we stated above that you have to be aware of two things. Your module code will be executed on the provisioned machine, <strong>so all dependencies which your module requires, have to be there</strong>. Second, your module communicates over specific input and output protocols. It uses certain syntax for sending input parameters (either sent as a <code>stdin</code> or file) and JSON protocol which will be consumed as an output of the module. And nothing more - any other, non-JSON compliant output will be treated as an error, and would not be consumed by <em>Ansible</em> properly.</p>
+
+<h3 id="case-study">Case Study</h3>
+
+<p>We would like to consume <em>XMLified</em> status pages and do certain actions based on checked and exposed facts, scraped from aforementioned place. Because I like Erlang, I will use that language to implement that module. We will do it using <code>escript</code>. What is it? Quoting official documentation:</p>
+
+<quote class="citation"><code>escript</code> provides support for running short Erlang programs without having to compile them first and an easy way to retrieve the command line arguments.</quote>
+
+<p>Besides way of executing code, we need to have XML parser and HTTP client - in both cases we will use built-in thins from Erlang library - <code>xmerl</code> and <code>httpc</code>.</p>
+
+<h3 id="developing-outside-ansible">Developing outside Ansible</h3>
+
+<p>First we need to setup our environment for Ansible. The easiest way to do it in Python world is to spin up a <code>virtualenv</code>:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">playground <span class="nv">$ </span>virtualenv -p python2.7 .local
+playground <span class="nv">$ </span><span class="nb">source</span> .local/bin/activate
+playground <span class="nv">$ </span>pip install <span class="nv">ansible</span><span class="o">==</span>1.9.4                                            <span class="o">(</span>.local<span class="o">)</span></code></pre></div>
+
+<p>Then we can fiddle with it.</p>
+
+<h4 id="input-arguments">Input arguments</h4>
+
+<p>How to pass an arguments to it? You can observe it either when you define task parameters inside <em>YAML</em> file or when you invoke ad hoc task in <em>Ansible</em>:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">playground <span class="nv">$ </span>ansible host<span class="o">[</span>001-002<span class="o">]</span> -i production_hosts -m stat -a <span class="s2">&quot;path=/etc/passwd&quot;</span></code></pre></div>
+
+<p>Everything stated inside <code>-a</code> attribute defines list of named parameters. In that case an argument named <code>path</code> has value <code>/etc/passwd</code>. This will be formatted and printed to a file. Path and name will be delivered as a first argument of command line invocation of our module.</p>
+
+<h4 id="output-format">Output format</h4>
+
+<p>As we specified above, our module will be executed in the context of actually modified machine. It communicates with Ansible over well defined JSON protocol, collected from <code>stdout</code>. We have two basic forms - error:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="s2">&quot;failed&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">&quot;msg&quot;</span><span class="o">:</span> <span class="s2">&quot;Details of the error.&quot;</span> <span class="p">}</span></code></pre></div>
+
+<p>And success:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="s2">&quot;changed&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="p">...</span> <span class="p">}</span></code></pre></div>
+
+<p>If we want to communicate new facts, which can be used in further tasks (e.g. as an argument for conditional statements) we can add it inside <code>ansible_facts</code>:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="s2">&quot;changed&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">&quot;ansible_facts&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;new_fact&quot;</span><span class="o">:</span> <span class="s2">&quot;new_value&quot;</span> <span class="p">}</span> <span class="p">}</span></code></pre></div>
+
+<p>It is a good practice to prefix your facts with name of the module (for avoiding name conflicts and preserving clean structure).</p>
+
+<h4 id="implementation">Implementation</h4>
+
+<p>Further implementation is pretty straightforward, especially that we’re writing a sequential script using all power of Erlang related with <a href="https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L40">pattern matching</a>, <a href="https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L26"><em>HTTP client</em></a> and <a href="https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L60">flow control</a>.</p>
+
+<h3 id="testing-with-ansible">Testing with Ansible</h3>
+
+<p>When you want to test your module with Ansible, you can set it up from source inside your <code>virtualenv</code> and then invoke it by this series of commands:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">playground <span class="nv">$ </span>git clone git://github.com/ansible/ansible.git --recursive
+playground <span class="nv">$ </span><span class="nb">source </span>ansible/hacking/env-setup
+playground <span class="nv">$ </span>chmod +x ansible/hacking/test-module
+playground <span class="nv">$ </span>ansible/hacking/test-module
+               -m ./xml_status_page
+               -a <span class="s2">&quot;host=localhost port=9999 xpath=//statistics name=version&quot;</span></code></pre></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>Thanks to the good architecture and separation of concerns in Ansible, we can easily create modules using different languages and techniques, which will be executed on the provisioned host by a runner. There is no cleaner way to separate executor from task implementation, if you can separate it via programming language.</p>
+
+<p>Also nice structure of this tool and ability to combine it with <code>virtalenv</code> allows us to use locally modified versions and prepare our own tailored toolboxes, customized to our projects and needs.</p>
+
+<h2 id="credits">Credits</h2>
+
+<ul>
+  <li><a href="http://docs.ansible.com/ansible/developing_modules.html">Developing modules - Ansible documentation</a></li>
+  <li><a href="https://github.com/ansible/ansible-modules-extras">Modules Extras - Ansible</a></li>
+  <li><a href="https://blog.lelonek.me/how-to-write-ansible-module-in-clojure-5b340df90f5a#.f5aqkjrlk">How to write Ansible module in Clojure? - Kamil Lelonek’s blog</a></li>
+  <li><a href="http://erlang.org/doc/man/escript.html"><code>escript</code> - Erlang Documentation</a></li>
+  <li><a href="http://erlang.org/doc/man/xmerl.html"><code>xmerl</code> - Erlang Documentation</a></li>
+  <li><a href="http://erlang.org/doc/man/httpc.html"><code>httpc</code> - Erlang Documentation</a></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/2016/03/28/writing-custom-modules-for-ansible.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2016/03/28/writing-custom-modules-for-ansible.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://www.afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <nav class="additional-navigation">
+        Go to:
+        <ul>
+          <li><a href="/categories.html">Categories</a></li>
+          <li><a href="/tag/series/">Series</a></li>
+          <li><a href="/tags.html">Tags</a></li>
+        </ul>
+      </nav>
+
+      <footer>
+        <section>© Copyright 2013, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>

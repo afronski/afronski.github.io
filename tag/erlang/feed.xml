@@ -7,6 +7,105 @@
     <atom:link href="http://www.afronski.pl/tag/erlang/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Writing custom modules for Ansible</title>
+        <description>&lt;h1 id=&quot;writing-custom-modules-for-ansible&quot;&gt;Writing custom modules for Ansible&lt;/h1&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;h3 id=&quot;what-is-ansible-and-what-is-a-module&quot;&gt;What is Ansible and what is a &lt;code&gt;module&lt;/code&gt;?&lt;/h3&gt;
+
+&lt;p&gt;If you are a big fan of &lt;em&gt;automation&lt;/em&gt;, if you are focused on spreading and building software in line with &lt;em&gt;DevOps&lt;/em&gt; culture tools related with automation / configuration management like &lt;em&gt;Chef&lt;/em&gt; or &lt;em&gt;Ansible&lt;/em&gt; are probably well known to you. Differences between various types of those tools is a topic for a next blog post. Let’s briefly zoom into details for those people which do not know what &lt;em&gt;Ansible&lt;/em&gt; and &lt;em&gt;modules&lt;/em&gt; are.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Ansible&lt;/em&gt; is a free-software platform for configuring and managing machines. It combines deployment, ad hoc tasks execution and configuration management. This tool uses &lt;em&gt;YAML&lt;/em&gt; and declarative way of defining steps, which are modifying state of your fleet. &lt;em&gt;Module&lt;/em&gt; is a single piece of those steps, well defined way of executing certain tasks on remote infrastructure. It works by outputting JSON to standard output, and it can be written in any programming language.&lt;/p&gt;
+
+&lt;h2 id=&quot;development&quot;&gt;Development&lt;/h2&gt;
+
+&lt;p&gt;Before we’ll start actual implementation we need to know how it works underneath.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+
+&lt;p&gt;If you want to write a custom module, we stated above that you have to be aware of two things. Your module code will be executed on the provisioned machine, &lt;strong&gt;so all dependencies which your module requires, have to be there&lt;/strong&gt;. Second, your module communicates over specific input and output protocols. It uses certain syntax for sending input parameters (either sent as a &lt;code&gt;stdin&lt;/code&gt; or file) and JSON protocol which will be consumed as an output of the module. And nothing more - any other, non-JSON compliant output will be treated as an error, and would not be consumed by &lt;em&gt;Ansible&lt;/em&gt; properly.&lt;/p&gt;
+
+&lt;h3 id=&quot;case-study&quot;&gt;Case Study&lt;/h3&gt;
+
+&lt;p&gt;We would like to consume &lt;em&gt;XMLified&lt;/em&gt; status pages and do certain actions based on checked and exposed facts, scraped from aforementioned place. Because I like Erlang, I will use that language to implement that module. We will do it using &lt;code&gt;escript&lt;/code&gt;. What is it? Quoting official documentation:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;&lt;code&gt;escript&lt;/code&gt; provides support for running short Erlang programs without having to compile them first and an easy way to retrieve the command line arguments.&lt;/quote&gt;
+
+&lt;p&gt;Besides way of executing code, we need to have XML parser and HTTP client - in both cases we will use built-in thins from Erlang library - &lt;code&gt;xmerl&lt;/code&gt; and &lt;code&gt;httpc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;developing-outside-ansible&quot;&gt;Developing outside Ansible&lt;/h3&gt;
+
+&lt;p&gt;First we need to setup our environment for Ansible. The easiest way to do it in Python world is to spin up a &lt;code&gt;virtualenv&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virtualenv -p python2.7 .local
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; .local/bin/activate
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip install &lt;span class=&quot;nv&quot;&gt;ansible&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.9.4                                            &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;.local&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then we can fiddle with it.&lt;/p&gt;
+
+&lt;h4 id=&quot;input-arguments&quot;&gt;Input arguments&lt;/h4&gt;
+
+&lt;p&gt;How to pass an arguments to it? You can observe it either when you define task parameters inside &lt;em&gt;YAML&lt;/em&gt; file or when you invoke ad hoc task in &lt;em&gt;Ansible&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible host&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;001-002&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; -i production_hosts -m stat -a &lt;span class=&quot;s2&quot;&gt;&amp;quot;path=/etc/passwd&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Everything stated inside &lt;code&gt;-a&lt;/code&gt; attribute defines list of named parameters. In that case an argument named &lt;code&gt;path&lt;/code&gt; has value &lt;code&gt;/etc/passwd&lt;/code&gt;. This will be formatted and printed to a file. Path and name will be delivered as a first argument of command line invocation of our module.&lt;/p&gt;
+
+&lt;h4 id=&quot;output-format&quot;&gt;Output format&lt;/h4&gt;
+
+&lt;p&gt;As we specified above, our module will be executed in the context of actually modified machine. It communicates with Ansible over well defined JSON protocol, collected from &lt;code&gt;stdout&lt;/code&gt;. We have two basic forms - error:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;failed&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;msg&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Details of the error.&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And success:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;changed&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If we want to communicate new facts, which can be used in further tasks (e.g. as an argument for conditional statements) we can add it inside &lt;code&gt;ansible_facts&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;changed&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;ansible_facts&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;new_fact&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;new_value&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It is a good practice to prefix your facts with name of the module (for avoiding name conflicts and preserving clean structure).&lt;/p&gt;
+
+&lt;h4 id=&quot;implementation&quot;&gt;Implementation&lt;/h4&gt;
+
+&lt;p&gt;Further implementation is pretty straightforward, especially that we’re writing a sequential script using all power of Erlang related with &lt;a href=&quot;https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L40&quot;&gt;pattern matching&lt;/a&gt;, &lt;a href=&quot;https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L26&quot;&gt;&lt;em&gt;HTTP client&lt;/em&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/afronski/playground-infrastructure/blob/master/ansible/custom_modules/xml_status_page/xml_status_page#L60&quot;&gt;flow control&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;testing-with-ansible&quot;&gt;Testing with Ansible&lt;/h3&gt;
+
+&lt;p&gt;When you want to test your module with Ansible, you can set it up from source inside your &lt;code&gt;virtualenv&lt;/code&gt; and then invoke it by this series of commands:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone git://github.com/ansible/ansible.git --recursive
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;ansible/hacking/env-setup
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chmod +x ansible/hacking/test-module
+playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible/hacking/test-module
+               -m ./xml_status_page
+               -a &lt;span class=&quot;s2&quot;&gt;&amp;quot;host=localhost port=9999 xpath=//statistics name=version&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;Thanks to the good architecture and separation of concerns in Ansible, we can easily create modules using different languages and techniques, which will be executed on the provisioned host by a runner. There is no cleaner way to separate executor from task implementation, if you can separate it via programming language.&lt;/p&gt;
+
+&lt;p&gt;Also nice structure of this tool and ability to combine it with &lt;code&gt;virtalenv&lt;/code&gt; allows us to use locally modified versions and prepare our own tailored toolboxes, customized to our projects and needs.&lt;/p&gt;
+
+&lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.ansible.com/ansible/developing_modules.html&quot;&gt;Developing modules - Ansible documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ansible/ansible-modules-extras&quot;&gt;Modules Extras - Ansible&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.lelonek.me/how-to-write-ansible-module-in-clojure-5b340df90f5a#.f5aqkjrlk&quot;&gt;How to write Ansible module in Clojure? - Kamil Lelonek’s blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/escript.html&quot;&gt;&lt;code&gt;escript&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/xmerl.html&quot;&gt;&lt;code&gt;xmerl&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/httpc.html&quot;&gt;&lt;code&gt;httpc&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 28 Mar 2016 21:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2016/03/28/writing-custom-modules-for-ansible.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2016/03/28/writing-custom-modules-for-ansible.html</guid>
+      </item>
+    
+      <item>
         <title>What is wrong with gen_event?</title>
         <description>&lt;h1 id=&quot;what-is-wrong-with-genevent&quot;&gt;What is wrong with &lt;code&gt;gen_event&lt;/code&gt;?&lt;/h1&gt;
 
