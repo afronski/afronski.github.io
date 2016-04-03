@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js,Clojure,SICP" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>Jenkins 2.0</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <section class="ads">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9524821705718873" data-ad-slot="3234654745" data-ad-format="auto"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </section>
+
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="jenkins-20">Jenkins 2.0</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Recently maintainers of <em>Jenkins</em> - the leading and most popular open source automation server - announced that long awaited version <em>2.0</em> <a href="https://jenkins.io/2.0/">is available to download and additionally it is marked as a beta release</a>. It means that they’re still recommending current <em>LTS</em> version for a production deployments, but new version is coming really soon.</p>
+
+<p>So let’s look what it offers!</p>
+
+<h2 id="whats-new">What’s new?</h2>
+
+<h3 id="improved-usability-aka-new-ui">Improved usability (aka “New UI”)</h3>
+
+<p>That is probably the most single awaited feature in Jenkins community. It means a lot for both, power users and newcomers. A lot of feedback was taken into account when preparing that feature. Old pages (e.g. <em>Create Item</em> or <em>Job Configuration</em>) look really clean and modern (we finally have tabs in <em>Job Configuration</em> page), new views like <em>Pipeline Stage view</em> (we will describe whole feature in the next section) look even more awesome:</p>
+
+<p><img src="/assets/Jenkins2PipelineStageView.png" alt="Jenkins 2.0 - Pipeline Stage view" /></p>
+
+<p>But that’s not the end of goodies from that release.</p>
+
+<h3 id="delivery-pipelines">Delivery pipelines</h3>
+
+<p>Finally Jenkins will be packaged with built-in delivery pipelines feature. It means that it will not require anymore plugins for doing that. It brings finally support for <code>Jenkinsfile</code> - concept which allows to codify your pipelines, and store it inside version control (either together with application source code or outside, in one of your supporting repositories). Besides that - finally no more <em>XML</em> fiddling when it comes to job configuration, because it will use a nice <em>DSL</em>:</p>
+
+<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">node</span> <span class="o">{</span>
+  <span class="n">git</span> <span class="nl">url:</span> <span class="s1">&#39;https://github.com/joe_user/simple-maven-project-with-tests.git&#39;</span>
+
+  <span class="kt">def</span> <span class="n">mvnHome</span> <span class="o">=</span> <span class="n">tool</span> <span class="s1">&#39;M3&#39;</span>
+  <span class="n">sh</span> <span class="s2">&quot;${mvnHome}/bin/mvn -B -Dmaven.test.failure.ignore verify&quot;</span>
+
+  <span class="n">step</span><span class="o">([</span><span class="n">$class</span><span class="o">:</span> <span class="s1">&#39;ArtifactArchiver&#39;</span><span class="o">,</span> <span class="nl">artifacts:</span> <span class="s1">&#39;**/target/*.jar&#39;</span><span class="o">,</span> <span class="nl">fingerprint:</span> <span class="kc">true</span><span class="o">])</span>
+  <span class="n">step</span><span class="o">([</span><span class="n">$class</span><span class="o">:</span> <span class="s1">&#39;JUnitResultArchiver&#39;</span><span class="o">,</span> <span class="nl">testResults:</span> <span class="s1">&#39;**/target/surefire-reports/TEST-*.xml&#39;</span><span class="o">])</span>
+<span class="o">}</span></code></pre></div>
+
+<p>That is a well known concept, similar to the <a href="https://github.com/jenkinsci/job-dsl-plugin"><em>job DSL</em> plugin</a>. But finally, it will be built-in and ready to use right after installation, without any additional effort.</p>
+
+<h3 id="full-backward-compatibility">Full backward compatibility</h3>
+
+<p>That is the most important thing - adding new stuff and improvements in UI means a lot for new users, but having those things and being fully backward compatible is a huge deal for people that are using <em>Jenkins</em> in production right now. As documentation states:</p>
+
+<quote class="citation">Jenkins 2.0 is a drop-in replacement of the Jenkins 1.x series of releases and fully backward compatible. There is practically no reason not to upgrade once 2.0 is released.</quote>
+
+<p>If that goal will be achieved, it is a huge thing.</p>
+
+<h2 id="how-to-play-with-it">How to play with it?</h2>
+
+<p>The easiest way to play with new Jenkins, will be to use prepared packages from the <a href="https://jenkins.io/2.0/">aforementioned page</a>. Maintainers prepared installers for almost all platforms. Of course there is also a standard <em><code>WAR</code></em> distribution available there.</p>
+
+<p>But there is even a simpler way to play with it for a Linux user. If you already have <code>docker</code> configured, you can spin it up with one command:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>docker run --name jenkins2 -p 8080:8080 -d jenkinsci/jenkins:2.0-beta-1</code></pre></div>
+
+<p>And that’s it! When that command will finish, on your local <code>8080</code> port there will be <em>Jenkins 2.0</em> waiting for you to configure and play with it.
+And last but not least - if you have any feedback related with new version, official page <a href="https://jenkins.io/2.0/#feedback">contains guides how to do it</a>. Community will be grateful!</p>
+
+<h2 id="credits">Credits</h2>
+
+<ul>
+  <li><a href="https://jenkins.io/2.0/">Jenkins 2.0 - Official Page</a></li>
+  <li><a href="https://jenkins.io/2.0/#feedback">Jenkins 2.0 - Feedback</a></li>
+  <li><a href="https://github.com/jenkinsci/job-dsl-plugin">jenkinsci/job-dsl-plugin</a></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/2016/04/03/jenkins-2-0.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2016/04/03/jenkins-2-0.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://www.afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <nav class="additional-navigation">
+        Go to:
+        <ul>
+          <li><a href="/categories.html">Categories</a></li>
+          <li><a href="/tag/series/">Series</a></li>
+          <li><a href="/tags.html">Tags</a></li>
+        </ul>
+      </nav>
+
+      <footer>
+        <section>© Copyright 2013, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>

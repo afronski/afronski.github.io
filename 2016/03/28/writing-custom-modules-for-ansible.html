@@ -34,9 +34,9 @@
 
 <h3 id="what-is-ansible-and-what-is-a-module">What is Ansible and what is a <code>module</code>?</h3>
 
-<p>If you are a big fan of <em>automation</em>, if you are focused on spreading and building software in line with <em>DevOps</em> culture tools related with automation / configuration management like <em>Chef</em> or <em>Ansible</em> are probably well known to you. Differences between various types of those tools is a topic for a next blog post. Let’s briefly zoom into details for those people which do not know what <em>Ansible</em> and <em>modules</em> are.</p>
+<p>If you are a big fan of <em>automation</em>, if you are focused on spreading and building software in line with <em>DevOps</em> culture, tools related with automation / configuration management like <em>Chef</em> or <em>Ansible</em> are probably well known to you. From the other hand that what differentiates those tools is a topic for a next blog post. Without diving into those differences, let’s briefly zoom into details for those people which do not know what <em>Ansible</em> and <em>modules</em> are.</p>
 
-<p><em>Ansible</em> is a free-software platform for configuring and managing machines. It combines deployment, ad hoc tasks execution and configuration management. This tool uses <em>YAML</em> and declarative way of defining steps, which are modifying state of your fleet. <em>Module</em> is a single piece of those steps, well defined way of executing certain tasks on remote infrastructure. It works by outputting JSON to standard output, and it can be written in any programming language.</p>
+<p><em>Ansible</em> is a free-software platform for configuring and managing machines. It combines deployment, ad-hoc tasks execution and configuration management. This tool uses <em>YAML</em> and declarative way of defining steps, which are modifying state of your fleet. <em>Module</em> is a single piece of those steps, a well defined way of executing certain tasks on the remote infrastructure. It executes commands, and communicates by outputting JSON to standard output - it means that it can be written in any programming or scripting language.</p>
 
 <h2 id="development">Development</h2>
 
@@ -44,7 +44,7 @@
 
 <h3 id="requirements">Requirements</h3>
 
-<p>If you want to write a custom module, we stated above that you have to be aware of two things. Your module code will be executed on the provisioned machine, <strong>so all dependencies which your module requires, have to be there</strong>. Second, your module communicates over specific input and output protocols. It uses certain syntax for sending input parameters (either sent as a <code>stdin</code> or file) and JSON protocol which will be consumed as an output of the module. And nothing more - any other, non-JSON compliant output will be treated as an error, and would not be consumed by <em>Ansible</em> properly.</p>
+<p>If you want to write a custom module, we stated above that you have to be aware of two things. Your module code will be executed on the provisioned machine, <strong>so all dependencies which your module requires, have to be there</strong>. Second, your module communicates over specific input and output protocols. It uses certain syntax for sending input parameters (either sent as a <code>stdin</code> or a file) and JSON protocol which will be consumed as an output of the module. And nothing more - any other, non-JSON compliant output will be treated as an error, and would not be consumed by <em>Ansible</em> properly.</p>
 
 <h3 id="case-study">Case Study</h3>
 
@@ -52,11 +52,11 @@
 
 <quote class="citation"><code>escript</code> provides support for running short Erlang programs without having to compile them first and an easy way to retrieve the command line arguments.</quote>
 
-<p>Besides way of executing code, we need to have XML parser and HTTP client - in both cases we will use built-in thins from Erlang library - <code>xmerl</code> and <code>httpc</code>.</p>
+<p>Besides way of executing code, we need to use an XML parser and HTTP client - in both cases we will use built-in thins from Erlang library - <code>xmerl</code> and <code>httpc</code>.</p>
 
 <h3 id="developing-outside-ansible">Developing outside Ansible</h3>
 
-<p>First we need to setup our environment for Ansible. The easiest way to do it in Python world is to spin up a <code>virtualenv</code>:</p>
+<p>First we need to setup our environment for Ansible. The easiest way to do it in Python world is to spin up a new <code>virtualenv</code>:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">playground <span class="nv">$ </span>virtualenv -p python2.7 .local
 playground <span class="nv">$ </span><span class="nb">source</span> .local/bin/activate
@@ -112,9 +112,10 @@ playground <span class="nv">$ </span>ansible/hacking/test-module
 <h2 id="credits">Credits</h2>
 
 <ul>
+  <li><a href="https://github.com/afronski/playground-infrastructure/tree/master/ansible/custom_modules/xml_status_page"><code>afronski/playground-infrastructure</code> - Implementation</a></li>
   <li><a href="http://docs.ansible.com/ansible/developing_modules.html">Developing modules - Ansible documentation</a></li>
   <li><a href="https://github.com/ansible/ansible-modules-extras">Modules Extras - Ansible</a></li>
-  <li><a href="https://blog.lelonek.me/how-to-write-ansible-module-in-clojure-5b340df90f5a#.f5aqkjrlk">How to write Ansible module in Clojure? - Kamil Lelonek’s blog</a></li>
+  <li><a href="https://blog.lelonek.me/how-to-write-ansible-module-in-clojure-5b340df90f5a">How to write Ansible module in Clojure? - Kamil Lelonek’s blog</a></li>
   <li><a href="http://erlang.org/doc/man/escript.html"><code>escript</code> - Erlang Documentation</a></li>
   <li><a href="http://erlang.org/doc/man/xmerl.html"><code>xmerl</code> - Erlang Documentation</a></li>
   <li><a href="http://erlang.org/doc/man/httpc.html"><code>httpc</code> - Erlang Documentation</a></li>

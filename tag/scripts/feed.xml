@@ -14,9 +14,9 @@
 
 &lt;h3 id=&quot;what-is-ansible-and-what-is-a-module&quot;&gt;What is Ansible and what is a &lt;code&gt;module&lt;/code&gt;?&lt;/h3&gt;
 
-&lt;p&gt;If you are a big fan of &lt;em&gt;automation&lt;/em&gt;, if you are focused on spreading and building software in line with &lt;em&gt;DevOps&lt;/em&gt; culture tools related with automation / configuration management like &lt;em&gt;Chef&lt;/em&gt; or &lt;em&gt;Ansible&lt;/em&gt; are probably well known to you. Differences between various types of those tools is a topic for a next blog post. Let’s briefly zoom into details for those people which do not know what &lt;em&gt;Ansible&lt;/em&gt; and &lt;em&gt;modules&lt;/em&gt; are.&lt;/p&gt;
+&lt;p&gt;If you are a big fan of &lt;em&gt;automation&lt;/em&gt;, if you are focused on spreading and building software in line with &lt;em&gt;DevOps&lt;/em&gt; culture, tools related with automation / configuration management like &lt;em&gt;Chef&lt;/em&gt; or &lt;em&gt;Ansible&lt;/em&gt; are probably well known to you. From the other hand that what differentiates those tools is a topic for a next blog post. Without diving into those differences, let’s briefly zoom into details for those people which do not know what &lt;em&gt;Ansible&lt;/em&gt; and &lt;em&gt;modules&lt;/em&gt; are.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Ansible&lt;/em&gt; is a free-software platform for configuring and managing machines. It combines deployment, ad hoc tasks execution and configuration management. This tool uses &lt;em&gt;YAML&lt;/em&gt; and declarative way of defining steps, which are modifying state of your fleet. &lt;em&gt;Module&lt;/em&gt; is a single piece of those steps, well defined way of executing certain tasks on remote infrastructure. It works by outputting JSON to standard output, and it can be written in any programming language.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Ansible&lt;/em&gt; is a free-software platform for configuring and managing machines. It combines deployment, ad-hoc tasks execution and configuration management. This tool uses &lt;em&gt;YAML&lt;/em&gt; and declarative way of defining steps, which are modifying state of your fleet. &lt;em&gt;Module&lt;/em&gt; is a single piece of those steps, a well defined way of executing certain tasks on the remote infrastructure. It executes commands, and communicates by outputting JSON to standard output - it means that it can be written in any programming or scripting language.&lt;/p&gt;
 
 &lt;h2 id=&quot;development&quot;&gt;Development&lt;/h2&gt;
 
@@ -24,7 +24,7 @@
 
 &lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
 
-&lt;p&gt;If you want to write a custom module, we stated above that you have to be aware of two things. Your module code will be executed on the provisioned machine, &lt;strong&gt;so all dependencies which your module requires, have to be there&lt;/strong&gt;. Second, your module communicates over specific input and output protocols. It uses certain syntax for sending input parameters (either sent as a &lt;code&gt;stdin&lt;/code&gt; or file) and JSON protocol which will be consumed as an output of the module. And nothing more - any other, non-JSON compliant output will be treated as an error, and would not be consumed by &lt;em&gt;Ansible&lt;/em&gt; properly.&lt;/p&gt;
+&lt;p&gt;If you want to write a custom module, we stated above that you have to be aware of two things. Your module code will be executed on the provisioned machine, &lt;strong&gt;so all dependencies which your module requires, have to be there&lt;/strong&gt;. Second, your module communicates over specific input and output protocols. It uses certain syntax for sending input parameters (either sent as a &lt;code&gt;stdin&lt;/code&gt; or a file) and JSON protocol which will be consumed as an output of the module. And nothing more - any other, non-JSON compliant output will be treated as an error, and would not be consumed by &lt;em&gt;Ansible&lt;/em&gt; properly.&lt;/p&gt;
 
 &lt;h3 id=&quot;case-study&quot;&gt;Case Study&lt;/h3&gt;
 
@@ -32,11 +32,11 @@
 
 &lt;quote class=&quot;citation&quot;&gt;&lt;code&gt;escript&lt;/code&gt; provides support for running short Erlang programs without having to compile them first and an easy way to retrieve the command line arguments.&lt;/quote&gt;
 
-&lt;p&gt;Besides way of executing code, we need to have XML parser and HTTP client - in both cases we will use built-in thins from Erlang library - &lt;code&gt;xmerl&lt;/code&gt; and &lt;code&gt;httpc&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Besides way of executing code, we need to use an XML parser and HTTP client - in both cases we will use built-in thins from Erlang library - &lt;code&gt;xmerl&lt;/code&gt; and &lt;code&gt;httpc&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;developing-outside-ansible&quot;&gt;Developing outside Ansible&lt;/h3&gt;
 
-&lt;p&gt;First we need to setup our environment for Ansible. The easiest way to do it in Python world is to spin up a &lt;code&gt;virtualenv&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;First we need to setup our environment for Ansible. The easiest way to do it in Python world is to spin up a new &lt;code&gt;virtualenv&lt;/code&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virtualenv -p python2.7 .local
 playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; .local/bin/activate
@@ -92,9 +92,10 @@ playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible/hacking/test-
 &lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/afronski/playground-infrastructure/tree/master/ansible/custom_modules/xml_status_page&quot;&gt;&lt;code&gt;afronski/playground-infrastructure&lt;/code&gt; - Implementation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://docs.ansible.com/ansible/developing_modules.html&quot;&gt;Developing modules - Ansible documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/ansible/ansible-modules-extras&quot;&gt;Modules Extras - Ansible&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.lelonek.me/how-to-write-ansible-module-in-clojure-5b340df90f5a#.f5aqkjrlk&quot;&gt;How to write Ansible module in Clojure? - Kamil Lelonek’s blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.lelonek.me/how-to-write-ansible-module-in-clojure-5b340df90f5a&quot;&gt;How to write Ansible module in Clojure? - Kamil Lelonek’s blog&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/escript.html&quot;&gt;&lt;code&gt;escript&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/xmerl.html&quot;&gt;&lt;code&gt;xmerl&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://erlang.org/doc/man/httpc.html&quot;&gt;&lt;code&gt;httpc&lt;/code&gt; - Erlang Documentation&lt;/a&gt;&lt;/li&gt;
