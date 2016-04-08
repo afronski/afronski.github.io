@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js,Clojure,SICP" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>A mythical beast called JIT</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <section class="ads">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9524821705718873" data-ad-slot="3234654745" data-ad-format="auto"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </section>
+
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="a-mythical-beast-called-jit">A mythical beast called <code>JIT</code></h1>
+
+<p>I have recently bumped into one of those articles which title sounds rather like <a href="https://top.fse.guru/nodejs-a-quick-optimization-advice-7353b820c92e">“one weird trick”</a> ad. Guiding just from it, you can imagine how small amount of information is contained there, and by actually going through that link there you will definitely make sure that it has some knowledge, but no real explanations are in place.</p>
+
+<p>Of course, a final explanation is indeed really simple - <code>Function.prototype.toString()</code> returns everything even the comments inside the function body, size of that string is a feature that allows the optimizing compiler inside <em>V8</em> to make a decision to inline that particular function or not. There is even a command line switch which to use to modify a limit and a default value. Simple enough? Not really.</p>
+
+<p>That article left a lot of unanswered questions. Probably because of that <em>JIT</em> compilers and its optimization techniques are kind of black magic.</p>
+
+<h2 id="why-is-it-hard">Why is it hard?</h2>
+
+<p>Obviously compiler engineers are not dumb people (they are actually really smart) and they are not obfuscating and complicating this by accident or on purpose. They are working hard, especially with such weakly typed and underspecified languages like <em>JavaScript</em> to provide you an optimized version of your code. Why is it a hard job? <em>It is all about guarantees</em>.</p>
+
+<p>How many of them you can recall from memory when it comes to <em>JavaScript</em>? Not a lot of them, right? That is not good, especially from the perspective of a compiler engineer. <em>JavaScript</em> is everywhere, success of the internet spread this language, and nowadays success of <em>Node.js</em> pushed this language from front-end, even to server-side - and everywhere people are talking about performance. Obviously not about native like performance for scientific computations, but the more complexity is pushed to the application layer, the more of it will have to be optimized after all. That’s why compilers and their creators have to be smart people - they have to deal with complexity of your applications and “<em>illness</em>” of the language itself.</p>
+
+<p>Returning to the main topic, one of many tricks that they are using, which is used also in aforementioned case, is called <em>compilation cache</em>.</p>
+
+<h2 id="v8-compilation-cache-and-inlining">V8, compilation cache and inlining</h2>
+
+<p>It is a really simple trick (do not confuse it with <em>inline caches</em> - it is a different technique!), where compiler textually compares the implementation of the function and if it is the same as the other one, merges it together and uses since then one representation. Why? Because if it is a hard process, why compiler should do it many times for the same code sample? If we can avoid it, we can speed-up the execution even more.</p>
+
+<p>Second thing which is using <em>compilation cache</em> is <em>inlining</em>, where instead of function call (which can be expensive) we are putting directly small piece of code. The more similarities we detect, the better cache utilization will be. And of course we can free program related memory (or rather reuse it inside <em>V8</em> to other things).</p>
+
+<p>But there are a culprit related to those techniques - it is related with the <em>textual representation</em> of function body. As in the original example, if the code differs by even a small piece that is inside a comment, it will be treated as a different thing - and in consequence <em>compilation cache</em> and <em>inlining</em> cannot be used properly. As a side note - regarding those two tricks compilers often are not working directly on the source code level, but at first they are transforming it to an <em>AST</em> or other more friendlier data structure for them. But not in case of <em>V8</em> - probably because of additional checks and computation that needs to be done, so authors relied on simple string comparison.</p>
+
+<p>There is one additional trick that we can use, that is really well described (and related to both optimization techniques) by one of my favorite presenters and compiler evangelists <em>Vyacheslav Egorov</em> - he is using <em>UUIDs</em> hard-coded inside a comment in the function body to distinguish logically different functions, that could be potentially compiled and inlined from a single cache entry.</p>
+
+<p>Why he would like to avoid that? In order to minimize the cache rebuilding and cache misses after recompilation and further passes of <em>JIT</em> compilation, when we’re generating code or do other <em>fancy stuff</em> (if you do that <em>fancy stuff</em>, you are probably aware of how that things work in the first place).</p>
+
+<p>Yeah, <em>JIT</em> and compilation techniques are <em>hard</em>. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+
+<h2 id="credits">Credits</h2>
+
+<ul>
+  <li><a href="https://top.fse.guru/nodejs-a-quick-optimization-advice-7353b820c92e">Node.js: A quick optimization advice</a></li>
+  <li><a href="https://youtu.be/YOHBZactXus?t=515">Vyacheslav Egorov: invokedynamic.js - JSConf EU 2014</a></li>
+  <li><a href="http://mrale.ph/blog/2011/12/18/v8-optimization-checklist.html">Brilliant checklist for optimization in Node.js</a></li>
+</ul>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/2016/04/08/a-mythical-beast-called-jit.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2016/04/08/a-mythical-beast-called-jit.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://www.afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <nav class="additional-navigation">
+        Go to:
+        <ul>
+          <li><a href="/categories.html">Categories</a></li>
+          <li><a href="/tag/series/">Series</a></li>
+          <li><a href="/tags.html">Tags</a></li>
+        </ul>
+      </nav>
+
+      <footer>
+        <section>© Copyright 2013, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>

@@ -4,6 +4,15 @@
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.afronski.pl/2016/04/08/a-mythical-beast-called-jit.html</loc>
+    
+    <lastmod>2016-04-08T19:45:00+02:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.afronski.pl/2016/04/03/jenkins-2-0.html</loc>
     
     <lastmod>2016-04-03T17:30:00+02:00</lastmod>
@@ -501,6 +510,22 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
     
   
     
