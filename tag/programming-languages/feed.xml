@@ -153,7 +153,7 @@
 
 &lt;p&gt;Is there something that we can use instead? Without using third parties (like &lt;a href=&quot;https://github.com/uwiger/gproc&quot;&gt;uwiger/gproc&lt;/a&gt;) I am afraid that there is nothing like that in the core.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/GenRouterExample.png&quot; alt=&quot;GenRouter example from José Valim's presentation.&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/GenRouterExample.png&quot; alt=&quot;GenRouter example from José Valim&#39;s presentation.&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you are interested - in &lt;em&gt;Elixir&lt;/em&gt; incoming &lt;em&gt;GenRouter&lt;/em&gt; behavior looks really promising. Of course, it is still really far away from the core and its future is uncertain, but whole concept is described in the &lt;a href=&quot;https://www.youtube.com/watch?v=9RB1JCKe3GY&quot;&gt;José Valim’s talk&lt;/a&gt; - there is even an example for that particular use case with &lt;code&gt;DynamicIn&lt;/code&gt; - &lt;code&gt;BroadcastOut&lt;/code&gt;, which will represent a process based replacement for &lt;code&gt;GenEvent&lt;/code&gt;.&lt;/p&gt;
 
@@ -411,7 +411,7 @@
 
 &lt;p&gt;It may sound as an impossible and strange coincidence, but that implementation &lt;strong&gt;was not inspired by work of Hewitt, Bishop and Steiger at all&lt;/strong&gt;. As &lt;a href=&quot;https://twitter.com/rvirding&quot;&gt;Robert Virding&lt;/a&gt; said &lt;a href=&quot;http://rvirding.blogspot.com/2008/01/virdings-first-rule-of-programming.html?showComment=1400761539472#c5295780053912797163&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
 
-&lt;quote class=&quot;citation&quot;&gt;No, we didn't as such &quot;invent&quot; them, but at the same time we didn't take them from anywhere either. We arrived at these properties on our own as the best ways of solving our problems. We never heard about actors till years later.&lt;/quote&gt;
+&lt;quote class=&quot;citation&quot;&gt;No, we didn&#39;t as such &quot;invent&quot; them, but at the same time we didn&#39;t take them from anywhere either. We arrived at these properties on our own as the best ways of solving our problems. We never heard about actors till years later.&lt;/quote&gt;
 
 &lt;p&gt;It means that &lt;em&gt;actor model&lt;/em&gt; has a solid industrial motivation and inspiration in the Telecommunication domain. Looking at this from a different perspective - it is how the phone calls are working at the highest conceptual level (also you can easily find analogies to that process in nature and biology). They have arrived to the same properties on their own, distilling and solving the domain problems over and over again - in complete isolation from the academic theory, as a best fit for set of their problems. I am convinced that this model is a valuable thing by that, because it means that at least two sets of people came up with same idea which is a perfect fit for handling certain class of problems related with concurrent operations.&lt;/p&gt;
 
@@ -713,7 +713,7 @@
 
 &lt;p&gt;This topic arisen during work on my hobby project called &lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;afronski/wolves-and-rabbits-world-simulation&lt;/a&gt;. Above you can see the &lt;em&gt;supervision tree&lt;/em&gt; of this application (pretty standard one), but at the beginning of it there are two additional processes - not just one, which I have expected (the application master). So I tried to found an explanation and literally - &lt;em&gt;I found nothing&lt;/em&gt;. There is only a small mention about that in the aforementioned book:&lt;/p&gt;
 
-&lt;quote class=&quot;citation&quot;&gt;The application master is in fact two processes taking charge of each individual application: they set it up and act like a middleman in between your application's top supervisor and the application controller.&lt;/quote&gt;
+&lt;quote class=&quot;citation&quot;&gt;The application master is in fact two processes taking charge of each individual application: they set it up and act like a middleman in between your application&#39;s top supervisor and the application controller.&lt;/quote&gt;
 
 &lt;p&gt;But that’s all. No particular explanation why the second process is necessary. This topic is missing in the &lt;em&gt;Erlang&lt;/em&gt; books that I know - if you know a book with a good explanation of this, please let me know in the comments - it can be beneficial for me (and as an additional reference).&lt;/p&gt;
 
@@ -723,7 +723,7 @@
 
 &lt;p&gt;So, we know what the &lt;em&gt;application controller&lt;/em&gt; is, what the &lt;em&gt;application master&lt;/em&gt; is explained above in the quote. In other words &lt;em&gt;application master&lt;/em&gt; behaves like an application &lt;em&gt;nanny&lt;/em&gt;: &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
 
-&lt;quote class=&quot;citation&quot;&gt;Just know that the application master acts a bit like the app's nanny (well, a pretty insane nanny). It looks over its children and grandchildren, and when things go awry, it goes berserk and terminates its whole family tree. Brutally killing children is a common topic among Erlangers.&lt;/quote&gt;
+&lt;quote class=&quot;citation&quot;&gt;Just know that the application master acts a bit like the app&#39;s nanny (well, a pretty insane nanny). It looks over its children and grandchildren, and when things go awry, it goes berserk and terminates its whole family tree. Brutally killing children is a common topic among Erlangers.&lt;/quote&gt;
 
 &lt;p&gt;&lt;em&gt;Nanny or not&lt;/em&gt; - still we don’t know why there are actually two of them. If there is no explanation in the books, we need to look at the actual source code. And finally we found something &lt;a href=&quot;https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84&quot;&gt;useful&lt;/a&gt;.&lt;/p&gt;
 

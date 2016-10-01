@@ -513,7 +513,7 @@ playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible/hacking/test-
 
 &lt;p&gt;Is there something that we can use instead? Without using third parties (like &lt;a href=&quot;https://github.com/uwiger/gproc&quot;&gt;uwiger/gproc&lt;/a&gt;) I am afraid that there is nothing like that in the core.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/GenRouterExample.png&quot; alt=&quot;GenRouter example from José Valim's presentation.&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/GenRouterExample.png&quot; alt=&quot;GenRouter example from José Valim&#39;s presentation.&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you are interested - in &lt;em&gt;Elixir&lt;/em&gt; incoming &lt;em&gt;GenRouter&lt;/em&gt; behavior looks really promising. Of course, it is still really far away from the core and its future is uncertain, but whole concept is described in the &lt;a href=&quot;https://www.youtube.com/watch?v=9RB1JCKe3GY&quot;&gt;José Valim’s talk&lt;/a&gt; - there is even an example for that particular use case with &lt;code&gt;DynamicIn&lt;/code&gt; - &lt;code&gt;BroadcastOut&lt;/code&gt;, which will represent a process based replacement for &lt;code&gt;GenEvent&lt;/code&gt;.&lt;/p&gt;
 
@@ -617,7 +617,7 @@ playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible/hacking/test-
 
 &lt;p&gt;&lt;img alt=&quot;Structural sharing representation&quot; src=&quot;/assets/ClojureTrees.png&quot; /&gt;&lt;/p&gt;
 
-&lt;quote class=&quot;legend&quot;&gt;Image shamelessly taken from &lt;a href=&quot;http://blip.tv/file/812787&quot;&gt;Rich Hickey's &quot;Clojure Concurrency&quot; talk&lt;/a&gt;.&lt;/quote&gt;
+&lt;quote class=&quot;legend&quot;&gt;Image shamelessly taken from &lt;a href=&quot;http://blip.tv/file/812787&quot;&gt;Rich Hickey&#39;s &quot;Clojure Concurrency&quot; talk&lt;/a&gt;.&lt;/quote&gt;
 
 &lt;p&gt;This technique is called a &lt;em&gt;structural sharing&lt;/em&gt; and it is &lt;em&gt;thread&lt;/em&gt; and &lt;em&gt;iteration&lt;/em&gt; safe way of reusing memory and reducing amount of necessary operations. All &lt;em&gt;Clojure&lt;/em&gt; data structures are persistent (which means that they are shared), especially the hash maps, sets and vectors are based on top of very interesting concept called &lt;em&gt;bit-partitioned hash tries&lt;/em&gt;. This is an enhanced concept of something called a &lt;em&gt;hashed tree&lt;/em&gt; or &lt;em&gt;trie&lt;/em&gt;, introduced by Phil Bagwell in that &lt;a href=&quot;http://infoscience.epfl.ch/record/64398/files/idealhashtrees.pdf&quot;&gt;paper&lt;/a&gt;. The main change is related with the index values and bit-partitioning of hash codes, where a certain bit parts is responsible for indexing on a specific depth level of that tree. Details are really nicely explained in those two articles &lt;a href=&quot;http://blog.higher-order.net/2009/02/01/understanding-clojures-persistentvector-implementation.html&quot;&gt;1&lt;/a&gt;, &lt;a href=&quot;http://blog.higher-order.net/2009/09/08/understanding-clojures-persistenthashmap-deftwice.html&quot;&gt;2&lt;/a&gt;.&lt;/p&gt;
 
@@ -982,7 +982,7 @@ playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible/hacking/test-
 
 &lt;p&gt;Probably because of that someone brought Rich Hickey’s opinion about &lt;code&gt;SICP&lt;/code&gt; to the table:&lt;/p&gt;
 
-&lt;quote class=&quot;citation&quot;&gt;I personally don't think SICP will help you much with Clojure. YMMV.&lt;/quote&gt;
+&lt;quote class=&quot;citation&quot;&gt;I personally don&#39;t think SICP will help you much with Clojure. YMMV.&lt;/quote&gt;
 
 &lt;p&gt;And it is hard to argue with that as well - it is &lt;em&gt;true&lt;/em&gt;, SICP has nothing to do with learning &lt;em&gt;Clojure&lt;/em&gt;. But I can refer to the topics which I already know and thanks to that - learn Clojure at the same time. It is beneficial that I can seek by myself for an idiomatic path to describe the same thing, but in &lt;em&gt;a Clojure way&lt;/em&gt;. Of course, there will be plenty of mistakes in the process - but hey, isn’t that the most effective way to learn? &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
 

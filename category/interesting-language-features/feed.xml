@@ -107,7 +107,7 @@
 
 &lt;p&gt;This topic arisen during work on my hobby project called &lt;a href=&quot;https://github.com/afronski/wolves-and-rabbits-world-simulation&quot;&gt;afronski/wolves-and-rabbits-world-simulation&lt;/a&gt;. Above you can see the &lt;em&gt;supervision tree&lt;/em&gt; of this application (pretty standard one), but at the beginning of it there are two additional processes - not just one, which I have expected (the application master). So I tried to found an explanation and literally - &lt;em&gt;I found nothing&lt;/em&gt;. There is only a small mention about that in the aforementioned book:&lt;/p&gt;
 
-&lt;quote class=&quot;citation&quot;&gt;The application master is in fact two processes taking charge of each individual application: they set it up and act like a middleman in between your application's top supervisor and the application controller.&lt;/quote&gt;
+&lt;quote class=&quot;citation&quot;&gt;The application master is in fact two processes taking charge of each individual application: they set it up and act like a middleman in between your application&#39;s top supervisor and the application controller.&lt;/quote&gt;
 
 &lt;p&gt;But that’s all. No particular explanation why the second process is necessary. This topic is missing in the &lt;em&gt;Erlang&lt;/em&gt; books that I know - if you know a book with a good explanation of this, please let me know in the comments - it can be beneficial for me (and as an additional reference).&lt;/p&gt;
 
@@ -117,7 +117,7 @@
 
 &lt;p&gt;So, we know what the &lt;em&gt;application controller&lt;/em&gt; is, what the &lt;em&gt;application master&lt;/em&gt; is explained above in the quote. In other words &lt;em&gt;application master&lt;/em&gt; behaves like an application &lt;em&gt;nanny&lt;/em&gt;: &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
 
-&lt;quote class=&quot;citation&quot;&gt;Just know that the application master acts a bit like the app's nanny (well, a pretty insane nanny). It looks over its children and grandchildren, and when things go awry, it goes berserk and terminates its whole family tree. Brutally killing children is a common topic among Erlangers.&lt;/quote&gt;
+&lt;quote class=&quot;citation&quot;&gt;Just know that the application master acts a bit like the app&#39;s nanny (well, a pretty insane nanny). It looks over its children and grandchildren, and when things go awry, it goes berserk and terminates its whole family tree. Brutally killing children is a common topic among Erlangers.&lt;/quote&gt;
 
 &lt;p&gt;&lt;em&gt;Nanny or not&lt;/em&gt; - still we don’t know why there are actually two of them. If there is no explanation in the books, we need to look at the actual source code. And finally we found something &lt;a href=&quot;https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84&quot;&gt;useful&lt;/a&gt;.&lt;/p&gt;
 
