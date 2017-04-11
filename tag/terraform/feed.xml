@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>afronski.pl - Tag: terraform</title>
+    <description>Random thoughts from top of my head - afronski.pl</description>
+    <link>http://www.afronski.pl</link>
+    <atom:link href="http://www.afronski.pl/tag/terraform/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>CloudFormation vs. Terraform</title>
+        <description>&lt;h1 id=&quot;cloudformation-vs-terraform&quot;&gt;&lt;em&gt;CloudFormation&lt;/em&gt; vs. &lt;em&gt;Terraform&lt;/em&gt;.&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/CFvsTF.png&quot; alt=&quot;CloudFormation vs. Terraform - fight!&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There is a time when every project that uses cloud computing service has a difficult choice to make - should we automate infrastructure or not?&lt;/p&gt;
+
+&lt;p&gt;Immediately after another question pops up - how we should do it? Should we use a dedicated tool (&lt;em&gt;AWS CloudFormation&lt;/em&gt;, &lt;em&gt;Azure Resource Templates&lt;/em&gt;, &lt;em&gt;OpenStack Heat&lt;/em&gt; or &lt;em&gt;Google Cloud Deployment Manager&lt;/em&gt;) or a provider-agnostic solution? And then - immediately after a surprise comes in - at first glance, there is no other tool like the &lt;em&gt;Terraform&lt;/em&gt; available on the market (but there is - it is called &lt;a href=&quot;https://theforeman.org&quot;&gt;Foreman&lt;/a&gt; &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;). So we have a good tool, built by amazing people (&lt;em&gt;HashiCorp&lt;/em&gt;) which do not rely on any particular &lt;em&gt;cloud&lt;/em&gt; - problem solved? Not entirely.&lt;/p&gt;
+
+&lt;p&gt;As a grown up, you know that like the &lt;em&gt;ORM&lt;/em&gt; does not let you change database on the fly, &lt;em&gt;Terraform&lt;/em&gt; will not let you automatically switch cloud provider for your entire system (assuming no upfront investment into design and architect your system). From the other hand - you are afraid of &lt;em&gt;vendor lock-in&lt;/em&gt;, and for sure you are considering how to design and prepare disaster recovery scenarios. A lot of unknowns, isn’t it?&lt;/p&gt;
+
+&lt;p&gt;I would like to show our rationale for new project and infrastructure for which we were responsible. That motivation which driven us into pure &lt;em&gt;CloudFormation&lt;/em&gt; setup, why we bet on &lt;em&gt;AWS&lt;/em&gt;, and why we decided to drop &lt;em&gt;Terraform&lt;/em&gt; assuming that certain conditions will stay with us for a long time.&lt;/p&gt;
+
+&lt;p&gt;Please have in mind that all remarks and comments pointed in this article are constructive criticism - it does not change my opinion about companies that created those tools at all. I have huge respect for both for &lt;em&gt;AWS&lt;/em&gt; and &lt;em&gt;HashiCorp&lt;/em&gt; - work they have done, especially in tooling and cloud computing landscape is outstanding. As a user of &lt;em&gt;AWS Services&lt;/em&gt; and &lt;em&gt;HashiCorp&lt;/em&gt; tools (mostly &lt;code&gt;Packer&lt;/code&gt;, &lt;code&gt;Vagrant&lt;/code&gt;, &lt;code&gt;Vault&lt;/code&gt; and &lt;code&gt;Consul&lt;/code&gt;) I am grateful for the work they did.&lt;/p&gt;
+
+&lt;p&gt;If you do not have an experience with &lt;em&gt;CloudFormation&lt;/em&gt; or &lt;em&gt;Terraform&lt;/em&gt; - please read either amazing documentation or any other article, that will introduce you to the topic - because I will rely on your basic knowledge about those two.&lt;/p&gt;
+
+&lt;h2 id=&quot;terraform-is-not-a-silver-bullet&quot;&gt;Terraform is not a silver bullet.&lt;/h2&gt;
+
+&lt;p&gt;When we evaluated &lt;em&gt;Terraform&lt;/em&gt; it was before &lt;code&gt;0.7&lt;/code&gt; release. According to the definition it is:&lt;/p&gt;
+
+&lt;quote class=&quot;citation&quot;&gt;... a tool for building, changing, and versioning infrastructure safely and efficiently. Terraform can manage existing and popular service providers as well as custom in-house solutions.&lt;/quote&gt;
+
+&lt;p&gt;It is tool built by practitioners, for fulfilling requirements of &lt;em&gt;infrastructure as a code&lt;/em&gt; approach. It is built as an orchestration tool, focused on visibility (execution plans and resource graphs) and change automation, with minimal human interaction.&lt;/p&gt;
+
+&lt;p&gt;Sounds great, and what is even more important it is &lt;em&gt;cloud&lt;/em&gt; / &lt;em&gt;provider&lt;/em&gt; agnostic by design. That is a huge plus, especially when you need to consider either a hybrid cloud environment (mixing public cloud with on premises) or multiple cloud providers scenario (e.g. disaster recovery or availability requirements). What is also very important it does not focus on cloud &lt;em&gt;APIs&lt;/em&gt; only - it incorporates various 3rd party APIs and Cloud provider API in one place, enabling interesting scenarios - e.g. creating infrastructure inside cloud provider, connecting it with your storage solution on premises and combining it with an external &lt;em&gt;DNS&lt;/em&gt; provider.&lt;/p&gt;
+
+&lt;p&gt;What is often mentioned as a benefit is its &lt;em&gt;DSL&lt;/em&gt; - &lt;em&gt;HashiCorp Configuration Language (HCL)&lt;/em&gt;. In my opinion it is not a revolution, but evolution in right direction. Still declarative, but more expressive and at the same time more concise, than verbose and hostile &lt;em&gt;JSON&lt;/em&gt; / &lt;em&gt;YAML&lt;/em&gt; formats. &lt;em&gt;Terraform&lt;/em&gt; internally is compatible with &lt;em&gt;JSON&lt;/em&gt; format. I would not like to dive into details, because they are extensively covered in really good documentation: https://www.terraform.io/docs/configuration/syntax.html. One thing I want to point out - it is not a valid programming language, and we will talk about it soon as well.&lt;/p&gt;
+
+&lt;p&gt;So far so good - tool looked awesome for us. But before final decision I wanted to check its state and how it “feels”. And that actually that shown a whole new perspective of it. First of all - from our perspective that tool is not as mature as we would like to see it. It is in the infancy stage - I have scanned the &lt;em&gt;Github&lt;/em&gt; repository just for bugs related with &lt;em&gt;AWS&lt;/em&gt; provider and it uncovered a long list. It is not a definite list (probably many of them was not confirmed, neither triaged / prioritized), but gives an answer how rapidly tool evolves. Second thing - which did not affect us directly, but we heard horror stories - there are some backward incompatible changes from version to version. Again - it is totally understandable, taking into account that tool is below 1.0, still it is not suitable for our needs - we wanted stable and tested solution, that will cover &lt;em&gt;AWS Services&lt;/em&gt; for us (so cloud agnostic does not add anything for us, we discuss this later).&lt;/p&gt;
+
+&lt;p&gt;What stroke me the most is how it works underneath. It does not use &lt;em&gt;CloudFormation&lt;/em&gt;, but &lt;em&gt;AWS API&lt;/em&gt; - which has several consequences. One of it is impossibility to perform a rollback, when something will go crazy. Usual workflow is slightly different from the &lt;em&gt;CloudFormation&lt;/em&gt; one- first we need to plan our changes, then we need to review them and decide - should we apply or not. With &lt;em&gt;CloudFormation&lt;/em&gt; it is possible to review changes as well, but if everything goes hazy from any reason (and it eventually will - trust me &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;) it will be able to roll-back that change and return to the previous state.&lt;/p&gt;
+
+&lt;p&gt;That workflow shows also one more disadvantage for us - &lt;em&gt;Terraform&lt;/em&gt; is highly opinionated. It requires and assumes various thing regarding your workflow. For us it does not make a difference, but that tool is not used inside project, neither company in what we want to use it. It means that it adds additional impedance mismatch and requires effort regarding knowledge exchange and learning additional tool. Last, but not least - it is stateful. In the version we’ve evaluated there was no easy way to share and lock state in a remote environment, which was critical from our point of view (and neither storing state on &lt;em&gt;S3&lt;/em&gt; or inside repository is not acceptable solution for us).&lt;/p&gt;
+
+&lt;p&gt;Up to that point we did not ditch &lt;em&gt;Terraform&lt;/em&gt; yet, but we desperately searched for an alternative - we have definitely needed to face the &lt;em&gt;CloudFormation&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;cloudformation-is-not-a-hostile-environment-neither-a-perfect-one&quot;&gt;CloudFormation is not a hostile environment (neither a perfect one).&lt;/h2&gt;
+
+&lt;section class=&quot;picture-section&quot;&gt;
+  &lt;img alt=&quot;JSON or YAML - choice is yours, but choose wisely! ;)&quot; src=&quot;/assets/Comparison.png&quot; /&gt;
+  &lt;small&gt;JSON or YAML - choice is yours, but choose wisely!&lt;/small&gt;
+&lt;/section&gt;
+
+&lt;p&gt;From the other hand, inside the company where we wanted to built new infrastructure and &lt;em&gt;CloudFormation&lt;/em&gt; was used across the &lt;em&gt;development&lt;/em&gt; and &lt;em&gt;operations&lt;/em&gt; departments. We heard horror stories too, and we wanted to be prepared for most of surprises before we start the project. So I have spent some time with that beast. And guess what? It is not as ugly as I initially thought.&lt;/p&gt;
+
+&lt;p&gt;The obvious advantage of that tool is its better support for &lt;em&gt;AWS&lt;/em&gt; services than other 3rd party tools - no doubt on that. When &lt;em&gt;AWS&lt;/em&gt; releases new service in most cases it is already supported inside &lt;em&gt;CloudFormation&lt;/em&gt;, at least partially. However, there are some elements that either does not make sense for &lt;em&gt;CloudFormation&lt;/em&gt; (e.g. registering &lt;em&gt;DNS&lt;/em&gt; name for machine spawned inside auto-scaling group) or they are unsupported (e.g. *ACM Certificate Import).&lt;/p&gt;
+
+&lt;p&gt;According to the documentation - &lt;em&gt;CloudFormation&lt;/em&gt; is stateless, but that is actually a tricky concept. It is stateless, except when it is not. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; From your perspective, you do not need to bother about state management, however it is not entirely true - it preserves stack inside the service, that stack resembles operations invoked inside your cloud (they called &lt;em&gt;events&lt;/em&gt;) and it connects them with &lt;em&gt;resources&lt;/em&gt;. Updates are based on top of that state. Another point are &lt;em&gt;exported outputs&lt;/em&gt; which are globally shared inside the same region and &lt;em&gt;AWS&lt;/em&gt; account. It means that you cannot create the same stack twice based on the declared definition, because it will collide for the defined outputs.&lt;/p&gt;
+
+&lt;p&gt;What about the learning curve? Well it turned out that it depends. Definitely it is not as hostile environment as it is advertised. If you will google for it - you will see how much people hate it. Of course, those people did not lie and in each accusation there is a grain of truth, but situation drastically changed after one announcement.&lt;/p&gt;
+
+&lt;p&gt;Announcement aforementioned above was related with releasing &lt;em&gt;YAML&lt;/em&gt; format for the &lt;em&gt;CloudFormation&lt;/em&gt; templates. Previously you could use only &lt;em&gt;JSON&lt;/em&gt; for that. In my opinion it is a game changer. If you do not believe me, look at the screenshot posted above - difference is at least noticeable. I wrote templates in both formats and difference is huge, starting from really basic stuff like added support for comments (yes, &lt;em&gt;JSON&lt;/em&gt; does not have comments at all), added support for multi-line strings (yay, no more string concatenation! This is really helpful for &lt;code&gt;&quot;AWS::CloudFormation::Init&quot;&lt;/code&gt; sections and similar), to the smaller stuff like better support for invoking built-in functions. And last, but not least - it is less verbose and less painful to modify / refactor. In case of &lt;em&gt;JSON&lt;/em&gt; it is really hard to refactor huge chunks of code, trying to make it readable and still preserving syntax validation (and &lt;em&gt;CloudFormation validation API&lt;/em&gt; supports slightly malformed &lt;em&gt;JSON&lt;/em&gt;, so you need to have two layers of checks).&lt;/p&gt;
+
+&lt;p&gt;Is it all? Not entirely. I have told you that there are couple of elements that are not supported directly in &lt;em&gt;CloudFormation&lt;/em&gt;, which makes operation really painful and semi-manual. It turned out that you can either workaround it with some well-known hacks focusing e.g. on already mentioned (in different context) &lt;code&gt;&quot;AWS::CloudFormation::Init&quot;&lt;/code&gt; or with new and strongly advertised concept that we wanted to test in practice - automating operations with &lt;em&gt;AWS Lambda&lt;/em&gt; service. It turned out that with help of &lt;em&gt;SNS&lt;/em&gt;, &lt;em&gt;SQS&lt;/em&gt; and &lt;em&gt;AWS SDK&lt;/em&gt; we were able to glue &lt;em&gt;CloudFormation&lt;/em&gt; other services in an elegant way. In serverless and event-driven fashion.&lt;/p&gt;
+
+&lt;section class=&quot;picture-section&quot;&gt;
+  &lt;img alt=&quot;Can you guess all the logos present in the picture?&quot; src=&quot;/assets/GuessTheLogos.png&quot; /&gt;
+  &lt;small&gt;Can you guess all the logos present in the picture?&lt;/small&gt;
+&lt;/section&gt;
+
+&lt;h2 id=&quot;vendor-lock-in-is-a-thing&quot;&gt;Vendor lock-in is a thing.&lt;/h2&gt;
+
+&lt;p&gt;In this place I would like to stop and point out a real threat - &lt;em&gt;vendor lock-in is a thing&lt;/em&gt;. It is not a myth, neither a boogeyman. Relying heavily on &lt;em&gt;CloudFormation&lt;/em&gt; and adding on top of it a glue in form of &lt;em&gt;AWS Lambda&lt;/em&gt; should be a deliberate choice. It is a considerable reliability, if you are considering moving out from the cloud.&lt;/p&gt;
+
+&lt;p&gt;If you are not a &lt;em&gt;Snapchat&lt;/em&gt;, and do not have 2 billion USD for spending it in 5 years for a certain cloud provider, for sure you have considered what if we want to use a different provider or use physical infrastructure for our product. Moving either in or out between clouds or cloud and physical is a big project per se, sprinkling it with additional services provided by your cloud complicates it even more.&lt;/p&gt;
+
+&lt;p&gt;In most cases if you were careful, it will be rather a infrastructure and operations effort. However some services looks so shiny, so easy to use, so cheap (like &lt;em&gt;AWS Lambda&lt;/em&gt;) and incorporating them looks like a really good choice. Except when you consider moving out from particular provider and you need to dedicate additional development and operations effort for such migration.&lt;/p&gt;
+
+&lt;p&gt;In our case decision it was actually simpler than you might think. We are moving out from physical data centers to the cloud of choice - &lt;em&gt;AWS&lt;/em&gt; was chosen as a most mature one. There is no plan for migrating out of the cloud (we were not first project moving there, a huge development work was already done, including custom services on top of &lt;em&gt;AWS API&lt;/em&gt;) and physical is not an elastic (obvious thing) and as cheap choice as you may think. Tests made in the cloud already confirmed, that even for our demanding domain (ad tech) that cloud provider will be sufficient for our needs. And it gives us more than physical world.&lt;/p&gt;
+
+&lt;p&gt;So you can consider it as a deliberate vendor lock-in, with all of its consequences. We were in the physical world, we know how it works and how it feels, and we still need more - that’s why we’ve chosen the cloud. But it is not a usual path to take.&lt;/p&gt;
+
+&lt;h2 id=&quot;cloudformation-pitfalls&quot;&gt;&lt;em&gt;CloudFormation&lt;/em&gt; pitfalls.&lt;/h2&gt;
+
+&lt;p&gt;We have already scratched the surface in the previous paragraph, but speaking about &lt;em&gt;CloudFormation&lt;/em&gt; - so far we are happy living with it, but it has sharp edges too. In that section I would like to point out couple of pitfalls, that knowing about may be helpful for you.&lt;/p&gt;
+
+&lt;p&gt;The most significant problem, covered also in many discussions over the internet, there are horror stories regarding updating and changesets for &lt;em&gt;CloudFormation&lt;/em&gt;. We did not have any problems with an list of changes generated by service, that hides the actual operations - and simply not showing everything (there are people claiming that it is still a thing). However an update is harder than you think, in most cases because of replacements - it is hard to believe sometimes how simple change may enable domino effect, and will cause to rebuilt some unrelated elements. And killing elements is problematic.&lt;/p&gt;
+
+&lt;p&gt;Another topic already partially covered above are &lt;em&gt;exported outputs&lt;/em&gt;. Those globals in the stateless world, are as much helpful, as annoying. From other hand, they are a neat way to connect stacks between, from the other - it is really easy to tangle stacks together and introduce dependencies, which are hard to reflect in the creation process.&lt;/p&gt;
+
+&lt;p&gt;Another element which is painful is naming (I will not repeat that old joke about hard things in computer science, but we all know it). Name should reflect the purpose, but also in many cases the location - for your convenience and better readability. In such case you have to remember which services are globally available, which are not (&lt;em&gt;Route53&lt;/em&gt;, &lt;em&gt;IAM&lt;/em&gt; and &lt;em&gt;S3&lt;/em&gt;). And that is not the end of story, because for example - &lt;em&gt;S3&lt;/em&gt; is a global service, and from the first glance you do not need to put region in the name of it. However bucket location makes a huge differences in scenario called cross-region replication, and having region name is really helpful. Decisions, decisions. Another pain-point related to naming are limits. Strangely enough they are not validated via &lt;em&gt;API&lt;/em&gt;, only checked during the stack execution are various name length limitations (e.g. 64 characters limit for &lt;em&gt;ELB&lt;/em&gt; name), you will know them by heart after couple of rounds with failures and rollbacks - just be prepared. &lt;img class=&quot;emoji&quot; title=&quot;:wink:&quot; alt=&quot;:wink:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f609.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And last but not least - you want be always compliant with &lt;em&gt;CloudFormation&lt;/em&gt; standards to start and stay small. Use always types provided by &lt;em&gt;CloudFormation&lt;/em&gt;, which helps validation &lt;em&gt;API&lt;/em&gt;. Prepare you own naming convention (also for tags) and stick to it as much as you can. Keep stacks as small as possible and split them in two dimensions - by responsibility (e.g. component) and by common modification reason (e.g. they are often modified together). Use exports with caution and wisely (naming convention also helps tremendously here).&lt;/p&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In our case, when a deliberate vendor lock-in was available as an option, we chosen &lt;em&gt;CloudFormation&lt;/em&gt; and we are not regretting that choice so far. We were able to built our infrastructure and tools on top of solid and battle tested service, fully compliant with our cloud computing provider of choice. However I know that it is not an usual option for everyone - I hope that deepened approach to the topic and our rationale will help you to make right decision. Remember: there is no universal solution here, in case of any doubts or if you would like to hear more about certain topic feel free to reach me in the comments below or directly at my contact email.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 11 Apr 2017 10:00:00 +0200</pubDate>
+        <link>http://www.afronski.pl/2017/04/11/terraform-vs-cloudformation.html</link>
+        <guid isPermaLink="true">http://www.afronski.pl/2017/04/11/terraform-vs-cloudformation.html</guid>
+      </item>
+    
+  </channel>
+</rss>

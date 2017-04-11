@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="author" content="Wojtek Gawroński (afronski)" />
+    <meta name="description" content="Personal blog of Wojtek Gawroński, a passionate software developer." />
+
+    <meta name="keywords" content="HTML,HTML5,JavaScript,CSS,CSS3,Canvas,WebGL,C#,.NET,Mono,Erlang,Vagrant,Node.js,Clojure,SICP" />
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
+
+    <title>CloudFormation vs. Terraform</title>
+
+    <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <section class="ads">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9524821705718873" data-ad-slot="3234654745" data-ad-format="auto"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </section>
+
+    <article class="container post">
+      <a href="/">Home</a>
+
+<h1 id="cloudformation-vs-terraform"><em>CloudFormation</em> vs. <em>Terraform</em>.</h1>
+
+<p><img src="/assets/CFvsTF.png" alt="CloudFormation vs. Terraform - fight!" /></p>
+
+<p>There is a time when every project that uses cloud computing service has a difficult choice to make - should we automate infrastructure or not?</p>
+
+<p>Immediately after another question pops up - how we should do it? Should we use a dedicated tool (<em>AWS CloudFormation</em>, <em>Azure Resource Templates</em>, <em>OpenStack Heat</em> or <em>Google Cloud Deployment Manager</em>) or a provider-agnostic solution? And then - immediately after a surprise comes in - at first glance, there is no other tool like the <em>Terraform</em> available on the market (but there is - it is called <a href="https://theforeman.org">Foreman</a> <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />). So we have a good tool, built by amazing people (<em>HashiCorp</em>) which do not rely on any particular <em>cloud</em> - problem solved? Not entirely.</p>
+
+<p>As a grown up, you know that like the <em>ORM</em> does not let you change database on the fly, <em>Terraform</em> will not let you automatically switch cloud provider for your entire system (assuming no upfront investment into design and architect your system). From the other hand - you are afraid of <em>vendor lock-in</em>, and for sure you are considering how to design and prepare disaster recovery scenarios. A lot of unknowns, isn’t it?</p>
+
+<p>I would like to show our rationale for new project and infrastructure for which we were responsible. That motivation which driven us into pure <em>CloudFormation</em> setup, why we bet on <em>AWS</em>, and why we decided to drop <em>Terraform</em> assuming that certain conditions will stay with us for a long time.</p>
+
+<p>Please have in mind that all remarks and comments pointed in this article are constructive criticism - it does not change my opinion about companies that created those tools at all. I have huge respect for both for <em>AWS</em> and <em>HashiCorp</em> - work they have done, especially in tooling and cloud computing landscape is outstanding. As a user of <em>AWS Services</em> and <em>HashiCorp</em> tools (mostly <code>Packer</code>, <code>Vagrant</code>, <code>Vault</code> and <code>Consul</code>) I am grateful for the work they did.</p>
+
+<p>If you do not have an experience with <em>CloudFormation</em> or <em>Terraform</em> - please read either amazing documentation or any other article, that will introduce you to the topic - because I will rely on your basic knowledge about those two.</p>
+
+<h2 id="terraform-is-not-a-silver-bullet">Terraform is not a silver bullet.</h2>
+
+<p>When we evaluated <em>Terraform</em> it was before <code>0.7</code> release. According to the definition it is:</p>
+
+<quote class="citation">... a tool for building, changing, and versioning infrastructure safely and efficiently. Terraform can manage existing and popular service providers as well as custom in-house solutions.</quote>
+
+<p>It is tool built by practitioners, for fulfilling requirements of <em>infrastructure as a code</em> approach. It is built as an orchestration tool, focused on visibility (execution plans and resource graphs) and change automation, with minimal human interaction.</p>
+
+<p>Sounds great, and what is even more important it is <em>cloud</em> / <em>provider</em> agnostic by design. That is a huge plus, especially when you need to consider either a hybrid cloud environment (mixing public cloud with on premises) or multiple cloud providers scenario (e.g. disaster recovery or availability requirements). What is also very important it does not focus on cloud <em>APIs</em> only - it incorporates various 3rd party APIs and Cloud provider API in one place, enabling interesting scenarios - e.g. creating infrastructure inside cloud provider, connecting it with your storage solution on premises and combining it with an external <em>DNS</em> provider.</p>
+
+<p>What is often mentioned as a benefit is its <em>DSL</em> - <em>HashiCorp Configuration Language (HCL)</em>. In my opinion it is not a revolution, but evolution in right direction. Still declarative, but more expressive and at the same time more concise, than verbose and hostile <em>JSON</em> / <em>YAML</em> formats. <em>Terraform</em> internally is compatible with <em>JSON</em> format. I would not like to dive into details, because they are extensively covered in really good documentation: https://www.terraform.io/docs/configuration/syntax.html. One thing I want to point out - it is not a valid programming language, and we will talk about it soon as well.</p>
+
+<p>So far so good - tool looked awesome for us. But before final decision I wanted to check its state and how it “feels”. And that actually that shown a whole new perspective of it. First of all - from our perspective that tool is not as mature as we would like to see it. It is in the infancy stage - I have scanned the <em>Github</em> repository just for bugs related with <em>AWS</em> provider and it uncovered a long list. It is not a definite list (probably many of them was not confirmed, neither triaged / prioritized), but gives an answer how rapidly tool evolves. Second thing - which did not affect us directly, but we heard horror stories - there are some backward incompatible changes from version to version. Again - it is totally understandable, taking into account that tool is below 1.0, still it is not suitable for our needs - we wanted stable and tested solution, that will cover <em>AWS Services</em> for us (so cloud agnostic does not add anything for us, we discuss this later).</p>
+
+<p>What stroke me the most is how it works underneath. It does not use <em>CloudFormation</em>, but <em>AWS API</em> - which has several consequences. One of it is impossibility to perform a rollback, when something will go crazy. Usual workflow is slightly different from the <em>CloudFormation</em> one- first we need to plan our changes, then we need to review them and decide - should we apply or not. With <em>CloudFormation</em> it is possible to review changes as well, but if everything goes hazy from any reason (and it eventually will - trust me <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />) it will be able to roll-back that change and return to the previous state.</p>
+
+<p>That workflow shows also one more disadvantage for us - <em>Terraform</em> is highly opinionated. It requires and assumes various thing regarding your workflow. For us it does not make a difference, but that tool is not used inside project, neither company in what we want to use it. It means that it adds additional impedance mismatch and requires effort regarding knowledge exchange and learning additional tool. Last, but not least - it is stateful. In the version we’ve evaluated there was no easy way to share and lock state in a remote environment, which was critical from our point of view (and neither storing state on <em>S3</em> or inside repository is not acceptable solution for us).</p>
+
+<p>Up to that point we did not ditch <em>Terraform</em> yet, but we desperately searched for an alternative - we have definitely needed to face the <em>CloudFormation</em>.</p>
+
+<h2 id="cloudformation-is-not-a-hostile-environment-neither-a-perfect-one">CloudFormation is not a hostile environment (neither a perfect one).</h2>
+
+<section class="picture-section">
+  <img alt="JSON or YAML - choice is yours, but choose wisely! ;)" src="/assets/Comparison.png" />
+  <small>JSON or YAML - choice is yours, but choose wisely!</small>
+</section>
+
+<p>From the other hand, inside the company where we wanted to built new infrastructure and <em>CloudFormation</em> was used across the <em>development</em> and <em>operations</em> departments. We heard horror stories too, and we wanted to be prepared for most of surprises before we start the project. So I have spent some time with that beast. And guess what? It is not as ugly as I initially thought.</p>
+
+<p>The obvious advantage of that tool is its better support for <em>AWS</em> services than other 3rd party tools - no doubt on that. When <em>AWS</em> releases new service in most cases it is already supported inside <em>CloudFormation</em>, at least partially. However, there are some elements that either does not make sense for <em>CloudFormation</em> (e.g. registering <em>DNS</em> name for machine spawned inside auto-scaling group) or they are unsupported (e.g. *ACM Certificate Import).</p>
+
+<p>According to the documentation - <em>CloudFormation</em> is stateless, but that is actually a tricky concept. It is stateless, except when it is not. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /> From your perspective, you do not need to bother about state management, however it is not entirely true - it preserves stack inside the service, that stack resembles operations invoked inside your cloud (they called <em>events</em>) and it connects them with <em>resources</em>. Updates are based on top of that state. Another point are <em>exported outputs</em> which are globally shared inside the same region and <em>AWS</em> account. It means that you cannot create the same stack twice based on the declared definition, because it will collide for the defined outputs.</p>
+
+<p>What about the learning curve? Well it turned out that it depends. Definitely it is not as hostile environment as it is advertised. If you will google for it - you will see how much people hate it. Of course, those people did not lie and in each accusation there is a grain of truth, but situation drastically changed after one announcement.</p>
+
+<p>Announcement aforementioned above was related with releasing <em>YAML</em> format for the <em>CloudFormation</em> templates. Previously you could use only <em>JSON</em> for that. In my opinion it is a game changer. If you do not believe me, look at the screenshot posted above - difference is at least noticeable. I wrote templates in both formats and difference is huge, starting from really basic stuff like added support for comments (yes, <em>JSON</em> does not have comments at all), added support for multi-line strings (yay, no more string concatenation! This is really helpful for <code>"AWS::CloudFormation::Init"</code> sections and similar), to the smaller stuff like better support for invoking built-in functions. And last, but not least - it is less verbose and less painful to modify / refactor. In case of <em>JSON</em> it is really hard to refactor huge chunks of code, trying to make it readable and still preserving syntax validation (and <em>CloudFormation validation API</em> supports slightly malformed <em>JSON</em>, so you need to have two layers of checks).</p>
+
+<p>Is it all? Not entirely. I have told you that there are couple of elements that are not supported directly in <em>CloudFormation</em>, which makes operation really painful and semi-manual. It turned out that you can either workaround it with some well-known hacks focusing e.g. on already mentioned (in different context) <code>"AWS::CloudFormation::Init"</code> or with new and strongly advertised concept that we wanted to test in practice - automating operations with <em>AWS Lambda</em> service. It turned out that with help of <em>SNS</em>, <em>SQS</em> and <em>AWS SDK</em> we were able to glue <em>CloudFormation</em> other services in an elegant way. In serverless and event-driven fashion.</p>
+
+<section class="picture-section">
+  <img alt="Can you guess all the logos present in the picture?" src="/assets/GuessTheLogos.png" />
+  <small>Can you guess all the logos present in the picture?</small>
+</section>
+
+<h2 id="vendor-lock-in-is-a-thing">Vendor lock-in is a thing.</h2>
+
+<p>In this place I would like to stop and point out a real threat - <em>vendor lock-in is a thing</em>. It is not a myth, neither a boogeyman. Relying heavily on <em>CloudFormation</em> and adding on top of it a glue in form of <em>AWS Lambda</em> should be a deliberate choice. It is a considerable reliability, if you are considering moving out from the cloud.</p>
+
+<p>If you are not a <em>Snapchat</em>, and do not have 2 billion USD for spending it in 5 years for a certain cloud provider, for sure you have considered what if we want to use a different provider or use physical infrastructure for our product. Moving either in or out between clouds or cloud and physical is a big project per se, sprinkling it with additional services provided by your cloud complicates it even more.</p>
+
+<p>In most cases if you were careful, it will be rather a infrastructure and operations effort. However some services looks so shiny, so easy to use, so cheap (like <em>AWS Lambda</em>) and incorporating them looks like a really good choice. Except when you consider moving out from particular provider and you need to dedicate additional development and operations effort for such migration.</p>
+
+<p>In our case decision it was actually simpler than you might think. We are moving out from physical data centers to the cloud of choice - <em>AWS</em> was chosen as a most mature one. There is no plan for migrating out of the cloud (we were not first project moving there, a huge development work was already done, including custom services on top of <em>AWS API</em>) and physical is not an elastic (obvious thing) and as cheap choice as you may think. Tests made in the cloud already confirmed, that even for our demanding domain (ad tech) that cloud provider will be sufficient for our needs. And it gives us more than physical world.</p>
+
+<p>So you can consider it as a deliberate vendor lock-in, with all of its consequences. We were in the physical world, we know how it works and how it feels, and we still need more - that’s why we’ve chosen the cloud. But it is not a usual path to take.</p>
+
+<h2 id="cloudformation-pitfalls"><em>CloudFormation</em> pitfalls.</h2>
+
+<p>We have already scratched the surface in the previous paragraph, but speaking about <em>CloudFormation</em> - so far we are happy living with it, but it has sharp edges too. In that section I would like to point out couple of pitfalls, that knowing about may be helpful for you.</p>
+
+<p>The most significant problem, covered also in many discussions over the internet, there are horror stories regarding updating and changesets for <em>CloudFormation</em>. We did not have any problems with an list of changes generated by service, that hides the actual operations - and simply not showing everything (there are people claiming that it is still a thing). However an update is harder than you think, in most cases because of replacements - it is hard to believe sometimes how simple change may enable domino effect, and will cause to rebuilt some unrelated elements. And killing elements is problematic.</p>
+
+<p>Another topic already partially covered above are <em>exported outputs</em>. Those globals in the stateless world, are as much helpful, as annoying. From other hand, they are a neat way to connect stacks between, from the other - it is really easy to tangle stacks together and introduce dependencies, which are hard to reflect in the creation process.</p>
+
+<p>Another element which is painful is naming (I will not repeat that old joke about hard things in computer science, but we all know it). Name should reflect the purpose, but also in many cases the location - for your convenience and better readability. In such case you have to remember which services are globally available, which are not (<em>Route53</em>, <em>IAM</em> and <em>S3</em>). And that is not the end of story, because for example - <em>S3</em> is a global service, and from the first glance you do not need to put region in the name of it. However bucket location makes a huge differences in scenario called cross-region replication, and having region name is really helpful. Decisions, decisions. Another pain-point related to naming are limits. Strangely enough they are not validated via <em>API</em>, only checked during the stack execution are various name length limitations (e.g. 64 characters limit for <em>ELB</em> name), you will know them by heart after couple of rounds with failures and rollbacks - just be prepared. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+
+<p>And last but not least - you want be always compliant with <em>CloudFormation</em> standards to start and stay small. Use always types provided by <em>CloudFormation</em>, which helps validation <em>API</em>. Prepare you own naming convention (also for tags) and stick to it as much as you can. Keep stacks as small as possible and split them in two dimensions - by responsibility (e.g. component) and by common modification reason (e.g. they are often modified together). Use exports with caution and wisely (naming convention also helps tremendously here).</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In our case, when a deliberate vendor lock-in was available as an option, we chosen <em>CloudFormation</em> and we are not regretting that choice so far. We were able to built our infrastructure and tools on top of solid and battle tested service, fully compliant with our cloud computing provider of choice. However I know that it is not an usual option for everyone - I hope that deepened approach to the topic and our rationale will help you to make right decision. Remember: there is no universal solution here, in case of any doubts or if you would like to hear more about certain topic feel free to reach me in the comments below or directly at my contact email.</p>
+
+    </article>
+
+    <section class="container">
+      <a href="/" class="mobile-link">Home</a>
+
+      <section class="social-buttons">
+        <div class="fb-share-button" data-href="/2017/04/11/terraform-vs-cloudformation.html" data-layout="button_count"></div>
+        <script type="IN/Share" data-url="/2017/04/11/terraform-vs-cloudformation.html" data-counter="right"></script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
+        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
+      </section>
+
+      <div id="disqus_thread"></div>
+    </section>
+
+    <aside class="menu">
+
+      <a href="http://www.afronski.pl">
+        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+      </a>
+
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
+      I'm a <a href="http://pl.linkedin.com/pub/wojtek-gawroński/58/879/5b0/">software developer</a>.<br/>
+      Besides working
+      <ul class="interests">
+        <li>I write <a href="https://github.com/afronski">code</a></li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
+        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
+        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
+        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+      </ul>
+
+      <nav class="additional-navigation">
+        Go to:
+        <ul>
+          <li><a href="/categories.html">Categories</a></li>
+          <li><a href="/tag/series/">Series</a></li>
+          <li><a href="/tags.html">Tags</a></li>
+        </ul>
+      </nav>
+
+      <footer>
+        <section>© Copyright 2013, Wojciech Gawroński</section>
+        <section>
+          Except where otherwise noted, content on this site<br/>
+          is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
+        </section>
+      </footer>
+    </aside>
+
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+    <noscript>
+      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>
