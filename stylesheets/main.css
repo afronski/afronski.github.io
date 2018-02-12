@@ -39,6 +39,14 @@ a:hover {
   text-decoration: underline;
 }
 
+.rwd-image {
+  max-width: 100%;
+}
+
+.half-rwd-image {
+  max-width: 49%;
+}
+
 .about-link {
   display: block;
   margin: 5px 0 15px 0;
