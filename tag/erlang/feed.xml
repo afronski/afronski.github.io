@@ -108,7 +108,9 @@ playground &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible/hacking/test-
     
       <item>
         <title>What is wrong with gen_event?</title>
-        <description>&lt;h1 id=&quot;what-is-wrong-with-genevent&quot;&gt;What is wrong with &lt;code&gt;gen_event&lt;/code&gt;?&lt;/h1&gt;
+        <description>&lt;h2 id=&quot;beware-this-article-is-from-2015-and-in-elixir-world-couple-things-changed-a-bit-here-you-can-find-the-updated-version-of-this-blog-posthttpspattern-matchcomblog20180831what-is-wrong-with-gen-event-an-updateutmsourceafronskiplutmmediumrebloggingutmcampaignwhats-wrong-with-gen-event&quot;&gt;Beware: this article is from 2015 and in Elixir world couple things changed a bit. &lt;a href=&quot;https://pattern-match.com/blog/2018/08/31/what-is-wrong-with-gen-event-an-update?utm_source=afronskiPL&amp;amp;utm_medium=reblogging&amp;amp;utm_campaign=whats-wrong-with-gen-event&quot;&gt;Here you can find the updated version of this blog post&lt;/a&gt;.&lt;/h2&gt;
+
+&lt;h1 id=&quot;what-is-wrong-with-genevent&quot;&gt;What is wrong with &lt;code&gt;gen_event&lt;/code&gt;?&lt;/h1&gt;
 
 &lt;quote class=&quot;citation&quot;&gt;I never used gen_event, I think it is a bad pattern.&lt;/quote&gt;
 
