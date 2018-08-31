@@ -10,6 +10,8 @@ tags:
   - gen_event
 ---
 
+## Beware: this article is from 2015 and in Elixir world couple things changed a bit. [Here you can find the updated version of this blog post](https://pattern-match.com/blog/2018/08/31/what-is-wrong-with-gen-event-an-update?utm_source=afronskiPL&utm_medium=reblogging&utm_campaign=whats-wrong-with-gen-event).
+
 # What is wrong with `gen_event`?
 
 <quote class="citation">I never used gen_event, I think it is a bad pattern.</quote>
