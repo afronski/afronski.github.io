@@ -13,6 +13,9 @@
 
     <link rel="alternate" type="application/rss+xml" title="afronski.pl" href="http://www.afronski.pl/feed.xml" />
 
+<script type="text/javascript" src="/scripts/gdpr.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/gdpr.css" />
+
     <title>Contact and About page - afronski.pl</title>
 
     <link rel="stylesheet" href="/stylesheets/syntax.min.css" />
@@ -32,9 +35,6 @@
         <section class="description" itemscope itemtype="http://data-vocabulary.org/Person">
           <h1>About me</h1>
           <p>
-            <strong>Disclaimer</strong>: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.
-          </p>
-          <p>
             <strong>TL;DR</strong>: I am a <em>computer science geek</em>, who loves to work with computers and electronics in general and I blog about it <a href="http://www.afronski.pl" itemprop="url">here</a>.
           </p>
            <p>
@@ -44,7 +44,7 @@
                  itemprop="photo" />
           </p>
           <p>
-            My name is <span itemprop="name">Wojciech Gawroński</span> (<strong><span itemprop="nickname">afronski</span></strong> on the internet), and I am <span itemprop="title">Software Engineer</span> and an owner of <span itemprop="org"><a href="http://www.white-rook.pl">White Rook</a></span> company. I am the passionate programmer (I would like to call myself a <em>hacker</em>, but I believe that someone else has to call me that way). I specialize in distributed systems, cloud computing (mainly <em>AWS</em>), web development and operations. I have more than ten years of professional experience. I love adding value, and I firmly believe that IT should be <em>pragmatic</em>, which means being a servant for the business.
+            My name is <span itemprop="name">Wojciech Gawroński</span> (<strong><span itemprop="nickname">afronski</span></strong> on the internet), and I am <span itemprop="title">Software Engineer</span>, co-founder of <span itemprop="org"><a href="https://pattern-match.com">Pattern Match</a></span> company. I am the passionate programmer (I would like to call myself a <em>hacker</em>, but I believe that someone else has to call me that way). I specialize in distributed systems, cloud computing (mainly <em>AWS</em>), web development and operations. I have more than ten years of professional experience. I love adding value, and I firmly believe that IT should be <em>pragmatic</em>, which means being a servant for the business.
           </p>
           <p>
             My always evergreen profile can be found on <a href="https://www.linkedin.com/in/afronski">LinkedIn</a>.
@@ -140,6 +140,8 @@
       </footer>
     </aside>
 
+    <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:[],analytics:["ga"],marketing:[]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require', 'displayfeatures');ga('send','pageview');</script>
+
   </body>
 </html>
