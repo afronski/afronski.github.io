@@ -32,7 +32,7 @@
 
 <h1 id="how-to-store-and-examine-custom-business-metrics">How to store and examine custom business metrics?</h1>
 
-<p>Recently, I spent some time looking for an ideal provider, which will deliver storage and graphing capabilities for our custom business metrics. Each growing business need to track your <code>KPIs</code> but also other values, on the internal and much more granular level. It was not an easy job to do, because we have got very specific requirements.</p>
+<p>Recently, I spent some time looking for an ideal provider, which will deliver storage and graphing capabilities for our custom business metrics. Each growing business need to track your <code class="highlighter-rouge">KPIs</code> but also other values, on the internal and much more granular level. It was not an easy job to do, because we have got very specific requirements.</p>
 
 <h2 id="requirements">Requirements</h2>
 
@@ -40,7 +40,7 @@
   <li>We need <em>schemaless</em> storage with support for JSON.</li>
   <li>We need a possibility to query, group, filter by plain fields and nested object structure.</li>
   <li>We need to deliver multiple and custom data series, represented as business metrics.</li>
-  <li>We need to deliver them over <code>HTTPS</code>.</li>
+  <li>We need to deliver them over <code class="highlighter-rouge">HTTPS</code>.</li>
   <li>We need a possibility to create graphs, tables and dashboards.</li>
   <li>We need at most one hour delay when displaying graphs from actual data.</li>
 </ul>
@@ -54,7 +54,7 @@
 <ul>
   <li><a href="https://keen.io/">Keen IO</a> - That is the most complete solution for us. It has everything (even a nice <em>Node.js</em> client), however it does not host dashboards and charts in their place. It is a very nice storage and API only. Fortunately, there is a <a href="http://keen.github.io/dashboards/">project</a> which provides nice, <em>Bootstrap</em> powered, templates for <a href="https://keen.io">Keen IO</a>. Unfortunately you have to host them on your own.</li>
   <li><a href="https://datahero.com/">DataHero</a> - It is the most impressive solution, with amazing charting abilities, but without any kind of storage and API for pushing metrics. They are specializing in visualization and data analysis. It is possible to integrate <a href="https://keen.io">Keen IO</a> with it, however you can schedule update of your data only once a day. Second possibility is to use the <em>Google Drive Spreadsheet</em> in order to achieve real-time integration for your dashboards, but it feels like a <em>hack</em>.</li>
-  <li><a href="https://statsmix.com/">StatsMix</a> - Very nice complete solution, which has dashboards, metrics storage. Unfortunately bugs related with <code>CSV</code> export, lack of JSON metadata filtering and grouping and plenty of UI glitches destroy the overall experience.</li>
+  <li><a href="https://statsmix.com/">StatsMix</a> - Very nice complete solution, which has dashboards, metrics storage. Unfortunately bugs related with <code class="highlighter-rouge">CSV</code> export, lack of JSON metadata filtering and grouping and plenty of UI glitches destroy the overall experience.</li>
   <li><a href="http://newrelic.com/insights">New Relic Insights</a> - Again, nice and complete solution but without support for JSON metadata (lack of filtering, storage and grouping). If you would like to store plain, flat structure it is a very nice solution to do that.</li>
   <li><a href="https://segment.com/">Segment</a> - It is a nice tool, but it is only a <em>black-box</em> which eases integration across multiple services. You can basically insert data into <a href="https://segment.com">Segment</a> (with a nice <em>Node.js</em> client) and forward them automatically to the other integrated services (like <em>Google Analytics</em>, <a href="https://keen.io">Keen IO</a> and so on). They do not have dashboards and export API.</li>
   <li><a href="https://www.librato.com/">Librato</a> - Again, very nice and complete solution without support for nested JSON objects. If you need to store and display graphs from only flat and plain metrics it is a nice tool to check.</li>
@@ -68,15 +68,6 @@
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/2015/01/24/how-to-store-and-examine-custom-business-metrics.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/2015/01/24/how-to-store-and-examine-custom-business-metrics.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
@@ -91,23 +82,12 @@
       <ul class="interests">
         <li>I write <a href="https://github.com/afronski">code</a></li>
         <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a></li>
         <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
           Except where otherwise noted, content on this site<br/>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
@@ -119,13 +99,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

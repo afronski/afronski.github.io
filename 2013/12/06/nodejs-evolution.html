@@ -34,52 +34,83 @@
 
 <p><img src="/assets/NodeJsLogo.png" alt="Node.js logo" /></p>
 
-<p><em>Node.js</em> in blessed, <em>enterprise</em> version <code>1.0</code> comes faster then you might have expected (look at the first link in references - Isaac said that <code>0.12</code> is the last version before the final release). What will the future bring us?</p>
+<p><em>Node.js</em> in blessed, <em>enterprise</em> version <code class="highlighter-rouge">1.0</code> comes faster then you might have expected (look at the first link in references - Isaac said that <code class="highlighter-rouge">0.12</code> is the last version before the final release). What will the future bring us?</p>
 
-<p>Bert Belder’s talk on LXJS 2013 gives us a small overview about what is to come. It obviously has a provocative first slide and title, but the point still stands - what should we expect from <em>Node.js <code>2.0</code></em> ?</p>
+<p>Bert Belder’s talk on LXJS 2013 gives us a small overview about what is to come. It obviously has a provocative first slide and title, but the point still stands - what should we expect from <em>Node.js <code class="highlighter-rouge">2.0</code></em> ?</p>
 
 <h1 id="tasks">Tasks</h1>
 
 <p>One nifty concept, called <em>Asynchronous Tasks</em>, was presented in the talk.</p>
 
-<p>It was presented as an asynchronous <code>try...catch</code> block without changing the language syntax and semantics. Let’s look at the initial representation:</p>
+<p>It was presented as an asynchronous <code class="highlighter-rouge">try...catch</code> block without changing the language syntax and semantics. Let’s look at the initial representation:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">task</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="kd">function</span> <span class="nx">concatTwoFilesAndThenSomeTask</span><span class="p">()</span> <span class="p">{</span>
-<span class="lineno"> 2</span> 
-<span class="lineno"> 3</span>   <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">&quot;some/template&quot;</span><span class="p">,</span> <span class="s2">&quot;utf8&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">file1</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno"> 4</span> 
-<span class="lineno"> 5</span>     <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno"> 6</span>       <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
-<span class="lineno"> 7</span>     <span class="p">}</span>
-<span class="lineno"> 8</span> 
-<span class="lineno"> 9</span>     <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">&quot;something/else&quot;</span><span class="p">,</span> <span class="s2">&quot;utf8&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">file2</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">10</span> 
-<span class="lineno">11</span>       <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">12</span>         <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
-<span class="lineno">13</span>       <span class="p">}</span>
-<span class="lineno">14</span> 
-<span class="lineno">15</span>       <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">file1</span> <span class="o">+</span> <span class="s2">&quot;--&quot;</span> <span class="o">+</span> <span class="nx">file2</span><span class="p">;</span>
-<span class="lineno">16</span> 
-<span class="lineno">17</span>       <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/foo/g</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">);</span>
-<span class="lineno">18</span>       <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
-<span class="lineno">19</span>     <span class="p">});</span>
-<span class="lineno">20</span> 
-<span class="lineno">21</span>   <span class="p">});</span>
-<span class="lineno">22</span> 
-<span class="lineno">23</span> <span class="p">}).</span><span class="nx">setCallback</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">24</span> 
-<span class="lineno">25</span>   <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">26</span>     <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
-<span class="lineno">27</span>   <span class="p">}</span>
-<span class="lineno">28</span> 
-<span class="lineno">29</span>   <span class="c1">// Do something with the result.</span>
-<span class="lineno">30</span> <span class="p">});</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="code"><pre><span class="nx">task</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="kd">function</span> <span class="nx">concatTwoFilesAndThenSomeTask</span><span class="p">()</span> <span class="p">{</span>
 
-<p>Of course it is a simple concept, which ignores many thing e.g. <code>EventEmitter</code>. But it also gives us many things e.g. meaningful stack traces with asynchronous operations or handling errors of composite asynchronous operations in one place.</p>
+  <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="dl">"</span><span class="s2">some/template</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">utf8</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">file1</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="dl">"</span><span class="s2">something/else</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">utf8</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">file2</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">file1</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">--</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">file2</span><span class="p">;</span>
+
+      <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/foo/g</span><span class="p">,</span> <span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+    <span class="p">});</span>
+
+  <span class="p">});</span>
+
+<span class="p">}).</span><span class="nx">setCallback</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Do something with the result.</span>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Of course it is a simple concept, which ignores many thing e.g. <code class="highlighter-rouge">EventEmitter</code>. But it also gives us many things e.g. meaningful stack traces with asynchronous operations or handling errors of composite asynchronous operations in one place.</p>
 
 <p>I know that there exist modules which can do that (like <a href="https://github.com/caolan/async">async</a>), but having it built into the platform seems very interesting and brings other capabilities (e.g. under-the-hood optimization) which the additional modules do not have.</p>
 
-<p>The whole concept has evolved into something called by Bert a <code>domains2</code> module. You can find details in references.</p>
+<p>The whole concept has evolved into something called by Bert a <code class="highlighter-rouge">domains2</code> module. You can find details in references.</p>
 
 <h1 id="what-else">What else?</h1>
 
@@ -100,15 +131,15 @@
       <li><a href="http://www.ietf.org/rfc/rfc1157.txt">SNMP</a></li>
     </ul>
   </li>
-  <li>Adding more load balancing algorithms to the <em><code>cluster</code></em> module (<a href="http://strongloop.com/strongblog/whats-new-in-node-js-v0-12-cluster-round-robin-load-balancing/">Round-Robin was recently added in <code>0.12</code></a>).</li>
+  <li>Adding more load balancing algorithms to the <em><code class="highlighter-rouge">cluster</code></em> module (<a href="http://strongloop.com/strongblog/whats-new-in-node-js-v0-12-cluster-round-robin-load-balancing/">Round-Robin was recently added in <code class="highlighter-rouge">0.12</code></a>).</li>
   <li>Adding supervision mechanisms (like the ones we have in <a href="http://www.erlang.org/doc/design_principles/sup_princ.html">Erlang and OTP</a>)</li>
   <li>Supporting mesh topology (like in <a href="https://github.com/dominictarr/scuttlebutt">this module</a>).</li>
-  <li>Solving problems with <em><code>NPM</code></em> and keeping it <em>awesome</em> (by providing <a href="http://npmjs.eu/">mirrors</a> or <a href="https://scalenpm.org/">scaling it</a> and <a href="http://blog.nodejs.org/2013/11/26/npm-post-mortem/">decentralizing</a>).</li>
+  <li>Solving problems with <em><code class="highlighter-rouge">NPM</code></em> and keeping it <em>awesome</em> (by providing <a href="http://npmjs.eu/">mirrors</a> or <a href="https://scalenpm.org/">scaling it</a> and <a href="http://blog.nodejs.org/2013/11/26/npm-post-mortem/">decentralizing</a>).</li>
 </ul>
 
 <p>The reported enhancements are just the tip of the iceberg and even you can expand this list. I encourage you to subscribe to <em>Node.js</em> <a href="https://groups.google.com/forum/#!forum/nodejs">mailing list</a> and then observe, learn, share ideas and experience, discuss.</p>
 
-<p>I encourage you to be a conscious and active member of the community, maybe involve in some initiatives mentioned above, like mirroring or scaling the <em><code>NPM</code></em> etc.</p>
+<p>I encourage you to be a conscious and active member of the community, maybe involve in some initiatives mentioned above, like mirroring or scaling the <em><code class="highlighter-rouge">NPM</code></em> etc.</p>
 
 <p>The future looks promising only with the platform evolving with it - and evolution depends only on us.</p>
 
@@ -117,7 +148,7 @@
 <ol>
   <li><a href="http://www.youtube.com/watch?v=82hJbjqbIt4">Isaac Shlueter - The Road to Node.js v1.0</a></li>
   <li><a href="http://www.youtube.com/watch?v=QnO6Uut4Ao8">Bert Belder - Node.js 2.0 (LXJS 2013)</a></li>
-  <li><a href="https://gist.github.com/piscisaureus/7454729"><code>domains2</code></a></li>
+  <li><a href="https://gist.github.com/piscisaureus/7454729"><code class="highlighter-rouge">domains2</code></a></li>
   <li><a href="http://blog.nodejs.org/2011/07/11/evolving-the-node-js-brand/">Node.js Logo</a></li>
 </ol>
 
@@ -125,15 +156,6 @@
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/2013/12/06/nodejs-evolution.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/2013/12/06/nodejs-evolution.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
@@ -148,23 +170,12 @@
       <ul class="interests">
         <li>I write <a href="https://github.com/afronski">code</a></li>
         <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a></li>
         <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
           Except where otherwise noted, content on this site<br/>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
@@ -176,13 +187,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

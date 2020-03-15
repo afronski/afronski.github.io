@@ -51,8 +51,8 @@
 <p><em>Register machine</em> is a type of a computer, which <em>sequentially</em> executes instructions. Those instructions are operating and modifying a set of a memory elements called <em>registers</em>. A typical operation will take operation arguments from registers, and it will push the result of that instruction to another register. When it comes to the designing of such machines, at first you need to create its data paths - which the wiring and placement of registers and defining possible operations. Of course we need someting which is supervising the execution process (e.g. preserving order) and that it is a responsibility of the <em>controller</em>.</p>
 
 <div class="register-machines">
-  <img alt="Data paths in register machine." class="data-paths" src="/assets/RegisterMachine-1.gif" />
-  <img alt="Controller for a register machine." class="controller" src="/assets/RegisterMachine-2.gif" />
+  <img alt="Data paths in register machine." class="data-paths" src="/assets/RegisterMachine-1.gif">
+  <img alt="Controller for a register machine." class="controller" src="/assets/RegisterMachine-2.gif">
 </div>
 
 <quote class="legend">Example representation of register machine for calculating <code>GCD</code> - first image shows the data paths, second an example controller.</quote>
@@ -65,7 +65,7 @@
 
 <p>First concept explained in the chapter is <em>recursion</em>.</p>
 
-<p>In order to handle properly recursion, register machine needs to implement instructions for <code>save</code> and <code>restore</code> values of registers in the stack data structure. Of course there is a problem of having such data structure and allocating memory for it.</p>
+<p>In order to handle properly recursion, register machine needs to implement instructions for <code class="highlighter-rouge">save</code> and <code class="highlighter-rouge">restore</code> values of registers in the stack data structure. Of course there is a problem of having such data structure and allocating memory for it.</p>
 
 <p>That need can be partially fixed by optimizing recurrent calls which have property of being a <em>tail call</em> (it means that the same function invocation is a last instruction executed just before the end of that function). In that case there is no point of saving and restoring previous values from the stack, because it can reuse existing frame of reference and registers in the next call.</p>
 
@@ -85,21 +85,22 @@
 
 <p>As a side note, I would like to point out that if you will have to choose a single heritage of the <em>Lisp</em> language to the computer science, <em>garbage collection</em> will be a really a significant one, with no doubt.</p>
 
-<h3 id="deconstructing-clojure">Deconstructing <em>Clojure</em></h3>
+<h3 id="deconstructing-clojure">Deconstructing <em>Clojure</em>
+</h3>
 
 <p>So instead of building our own <em>Clojure</em> compiler, we will go under the hood for a while. Do not worry, we will not go too deep into the internals, but hopefully we will get a better understanding about the language itself. I would like to focus on two topics - <em>Clojure</em> evaluation and <em>data structures</em> implementation available in the language, which are leveraging very interesting properties.</p>
 
 <h4 id="is-clojure--clojurescript-interpreted-or-compiled">Is <em>Clojure</em> / <em>ClojureScript</em> interpreted or compiled?</h4>
 
-<p>Answer is like an usual one - <strong>it depends</strong>. It can be loaded dynamically directly to the <em><code>JVM</code></em> via <code>load / eval</code> (it is called <em>a dynamic compilation</em>) or compiled <em>ahead of time</em> to the <em>Java bytecode</em>, and then loaded into <em>VM</em> (it is called <em>AOT compilation</em>). But even in the case of dynamic compilation, you are preprocessing everything to the <em>bytecode</em> representation - the only difference is that it does not land in the file (it is generated during the run-time). As you may expected it means that <em>VM</em> does not understand <em>Clojure</em> or even <em>Java</em> languages directly - <em>bytecode</em> is a collection of class files. Each one contains description of a class and methods, which have been translated to intermediate representation suitable for <em><code>JVM</code></em> (you can find details <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html">here</a>).</p>
+<p>Answer is like an usual one - <strong>it depends</strong>. It can be loaded dynamically directly to the <em><code class="highlighter-rouge">JVM</code></em> via <code class="highlighter-rouge">load / eval</code> (it is called <em>a dynamic compilation</em>) or compiled <em>ahead of time</em> to the <em>Java bytecode</em>, and then loaded into <em>VM</em> (it is called <em>AOT compilation</em>). But even in the case of dynamic compilation, you are preprocessing everything to the <em>bytecode</em> representation - the only difference is that it does not land in the file (it is generated during the run-time). As you may expected it means that <em>VM</em> does not understand <em>Clojure</em> or even <em>Java</em> languages directly - <em>bytecode</em> is a collection of class files. Each one contains description of a class and methods, which have been translated to intermediate representation suitable for <em><code class="highlighter-rouge">JVM</code></em> (you can find details <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html">here</a>).</p>
 
-<p>If we already have such code, then <em><code>JVM</code></em> <em>loads</em>, <em>links</em> and <em>initializes</em> class files provided during execution. During the first phase it finds a binary representation of the class and creates the <em>VM</em> internal representation from that. Then (during the <em>linking</em> phase) it adds prepared representations to the <em><code>JVM</code></em> state, and during that it also verifies is everything is structurally correct. At this point it also can resolve the symbolic references and it will prepare static fields, prefilled with the default variables. In the last step it invokes the initializers, but only when the class is needed (e.g. they are referenced by <code>new</code> or static method invocations, and obviously by associating it with the main class).</p>
+<p>If we already have such code, then <em><code class="highlighter-rouge">JVM</code></em> <em>loads</em>, <em>links</em> and <em>initializes</em> class files provided during execution. During the first phase it finds a binary representation of the class and creates the <em>VM</em> internal representation from that. Then (during the <em>linking</em> phase) it adds prepared representations to the <em><code class="highlighter-rouge">JVM</code></em> state, and during that it also verifies is everything is structurally correct. At this point it also can resolve the symbolic references and it will prepare static fields, prefilled with the default variables. In the last step it invokes the initializers, but only when the class is needed (e.g. they are referenced by <code class="highlighter-rouge">new</code> or static method invocations, and obviously by associating it with the main class).</p>
 
-<p>BTW. Sometimes I hear people complaining about the <em><code>JVM</code></em> start-up time, in terms of loading <em>Clojure</em> <em><code>REPL</code></em>’ - it has been already improved a lot, but if someone is interested in the details and why the <em>Clojure</em> (and not actually <em><code>JVM</code></em>) takes so long to bootstrap, I encourage you to dive deeper into those articles - <a href="http://blog.ndk.io/2014/02/11/jvm-slow-startup.html">1</a>, <a href="http://blog.ndk.io/2014/02/25/clojure-bootstrapping.html">2</a>.</p>
+<p>BTW. Sometimes I hear people complaining about the <em><code class="highlighter-rouge">JVM</code></em> start-up time, in terms of loading <em>Clojure</em> <em><code class="highlighter-rouge">REPL</code></em>’ - it has been already improved a lot, but if someone is interested in the details and why the <em>Clojure</em> (and not actually <em><code class="highlighter-rouge">JVM</code></em>) takes so long to bootstrap, I encourage you to dive deeper into those articles - <a href="http://blog.ndk.io/2014/02/11/jvm-slow-startup.html">1</a>, <a href="http://blog.ndk.io/2014/02/25/clojure-bootstrapping.html">2</a>.</p>
 
-<p>Situation is slightly simpler, when it comes to <em>ClojureScript</em> - it is always compiled to the <em>JavaScript</em> representation. But the compilation process is somehow interesting anyway. Under the hood, it uses <em>Google Closure Compiler</em> and if you are familiar with it, it requires a specific structure to be built in order preserve certain features, especially during the optimization phase. By leveraging the <em>libraries</em>, <em>Google Closure Modules</em>, specific dependency management, <code>cljsc</code> compiler can do amazing things - to name just one, <em>dead code analysis</em> which can prune properly even the external libraries code (assuming that external dependency somehow supports <em>Google Closure</em> as well). Obviously there is a trade-off - there are <a href="https://developers.google.com/closure/compiler/docs/limitations?csw=1">limitations</a>, and if you want to do the most advanced optimizations you have to be compliant with them. That is the way how compiler can assume certain things and then safely do optimizations.</p>
+<p>Situation is slightly simpler, when it comes to <em>ClojureScript</em> - it is always compiled to the <em>JavaScript</em> representation. But the compilation process is somehow interesting anyway. Under the hood, it uses <em>Google Closure Compiler</em> and if you are familiar with it, it requires a specific structure to be built in order preserve certain features, especially during the optimization phase. By leveraging the <em>libraries</em>, <em>Google Closure Modules</em>, specific dependency management, <code class="highlighter-rouge">cljsc</code> compiler can do amazing things - to name just one, <em>dead code analysis</em> which can prune properly even the external libraries code (assuming that external dependency somehow supports <em>Google Closure</em> as well). Obviously there is a trade-off - there are <a href="https://developers.google.com/closure/compiler/docs/limitations?csw=1">limitations</a>, and if you want to do the most advanced optimizations you have to be compliant with them. That is the way how compiler can assume certain things and then safely do optimizations.</p>
 
-<p>If you want grab a brief overview what kind of optimizations it can apply, I strongly suggest you to follow the tutorial from <a href="https://github.com/swannodette/hello-cljsc/blob/master/src/hello_cljsc/core.clj">swanodette/hello-cljsc</a> - at the end, there is a small example how enabling just <code>{:optimizations :simple}</code> can nicely optimize the initial source code. And there is still <code>{:optimizations :advanced}</code> mode. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+<p>If you want grab a brief overview what kind of optimizations it can apply, I strongly suggest you to follow the tutorial from <a href="https://github.com/swannodette/hello-cljsc/blob/master/src/hello_cljsc/core.clj">swanodette/hello-cljsc</a> - at the end, there is a small example how enabling just <code class="highlighter-rouge">{:optimizations :simple}</code> can nicely optimize the initial source code. And there is still <code class="highlighter-rouge">{:optimizations :advanced}</code> mode. <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"></p>
 
 <h4 id="data-structures-1">Data Structures</h4>
 
@@ -107,34 +108,39 @@
 
 <p>Those guarantees are really nice when it comes to the program analysis, but also from the compiler and optimization perspective. If that previous value is immutable and it will not change at all, we can leverage certain techniques of <em>sharing</em> parts of our collections between different values. We do not have to copy a whole collection, but only an updated part, where the old stuff can be just a reference (e.g. a pointer). It means that some collection persists on despite being created on top of another one.</p>
 
-<p><img alt="Structural sharing representation" src="/assets/ClojureTrees.png" /></p>
+<p><img alt="Structural sharing representation" src="/assets/ClojureTrees.png"></p>
 
 <quote class="legend">Image shamelessly taken from <a href="http://blip.tv/file/812787">Rich Hickey's "Clojure Concurrency" talk</a>.</quote>
 
 <p>This technique is called a <em>structural sharing</em> and it is <em>thread</em> and <em>iteration</em> safe way of reusing memory and reducing amount of necessary operations. All <em>Clojure</em> data structures are persistent (which means that they are shared), especially the hash maps, sets and vectors are based on top of very interesting concept called <em>bit-partitioned hash tries</em>. This is an enhanced concept of something called a <em>hashed tree</em> or <em>trie</em>, introduced by Phil Bagwell in that <a href="http://infoscience.epfl.ch/record/64398/files/idealhashtrees.pdf">paper</a>. The main change is related with the index values and bit-partitioning of hash codes, where a certain bit parts is responsible for indexing on a specific depth level of that tree. Details are really nicely explained in those two articles <a href="http://blog.higher-order.net/2009/02/01/understanding-clojures-persistentvector-implementation.html">1</a>, <a href="http://blog.higher-order.net/2009/09/08/understanding-clojures-persistenthashmap-deftwice.html">2</a>.</p>
 
-<h3 id="limitations-of-the-jvm">Limitations of the <code>JVM</code></h3>
+<h3 id="limitations-of-the-jvm">Limitations of the <code class="highlighter-rouge">JVM</code>
+</h3>
 
-<p>Author of <em>Clojure</em>, Rich Hickey, <a href="http://wiki.jvmlangsummit.com/pdf/27_Hickey_clojure.pdf">even if he was pretty much very happy with using <em><code>JVM</code></em></a> (mostly because of platform maturity, tooling and libraries) presented also a pain points regarding the aforementioned choice.</p>
+<p>Author of <em>Clojure</em>, Rich Hickey, <a href="http://wiki.jvmlangsummit.com/pdf/27_Hickey_clojure.pdf">even if he was pretty much very happy with using <em><code class="highlighter-rouge">JVM</code></em></a> (mostly because of platform maturity, tooling and libraries) presented also a pain points regarding the aforementioned choice.</p>
 
-<p>The main issue is related with <em>no tail call optimization</em>. It affects other programming languages on top of <em><code>JVM</code></em> and each one solves that in a different way (e.g. sometimes by introducing an additional concepts like function annotations and generating <em>trampolines</em> - as it is done in <a href="http://www.scala-lang.org/">Scala</a> or <a href="https://github.com/Frege/frege">Frege</a>). <em>Clojure</em> attacks this problem from a different angle using <code>loop</code> and <code>recur</code> constructs which are really in phase with language philosophy. But for now, platform does not have support for that anyway, so under the hood it has to generate a loop or a any other suitable workaround.</p>
+<p>The main issue is related with <em>no tail call optimization</em>. It affects other programming languages on top of <em><code class="highlighter-rouge">JVM</code></em> and each one solves that in a different way (e.g. sometimes by introducing an additional concepts like function annotations and generating <em>trampolines</em> - as it is done in <a href="http://www.scala-lang.org/">Scala</a> or <a href="https://github.com/Frege/frege">Frege</a>). <em>Clojure</em> attacks this problem from a different angle using <code class="highlighter-rouge">loop</code> and <code class="highlighter-rouge">recur</code> constructs which are really in phase with language philosophy. But for now, platform does not have support for that anyway, so under the hood it has to generate a loop or a any other suitable workaround.</p>
 
-<p>Another pain point is related with use of Java’s boxed numbers and other <em>math-related</em> types. You have got plenty of options on <em><code>JVM</code></em> like <em>Integer</em>, <em>Long</em>, <em>BigInteger</em> etc., but by using you will inherit all problems related with choosing a proper type in <em>Clojure</em> as well. By relying on <em>Clojure</em> built-in types only, you will have problems related with <em>interoperability</em> between your code and <em><code>JVM</code></em> world, and you will have to deal with casting and types promotion by yourself. Another side-effect of that design is that it is also slower (because those numbers are really objects, and they are available on the <em>heap</em>). Having proper number types in the language, and hiding complexity of it inside compiler (related with optimizations or casting) could be really beneficial.</p>
+<p>Another pain point is related with use of Java’s boxed numbers and other <em>math-related</em> types. You have got plenty of options on <em><code class="highlighter-rouge">JVM</code></em> like <em>Integer</em>, <em>Long</em>, <em>BigInteger</em> etc., but by using you will inherit all problems related with choosing a proper type in <em>Clojure</em> as well. By relying on <em>Clojure</em> built-in types only, you will have problems related with <em>interoperability</em> between your code and <em><code class="highlighter-rouge">JVM</code></em> world, and you will have to deal with casting and types promotion by yourself. Another side-effect of that design is that it is also slower (because those numbers are really objects, and they are available on the <em>heap</em>). Having proper number types in the language, and hiding complexity of it inside compiler (related with optimizations or casting) could be really beneficial.</p>
 
 <h3 id="summary">Summary</h3>
 
 <p>Over the course of five blog posts, we have went through whole book. We covered a lot of ground and prepared a lot of exercises from the book. We also learned <em>Clojure</em> during the process. If I have to choose the most interesting example from the book, I would go with the <a href="https://github.com/afronski/sicp-examples/blob/master/chapters/2/2.3.2/deriv.clj">symbolic derivation</a> or <a href="https://github.com/afronski/sicp-examples/blob/master/chapters/3/3.3.4/electronic-circuit.clj">electronic circuit simulator</a>. I did not change my opinion about the book - I still think that it is <strong>one of the most important publications for a computer scientist</strong>. Or for a programmer, who is just eager to learn and know more. Especially about <em>functional programming</em>.</p>
 
-<p>I hope that you have enjoyed the series as much as I did. <img class="emoji" title=":smile:" alt=":smile:" src="https://assets.github.com/images/icons/emoji/unicode/1f604.png" height="20" width="20" align="absmiddle" /></p>
+<p>I hope that you have enjoyed the series as much as I did. <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></p>
 
 <h3 id="credits">Credits</h3>
 
 <ul>
-  <li><a href="http://mitpress.mit.edu/books/structure-and-interpretation-computer-programs">Structure and Interpretation of Computer Programs</a>, <em>Harold Abelson</em>, <em>Gerald Jay Sussman</em> and <em>Julie Sussman</em></li>
+  <li>
+<a href="http://mitpress.mit.edu/books/structure-and-interpretation-computer-programs">Structure and Interpretation of Computer Programs</a>, <em>Harold Abelson</em>, <em>Gerald Jay Sussman</em> and <em>Julie Sussman</em>
+</li>
   <li><a href="https://mitpress.mit.edu/sicp/full-text/book/book.html">Full book available online</a></li>
-  <li><a href="https://github.com/clojure/clojure">clojure/clojure</a> - Source code.</li>
+  <li>
+<a href="https://github.com/clojure/clojure">clojure/clojure</a> - Source code.</li>
   <li><a href="https://github.com/swannodette/hello-cljsc">swanodette/hello-cljsc</a></li>
-  <li><a href="http://wiki.jvmlangsummit.com/pdf/27_Hickey_clojure.pdf">Clojure, A Dynamic Programming Language for the JVM</a> - Slides from Rich Hickey’s talk about <em>Clojure</em> internals.</li>
+  <li>
+<a href="http://wiki.jvmlangsummit.com/pdf/27_Hickey_clojure.pdf">Clojure, A Dynamic Programming Language for the JVM</a> - Slides from Rich Hickey’s talk about <em>Clojure</em> internals.</li>
   <li><a href="https://github.com/afronski/sicp-examples">afronski/sicp-examples</a></li>
 </ul>
 
@@ -142,48 +148,32 @@
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/sicp-in-clojure/2015/10/19/sicp-in-clojure-chapter-5.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/sicp-in-clojure/2015/10/19/sicp-in-clojure-chapter-5.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
 
       <a href="http://www.afronski.pl">
-        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+        <img id="avatar" src="/images/avatar.png" alt="My avatar">
       </a>
 
-      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
-      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br/>
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br>
+      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br>
       Besides working
       <ul class="interests">
-        <li>I write <a href="https://github.com/afronski">code</a></li>
-        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
-        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+        <li>I write <a href="https://github.com/afronski">code</a>
+</li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a>
+</li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a>
+</li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a>
+</li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
-          Except where otherwise noted, content on this site<br/>
+          Except where otherwise noted, content on this site<br>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
         </section>
       </footer>
@@ -193,13 +183,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

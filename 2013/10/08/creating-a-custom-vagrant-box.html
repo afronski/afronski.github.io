@@ -32,7 +32,7 @@
 
 <h1 id="creating-a-custom-vagrant-box">Creating a custom Vagrant box</h1>
 
-<p><img src="/assets/VagrantLogo.png" alt="Vagrant Logo" /></p>
+<p><img src="/assets/VagrantLogo.png" alt="Vagrant Logo"></p>
 
 <p><em>vagrant - a person without a settled home or regular work who wanders from place to place and lives by begging.</em></p>
 
@@ -49,7 +49,7 @@
 
 <p>And last but not least: all recipes provided in this article are valid for Vagrant in version 1.2 and above.</p>
 
-<h1 id="but-sometimes-necessary">… but sometimes necessary…</h1>
+<h1 id="-but-sometimes-necessary">… but sometimes necessary…</h1>
 
 <h4 id="install-vagrant">Install Vagrant</h4>
 
@@ -57,85 +57,85 @@
 
 <h4 id="virtual-machine-in-virtualbox">Virtual Machine in VirtualBox</h4>
 
-<p>At first, we have to prepare a virtual machine with a specified amount of RAM, number of virtual processors, virtual hard disk image and the rest of the virtualized hardware. Remember the <em>VM</em> name - you will need it at the end <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />.</p>
+<p>At first, we have to prepare a virtual machine with a specified amount of RAM, number of virtual processors, virtual hard disk image and the rest of the virtualized hardware. Remember the <em>VM</em> name - you will need it at the end <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20">.</p>
 
 <p>One important thing related to networking - create only one network adapter and set it for using NAT. At last, setup port forwarding like presented below:</p>
 
-<p><img src="/assets/VirtualBoxPortForwarding.png" alt="Port forwarding setup for test purposes" /></p>
+<p><img src="/assets/VirtualBoxPortForwarding.png" alt="Port forwarding setup for test purposes"></p>
 
 <h4 id="installation">Installation</h4>
 
 <p>Grab your favourite <em>Linux distribution</em> / <em>Unix flavour</em> ISO image and proceed with the installation process (no Windows because right now Vagrant doesn’t support this operating system as a guest).</p>
 
-<p>This is the easiest step in the whole guide <img class="emoji" title=":grin:" alt=":grin:" src="https://assets.github.com/images/icons/emoji/unicode/1f601.png" height="20" width="20" align="absmiddle" />.</p>
+<p>This is the easiest step in the whole guide <img class="emoji" title=":grin:" alt=":grin:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png" height="20" width="20">.</p>
 
 <h4 id="user-management">User management</h4>
 
 <p>After the installation, create a new user account:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Create user &#39;vagrant&#39;.</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Create user 'vagrant'.</span>
 root&gt; useradd vagrant
 
 <span class="c"># Setup password.</span>
-root&gt; passwd vagrant</code></pre></div>
+root&gt; passwd vagrant</code></pre></figure>
 
 <p>And add him to proper groups:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">root&gt; usermod -aG users,wheel vagrant</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root&gt; usermod <span class="nt">-aG</span> <span class="nb">users</span>,wheel vagrant</code></pre></figure>
 
-<p>And the final step here - disable password for <code>sudo</code> command in the <code>wheel</code> group:</p>
+<p>And the final step here - disable password for <code class="highlighter-rouge">sudo</code> command in the <code class="highlighter-rouge">wheel</code> group:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">root&gt; visudo
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root&gt; visudo
 
 <span class="c"># Uncomment or add a line like below:</span>
-%wheel <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> NOPASSWD: ALL</code></pre></div>
+%wheel <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> NOPASSWD: ALL</code></pre></figure>
 
 <h4 id="ssh">SSH</h4>
 
 <p>At first open port 22 on your machine, then get this <a href="https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub">public key</a> and put it in the file:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">root&gt; curl https://raw.github.com/.../vagrant.pub &gt; /etc/ssh/authorized_keys
-root&gt; chown root:root /etc/ssh/authorized_keys</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root&gt; curl https://raw.github.com/.../vagrant.pub <span class="o">&gt;</span> /etc/ssh/authorized_keys
+root&gt; <span class="nb">chown </span>root:root /etc/ssh/authorized_keys</code></pre></figure>
 
-<p>Then setup your <code>sshd_config</code> file like presented below:</p>
+<p>Then setup your <code class="highlighter-rouge">sshd_config</code> file like presented below:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Uncomment these lines:</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Uncomment these lines:</span>
 Port 22
 AddressFamily any
 ListenAddress 0.0.0.0
 ListenAddress ::
-PermitRootLogin yes
+PermitRootLogin <span class="nb">yes</span>
 
 <span class="c"># Also uncomment and change these:</span>
 AuthorizedKeysFile /etc/ssh/authorized_keys
-PasswordAuthentication no</code></pre></div>
+PasswordAuthentication no</code></pre></figure>
 
 <p>Then you can verify your settings by command:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>ssh -i ~/.vagrant.d/insecure_private_key vagrant@localhost -p 2222</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>ssh <span class="nt">-i</span> ~/.vagrant.d/insecure_private_key vagrant@localhost <span class="nt">-p</span> 2222</code></pre></figure>
 
 <p>If there are no errors you’re ready for the next step.</p>
 
 <p>In some cases you’ll receive an error similar to this one (<strong>SELinux compatible tip</strong>):</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>ssh -i ~/.vagrant.d/insecure_private_key vagrant@localhost -p 2222
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>ssh <span class="nt">-i</span> ~/.vagrant.d/insecure_private_key vagrant@localhost <span class="nt">-p</span> 2222
 
-Permission denied <span class="o">(</span>publickey,gssapi-keyex,gssapi-with-mic<span class="o">)</span></code></pre></div>
+Permission denied <span class="o">(</span>publickey,gssapi-keyex,gssapi-with-mic<span class="o">)</span></code></pre></figure>
 
 <p>In this case you need to fix the labels for the file with authorized keys:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span><span class="nb">cd</span> /etc/ssh/
-~ <span class="nv">$ </span>ls -laZ                     <span class="c"># Checking labels.</span>
-~ <span class="nv">$ </span>restorecon -r -vv .         <span class="c"># Fixing them.</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span><span class="nb">cd</span> /etc/ssh/
+~ <span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-laZ</span>                     <span class="c"># Checking labels.</span>
+~ <span class="nv">$ </span>restorecon <span class="nt">-r</span> <span class="nt">-vv</span> <span class="nb">.</span>         <span class="c"># Fixing them.</span></code></pre></figure>
 
 <h4 id="finishing-touches">Finishing touches</h4>
 
-<p>Unfortunately our <code>sudo</code> has one big disadvantage - it won’t work without a real TTY and as you probably guessed - vagrant doesn’t use it. So we have to disable this setting in <code>sudoers</code> file:</p>
+<p>Unfortunately our <code class="highlighter-rouge">sudo</code> has one big disadvantage - it won’t work without a real TTY and as you probably guessed - vagrant doesn’t use it. So we have to disable this setting in <code class="highlighter-rouge">sudoers</code> file:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>sudo visudo
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span><span class="nb">sudo </span>visudo
 
 <span class="c"># Comment or remove line like below:</span>
-Default requiretty</code></pre></div>
+Default requiretty</code></pre></figure>
 
 <p>Just before the last step, please remove all previously forwarded ports for your virtual machine in VirtualBox.</p>
 
@@ -143,17 +143,17 @@ Default requiretty</code></pre></div>
 
 <p>We still have to do the last step - packaging:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>vagrant package --name &lt;VM name&gt; --output FreshAndHotVagrant.box</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>vagrant package <span class="nt">--name</span> &lt;VM name&gt; <span class="nt">--output</span> FreshAndHotVagrant.box</code></pre></figure>
 
 <p>The result is a finished box, which we can add to our list:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>vagrant box add &lt;internal box name&gt; FreshAndHotVagrant.box</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>vagrant box add &lt;internal box name&gt; FreshAndHotVagrant.box</code></pre></figure>
 
-<p>Then feel free to use it inside <code>Vagrantfile</code>:</p>
+<p>Then feel free to use it inside <code class="highlighter-rouge">Vagrantfile</code>:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;&lt;internal box name&gt;&quot;</span>
-<span class="k">end</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Vagrant</span><span class="p">.</span><span class="nf">configure</span><span class="p">(</span><span class="s2">"2"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">vm</span><span class="p">.</span><span class="nf">box</span> <span class="o">=</span> <span class="s2">"&lt;internal box name&gt;"</span>
+<span class="k">end</span></code></pre></figure>
 
 <h1 id="links-and-image-credits">Links and Image credits</h1>
 
@@ -166,48 +166,32 @@ Default requiretty</code></pre></div>
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/2013/10/08/creating-a-custom-vagrant-box.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/2013/10/08/creating-a-custom-vagrant-box.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
 
       <a href="http://www.afronski.pl">
-        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+        <img id="avatar" src="/images/avatar.png" alt="My avatar">
       </a>
 
-      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
-      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br/>
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br>
+      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br>
       Besides working
       <ul class="interests">
-        <li>I write <a href="https://github.com/afronski">code</a></li>
-        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
-        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+        <li>I write <a href="https://github.com/afronski">code</a>
+</li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a>
+</li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a>
+</li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a>
+</li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
-          Except where otherwise noted, content on this site<br/>
+          Except where otherwise noted, content on this site<br>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
         </section>
       </footer>
@@ -217,13 +201,5 @@ Default requiretty</code></pre></div>
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

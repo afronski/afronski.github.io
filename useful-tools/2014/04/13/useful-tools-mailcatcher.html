@@ -30,62 +30,53 @@
     <article class="container post">
       <a href="/">Home</a>
 
-<h1 id="useful-tools---mailcatcher">Useful tools - <code>mailcatcher</code></h1>
+<h1 id="useful-tools---mailcatcher">Useful tools - <code class="highlighter-rouge">mailcatcher</code></h1>
 
 <h2 id="overview">Overview</h2>
 
-<p><em>MailCatcher</em> runs a super simple <code>SMTP</code> server which catches any message sent to it to display in a web interface. It is a very useful tool which does not need a huge knowledge about e.g. <code>sendmail</code> and it is really easy to set up.</p>
+<p><em>MailCatcher</em> runs a super simple <code class="highlighter-rouge">SMTP</code> server which catches any message sent to it to display in a web interface. It is a very useful tool which does not need a huge knowledge about e.g. <code class="highlighter-rouge">sendmail</code> and it is really easy to set up.</p>
 
 <h2 id="installation-and-usage">Installation and Usage</h2>
 
 <p>Service is written in <em>Ruby</em> and it is accessible in the gems repository. If you have <em>Ruby</em> installed you will only need to perform two installation steps:</p>
 
 <ol>
-  <li>Install it from gems by <code>gem install mailcatcher</code>.</li>
-  <li>Start the service by invoking command <code>mailcatcher</code>.</li>
-  <li>Go to the dashboard at <code>http://localhost:1080/</code>.</li>
-  <li>Send email through <code>smtp://localhost:1025</code> - after that email should appear in the dashboard.</li>
+  <li>Install it from gems by <code class="highlighter-rouge">gem install mailcatcher</code>.</li>
+  <li>Start the service by invoking command <code class="highlighter-rouge">mailcatcher</code>.</li>
+  <li>Go to the dashboard at <code class="highlighter-rouge">http://localhost:1080/</code>.</li>
+  <li>Send email through <code class="highlighter-rouge">smtp://localhost:1025</code> - after that email should appear in the dashboard.</li>
 </ol>
 
-<p>Using it inside a web framework e.g. <em><code>Symfony2</code></em> is a piece of cake. The only thing you need is a small modification in the <em><code>parameters.yml</code></em> configuration file:</p>
+<p>Using it inside a web framework e.g. <em><code class="highlighter-rouge">Symfony2</code></em> is a piece of cake. The only thing you need is a small modification in the <em><code class="highlighter-rouge">parameters.yml</code></em> configuration file:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">mailer_transport</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">smtp</span>
-  <span class="l-Scalar-Plain">mailer_host</span><span class="p-Indicator">:</span>       <span class="l-Scalar-Plain">localhost</span>
-  <span class="l-Scalar-Plain">mailer_port</span><span class="p-Indicator">:</span>       <span class="l-Scalar-Plain">1025</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">parameters</span><span class="pi">:</span>
+  <span class="na">mailer_transport</span><span class="pi">:</span>  <span class="s">smtp</span>
+  <span class="na">mailer_host</span><span class="pi">:</span>       <span class="s">localhost</span>
+  <span class="na">mailer_port</span><span class="pi">:</span>       <span class="s">1025</span></code></pre></figure>
 
-<p>You need to be sure that in the <em><code>config.yml</code></em> you have these keys:</p>
+<p>You need to be sure that in the <em><code class="highlighter-rouge">config.yml</code></em> you have these keys:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">swiftmailer</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">transport</span><span class="p-Indicator">:</span>      <span class="err">%</span><span class="l-Scalar-Plain">mailer_transport%</span>
-  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span>           <span class="err">%</span><span class="l-Scalar-Plain">mailer_host%</span>
-  <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span>           <span class="err">%</span><span class="l-Scalar-Plain">mailer_port%</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">swiftmailer</span><span class="pi">:</span>
+  <span class="na">transport</span><span class="pi">:</span>      <span class="err">%</span><span class="s">mailer_transport%</span>
+  <span class="na">host</span><span class="pi">:</span>           <span class="err">%</span><span class="s">mailer_host%</span>
+  <span class="na">port</span><span class="pi">:</span>           <span class="err">%</span><span class="s">mailer_port%</span></code></pre></figure>
 
-<p>After applying mentioned changes and rebuilding the cache application will send emails via <code>SMTP</code> server from <em>mailcatcher</em>.</p>
+<p>After applying mentioned changes and rebuilding the cache application will send emails via <code class="highlighter-rouge">SMTP</code> server from <em>mailcatcher</em>.</p>
 
 <p>If you need to run it as a service with web interface accessible outside you need to run it in this way:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>nohup mailcatcher --http-ip 0.0.0.0 &gt; /var/log/mailcatcher.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span><span class="nb">nohup </span>mailcatcher <span class="nt">--http-ip</span> 0.0.0.0 <span class="o">&gt;</span> /var/log/mailcatcher.log 2&gt;&amp;1 &amp;</code></pre></figure>
 
 <h1 id="links">Links</h1>
 
 <ol>
-  <li><a href="http://mailcatcher.me/"><code>mailcatcher</code></a></li>
+  <li><a href="http://mailcatcher.me/"><code class="highlighter-rouge">mailcatcher</code></a></li>
 </ol>
 
     </article>
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/useful-tools/2014/04/13/useful-tools-mailcatcher.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/useful-tools/2014/04/13/useful-tools-mailcatcher.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
@@ -100,23 +91,12 @@
       <ul class="interests">
         <li>I write <a href="https://github.com/afronski">code</a></li>
         <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a></li>
         <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
           Except where otherwise noted, content on this site<br/>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
@@ -128,13 +108,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

@@ -38,7 +38,7 @@
 
 <p>In previous blog post, we talked about <em>pattern matching</em> and its usage in <em>functional programming</em> in general. But <em>Erlang</em> is more known in the programming community from something different. This programming language, with support for distribution and concurrency baked in since beginning, is mostly known as a solid foundation for reliable, long running systems, maintained for many years. It was developed this way <strong>deliberately</strong> with all mentioned features in mind, because of requirements imposed by telecommunications industry from the 80s. Moreover, these requirements are still actual for today’s IT systems. We can benefit from the whole platform, especially if we have to deal with strict requirements related with <em>reliability</em> and <em>fault-tolerance</em>.</p>
 
-<p><em>Erlang’s</em> unique features related with concurrency, reliability and distribution are based on very simple concepts - <em>isolation</em>, <em>lightweight processes</em> and powerful <em><code>VM</code></em> implementation. Back in a days, <em>Erlang</em> needs for distribution was argued because of <em>hardware redundancy</em>. If you want to have <em>fault-tolerant</em> system, you need at least two computers. You need to provide <em>redundancy</em> and simply put - <em>two machines are able to handle multiple errors, one machine handles only the first error</em>. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+<p><em>Erlang’s</em> unique features related with concurrency, reliability and distribution are based on very simple concepts - <em>isolation</em>, <em>lightweight processes</em> and powerful <em><code class="highlighter-rouge">VM</code></em> implementation. Back in a days, <em>Erlang</em> needs for distribution was argued because of <em>hardware redundancy</em>. If you want to have <em>fault-tolerant</em> system, you need at least two computers. You need to provide <em>redundancy</em> and simply put - <em>two machines are able to handle multiple errors, one machine handles only the first error</em>. <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"></p>
 
 <p>But, if you have multiple concurrent processes, you need to treat errors differently - classic way of error handling or <em>defensive programming</em> techniques will not help us here. <em>Erlang’s</em> famous motto for that situations is <strong>let it crash</strong>. It does not mean, that we should crash whole <em>VM</em> in case of error, We need to deal with them in a different way and with different tools - <em>supervisors</em> with their hierarchies and ability to <em>connect</em> and <em>observe</em> other processes. I would like to focus on the second group.</p>
 
@@ -47,15 +47,15 @@
 <p><em>Isolation</em> is a very wise choice when it comes to the reliability, because we can avoid <em>cascading failures</em>. But, how you will know that something actually failed? Besides <em>isolation</em>, the very important thing is to have ability to <em>observe</em> other processes. By connecting two processes together via <em>link</em>, you are creating the bidirectional bond - if one of them fails, both processes will be killed.</p>
 
 <section class="picture-section">
-  <img class="half-sized-image" alt="Links in Erlang" src="http://learnyousomeerlang.com/static/img/link-exit.png" />
+  <img class="half-sized-image" alt="Links in Erlang" src="http://learnyousomeerlang.com/static/img/link-exit.png">
   <small>Image shamelessly taken from the amazing book <em>Learn You Some Erlang For Great Good!</em></small>
 </section>
 
 <p>It sounds useful - you can group processes together with common concerns and bring them down together in case of error. Disabling a link is possible on both sides. But what if we would like to have more granular control on the exiting flow. We can either <em>monitor</em> a second process or <em>trap exits</em>. Lets look on the second method at first:</p>
 
-<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="nb">process_flag</span><span class="p">(</span><span class="n">trap_exit</span><span class="p">,</span> <span class="n">true</span><span class="p">).</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="nb">process_flag</span><span class="p">(</span><span class="n">trap_exit</span><span class="p">,</span> <span class="n">true</span><span class="p">).</span></code></pre></figure>
 
-<p>By doing that, process which trap exits will receive an additional message to the mailbox if the linked processes will exit abruptly with an erroneous reason. Also, if the process itself will exit with an error - exit signal will be trapped. Only one type of error, called a <em><code>kill</code></em> invoked by the process itself, cannot be trapped - you can do it by <code>exit(Pid, kill).</code>.</p>
+<p>By doing that, process which trap exits will receive an additional message to the mailbox if the linked processes will exit abruptly with an erroneous reason. Also, if the process itself will exit with an error - exit signal will be trapped. Only one type of error, called a <em><code class="highlighter-rouge">kill</code></em> invoked by the process itself, cannot be trapped - you can do it by <code class="highlighter-rouge">exit(Pid, kill).</code>.</p>
 
 <p>Besides that you can <em>observe</em> other processes by setting unidirectional connection called a <em>monitor</em>. When the monitored process will go down, observer will receive a new message directly to the mailbox. As we said, it is a unidirectional relation, so it can be disabled only by the process that set up that connection earlier.</p>
 
@@ -65,7 +65,7 @@
 
 <quote class="foreign">Links were invented by Mike Williams and based on the idea of a C-wire (a form of electrical circuit breaker).</quote>
 
-<p>Idea comes directly from the <em>“C-wire”</em> in early telephones. In order to cancel a problematic call, you should ground the <em>C-wire</em>. <em>Electronics</em> is always a very good place to collect a valuable inspiration regarding the <em>system design</em> and <em>fault-tolerance</em>. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+<p>Idea comes directly from the <em>“C-wire”</em> in early telephones. In order to cancel a problematic call, you should ground the <em>C-wire</em>. <em>Electronics</em> is always a very good place to collect a valuable inspiration regarding the <em>system design</em> and <em>fault-tolerance</em>. <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"></p>
 
 <h3 id="credits">Credits</h3>
 
@@ -79,48 +79,32 @@
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/interesting-language-features/2015/03/27/interesting-language-features-erlang-links-and-monitors.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
 
       <a href="http://www.afronski.pl">
-        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+        <img id="avatar" src="/images/avatar.png" alt="My avatar">
       </a>
 
-      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
-      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br/>
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br>
+      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br>
       Besides working
       <ul class="interests">
-        <li>I write <a href="https://github.com/afronski">code</a></li>
-        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
-        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+        <li>I write <a href="https://github.com/afronski">code</a>
+</li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a>
+</li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a>
+</li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a>
+</li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
-          Except where otherwise noted, content on this site<br/>
+          Except where otherwise noted, content on this site<br>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
         </section>
       </footer>
@@ -130,13 +114,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

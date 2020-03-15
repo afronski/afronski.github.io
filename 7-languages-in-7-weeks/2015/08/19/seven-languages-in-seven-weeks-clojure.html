@@ -40,7 +40,7 @@
 
 <p>In the book Bruce Tate assigns for each language a movie character (e.g. one of my favorite is <a href="https://en.wikipedia.org/wiki/Agent_Smith">Agent Smith</a> associated with <em>Erlang</em>). Also choice for <em>Clojure</em>, which is referred here, is brilliant - <a href="https://en.wikipedia.org/wiki/Yoda">Master Yoda</a> speaks differently (like any Lisp-family based language), he is an exile (those languages waited very long for its fame and glory) and he has an extraordinary knowledge.</p>
 
-<p><img class="right clojure-logo" alt="Clojure Logo" src="/assets/ClojureLogo.gif" /></p>
+<p><img class="right clojure-logo" alt="Clojure Logo" src="/assets/ClojureLogo.gif"></p>
 
 <h3 id="what-is-different-in-clojure">What is different in Clojure?</h3>
 
@@ -48,7 +48,7 @@
 
 <p>Main example - it favors pure functions (with no <em>side-effects</em>), but also does not close you inside very strict environment, where you cannot work with side-effects anymore. Instead it provides very natural and effective primitives for managing them.</p>
 
-<p>Concurrency primitives based on <em>STM</em> (<em>Software Transactional Memory</em>) - like references and atoms, agents, or amazing standard library for manging asynchronicity - <code>core.async</code> are another elements.</p>
+<p>Concurrency primitives based on <em>STM</em> (<em>Software Transactional Memory</em>) - like references and atoms, agents, or amazing standard library for manging asynchronicity - <code class="highlighter-rouge">core.async</code> are another elements.</p>
 
 <p><em>Clojure</em> as an langauge has unique approach to state manipulation, which is natural and not broken as other models. Its <em>epochal time model</em> is a definition of states succession over time. Modified <em>state</em> is a value, which means it is immutable. But <em>identity</em>, which is the aforementioned succession of states, is a narrow view. Value inside that view differs depending on the time that observers choose to reveal it.</p>
 
@@ -56,7 +56,7 @@
 
 <p>Also there is one more point regarding the runtime platform - <em>JVM</em> and its evolution can be a limiting factor (you can observe that with e.g. lack of tail-call optimization for recurrency, which is a key thing in functional programming language). Using it as a platform has advantages and disadvantages - in the other words - it is a double-edged sword. Thanks to its popularity, it brings many things to the table (community, experience, stable runtime and huge collection of libraries) - but taking care about compatibility with this ecosystem is expensive and also evolution is slowed down by a <em>velocity</em> and sometimes <em>direction</em> of the runtime evolution. Keep in mind that it has totally different momentum - whole problem is very nicely explained by <em>Brian Goetz</em> <a href="https://www.youtube.com/watch?v=2y5Pv4yN0b0">here</a>.</p>
 
-<p><em>Clojure</em> is focused on data structures and its manipulation. It is our primary task in our daily job, every day we sort, transform, filter and shuffle data structures. Well defined and designed sequences (with support for lazy collections) and other more advanced constructs like <em>reducers</em> and <em>transducers</em> - everything helps you with one of the most common daily tasks. Internally, implementation is also amazing - thanks to immutability we can leverage fully <em>structural sharing</em> for small and large data structures. Even if you decide to share your data with the external world, you can do it easily in a <em>Clojure</em> style with <a href="https://github.com/edn-format/edn"><em><code>edn</code></em></a>.</p>
+<p><em>Clojure</em> is focused on data structures and its manipulation. It is our primary task in our daily job, every day we sort, transform, filter and shuffle data structures. Well defined and designed sequences (with support for lazy collections) and other more advanced constructs like <em>reducers</em> and <em>transducers</em> - everything helps you with one of the most common daily tasks. Internally, implementation is also amazing - thanks to immutability we can leverage fully <em>structural sharing</em> for small and large data structures. Even if you decide to share your data with the external world, you can do it easily in a <em>Clojure</em> style with <a href="https://github.com/edn-format/edn"><em><code class="highlighter-rouge">edn</code></em></a>.</p>
 
 <p><em>Clojure</em> derives many things from <em>Lisp-family</em> languages - <em>macros</em> are also one of those. Language creators gave you such amazing power, but also a responsiblity, to adapt and adjust language constructs. You can benefit from the language homoiconicity, create your own <em>DSLs</em> and so on. What is interesting, <em>Clojure</em> deliberately removed ability to define your own reader macros, in order to avoid creating your own and potentially incompatible <em>Lisp</em> dialects.</p>
 
@@ -70,62 +70,50 @@
 
 <p>And we arrived almost to the end of the book. The last but not least is <em>Haskell</em> - strict and purist like <em>Spock</em> from <em>Star Trek</em> (yes, that is the <em>Bruce’s</em> choice). Then, after a short break, we will start again with first language described in the sequel <a href="https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks"><em>Seven More Languages in Seven Weeks</em></a>.</p>
 
-<p>See you in the next posts! <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /> And please, do not hesitate with sharing your feedback and comments below.</p>
+<p>See you in the next posts! <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"> And please, do not hesitate with sharing your feedback and comments below.</p>
 
 <h3 id="credits">Credits</h3>
 
 <ul>
   <li><a href="http://clojure.org">Clojure, official site</a></li>
-  <li><a href="https://github.com/matthiasn/talk-transcripts/tree/master/Hickey_Rich">Rich Hickey’s talk transcripts hosted by</a> <a href="https://github.com/matthiasn">@matthiasn</a></li>
-  <li><a href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks">Seven Languages in Seven Weeks</a>, <em>Bruce A. Tate</em></li>
+  <li>
+<a href="https://github.com/matthiasn/talk-transcripts/tree/master/Hickey_Rich">Rich Hickey’s talk transcripts hosted by</a> <a href="https://github.com/matthiasn">@matthiasn</a>
+</li>
+  <li>
+<a href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks">Seven Languages in Seven Weeks</a>, <em>Bruce A. Tate</em>
+</li>
 </ul>
 
     </article>
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/7-languages-in-7-weeks/2015/08/19/seven-languages-in-seven-weeks-clojure.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/7-languages-in-7-weeks/2015/08/19/seven-languages-in-seven-weeks-clojure.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
 
       <a href="http://www.afronski.pl">
-        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+        <img id="avatar" src="/images/avatar.png" alt="My avatar">
       </a>
 
-      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
-      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br/>
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br>
+      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br>
       Besides working
       <ul class="interests">
-        <li>I write <a href="https://github.com/afronski">code</a></li>
-        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
-        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+        <li>I write <a href="https://github.com/afronski">code</a>
+</li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a>
+</li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a>
+</li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a>
+</li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
-          Except where otherwise noted, content on this site<br/>
+          Except where otherwise noted, content on this site<br>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
         </section>
       </footer>
@@ -135,13 +123,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

@@ -43,13 +43,13 @@
 <p>One of the parts in aforementioned complexity is an entity called <strong>application_controller</strong>. Whenever the <em>VM</em> starts up, this process is started and it starts <em>applications</em>. It supervises most of them (but not in the literal way). If you have couple of them, it will look like this:</p>
 
 <section class="picture-section">
-  <img alt="Application Controller and multiple applications with application masters." src="/assets/ApplicationController.png" />
+  <img alt="Application Controller and multiple applications with application masters." src="/assets/ApplicationController.png">
   <small>Image shamelessly taken from the amazing book <em>Learn You Some Erlang For Great Good!</em></small>
 </section>
 
-<p>Everything that I have told you before you can find in the books (and again - I especially recommend the amazing book from <a href="https://twitter.com/mononcqc">@mononcqc</a> - <a href="http://learnyousomeerlang.com">Learn You Some Erlang For Great Good!</a>), but there is a small understatement regarding <em>applications</em>. <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+<p>Everything that I have told you before you can find in the books (and again - I especially recommend the amazing book from <a href="https://twitter.com/mononcqc">@mononcqc</a> - <a href="http://learnyousomeerlang.com">Learn You Some Erlang For Great Good!</a>), but there is a small understatement regarding <em>applications</em>. <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"></p>
 
-<p><img src="/assets/SupervisionTree.png" alt="What are the processes at the beginning?" /></p>
+<p><img src="/assets/SupervisionTree.png" alt="What are the processes at the beginning?"></p>
 
 <p>This topic arisen during work on my hobby project called <a href="https://github.com/afronski/wolves-and-rabbits-world-simulation">afronski/wolves-and-rabbits-world-simulation</a>. Above you can see the <em>supervision tree</em> of this application (pretty standard one), but at the beginning of it there are two additional processes - not just one, which I have expected (the application master). So I tried to found an explanation and literally - <em>I found nothing</em>. There is only a small mention about that in the aforementioned book:</p>
 
@@ -61,53 +61,53 @@
 
 <h3 id="internals">Internals</h3>
 
-<p>So, we know what the <em>application controller</em> is, what the <em>application master</em> is explained above in the quote. In other words <em>application master</em> behaves like an application <em>nanny</em>: <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" /></p>
+<p>So, we know what the <em>application controller</em> is, what the <em>application master</em> is explained above in the quote. In other words <em>application master</em> behaves like an application <em>nanny</em>: <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"></p>
 
 <quote class="citation">Just know that the application master acts a bit like the app's nanny (well, a pretty insane nanny). It looks over its children and grandchildren, and when things go awry, it goes berserk and terminates its whole family tree. Brutally killing children is a common topic among Erlangers.</quote>
 
 <p><em>Nanny or not</em> - still we don’t know why there are actually two of them. If there is no explanation in the books, we need to look at the actual source code. And finally we found something <a href="https://github.com/erlang/otp/blob/maint/lib/kernel/src/application_master.erl#L84">useful</a>.</p>
 
-<div class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="c">%%% The logical and physical process structure is as follows:</span>
-<span class="c">%%%</span>
-<span class="c">%%%         logical                physical</span>
-<span class="c">%%%</span>
-<span class="c">%%%         --------               --------</span>
-<span class="c">%%%         |AM(GL)|               |AM(GL)|</span>
-<span class="c">%%%         --------               --------</span>
-<span class="c">%%%            |                       |</span>
-<span class="c">%%%         --------               --------</span>
-<span class="c">%%%         |Appl P|               |   X  |</span>
-<span class="c">%%%         --------               --------</span>
-<span class="c">%%%                                    |</span>
-<span class="c">%%%                                --------</span>
-<span class="c">%%%                                |Appl P|</span>
-<span class="c">%%%                                --------</span>
-<span class="c">%%%</span>
-<span class="c">%%% Where AM(GL) == Application Master (Group Leader)</span>
-<span class="c">%%%       Appl P == The application specific root process (child to AM)</span>
-<span class="c">%%%       X      == A special &#39;invisible&#39; process</span>
-<span class="c">%%%</span>
-<span class="c">%%% The reason for not using the logical structrure is that</span>
-<span class="c">%%% the application start function is synchronous, and</span>
-<span class="c">%%% that the AM is GL.</span>
-<span class="c">%%%</span>
-<span class="c">%%% This means that if AM executed the start</span>
-<span class="c">%%% function, and this function uses io, deadlock would occur.</span>
-<span class="c">%%% Therefore, this function is executed by the process X.</span>
-<span class="c">%%%</span>
-<span class="c">%%% Also, AM needs three loops;</span>
-<span class="c">%%%   - init_loop (waiting for the start function to return)</span>
-<span class="c">%%%   - main_loop</span>
-<span class="c">%%%   - terminate_loop (waiting for the process to die)</span>
-<span class="c">%%% In each of these loops, io and other requests are handled.</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-erlang" data-lang="erlang"><span class="c">%%% The logical and physical process structure is as follows:
+%%%
+%%%         logical                physical
+%%%
+%%%         --------               --------
+%%%         |AM(GL)|               |AM(GL)|
+%%%         --------               --------
+%%%            |                       |
+%%%         --------               --------
+%%%         |Appl P|               |   X  |
+%%%         --------               --------
+%%%                                    |
+%%%                                --------
+%%%                                |Appl P|
+%%%                                --------
+%%%
+%%% Where AM(GL) == Application Master (Group Leader)
+%%%       Appl P == The application specific root process (child to AM)
+%%%       X      == A special 'invisible' process
+%%%
+%%% The reason for not using the logical structrure is that
+%%% the application start function is synchronous, and
+%%% that the AM is GL.
+%%%
+%%% This means that if AM executed the start
+%%% function, and this function uses io, deadlock would occur.
+%%% Therefore, this function is executed by the process X.
+%%%
+%%% Also, AM needs three loops;
+%%%   - init_loop (waiting for the start function to return)
+%%%   - main_loop
+%%%   - terminate_loop (waiting for the process to die)
+</span><span class="err">%%%</span> <span class="nv">In</span> <span class="n">each</span> <span class="k">of</span> <span class="n">these</span> <span class="n">loops</span><span class="p">,</span> <span class="n">io</span> <span class="ow">and</span> <span class="n">other</span> <span class="n">requests</span> <span class="n">are</span> <span class="n">handled</span><span class="p">.</span></code></pre></figure>
 
 <p>But what is a <strong>group leader</strong>? Let’s dig into official documentation:</p>
 
 <quote class="citation">Every process is a member of some process group and all groups have a group leader. All IO from the group is channeled to the group leader. When a new process is spawned, it gets the same group leader as the spawning process. Initially, at system start-up, init is both its own group leader and the group leader of all processes.</quote>
 
-<p>Aha! Now the actual structure is pretty clear. During the <code>application:start/2</code> anything can happen, including <em>I/O calls</em> - but <em>application master</em> is a group leader, owner of <em>I/O resources</em> in its supervision tree. If the <em>I/O calls</em> are channeled through leader, definitely a deadlock can occur if the same process is responsible for invoking that <em>a call</em>. In order to avoid that <em>OTP developers</em> introduced an artificial process called <code>X</code> in the comment above, which executes the start function. Thanks to that, any <em>I/O calls</em> from the start-up process can be forwarded through the <em>application master</em> safely. <img class="emoji" title=":smile:" alt=":smile:" src="https://assets.github.com/images/icons/emoji/unicode/1f604.png" height="20" width="20" align="absmiddle" /></p>
+<p>Aha! Now the actual structure is pretty clear. During the <code class="highlighter-rouge">application:start/2</code> anything can happen, including <em>I/O calls</em> - but <em>application master</em> is a group leader, owner of <em>I/O resources</em> in its supervision tree. If the <em>I/O calls</em> are channeled through leader, definitely a deadlock can occur if the same process is responsible for invoking that <em>a call</em>. In order to avoid that <em>OTP developers</em> introduced an artificial process called <code class="highlighter-rouge">X</code> in the comment above, which executes the start function. Thanks to that, any <em>I/O calls</em> from the start-up process can be forwarded through the <em>application master</em> safely. <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></p>
 
-<p>What is even more interesting, an application life cycle consists of three phases - <code>init_loop</code> which is responsible for waiting until the start-up process will finish, <code>main_loop</code> which is a normal work of an application and <code>terminate_loop</code> which is responsible for shutdown all process owned by an application.</p>
+<p>What is even more interesting, an application life cycle consists of three phases - <code class="highlighter-rouge">init_loop</code> which is responsible for waiting until the start-up process will finish, <code class="highlighter-rouge">main_loop</code> which is a normal work of an application and <code class="highlighter-rouge">terminate_loop</code> which is responsible for shutdown all process owned by an application.</p>
 
 <p>We finally found an useful explanation for the additional processes in the <em>supervision tree</em>. Besides that, we introduced <em>behaviors</em>, which are the primary mechanism where it comes to reusing common abstractions prepared by the <em>OTP team</em>. But we, as the developers, can also create our own behaviors - and we will cover this topic in the next post.</p>
 
@@ -123,48 +123,32 @@
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/interesting-language-features/2015/05/14/interesting-language-features-erlang-application-behavior.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
 
       <a href="http://www.afronski.pl">
-        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+        <img id="avatar" src="/images/avatar.png" alt="My avatar">
       </a>
 
-      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
-      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br/>
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br>
+      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br>
       Besides working
       <ul class="interests">
-        <li>I write <a href="https://github.com/afronski">code</a></li>
-        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
-        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+        <li>I write <a href="https://github.com/afronski">code</a>
+</li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a>
+</li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a>
+</li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a>
+</li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
-          Except where otherwise noted, content on this site<br/>
+          Except where otherwise noted, content on this site<br>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
         </section>
       </footer>
@@ -174,13 +158,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

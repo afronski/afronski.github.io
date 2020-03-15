@@ -40,14 +40,23 @@
 
 <p>Let’s look at the standard abstraction of <em>iterable collections</em>, available in Java and Scala (example written in <em>Scala</em>):</p>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">trait</span> <span class="nc">Iterable</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
-<span class="lineno">2</span>   <span class="k">def</span> <span class="n">iterator</span><span class="o">()</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
-<span class="lineno">3</span> <span class="o">}</span>
-<span class="lineno">4</span> 
-<span class="lineno">5</span> <span class="k">trait</span> <span class="nc">Iterator</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
-<span class="lineno">6</span>   <span class="k">def</span> <span class="n">hasNext</span><span class="k">:</span> <span class="kt">Boolean</span>
-<span class="lineno">7</span>   <span class="k">def</span> <span class="n">next</span><span class="o">()</span><span class="k">:</span> <span class="kt">T</span>
-<span class="lineno">8</span> <span class="o">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="k">trait</span> <span class="nc">Iterable</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">iterator</span><span class="o">()</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+<span class="o">}</span>
+
+<span class="k">trait</span> <span class="nc">Iterator</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">hasNext</span><span class="k">:</span> <span class="kt">Boolean</span>
+  <span class="k">def</span> <span class="nf">next</span><span class="o">()</span><span class="k">:</span> <span class="kt">T</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><em>Iterable</em> is an abstraction for all collections which can be stepped through one-by-one.</p>
 
@@ -61,19 +70,33 @@
 
 <p>But we can introduce new abstractions. Let’s look at the example (again, written in <em>Scala</em>):</p>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno"> 1</span> <span class="k">trait</span> <span class="nc">Observable</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
-<span class="lineno"> 2</span>   <span class="k">def</span> <span class="n">subscribe</span><span class="o">(</span><span class="n">observer</span><span class="k">:</span> <span class="kt">Observer</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Subscription</span>
-<span class="lineno"> 3</span> <span class="o">}</span>
-<span class="lineno"> 4</span> 
-<span class="lineno"> 5</span> <span class="k">trait</span> <span class="nc">Observer</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
-<span class="lineno"> 6</span>   <span class="k">def</span> <span class="n">onNext</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span>
-<span class="lineno"> 7</span>   <span class="k">def</span> <span class="n">onError</span><span class="o">(</span><span class="n">error</span><span class="k">:</span> <span class="kt">Throwable</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span>
-<span class="lineno"> 8</span>   <span class="k">def</span> <span class="n">onCompleted</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span>
-<span class="lineno"> 9</span> <span class="o">}</span>
-<span class="lineno">10</span> 
-<span class="lineno">11</span> <span class="k">trait</span> <span class="nc">Subscription</span> <span class="o">{</span>
-<span class="lineno">12</span>   <span class="k">def</span> <span class="n">unsubscribe</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span>
-<span class="lineno">13</span> <span class="o">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="k">trait</span> <span class="nc">Observable</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">subscribe</span><span class="o">(</span><span class="n">observer</span><span class="k">:</span> <span class="kt">Observer</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Subscription</span>
+<span class="o">}</span>
+
+<span class="k">trait</span> <span class="nc">Observer</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">onNext</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span>
+  <span class="k">def</span> <span class="nf">onError</span><span class="o">(</span><span class="n">error</span><span class="k">:</span> <span class="kt">Throwable</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span>
+  <span class="k">def</span> <span class="nf">onCompleted</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span>
+<span class="o">}</span>
+
+<span class="k">trait</span> <span class="nc">Subscription</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">unsubscribe</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>We can compare these two concepts and definitely see similarities, such as that <em>Observable</em> is similar to <em>Iterable</em>. The same for <em>Observer</em> - <em>Iterator</em> pair. Also, we can easily spot an intent and usage here.</p>
 
@@ -89,29 +112,39 @@
 
 <p>Ready? Superb, but first we will bring up two definitions.</p>
 
-<h2 id="tryt"><code>Try[T]</code></h2>
+<h2 id="tryt"><code class="highlighter-rouge">Try[T]</code></h2>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">val</span> <span class="n">sumTry</span> <span class="k">=</span> <span class="k">for</span> <span class="o">{</span>
-<span class="lineno">2</span>   <span class="n">int1</span> <span class="k">&lt;-</span> <span class="nc">Try</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="n">parseInt</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">))</span>   <span class="c1">// int1 is Success(1).</span>
-<span class="lineno">3</span>   <span class="n">int2</span> <span class="k">&lt;-</span> <span class="nc">Try</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="n">parseInt</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">))</span>   <span class="c1">// int2 is Failure(...).</span>
-<span class="lineno">4</span> <span class="o">}</span> <span class="k">yield</span> <span class="o">{</span>
-<span class="lineno">5</span>   <span class="n">int1</span> <span class="o">+</span> <span class="n">int2</span>
-<span class="lineno">6</span> <span class="o">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="k">val</span> <span class="nv">sumTry</span> <span class="k">=</span> <span class="k">for</span> <span class="o">{</span>
+  <span class="n">int1</span> <span class="k">&lt;-</span> <span class="nc">Try</span><span class="o">(</span><span class="nv">Integer</span><span class="o">.</span><span class="py">parseInt</span><span class="o">(</span><span class="s">"1"</span><span class="o">))</span>   <span class="c1">// int1 is Success(1).</span>
+  <span class="n">int2</span> <span class="k">&lt;-</span> <span class="nc">Try</span><span class="o">(</span><span class="nv">Integer</span><span class="o">.</span><span class="py">parseInt</span><span class="o">(</span><span class="s">"a"</span><span class="o">))</span>   <span class="c1">// int2 is Failure(...).</span>
+<span class="o">}</span> <span class="k">yield</span> <span class="o">{</span>
+  <span class="n">int1</span> <span class="o">+</span> <span class="n">int2</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p><em><code>Try</code></em> is an analog for the <code>try...catch</code> block. Instead of having an exception thrown and having to deal with it immediately in the same thread, it disconnects the error handling and recovery.</p>
+<p><em><code class="highlighter-rouge">Try</code></em> is an analog for the <code class="highlighter-rouge">try...catch</code> block. Instead of having an exception thrown and having to deal with it immediately in the same thread, it disconnects the error handling and recovery.</p>
 
-<h2 id="optiont"><code>Option[T]</code></h2>
+<h2 id="optiont"><code class="highlighter-rouge">Option[T]</code></h2>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">val</span> <span class="n">optionResult</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>   <span class="c1">// optionResult is None.</span>
-<span class="lineno">2</span> <span class="k">val</span> <span class="n">optionResult2</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>     <span class="c1">// optionResult2 is Some(1).</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="k">val</span> <span class="nv">optionResult</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>   <span class="c1">// optionResult is None.</span>
+<span class="k">val</span> <span class="nv">optionResult2</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>     <span class="c1">// optionResult2 is Some(1).</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p><em><code>Option</code></em> represents optional values, returning an instance of <em><code>Some(A)</code></em> if <code>A</code> exists, or <em><code>None</code></em> if it does not.</p>
+<p><em><code class="highlighter-rouge">Option</code></em> represents optional values, returning an instance of <em><code class="highlighter-rouge">Some(A)</code></em> if <code class="highlighter-rouge">A</code> exists, or <em><code class="highlighter-rouge">None</code></em> if it does not.</p>
 
 <h2 id="composition">Composition</h2>
 
 <p>The same abstraction, of <em>Observable</em> can be built on top of <em>Iterable</em> and a simple type, which is a composite of two previously explained elements:</p>
 
-<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="n">collection</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">Try</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">T</span><span class="o">]]]</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">val</span> <span class="nv">collection</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">Try</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">T</span><span class="o">]]]</span></code></pre></figure>
 
 <p>It’s a sequence which introduces the same abstraction, but definitely loses the intent. Usage is not visible at the first glance as well (how are we communicating that something changed?).</p>
 
@@ -131,15 +164,6 @@
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/2013/12/17/with-great-power-comes-great-responsibility.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/2013/12/17/with-great-power-comes-great-responsibility.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
@@ -154,23 +178,12 @@
       <ul class="interests">
         <li>I write <a href="https://github.com/afronski">code</a></li>
         <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a></li>
         <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
           Except where otherwise noted, content on this site<br/>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
@@ -182,13 +195,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

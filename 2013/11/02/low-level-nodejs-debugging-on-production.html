@@ -34,152 +34,136 @@
 
 <p>Sometimes when you want to run your Node.js application on production environment, you will receive:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">node-stuff <span class="nv">$ </span>node index.js
-Segmentation fault</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">node-stuff <span class="nv">$ </span>node index.js
+Segmentation fault</code></pre></figure>
 
 <p>Yeah… and <em>now</em> what?</p>
 
-<p>Welcome to the dungeon, <em>DevOps</em> marine <img class="emoji" title=":grin:" alt=":grin:" src="https://assets.github.com/images/icons/emoji/unicode/1f601.png" height="20" width="20" align="absmiddle" />.</p>
+<p>Welcome to the dungeon, <em>DevOps</em> marine <img class="emoji" title=":grin:" alt=":grin:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png" height="20" width="20">.</p>
 
-<p>First of all, if you deployed an application on an <em>OS</em> different than <em>SmartOS</em>, you lost the ability to use many impressive tools which could definitely help you in that case (the most impressive ones are <code>mdb</code> and <code>dtrace</code>, you can find details in the references section of this post).</p>
+<p>First of all, if you deployed an application on an <em>OS</em> different than <em>SmartOS</em>, you lost the ability to use many impressive tools which could definitely help you in that case (the most impressive ones are <code class="highlighter-rouge">mdb</code> and <code class="highlighter-rouge">dtrace</code>, you can find details in the references section of this post).</p>
 
-<p>So there is no <em><code>mdb</code></em>, no <em><code>dtrace</code></em>, no <em>SmartOS</em>. You can’t also use your favorite debugger like <a href="https://trace.gl/">trace.gl</a>, <a href="https://github.com/jwarkentin/node-monkey">node-monkey</a> or <a href="https://github.com/node-inspector/node-inspector">node-inspector</a>. You have got only <code>gdb</code> and your brain filled with low-level computer knowledge <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />.</p>
+<p>So there is no <em><code class="highlighter-rouge">mdb</code></em>, no <em><code class="highlighter-rouge">dtrace</code></em>, no <em>SmartOS</em>. You can’t also use your favorite debugger like <a href="https://trace.gl/">trace.gl</a>, <a href="https://github.com/jwarkentin/node-monkey">node-monkey</a> or <a href="https://github.com/node-inspector/node-inspector">node-inspector</a>. You have got only <code class="highlighter-rouge">gdb</code> and your brain filled with low-level computer knowledge <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20">.</p>
 
 <p>Before you dive deeper into the internals of your application, let’s begin the voodoo that is the process of setting the proper options in your <em>OS</em>. First you will remove the limit related with the <em>core dump</em> size:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>sudo <span class="nb">ulimit</span> -c unlimited</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span><span class="nb">sudo ulimit</span> <span class="nt">-c</span> unlimited</code></pre></figure>
 
 <p>Next, you set different path for these files (remember to put them on a partition with a huge amount of the free disk space):</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;/tmp/core_%e.%p&#39;</span> <span class="p">|</span> sudo tee /proc/sys/kernel/core_pattern</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'/tmp/core_%e.%p'</span> | <span class="nb">sudo tee</span> /proc/sys/kernel/core_pattern</code></pre></figure>
 
-<p>Then, if you are using native Node.js extensions you have to recompile them with the debugging flag <em><code>-g</code></em> (configuration file taken from the <em><code>node_xslt</code></em> module):</p>
+<p>Then, if you are using native Node.js extensions you have to recompile them with the debugging flag <em><code class="highlighter-rouge">-g</code></em> (configuration file taken from the <em><code class="highlighter-rouge">node_xslt</code></em> module):</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
-  <span class="s2">&quot;targets&quot;</span><span class="o">:</span> <span class="p">[{</span>
-    <span class="s2">&quot;target_name&quot;</span><span class="o">:</span> <span class="s2">&quot;node_xslt&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sources&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;node_xslt.cc&quot;</span> <span class="p">],</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">targets</span><span class="dl">"</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="dl">"</span><span class="s2">target_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">node_xslt</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">sources</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span> <span class="dl">"</span><span class="s2">node_xslt.cc</span><span class="dl">"</span> <span class="p">],</span>
 
-    <span class="s2">&quot;cflags&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;&lt;!(xml2-config --cflags)&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;-fexceptions&quot;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">cflags</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">&lt;!(xml2-config --cflags)</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">-fexceptions</span><span class="dl">"</span><span class="p">,</span>
 
-      <span class="s2">&quot;-g&quot;</span>
+      <span class="dl">"</span><span class="s2">-g</span><span class="dl">"</span>
     <span class="p">],</span>
 
-    <span class="s2">&quot;cflags_cc&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;&lt;!(xml2-config --cflags)&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;-fexceptions&quot;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">cflags_cc</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">&lt;!(xml2-config --cflags)</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">-fexceptions</span><span class="dl">"</span><span class="p">,</span>
 
-      <span class="s2">&quot;-g&quot;</span>
+      <span class="dl">"</span><span class="s2">-g</span><span class="dl">"</span>
     <span class="p">],</span>
 
-    <span class="s2">&quot;xcode_settings&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;OTHER_CFLAGS&quot;</span><span class="o">:</span> <span class="p">[</span>
-        <span class="s2">&quot;&lt;!(xml2-config --cflags)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;-fexceptions&quot;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">xcode_settings</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">OTHER_CFLAGS</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">"</span><span class="s2">&lt;!(xml2-config --cflags)</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">-fexceptions</span><span class="dl">"</span><span class="p">,</span>
 
-        <span class="s2">&quot;-g&quot;</span>
+        <span class="dl">"</span><span class="s2">-g</span><span class="dl">"</span>
       <span class="p">]</span>
     <span class="p">},</span>
-    <span class="s2">&quot;libraries&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;-lxml2&quot;</span> <span class="p">,</span> <span class="s2">&quot;-lxslt&quot;</span> <span class="p">,</span> <span class="s2">&quot;-lexslt&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;library_dirs&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;/usr/lib&quot;</span> <span class="p">]</span>
+    <span class="dl">"</span><span class="s2">libraries</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">-lxml2</span><span class="dl">"</span> <span class="p">,</span> <span class="dl">"</span><span class="s2">-lxslt</span><span class="dl">"</span> <span class="p">,</span> <span class="dl">"</span><span class="s2">-lexslt</span><span class="dl">"</span><span class="p">],</span>
+    <span class="dl">"</span><span class="s2">library_dirs</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span> <span class="dl">"</span><span class="s2">/usr/lib</span><span class="dl">"</span> <span class="p">]</span>
   <span class="p">}]</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
-<p>Then, look at the dependencies (in our case <code>libxslt</code>, <code>libxml2</code>) and reinstall them in the development version (sometimes marked with a <code>-devel</code> postfix).</p>
+<p>Then, look at the dependencies (in our case <code class="highlighter-rouge">libxslt</code>, <code class="highlighter-rouge">libxml2</code>) and reinstall them in the development version (sometimes marked with a <code class="highlighter-rouge">-devel</code> postfix).</p>
 
 <p>After modifications and installing dependencies in the <em>debugging mode</em>, you have to run installation process inside the directory of the modified module (but only there, not on the upper level, because it will remove our changes in the modified module):</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">node_xslt <span class="nv">$ </span>npm install --verbose</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">node_xslt <span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--verbose</span></code></pre></figure>
 
-<p>Somewhere inside the long output you will find information about flags used in compilation process (and you should see a <em><code>-g</code></em> flag, responsible for attaching debugging informations).</p>
+<p>Somewhere inside the long output you will find information about flags used in compilation process (and you should see a <em><code class="highlighter-rouge">-g</code></em> flag, responsible for attaching debugging informations).</p>
 
-<p>Next, you have to simulate again situation with <em><code>Segmentation fault</code></em> behavior. When application receive unwanted signal, it will dump file with the <em>post-mortem</em> internal structure, ready for using inside <code>gdb</code>:</p>
+<p>Next, you have to simulate again situation with <em><code class="highlighter-rouge">Segmentation fault</code></em> behavior. When application receive unwanted signal, it will dump file with the <em>post-mortem</em> internal structure, ready for using inside <code class="highlighter-rouge">gdb</code>:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>gdb /usr/bin/node /tmp/core_XXX.YYY</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>gdb /usr/bin/node /tmp/core_XXX.YYY</code></pre></figure>
 
 <p>And now you are inside the belly of the monster, so you can move around:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">...
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">...
 Program received signal SIGSEGV, Segmentation fault.
 
 <span class="o">(</span>gdb<span class="o">)</span> bt
 <span class="c"># It shows the stack trace (but from the native code).</span>
-<span class="o">(</span>gdb<span class="o">)</span> print V8_Fatal<span class="o">(</span><span class="s2">&quot;a&quot;</span>, 11, <span class="s2">&quot;c&quot;</span><span class="o">)</span>
+<span class="o">(</span>gdb<span class="o">)</span> print V8_Fatal<span class="o">(</span><span class="s2">"a"</span>, 11, <span class="s2">"c"</span><span class="o">)</span>
 <span class="c"># It shows the stack trace inside V8.</span>
-<span class="c"># Values &quot;a&quot;, 11 and &quot;c&quot; are irrelevant.</span>
+<span class="c"># Values "a", 11 and "c" are irrelevant.</span>
 <span class="o">(</span>gdb<span class="o">)</span> quit
-<span class="c"># It exits gdb.</span></code></pre></div>
+<span class="c"># It exits gdb.</span></code></pre></figure>
 
 <p>If you want to attach to the running process, you have to invoke the command specified below:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>gdb attach <span class="k">$(</span>pidof node<span class="k">)</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>gdb attach <span class="si">$(</span>pidof node<span class="si">)</span></code></pre></figure>
 
-<p>However, if your application is running in a cluster mode (or you are running more than one Node.js application on your machine), this will fail and instead of <em><code>pidof</code></em> you have to pass a single <em>PID</em> value (from one application, master or one of the slaves, depends on what is interesting for you).</p>
+<p>However, if your application is running in a cluster mode (or you are running more than one Node.js application on your machine), this will fail and instead of <em><code class="highlighter-rouge">pidof</code></em> you have to pass a single <em>PID</em> value (from one application, master or one of the slaves, depends on what is interesting for you).</p>
 
-<p>You can also run <em><code>strace</code></em> in order to determine which system calls does your program invoke before <em>death</em>:</p>
+<p>You can also run <em><code class="highlighter-rouge">strace</code></em> in order to determine which system calls does your program invoke before <em>death</em>:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>strace -ttT</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>strace <span class="nt">-ttT</span></code></pre></figure>
 
-<p>After gathering a certain amount of knowledge, armed with the stack traces, system call invocations and the memory footprint you have to <em>dig deeper</em> into the actual application code and maybe try to reproduce that behavior in a more <em>debuggable</em> environment <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />.</p>
+<p>After gathering a certain amount of knowledge, armed with the stack traces, system call invocations and the memory footprint you have to <em>dig deeper</em> into the actual application code and maybe try to reproduce that behavior in a more <em>debuggable</em> environment <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20">.</p>
 
 <h1 id="references">References</h1>
 
 <ol>
-  <li><a href="http://dtrace.org/blogs/dap/2012/01/13/playing-with-nodev8-postmortem-debugging">Using <code>mdb</code></a></li>
-  <li><a href="http://dtrace.org/blogs/dap/2012/01/05/where-does-your-node-program-spend-its-time">Using <code>dtrace</code></a></li>
-  <li><a href="http://linux.die.net/man/3/ulimit"><code>ulimit</code> man pages</a></li>
+  <li><a href="http://dtrace.org/blogs/dap/2012/01/13/playing-with-nodev8-postmortem-debugging">Using <code class="highlighter-rouge">mdb</code></a></li>
+  <li><a href="http://dtrace.org/blogs/dap/2012/01/05/where-does-your-node-program-spend-its-time">Using <code class="highlighter-rouge">dtrace</code></a></li>
+  <li><a href="http://linux.die.net/man/3/ulimit"><code class="highlighter-rouge">ulimit</code> man pages</a></li>
   <li><a href="https://github.com/bsuh/node_xslt">node_xslt</a></li>
-  <li><a href="http://linux.die.net/man/1/strace"><code>strace</code> man pages</a></li>
+  <li><a href="http://linux.die.net/man/1/strace"><code class="highlighter-rouge">strace</code> man pages</a></li>
 </ol>
 
     </article>
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/2013/11/02/low-level-nodejs-debugging-on-production.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/2013/11/02/low-level-nodejs-debugging-on-production.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
 
       <a href="http://www.afronski.pl">
-        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+        <img id="avatar" src="/images/avatar.png" alt="My avatar">
       </a>
 
-      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
-      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br/>
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br>
+      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br>
       Besides working
       <ul class="interests">
-        <li>I write <a href="https://github.com/afronski">code</a></li>
-        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
-        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+        <li>I write <a href="https://github.com/afronski">code</a>
+</li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a>
+</li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a>
+</li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a>
+</li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
-          Except where otherwise noted, content on this site<br/>
+          Except where otherwise noted, content on this site<br>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
         </section>
       </footer>
@@ -189,13 +173,5 @@ Program received signal SIGSEGV, Segmentation fault.
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

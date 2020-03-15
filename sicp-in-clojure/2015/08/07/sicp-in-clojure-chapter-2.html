@@ -46,48 +46,48 @@
 
 <h3 id="compound-data-structures">Compound Data Structures</h3>
 
-<div class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="c1">;; Pair represented as a closure.</span>
-<span class="c1">;;</span>
-<span class="c1">;; We are returning a new function, which</span>
-<span class="c1">;; accepts only 0 or 1 as an index value.</span>
-<span class="c1">;;</span>
-<span class="c1">;; This is a constructor which is the first part</span>
-<span class="c1">;; of our barrier.</span>
+<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="c1">;; Pair represented as a closure.</span><span class="w">
+</span><span class="c1">;;</span><span class="w">
+</span><span class="c1">;; We are returning a new function, which</span><span class="w">
+</span><span class="c1">;; accepts only 0 or 1 as an index value.</span><span class="w">
+</span><span class="c1">;;</span><span class="w">
+</span><span class="c1">;; This is a constructor which is the first part</span><span class="w">
+</span><span class="c1">;; of our barrier.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nb">cons </span><span class="p">[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">m</span><span class="p">]</span>
-    <span class="p">(</span><span class="nb">cond </span><span class="p">(</span><span class="nb">= </span><span class="nv">m</span> <span class="mi">0</span><span class="p">)</span> <span class="nv">x</span>
-          <span class="p">(</span><span class="nb">= </span><span class="nv">m</span> <span class="mi">1</span><span class="p">)</span> <span class="nv">y</span>
-          <span class="ss">:else</span> <span class="p">(</span><span class="nb">assert </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">m</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">m</span> <span class="mi">0</span><span class="p">))</span> <span class="s">&quot;Argument should be 0 or 1.&quot;</span><span class="p">))))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="nb">cons</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="w">
+    </span><span class="p">(</span><span class="k">cond</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w">
+          </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w">
+          </span><span class="no">:else</span><span class="w"> </span><span class="p">(</span><span class="nb">assert</span><span class="w"> </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="s">"Argument should be 0 or 1."</span><span class="p">))))</span><span class="w">
 
-<span class="c1">;; Those functions are selectors, second</span>
-<span class="c1">;; part of our barrier.</span>
+</span><span class="c1">;; Those functions are selectors, second</span><span class="w">
+</span><span class="c1">;; part of our barrier.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">car</span> <span class="p">[</span><span class="nv">z</span><span class="p">]</span> <span class="p">(</span><span class="nf">z</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="kd">defn </span><span class="nv">cdr</span> <span class="p">[</span><span class="nv">z</span><span class="p">]</span> <span class="p">(</span><span class="nf">z</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">z</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w">
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">cdr</span><span class="w"> </span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">z</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w">
 
-<span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nb">cons </span><span class="mi">1</span> <span class="mi">2</span><span class="p">)))</span> <span class="c1">;; 1</span>
-<span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nb">cons </span><span class="mi">1</span> <span class="mi">2</span><span class="p">)))</span> <span class="c1">;; 2</span>
+</span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">car</span><span class="w"> </span><span class="p">(</span><span class="nb">cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)))</span><span class="w"> </span><span class="c1">;; 1</span><span class="w">
+</span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">cdr</span><span class="w"> </span><span class="p">(</span><span class="nb">cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)))</span><span class="w"> </span><span class="c1">;; 2</span><span class="w">
 
-<span class="c1">;; Pair represented as a list.</span>
-<span class="c1">;;</span>
-<span class="c1">;; We are returning a list, which</span>
-<span class="c1">;; has only 2 elements</span>
-<span class="c1">;;</span>
-<span class="c1">;; As in the previous case,</span>
-<span class="c1">;; this is a constructor.</span>
+</span><span class="c1">;; Pair represented as a list.</span><span class="w">
+</span><span class="c1">;;</span><span class="w">
+</span><span class="c1">;; We are returning a list, which</span><span class="w">
+</span><span class="c1">;; has only 2 elements</span><span class="w">
+</span><span class="c1">;;</span><span class="w">
+</span><span class="c1">;; As in the previous case,</span><span class="w">
+</span><span class="c1">;; this is a constructor.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nb">cons </span><span class="p">[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">list </span><span class="nv">x</span> <span class="nv">y</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="nb">cons</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">list</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w">
 
-<span class="c1">;; In that case, the following</span>
-<span class="c1">;; functions are selectors.</span>
+</span><span class="c1">;; In that case, the following</span><span class="w">
+</span><span class="c1">;; functions are selectors.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">car</span> <span class="p">[</span><span class="nv">z</span><span class="p">]</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">z</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="kd">defn </span><span class="nv">cdr</span> <span class="p">[</span><span class="nv">z</span><span class="p">]</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">z</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">nth</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w">
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">cdr</span><span class="w"> </span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">nth</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w">
 
-<span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nb">cons </span><span class="mi">1</span> <span class="mi">2</span><span class="p">)))</span> <span class="c1">;; 1</span>
-<span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nb">cons </span><span class="mi">1</span> <span class="mi">2</span><span class="p">)))</span> <span class="c1">;; 2</span></code></pre></div>
+</span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">car</span><span class="w"> </span><span class="p">(</span><span class="nb">cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)))</span><span class="w"> </span><span class="c1">;; 1</span><span class="w">
+</span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">cdr</span><span class="w"> </span><span class="p">(</span><span class="nb">cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)))</span><span class="w"> </span><span class="c1">;; 2</span></code></pre></figure>
 
 <p>We have presented here two implementations of the <em>pair</em> data structure. The first one is build on top of a list, the latter on top of a <em>closure</em> which is a pretty standard technique when it comes to preserving a small amount of state. The thing which I would like to highlight here is the very clean API focused around two types of functions - <em>constructor</em> and <em>selectors</em>.</p>
 
@@ -103,31 +103,31 @@
 
 <h3 id="freedom-and-elasticity">Freedom and Elasticity</h3>
 
-<div class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="c1">;; First we define combinators like</span>
-<span class="c1">;; `below`, `beside`, `flip-vert` and</span>
-<span class="c1">;; `flip-horiz`.</span>
+<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="c1">;; First we define combinators like</span><span class="w">
+</span><span class="c1">;; `below`, `beside`, `flip-vert` and</span><span class="w">
+</span><span class="c1">;; `flip-horiz`.</span><span class="w">
 
-<span class="c1">;; Now we can define a `wave` which</span>
-<span class="c1">;; draws a pattern.</span>
+</span><span class="c1">;; Now we can define a `wave` which</span><span class="w">
+</span><span class="c1">;; draws a pattern.</span><span class="w">
 
-<span class="c1">;; Using previous combinators and patterns</span>
-<span class="c1">;; we can easily build more complicated</span>
-<span class="c1">;; patterns:</span>
+</span><span class="c1">;; Using previous combinators and patterns</span><span class="w">
+</span><span class="c1">;; we can easily build more complicated</span><span class="w">
+</span><span class="c1">;; patterns:</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">wave2</span>
-  <span class="p">(</span><span class="nf">beside</span> <span class="nv">wave</span> <span class="p">(</span><span class="nf">flip-vert</span> <span class="nv">wave</span><span class="p">)))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">wave2</span><span class="w">
+  </span><span class="p">(</span><span class="nf">beside</span><span class="w"> </span><span class="n">wave</span><span class="w"> </span><span class="p">(</span><span class="nf">flip-vert</span><span class="w"> </span><span class="n">wave</span><span class="p">)))</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">wave4</span>
-  <span class="p">(</span><span class="nf">below</span> <span class="nv">wave2</span> <span class="nv">wave2</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">wave4</span><span class="w">
+  </span><span class="p">(</span><span class="nf">below</span><span class="w"> </span><span class="n">wave2</span><span class="w"> </span><span class="n">wave2</span><span class="p">))</span><span class="w">
 
-<span class="c1">;; You can even create more complicated</span>
-<span class="c1">;; combinators from existing ones:</span>
+</span><span class="c1">;; You can even create more complicated</span><span class="w">
+</span><span class="c1">;; combinators from existing ones:</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">right-split</span>
-  <span class="p">(</span><span class="nf">split</span> <span class="nv">beside</span> <span class="nv">below</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">right-split</span><span class="w">
+  </span><span class="p">(</span><span class="nf">split</span><span class="w"> </span><span class="n">beside</span><span class="w"> </span><span class="n">below</span><span class="p">))</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">up-split</span>
-  <span class="p">(</span><span class="nf">split</span> <span class="nv">below</span> <span class="nv">beside</span><span class="p">))</span></code></pre></div>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">up-split</span><span class="w">
+  </span><span class="p">(</span><span class="nf">split</span><span class="w"> </span><span class="n">below</span><span class="w"> </span><span class="n">beside</span><span class="p">))</span></code></pre></figure>
 
 <p>Thanks to the minimal syntax and small amount of syntactical rules it is easier to create something very expressive, meaningful for the users which will be using the final form called a <em>DSL</em> (<em>domain specific language</em>). Also, as you will see in the next section, it is very easy to transform it even further thanks to the very important feature of the language.</p>
 
@@ -135,97 +135,97 @@
 
 <h3 id="introduction-to-homoiconicity">Introduction to <em>homoiconicity</em></h3>
 
-<div class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="c1">;; Required selectors for extracting</span>
-<span class="c1">;; data from assumed data structures.</span>
+<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="c1">;; Required selectors for extracting</span><span class="w">
+</span><span class="c1">;; data from assumed data structures.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">car</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nb">first </span><span class="nv">x</span><span class="p">))</span>
-<span class="p">(</span><span class="kd">defn </span><span class="nv">cdr</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">x</span><span class="p">))</span>
-<span class="p">(</span><span class="kd">defn </span><span class="nv">cadr</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nf">cdr</span> <span class="nv">x</span><span class="p">)))</span>
-<span class="p">(</span><span class="kd">defn </span><span class="nv">caddr</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nf">cdr</span> <span class="nv">x</span><span class="p">))))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w">
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">cdr</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">rest</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w">
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">cadr</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">car</span><span class="w"> </span><span class="p">(</span><span class="nf">cdr</span><span class="w"> </span><span class="n">x</span><span class="p">)))</span><span class="w">
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">caddr</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">car</span><span class="w"> </span><span class="p">(</span><span class="nf">cdr</span><span class="w"> </span><span class="p">(</span><span class="nf">cdr</span><span class="w"> </span><span class="n">x</span><span class="p">))))</span><span class="w">
 
-<span class="c1">;; In our application pair is a:</span>
-<span class="c1">;;   &#39;(+ 1 2)</span>
+</span><span class="c1">;; In our application pair is a:</span><span class="w">
+</span><span class="c1">;;   '(+ 1 2)</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">pair?</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">count </span><span class="nv">x</span><span class="p">)</span> <span class="mi">3</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">pair?</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">
 
-<span class="c1">;; Basic predicates.</span>
+</span><span class="c1">;; Basic predicates.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">variable?</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">symbol? </span><span class="nv">x</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">variable?</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">symbol?</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">same-variable?</span> <span class="p">[</span><span class="nv">v1</span> <span class="nv">v2</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">variable?</span> <span class="nv">v1</span><span class="p">)</span> <span class="p">(</span><span class="nf">variable?</span> <span class="nv">v2</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">v1</span> <span class="nv">v2</span><span class="p">)))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">same-variable?</span><span class="w"> </span><span class="p">[</span><span class="n">v1</span><span class="w"> </span><span class="n">v2</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nf">variable?</span><span class="w"> </span><span class="n">v1</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">variable?</span><span class="w"> </span><span class="n">v2</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="n">v2</span><span class="p">)))</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">=number?</span> <span class="p">[</span><span class="nv">exp</span> <span class="nv">num</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">number?</span> <span class="nv">exp</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">exp</span> <span class="nv">num</span><span class="p">)))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">=number?</span><span class="w"> </span><span class="p">[</span><span class="n">exp</span><span class="w"> </span><span class="n">num</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nf">number?</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">exp</span><span class="w"> </span><span class="n">num</span><span class="p">)))</span><span class="w">
 
-<span class="c1">;; Custom constructors for sum and product.</span>
+</span><span class="c1">;; Custom constructors for sum and product.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">make-sum</span> <span class="p">[</span><span class="nv">a1</span> <span class="nv">a2</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">cond </span><span class="p">(</span><span class="nf">=number?</span> <span class="nv">a1</span> <span class="mi">0</span><span class="p">)</span> <span class="nv">a2</span>
-        <span class="p">(</span><span class="nf">=number?</span> <span class="nv">a2</span> <span class="mi">0</span><span class="p">)</span> <span class="nv">a1</span>
-        <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">number?</span> <span class="nv">a1</span><span class="p">)</span> <span class="p">(</span><span class="nf">number?</span> <span class="nv">a2</span><span class="p">))</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">a1</span> <span class="nv">a2</span><span class="p">)</span>
-        <span class="ss">:else</span> <span class="p">(</span><span class="nb">list </span><span class="ss">&#39;+</span> <span class="nv">a1</span> <span class="nv">a2</span><span class="p">)))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">make-sum</span><span class="w"> </span><span class="p">[</span><span class="n">a1</span><span class="w"> </span><span class="n">a2</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">cond</span><span class="w"> </span><span class="p">(</span><span class="nf">=number?</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">a2</span><span class="w">
+        </span><span class="p">(</span><span class="nf">=number?</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">a1</span><span class="w">
+        </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nf">number?</span><span class="w"> </span><span class="n">a1</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">number?</span><span class="w"> </span><span class="n">a2</span><span class="p">))</span><span class="w"> </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="n">a2</span><span class="p">)</span><span class="w">
+        </span><span class="no">:else</span><span class="w"> </span><span class="p">(</span><span class="nb">list</span><span class="w"> </span><span class="ss">'+</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="n">a2</span><span class="p">)))</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">make-product</span> <span class="p">[</span><span class="nv">m1</span> <span class="nv">m2</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">cond </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">=number?</span> <span class="nv">m1</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nf">=number?</span> <span class="nv">m2</span> <span class="mi">0</span><span class="p">))</span> <span class="mi">0</span>
-        <span class="p">(</span><span class="nf">=number?</span> <span class="nv">m1</span> <span class="mi">1</span><span class="p">)</span> <span class="nv">m2</span>
-        <span class="p">(</span><span class="nf">=number?</span> <span class="nv">m2</span> <span class="mi">1</span><span class="p">)</span> <span class="nv">m1</span>
-        <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">number?</span> <span class="nv">m1</span><span class="p">)</span> <span class="p">(</span><span class="nf">number?</span> <span class="nv">m2</span><span class="p">))</span> <span class="p">(</span><span class="nb">* </span><span class="nv">m1</span> <span class="nv">m2</span><span class="p">)</span>
-        <span class="ss">:else</span> <span class="p">(</span><span class="nb">list </span><span class="ss">&#39;*</span> <span class="nv">m1</span> <span class="nv">m2</span><span class="p">)))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">make-product</span><span class="w"> </span><span class="p">[</span><span class="n">m1</span><span class="w"> </span><span class="n">m2</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">cond</span><span class="w"> </span><span class="p">(</span><span class="nb">or</span><span class="w"> </span><span class="p">(</span><span class="nf">=number?</span><span class="w"> </span><span class="n">m1</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">=number?</span><span class="w"> </span><span class="n">m2</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">(</span><span class="nf">=number?</span><span class="w"> </span><span class="n">m1</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">m2</span><span class="w">
+        </span><span class="p">(</span><span class="nf">=number?</span><span class="w"> </span><span class="n">m2</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">m1</span><span class="w">
+        </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nf">number?</span><span class="w"> </span><span class="n">m1</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">number?</span><span class="w"> </span><span class="n">m2</span><span class="p">))</span><span class="w"> </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="n">m1</span><span class="w"> </span><span class="n">m2</span><span class="p">)</span><span class="w">
+        </span><span class="no">:else</span><span class="w"> </span><span class="p">(</span><span class="nb">list</span><span class="w"> </span><span class="ss">'*</span><span class="w"> </span><span class="n">m1</span><span class="w"> </span><span class="n">m2</span><span class="p">)))</span><span class="w">
 
-<span class="c1">;; Predicate which detects sum.</span>
+</span><span class="c1">;; Predicate which detects sum.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">sum?</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">pair?</span> <span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">car</span> <span class="nv">x</span><span class="p">)</span> <span class="ss">&#39;+</span><span class="p">)))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">sum?</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nf">pair?</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="p">(</span><span class="nf">car</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="ss">'+</span><span class="p">)))</span><span class="w">
 
-<span class="c1">;; Selectors for addition.</span>
+</span><span class="c1">;; Selectors for addition.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">addend</span> <span class="p">[</span><span class="nv">s</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">cadr</span> <span class="nv">s</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">addend</span><span class="w"> </span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">cadr</span><span class="w"> </span><span class="n">s</span><span class="p">))</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">augend</span> <span class="p">[</span><span class="nv">s</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">caddr</span> <span class="nv">s</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">augend</span><span class="w"> </span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">caddr</span><span class="w"> </span><span class="n">s</span><span class="p">))</span><span class="w">
 
-<span class="c1">;; Custom predicate which detects product.</span>
+</span><span class="c1">;; Custom predicate which detects product.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">product?</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">pair?</span> <span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">car</span> <span class="nv">x</span><span class="p">)</span> <span class="ss">&#39;*</span><span class="p">)))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">product?</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nf">pair?</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="p">(</span><span class="nf">car</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="ss">'*</span><span class="p">)))</span><span class="w">
 
-<span class="c1">;; Selectors for multiplication.</span>
+</span><span class="c1">;; Selectors for multiplication.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">multiplier</span> <span class="p">[</span><span class="nv">p</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">cadr</span> <span class="nv">p</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">cadr</span><span class="w"> </span><span class="n">p</span><span class="p">))</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">multiplicand</span> <span class="p">[</span><span class="nv">p</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">caddr</span> <span class="nv">p</span><span class="p">))</span>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">multiplicand</span><span class="w"> </span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">caddr</span><span class="w"> </span><span class="n">p</span><span class="p">))</span><span class="w">
 
-<span class="c1">;; Actual algorithm for symbolic derivation.</span>
-<span class="c1">;; Please note how declarative this approach is,</span>
-<span class="c1">;; how recursion actually helps to handle subsequent</span>
-<span class="c1">;; cases and where the simplification mechanism is.</span>
+</span><span class="c1">;; Actual algorithm for symbolic derivation.</span><span class="w">
+</span><span class="c1">;; Please note how declarative this approach is,</span><span class="w">
+</span><span class="c1">;; how recursion actually helps to handle subsequent</span><span class="w">
+</span><span class="c1">;; cases and where the simplification mechanism is.</span><span class="w">
 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">deriv</span> <span class="p">[</span><span class="nv">exp</span> <span class="nv">var</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">cond </span><span class="p">(</span><span class="nf">number?</span> <span class="nv">exp</span><span class="p">)</span>
-         <span class="mi">0</span>
-        <span class="p">(</span><span class="nf">variable?</span> <span class="nv">exp</span><span class="p">)</span>
-         <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">same-variable?</span> <span class="nv">exp</span> <span class="nv">var</span><span class="p">)</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">(</span><span class="nf">sum?</span> <span class="nv">exp</span><span class="p">)</span>
-         <span class="p">(</span><span class="nf">make-sum</span> <span class="p">(</span><span class="nf">deriv</span> <span class="p">(</span><span class="nf">addend</span> <span class="nv">exp</span><span class="p">)</span> <span class="nv">var</span><span class="p">)</span>
-                   <span class="p">(</span><span class="nf">deriv</span> <span class="p">(</span><span class="nf">augend</span> <span class="nv">exp</span><span class="p">)</span> <span class="nv">var</span><span class="p">))</span>
-        <span class="p">(</span><span class="nf">product?</span> <span class="nv">exp</span><span class="p">)</span>
-         <span class="p">(</span><span class="nf">make-sum</span>
-          <span class="p">(</span><span class="nf">make-product</span> <span class="p">(</span><span class="nf">multiplier</span> <span class="nv">exp</span><span class="p">)</span>
-                        <span class="p">(</span><span class="nf">deriv</span> <span class="p">(</span><span class="nf">multiplicand</span> <span class="nv">exp</span><span class="p">)</span> <span class="nv">var</span><span class="p">))</span>
-          <span class="p">(</span><span class="nf">make-product</span> <span class="p">(</span><span class="nf">deriv</span> <span class="p">(</span><span class="nf">multiplier</span> <span class="nv">exp</span><span class="p">)</span> <span class="nv">var</span><span class="p">)</span>
-                        <span class="p">(</span><span class="nf">multiplicand</span> <span class="nv">exp</span><span class="p">)))</span>
-        <span class="ss">:else</span> <span class="p">(</span><span class="nb">assert </span><span class="nv">false</span> <span class="s">&quot;Unknown expression type.&quot;</span><span class="p">)))</span></code></pre></div>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">deriv</span><span class="w"> </span><span class="p">[</span><span class="n">exp</span><span class="w"> </span><span class="n">var</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">cond</span><span class="w"> </span><span class="p">(</span><span class="nf">number?</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w">
+         </span><span class="mi">0</span><span class="w">
+        </span><span class="p">(</span><span class="nf">variable?</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w">
+         </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">same-variable?</span><span class="w"> </span><span class="n">exp</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+        </span><span class="p">(</span><span class="nf">sum?</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w">
+         </span><span class="p">(</span><span class="nf">make-sum</span><span class="w"> </span><span class="p">(</span><span class="nf">deriv</span><span class="w"> </span><span class="p">(</span><span class="nf">addend</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w">
+                   </span><span class="p">(</span><span class="nf">deriv</span><span class="w"> </span><span class="p">(</span><span class="nf">augend</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w"> </span><span class="n">var</span><span class="p">))</span><span class="w">
+        </span><span class="p">(</span><span class="nf">product?</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w">
+         </span><span class="p">(</span><span class="nf">make-sum</span><span class="w">
+          </span><span class="p">(</span><span class="nf">make-product</span><span class="w"> </span><span class="p">(</span><span class="nf">multiplier</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w">
+                        </span><span class="p">(</span><span class="nf">deriv</span><span class="w"> </span><span class="p">(</span><span class="nf">multiplicand</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w"> </span><span class="n">var</span><span class="p">))</span><span class="w">
+          </span><span class="p">(</span><span class="nf">make-product</span><span class="w"> </span><span class="p">(</span><span class="nf">deriv</span><span class="w"> </span><span class="p">(</span><span class="nf">multiplier</span><span class="w"> </span><span class="n">exp</span><span class="p">)</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w">
+                        </span><span class="p">(</span><span class="nf">multiplicand</span><span class="w"> </span><span class="n">exp</span><span class="p">)))</span><span class="w">
+        </span><span class="no">:else</span><span class="w"> </span><span class="p">(</span><span class="nb">assert</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="s">"Unknown expression type."</span><span class="p">)))</span></code></pre></figure>
 
 <p>Basically almost anyone who is interested in the <em>Lisp-like</em> languages heard the term <em>homoiconicity</em>. If you don’t know, this fancy word hides a really simple concept - a property in which the program structure is similar to its syntax, and therefore the program’s internal representation can be inferred by reading the text’s layout. If the programming language is <em>homoiconic</em>, it means that the language text has the same structure as its abstract syntax tree. This allows all code in the language to be accessed and transformed as data, using the same representation.</p>
 
 <p>The origin and one of the main reasons that <em>Lisp</em> was created is one related with <em>symbolical processing</em>. In the provided example we can easily operate on symbols (which represent an equation), which are introduced in the very same manner as the actual code - as a list of tokens, almost ready to invoke. Also we can easily transform an infix notation to prefix notation with a very simple helper function. The whole concept is just a small step before transforming an <em>AST</em> to a different form with e.g. <em>macros</em>.</p>
 
-<p>Also, please note the way how we introduced the simplification (like <code>0 * x = 0</code> and <code>1 * y = y</code>) - it is easy to hide it from the user, that the final effect will be observed.</p>
+<p>Also, please note the way how we introduced the simplification (like <code class="highlighter-rouge">0 * x = 0</code> and <code class="highlighter-rouge">1 * y = y</code>) - it is easy to hide it from the user, that the final effect will be observed.</p>
 
 <h3 id="summary">Summary</h3>
 
@@ -245,15 +245,6 @@
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/sicp-in-clojure/2015/08/07/sicp-in-clojure-chapter-2.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/sicp-in-clojure/2015/08/07/sicp-in-clojure-chapter-2.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
@@ -268,23 +259,12 @@
       <ul class="interests">
         <li>I write <a href="https://github.com/afronski">code</a></li>
         <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a></li>
         <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
           Except where otherwise noted, content on this site<br/>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
@@ -296,13 +276,5 @@
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

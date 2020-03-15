@@ -50,17 +50,17 @@
 
 <h3 id="delivery-pipelines">Delivery pipelines</h3>
 
-<p>Finally Jenkins will be packaged with built-in delivery pipelines feature. It means that it will not require anymore plugins for doing that. It brings finally support for <code>Jenkinsfile</code> - concept which allows to codify your pipelines, and store it inside version control (either together with application source code or outside, in one of your supporting repositories). Besides that - finally no more <em>XML</em> fiddling when it comes to job configuration, because it will use a nice <em>DSL</em>:</p>
+<p>Finally Jenkins will be packaged with built-in delivery pipelines feature. It means that it will not require anymore plugins for doing that. It brings finally support for <code class="highlighter-rouge">Jenkinsfile</code> - concept which allows to codify your pipelines, and store it inside version control (either together with application source code or outside, in one of your supporting repositories). Besides that - finally no more <em>XML</em> fiddling when it comes to job configuration, because it will use a nice <em>DSL</em>:</p>
 
-<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">node</span> <span class="o">{</span>
-  <span class="n">git</span> <span class="nl">url:</span> <span class="s1">&#39;https://github.com/joe_user/simple-maven-project-with-tests.git&#39;</span>
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">node</span> <span class="o">{</span>
+  <span class="n">git</span> <span class="nl">url:</span> <span class="s1">'https://github.com/joe_user/simple-maven-project-with-tests.git'</span>
 
-  <span class="kt">def</span> <span class="n">mvnHome</span> <span class="o">=</span> <span class="n">tool</span> <span class="s1">&#39;M3&#39;</span>
-  <span class="n">sh</span> <span class="s2">&quot;${mvnHome}/bin/mvn -B -Dmaven.test.failure.ignore verify&quot;</span>
+  <span class="kt">def</span> <span class="n">mvnHome</span> <span class="o">=</span> <span class="n">tool</span> <span class="s1">'M3'</span>
+  <span class="n">sh</span> <span class="s2">"${mvnHome}/bin/mvn -B -Dmaven.test.failure.ignore verify"</span>
 
-  <span class="n">step</span><span class="o">([</span><span class="n">$class</span><span class="o">:</span> <span class="s1">&#39;ArtifactArchiver&#39;</span><span class="o">,</span> <span class="nl">artifacts:</span> <span class="s1">&#39;**/target/*.jar&#39;</span><span class="o">,</span> <span class="nl">fingerprint:</span> <span class="kc">true</span><span class="o">])</span>
-  <span class="n">step</span><span class="o">([</span><span class="n">$class</span><span class="o">:</span> <span class="s1">&#39;JUnitResultArchiver&#39;</span><span class="o">,</span> <span class="nl">testResults:</span> <span class="s1">&#39;**/target/surefire-reports/TEST-*.xml&#39;</span><span class="o">])</span>
-<span class="o">}</span></code></pre></div>
+  <span class="n">step</span><span class="o">([</span><span class="n">$class</span><span class="o">:</span> <span class="s1">'ArtifactArchiver'</span><span class="o">,</span> <span class="nl">artifacts:</span> <span class="s1">'**/target/*.jar'</span><span class="o">,</span> <span class="nl">fingerprint:</span> <span class="kc">true</span><span class="o">])</span>
+  <span class="n">step</span><span class="o">([</span><span class="n">$class</span><span class="o">:</span> <span class="s1">'JUnitResultArchiver'</span><span class="o">,</span> <span class="nl">testResults:</span> <span class="s1">'**/target/surefire-reports/TEST-*.xml'</span><span class="o">])</span>
+<span class="o">}</span></code></pre></figure>
 
 <p>That is a well known concept, similar to the <a href="https://github.com/jenkinsci/job-dsl-plugin"><em>job DSL</em> plugin</a>. But finally, it will be built-in and ready to use right after installation, without any additional effort.</p>
 
@@ -74,13 +74,13 @@
 
 <h2 id="how-to-play-with-it">How to play with it?</h2>
 
-<p>The easiest way to play with new Jenkins, will be to use prepared packages from the <a href="https://jenkins.io/2.0/">aforementioned page</a>. Maintainers prepared installers for almost all platforms. Of course there is also a standard <em><code>WAR</code></em> distribution available there.</p>
+<p>The easiest way to play with new Jenkins, will be to use prepared packages from the <a href="https://jenkins.io/2.0/">aforementioned page</a>. Maintainers prepared installers for almost all platforms. Of course there is also a standard <em><code class="highlighter-rouge">WAR</code></em> distribution available there.</p>
 
-<p>But there is even a simpler way to play with it for a Linux user. If you already have <code>docker</code> configured, you can spin it up with one command:</p>
+<p>But there is even a simpler way to play with it for a Linux user. If you already have <code class="highlighter-rouge">docker</code> configured, you can spin it up with one command:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>docker run --name jenkins2 -p 8080:8080 -d jenkinsci/jenkins:2.0-beta-1</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>docker run <span class="nt">--name</span> jenkins2 <span class="nt">-p</span> 8080:8080 <span class="nt">-d</span> jenkinsci/jenkins:2.0-beta-1</code></pre></figure>
 
-<p>And that’s it! When that command will finish, on your local <code>8080</code> port there will be <em>Jenkins 2.0</em> waiting for you to configure and play with it.
+<p>And that’s it! When that command will finish, on your local <code class="highlighter-rouge">8080</code> port there will be <em>Jenkins 2.0</em> waiting for you to configure and play with it.
 And last but not least - if you have any feedback related with new version, official page <a href="https://jenkins.io/2.0/#feedback">contains guides how to do it</a>. Community will be grateful!</p>
 
 <h2 id="credits">Credits</h2>
@@ -95,15 +95,6 @@ And last but not least - if you have any feedback related with new version, offi
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/2016/04/03/jenkins-2-0.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/2016/04/03/jenkins-2-0.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
@@ -118,23 +109,12 @@ And last but not least - if you have any feedback related with new version, offi
       <ul class="interests">
         <li>I write <a href="https://github.com/afronski">code</a></li>
         <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a></li>
         <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
           Except where otherwise noted, content on this site<br/>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
@@ -146,13 +126,5 @@ And last but not least - if you have any feedback related with new version, offi
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

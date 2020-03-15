@@ -32,60 +32,86 @@
 
 <h1 id="tips-and-tricks-for-chef-solo-and-vagrant">Tips and tricks for chef-solo and vagrant</h1>
 
-<p>In your daily work at the kitchen sink <img class="emoji" title=":wink:" alt=":wink:" src="https://assets.github.com/images/icons/emoji/unicode/1f609.png" height="20" width="20" align="absmiddle" />, sometimes you have to be a <em>plumber</em> and get dirty. In order to do that you have to be familiar with the concept of debugging <em>vagrant</em>, <em>chef-solo</em> and some other useful tricks.</p>
+<p>In your daily work at the kitchen sink <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20">, sometimes you have to be a <em>plumber</em> and get dirty. In order to do that you have to be familiar with the concept of debugging <em>vagrant</em>, <em>chef-solo</em> and some other useful tricks.</p>
 
 <h2 id="debugging-vagrant">Debugging vagrant</h2>
 
-<p>If you want to enable a verbose mode for <em>vagrant</em>, you need to set the environment variable <code>VAGRANT_LOG</code> to <code>DEBUG</code> or <code>INFO</code> value, as in the example below:</p>
+<p>If you want to enable a verbose mode for <em>vagrant</em>, you need to set the environment variable <code class="highlighter-rouge">VAGRANT_LOG</code> to <code class="highlighter-rouge">DEBUG</code> or <code class="highlighter-rouge">INFO</code> value, as in the example below:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ VAGRANT_LOG</span><span class="o">=</span>DEBUG vagrant up</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ VAGRANT_LOG</span><span class="o">=</span>DEBUG vagrant up</code></pre></figure>
 
 <h2 id="debugging-chef-solo">Debugging chef-solo</h2>
 
 <p>You have got two options how to enable verbose mode for <em>chef-solo</em>.</p>
 
-<p>First, you can <em><code>SSH</code></em> into a created virtual machine and invoke the <em>magic command</em> in a certain directory:</p>
+<p>First, you can <em><code class="highlighter-rouge">SSH</code></em> into a created virtual machine and invoke the <em>magic command</em> in a certain directory:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>vagrant ssh
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">~ <span class="nv">$ </span>vagrant ssh
 
 vagrant@localhost ~ <span class="nv">$ </span><span class="nb">cd</span> /tmp/vagrant-chef-1
-vagrant@localhost /tmp/vagrant-chef-1 <span class="nv">$ </span>sudo chef-solo -c solo.rb -j dna.json -l debug</code></pre></div>
+vagrant@localhost /tmp/vagrant-chef-1 <span class="nv">$ </span><span class="nb">sudo </span>chef-solo <span class="nt">-c</span> solo.rb <span class="nt">-j</span> dna.json <span class="nt">-l</span> debug</code></pre></figure>
 
-<p>In this <em>magic command</em> the parameter <code>-c</code> is responsible for setting a configuration file, <code>-j</code> is for passing a file with attributes, which is later called a <em>node specification</em>. Last parameter <code>-l</code> - most important for us - enables the verbose mode at a certain logging level.</p>
+<p>In this <em>magic command</em> the parameter <code class="highlighter-rouge">-c</code> is responsible for setting a configuration file, <code class="highlighter-rouge">-j</code> is for passing a file with attributes, which is later called a <em>node specification</em>. Last parameter <code class="highlighter-rouge">-l</code> - most important for us - enables the verbose mode at a certain logging level.</p>
 
-<p>You may be wondering why you are entering a <code>/tmp/vagrant-chef-1</code> directory with a digit at the end?</p>
+<p>You may be wondering why you are entering a <code class="highlighter-rouge">/tmp/vagrant-chef-1</code> directory with a digit at the end?</p>
 
 <p>The actual value depends on the number of concurrent and active provisioning processes running on the virtual machine and is represented by the <a href="https://github.com/mitchellh/vagrant/blob/master/plugins/provisioners/chef/provisioner/base.rb#L22">get_and_update_counter</a> method and the <a href="https://github.com/mitchellh/vagrant/blob/master/lib/vagrant/util/counter.rb">Counter</a> module.</p>
 
 <p>But you can enable it in a different way - by passing the arguments to a provisioner inside <em>Vagrantfile</em>:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="lineno">1</span> <span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-<span class="lineno">2</span>   <span class="c1"># ...</span>
-<span class="lineno">3</span> 
-<span class="lineno">4</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="ss">:chef_solo</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
-<span class="lineno">5</span>     <span class="c1"># ...</span>
-<span class="lineno">6</span> 
-<span class="lineno">7</span>     <span class="n">chef</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="s1">&#39;-l debug&#39;</span>
-<span class="lineno">8</span>   <span class="k">end</span>
-<span class="lineno">9</span> <span class="k">end</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="code"><pre><span class="no">Vagrant</span><span class="p">.</span><span class="nf">configure</span><span class="p">(</span><span class="s1">'2'</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="c1"># ...</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">vm</span><span class="p">.</span><span class="nf">provision</span> <span class="ss">:chef_solo</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
+    <span class="c1"># ...</span>
+
+    <span class="n">chef</span><span class="p">.</span><span class="nf">arguments</span> <span class="o">=</span> <span class="s1">'-l debug'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td>
+</tr></tbody></table></code></pre></figure>
 
 <h2 id="mutating-the-dna">Mutating the DNA</h2>
 
-<p>As you can see in the example above, related with the chef-solo debugging, you have got a <code>dna.json</code> file with attributes generated on the basis of provisioner configuration attached in <em>Vagrantfile</em>. We call it a <em>node specification</em>. But what if you already have an existing node specification, and you want to use it?</p>
+<p>As you can see in the example above, related with the chef-solo debugging, you have got a <code class="highlighter-rouge">dna.json</code> file with attributes generated on the basis of provisioner configuration attached in <em>Vagrantfile</em>. We call it a <em>node specification</em>. But what if you already have an existing node specification, and you want to use it?</p>
 
-<p>There is an attribute for that, called <code>json</code>, but it is a dictionary. You cannot pass a plain string with a path to the node file, like the role name in the <em>add_role</em> method or setting a value in the <em>environment</em> field.</p>
+<p>There is an attribute for that, called <code class="highlighter-rouge">json</code>, but it is a dictionary. You cannot pass a plain string with a path to the node file, like the role name in the <em>add_role</em> method or setting a value in the <em>environment</em> field.</p>
 
 <p>In order to inject our attributes you need to read the file first, then parse the content as JSON and finally merge it with the existing value of the field:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="lineno">1</span> <span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-<span class="lineno">2</span>   <span class="c1"># ...</span>
-<span class="lineno">3</span> 
-<span class="lineno">4</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="ss">:chef_solo</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
-<span class="lineno">5</span>     <span class="c1"># ...</span>
-<span class="lineno">6</span> 
-<span class="lineno">7</span>     <span class="n">chef</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span><span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;path/to/json/file&#39;</span><span class="p">)))</span>
-<span class="lineno">8</span>   <span class="k">end</span>
-<span class="lineno">9</span> <span class="k">end</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="code"><pre><span class="no">Vagrant</span><span class="p">.</span><span class="nf">configure</span><span class="p">(</span><span class="s1">'2'</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="c1"># ...</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">vm</span><span class="p">.</span><span class="nf">provision</span> <span class="ss">:chef_solo</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
+    <span class="c1"># ...</span>
+
+    <span class="n">chef</span><span class="p">.</span><span class="nf">json</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s1">'path/to/json/file'</span><span class="p">)))</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td>
+</tr></tbody></table></code></pre></figure>
 
 <h1 id="links">Links</h1>
 
@@ -98,48 +124,32 @@ vagrant@localhost /tmp/vagrant-chef-1 <span class="nv">$ </span>sudo chef-solo -
 
     <section class="container">
       <a href="/" class="mobile-link">Home</a>
-
-      <section class="social-buttons">
-        <div class="fb-share-button" data-href="/2013/10/18/chef-solo-dna-mutation.html" data-layout="button_count"></div>
-        <script type="IN/Share" data-url="/2013/10/18/chef-solo-dna-mutation.html" data-counter="right"></script>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Nice blog post:" data-via="afronski">Tweet</a>
-        <script id='fbnz9bt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//button.flattr.com/view/?fid=66q0xn&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbnz9bt');</script>
-      </section>
-
-      <div id="disqus_thread"></div>
     </section>
 
     <aside class="menu">
 
       <a href="http://www.afronski.pl">
-        <img id="avatar" src="/images/avatar.png" alt="My avatar" />
+        <img id="avatar" src="/images/avatar.png" alt="My avatar">
       </a>
 
-      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br/>
-      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br/>
+      Hello! I'm <a href="/about.html">Wojtek Gawroński</a>.<br>
+      I'm a <a href="https://www.linkedin.com/in/afronski">software developer</a>.<br>
       Besides working
       <ul class="interests">
-        <li>I write <a href="https://github.com/afronski">code</a></li>
-        <li>I <a href="https://twitter.com/afronski">tweet</a></li>
-        <li>I give <a href="http://www.afronski.pl/presentations">talks</a></li>
-        <li>I <a href="/feed.xml">blog</a></li>
-        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a></li>
-        <li>I <a href="http://www.last.fm/user/afronski">listen music</a></li>
+        <li>I write <a href="https://github.com/afronski">code</a>
+</li>
+        <li>I <a href="https://twitter.com/afronski">tweet</a>
+</li>
+        <li>I <a href="https://awsgentleman.com">blog about <em>AWS</em></a>
+</li>
+        <li>I <a href="https://www.goodreads.com/user/show/16145105-wojtek-gawro-ski">read books</a>
+</li>
       </ul>
 
-      <nav class="additional-navigation">
-        Go to:
-        <ul>
-          <li><a href="/categories.html">Categories</a></li>
-          <li><a href="/tag/series/">Series</a></li>
-          <li><a href="/tags.html">Tags</a></li>
-        </ul>
-      </nav>
-
       <footer>
-        <section>© Copyright 2013 - 2018, Wojciech Gawroński</section>
+        <section>© Copyright 2013 - 2020, Wojciech Gawroński</section>
         <section>
-          Except where otherwise noted, content on this site<br/>
+          Except where otherwise noted, content on this site<br>
           is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/pl/legalcode">CC BY-NC-ND 3.0</a>.
         </section>
       </footer>
@@ -149,13 +159,5 @@ vagrant@localhost /tmp/vagrant-chef-1 <span class="nv">$ </span>sudo chef-solo -
     <script>gdprCookieNotice({locale:"en",timeout:500,expiration:30,domain:".afronski.pl",implicit:true,statement:"http://www.afronski.pl/cookies.html",performance:["sessionid"],analytics:["_ga","_gid","_gat","twid","c_user"],marketing:["SID","SIDCC","SAPISID","S","SSID","OGPC","NID","HSID","CONSENT","APISID","1P_JAR"]});</script>
     <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-44633104-1','afronski.pl');ga('require','displayfeatures');ga('send','pageview');</script>
 
-    <noscript>
-      Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-
-    <script type="text/javascript">var disqus_shortname="afronskipl";(function(){var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script>
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-    <script>window.fbAsyncInit=function(){FB.init({appId:'801123949972066',xfbml:true,version:'v2.2'});};(function(d,s,id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>
