@@ -3,13 +3,8 @@ url: http://www.afronski.pl
 
 description: Random thoughts from top of my head - afronski.pl
 
-gems:
+plugins:
   - jemoji
-
-emoji:
-  dir: "/images/emoji"
-
-highlighter: pygments
 
 exclude: [
   "Gemfile",
